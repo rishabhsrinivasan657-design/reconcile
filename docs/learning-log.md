@@ -202,3 +202,26 @@ draft pull request with CI, then ran the test plan: 18 of 19 criteria fully pass
   the test plan says so.
 
 **Remember:** "done" means proven against the checklist, not "I think it works."
+
+---
+
+## M1 · Review, release, and retro (2026-10-16)
+
+**In one line:** approve, merge, tag v0.2.0, publish release notes, and learn from what went wrong.
+
+**What we did:** marked PR #1 ready and merged it, tagged **v0.2.0**, published a
+GitHub Release, and wrote the M1 retrospective.
+
+**Key ideas**
+- **Draft vs. ready PR.** "Draft" means "still working, don't review yet." "Ready"
+  asks for review. The merge only happened after your approval at the gate.
+- **MINOR version bump (0.1.0 → 0.2.0).** New features, nothing broken for users.
+- **GitHub Release** = tag + human-readable notes, which visitors see on the repo page.
+  Notes come straight from `CHANGELOG.md`, so there's one source of truth.
+- **Retros find process problems, not just code problems.** The biggest lesson from
+  M1 wasn't about code: a merge button quietly published your Gmail. Tools have
+  defaults, and you only find them by looking.
+- **Some fixes need a human.** Rewriting `main` was blocked by a safety rule. That's
+  correct: force-pushing a shared branch is a decision for the owner, not the assistant.
+
+**Remember:** every milestone ends with "what will we do differently next time?", and that goes in the backlog.
