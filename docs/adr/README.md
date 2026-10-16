@@ -13,3 +13,5 @@ one and update the old one's status line.
 | [0004](0004-money-as-decimal.md) | Money as decimals, never floats | Accepted |
 | [0005](0005-append-only-audit-log.md) | Append-only audit log enforced by a Postgres trigger | Accepted |
 | [0006](0006-evals-synthetic-golden-set.md) | Seeded synthetic golden set, replay-mode CI, 2-point regression gate | Accepted |
+| [0007](0007-pdf-rendering-and-scans.md) | Render PDFs with pdfkit; scans via pdfjs + @napi-rs/canvas | Proposed |
+| [0008](0008-generator-truth-from-planted-errors.md) | Answer key from planted errors; curated data instead of Faker | Proposed |

@@ -138,3 +138,34 @@ retrospective.
   happen.
 
 **Remember:** shipping isn't the end of a cycle. The retro is what makes the next cycle better.
+
+---
+
+## M1 · Requirements and design (2026-10-16)
+
+**In one line:** turn one milestone into a checklist (requirements), then a blueprint (design).
+
+**What we did:** wrote 19 acceptance criteria for M1, a design covering
+tooling, database, and the document generator, two new ADRs, and a test plan
+that maps each criterion to a check.
+
+**Key ideas**
+- **Acceptance criteria (AC):** small, testable promises ("same seed gives
+  identical files"). If you can't test it, rewrite it until you can.
+- **The test plan is written during design, before code.** Deciding *how* to
+  prove something forces the design to be provable.
+- **Design finds requirement bugs.** Writing exact formulas showed that one
+  short-ship could be counted twice (as `SHORT_SHIP` and as
+  `QTY_BILLED_NOT_RECEIVED`). We caught it before any code existed. This is
+  why requirements and design are separate phases.
+- **Don't grade your own homework.** The answer key comes from the errors we
+  planted, never from the matcher it will test.
+- **Pin your versions.** "Latest" isn't always safe: TypeScript 7 would break
+  the linter, and npm's "latest" Prisma is a release candidate. Pinning makes
+  builds repeatable.
+- **Determinism:** same input gives exactly the same output. It's what makes
+  caching and fair comparisons possible.
+- **YAGNI ("You Aren't Gonna Need It"):** no empty apps, no Turborepo until
+  needed. Less to build, less to break.
+
+**Remember:** an hour of design saves a day of rework.
