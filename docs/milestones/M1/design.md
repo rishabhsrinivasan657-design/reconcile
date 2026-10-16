@@ -379,3 +379,18 @@ Each commit builds and passes tests.
 | Prisma 7's adapter setup is new | Follow the official Postgres adapter guide. It's isolated in `packages/db`. |
 | Synthetic layouts are too easy | 6 families, varied fonts and labels, multi-page tables, scans. Revisit after the M3 extraction metrics. |
 | Committed golden subset bloats the repo | Estimated at ~5–10 MB. Measured at commit time; above 20 MB we reduce PNG resolution. |
+
+## 10. Implementation notes (deviations found while building)
+
+Recorded here so the design stays truthful. Each one is small and was raised in the PR.
+
+| Planned | Actual | Why |
+|---|---|---|
+| Every document styled by its vendor | **Invoices** use the vendor's style. **POs** come from the buyer's ERP (one style), and **RRs** from the warehouse system (one style per DC) | That's how real documents arrive. Invoice variety still covers all 6 families (AC-11). |
+| 1–25 lines per set | 1–13 lines (bounded by the vendor's 13–14 SKUs, keeping one unordered for the extra-line error) | A PO doesn't repeat SKUs. Multi-page documents still occur (letterhead family). |
+| Fonts committed under `assets/fonts` | OFL fonts from `@fontsource/*` npm packages (WOFF) plus PDF standard fonts. IBM Plex Mono was replaced by Roboto Mono and Source Code Pro. | No binaries in git. fontkit can't subset some WOFF2 files, or Plex Mono at all (each checked). |
+| Scans for any document | Single-page documents only | One PNG per document keeps the answer key simple |
+| Rule for incomplete sets not specified | A set missing its PO, RR, or invoice raises **only** `MISSING_DOCUMENT`. Matching-dependent planted errors are skipped for it. | You can't 3-way match an incomplete set, so other exceptions would be unobservable |
+| `duplicate_invoice` default rate 0.06 | 0.08 | Seed 42 produced only one duplicate in 100 sets, too few for the CI subset's "at least 2" coverage |
+| `vitest.workspace.ts` | `vitest.config.ts` with `test.projects` | The workspace file is deprecated in Vitest 5 |
+| Docs check parses Mermaid | Diagrams are rendered to PNG locally. CI compares source hashes against a manifest. | The diagrams weren't visible outside GitHub (your feedback) |

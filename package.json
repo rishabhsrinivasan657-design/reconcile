@@ -22,7 +22,8 @@
     "db:seed": "pnpm --filter @reconcile/db exec prisma db seed",
     "db:reset": "pnpm --filter @reconcile/db exec prisma migrate reset --force",
     "generate": "tsx packages/generator/src/cli.ts",
-    "generate:ci": "tsx packages/generator/src/cli.ts --ci"
+    "generate:ci": "tsx packages/generator/src/cli.ts --ci",
+    "generate:samples": "tsx packages/generator/src/samples.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

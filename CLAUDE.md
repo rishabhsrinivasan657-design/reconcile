@@ -172,19 +172,21 @@ strings or numbers into the decimal type.
 - Prefer deterministic code over LLM calls whenever a rule can do the job.
   The LLM handles reading documents and fuzzy judgment, nothing else.
 
-## Commands (fill in as they become real)
+## Commands
 
 ```
-docker compose up -d        # postgres + redis
-pnpm install
-pnpm db:migrate             # prisma migrate dev
-pnpm db:seed
+corepack enable && pnpm install   # also runs prisma generate
+docker compose up -d               # postgres + redis (POSTGRES_PORT to override 5432)
+pnpm db:migrate | db:seed | db:reset
 pnpm generate --seed 42 --sets 100 --out evals/golden
-pnpm dev                    # web + api + worker
-pnpm test                   # vitest
-pnpm test:e2e               # playwright
-pnpm eval                   # eval harness
+pnpm generate:ci                   # rebuild committed evals/golden-ci (20 sets)
+pnpm lint | typecheck | test | format
+pnpm docs:diagrams | docs:check
+# later: pnpm dev, pnpm test:e2e, pnpm eval
 ```
+
+Toolchain pins: TypeScript 6.0 (typescript-eslint doesn't support 7), Prisma 7.10 (npm
+`latest` is an 8.0 RC), pnpm 10 via Corepack.
 
 ## Development process (SDLC)
 
