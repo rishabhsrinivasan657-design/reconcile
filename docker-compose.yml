@@ -1,3 +1,4 @@
+name: reconcile
 # Local stack. `docker compose up -d` then `pnpm db:migrate && pnpm db:seed`.
 services:
   postgres:

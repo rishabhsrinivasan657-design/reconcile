@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # mermaid-cli is only needed locally to render diagrams; CI just compares hashes.
+  PUPPETEER_SKIP_DOWNLOAD: 'true'
+
+jobs:
+  check:
+    name: Lint, typecheck, docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @reconcile/db exec prisma generate
+      - run: pnpm lint
+      - run: pnpm format:check
+      - run: pnpm typecheck
+      - run: pnpm docs:check
+
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: reconcile
+          POSTGRES_PASSWORD: reconcile
+          POSTGRES_DB: reconcile_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U reconcile" --health-interval 2s
+          --health-timeout 3s --health-retries 30
+    env:
+      DATABASE_URL: postgresql://reconcile:reconcile@localhost:5432/reconcile_test
+      DATABASE_URL_TEST: postgresql://reconcile:reconcile@localhost:5432/reconcile_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @reconcile/db exec prisma generate
+      - run: pnpm --filter @reconcile/db exec prisma migrate deploy
+      - run: pnpm test
