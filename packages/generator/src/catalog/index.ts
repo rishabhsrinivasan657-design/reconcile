@@ -21,7 +21,8 @@ export type TemplateFamily = (typeof TEMPLATE_FAMILIES)[number];
 export type FontKey =
   | 'inter'
   | 'plex-sans'
-  | 'plex-mono'
+  | 'roboto-mono'
+  | 'source-code-pro'
   | 'source-serif'
   | 'roboto-condensed'
   | 'lato'
@@ -90,9 +91,9 @@ const FONT_PAIRS: Record<TemplateFamily, readonly (readonly [FontKey, FontKey])[
     ['lato', 'lato'],
   ],
   erp: [
-    ['plex-mono', 'plex-mono'],
+    ['roboto-mono', 'roboto-mono'],
     ['courier', 'courier'],
-    ['plex-mono', 'plex-mono'],
+    ['source-code-pro', 'source-code-pro'],
   ],
   twocol: [
     ['roboto-condensed', 'roboto-condensed'],

@@ -72,9 +72,6 @@ importers:
 
   packages/generator:
     dependencies:
-      '@fontsource/ibm-plex-mono':
-        specifier: ^5.3.0
-        version: 5.3.0
       '@fontsource/ibm-plex-sans':
         specifier: ^5.3.0
         version: 5.3.0
@@ -87,6 +84,12 @@ importers:
       '@fontsource/roboto-condensed':
         specifier: ^5.3.0
         version: 5.3.0
+      '@fontsource/roboto-mono':
+        specifier: ^5.3.0
+        version: 5.3.0
+      '@fontsource/source-code-pro':
+        specifier: ^5.3.1
+        version: 5.3.1
       '@fontsource/source-serif-4':
         specifier: ^5.3.1
         version: 5.3.1
@@ -366,9 +369,6 @@ packages:
   '@floating-ui/utils@0.2.12':
     resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
 
-  '@fontsource/ibm-plex-mono@5.3.0':
-    resolution: {integrity: sha512-eTgnZjZEGk1QtD3ZstF+Vclo2HLAni8YMy34/DxllwZvyz1lR/1RF/xTiAquOBO7MvqBx8D2Ig2WCPMVfdZu7Q==}
-
   '@fontsource/ibm-plex-sans@5.3.0':
     resolution: {integrity: sha512-CbE4CbbEEZJX860XyUiRpsksXIQR8Rp2XDva2VO53NJox9tVNtusrysd2x5YkUEY3ErQ66W1IiiQL8/wihhw5w==}
 
@@ -380,6 +380,12 @@ packages:
 
   '@fontsource/roboto-condensed@5.3.0':
     resolution: {integrity: sha512-Vbh5pesre/M/Jspd10btdKRqLSTe3yn4l6B2tXHGElCeASfA7Pgdpu1mb8wTG8E72J4Xk6FUfqnSe46UN2QAog==}
+
+  '@fontsource/roboto-mono@5.3.0':
+    resolution: {integrity: sha512-yhwplHMHW9dCk+1pZuERfcJe+K3rosGVZEoK0XktkxRSqQ9qsipSwwiuW2/8Qmtp9lzu3Ixa/ie4BMH3i8CkZQ==}
+
+  '@fontsource/source-code-pro@5.3.1':
+    resolution: {integrity: sha512-qsJEkwJWXYP/9clmtt3BsIlZ+Lr4cuRgNAgu0vyZdCgESMRMhRkAmEFFHHNM81VdeURqg5D5+Rr3bALDFav78A==}
 
   '@fontsource/source-serif-4@5.3.1':
     resolution: {integrity: sha512-cWcTCXjYYrgF9A67fThVir1VSc0lPEYmwQ6jA4pPt01s2MSCi/maINUcZoCzaqnU8fyUReDO97eGcBUkHgOeug==}
@@ -2744,8 +2750,6 @@ snapshots:
 
   '@floating-ui/utils@0.2.12': {}
 
-  '@fontsource/ibm-plex-mono@5.3.0': {}
-
   '@fontsource/ibm-plex-sans@5.3.0': {}
 
   '@fontsource/inter@5.3.0': {}
@@ -2753,6 +2757,10 @@ snapshots:
   '@fontsource/lato@5.3.0': {}
 
   '@fontsource/roboto-condensed@5.3.0': {}
+
+  '@fontsource/roboto-mono@5.3.0': {}
+
+  '@fontsource/source-code-pro@5.3.1': {}
 
   '@fontsource/source-serif-4@5.3.1': {}
 
