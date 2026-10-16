@@ -7,11 +7,16 @@
 | Requirements | [`prd.md`](prd.md) |
 | Decisions | [`adr/`](adr/) |
 
-This page shows **how** Reconcile is built. Diagrams are Mermaid (they render
-on GitHub). Detailed per-milestone designs live in `milestones/Mx/design.md`
+This page shows **how** Reconcile is built. Each diagram is a PNG image, so it
+shows in any viewer, with its Mermaid source in a collapsed block underneath.
+After editing a diagram's source, re-render it (`pnpm docs:diagrams` from M1 on). Detailed per-milestone designs live in `milestones/Mx/design.md`
 and must stay consistent with this page, or update it.
 
 ## 1. System context: who talks to Reconcile
+
+![1. System context: who talks to Reconcile](diagrams/architecture-1-system-context-who-talks-to-reconcile.png)
+
+<details><summary>Diagram source (Mermaid)</summary>
 
 ```mermaid
 flowchart LR
@@ -21,10 +26,16 @@ flowchart LR
   gen([Synthetic generator]) -->|PDFs + ground truth| R
 ```
 
+</details>
+
 Everything except the LLM provider runs on your machine. With Ollama, the
 LLM runs locally too.
 
 ## 2. Containers: the moving parts
+
+![2. Containers: the moving parts](diagrams/architecture-2-containers-the-moving-parts.png)
+
+<details><summary>Diagram source (Mermaid)</summary>
 
 ```mermaid
 flowchart TB
@@ -56,6 +67,8 @@ flowchart TB
   mcpsrv --> db
 ```
 
+</details>
+
 | Part | Responsibility | Must NOT |
 |---|---|---|
 | `web` | UI only. Talks to `api` over HTTP. | touch the DB or queues directly |
@@ -66,6 +79,10 @@ flowchart TB
 | `mcp` | Read-only tools over the DB | write anything |
 
 ## 3. Main flow: upload → exception
+
+![3. Main flow: upload → exception](diagrams/architecture-3-main-flow-upload-exception.png)
+
+<details><summary>Diagram source (Mermaid)</summary>
 
 ```mermaid
 sequenceDiagram
@@ -100,9 +117,15 @@ sequenceDiagram
   A->>D: update status + AuditEvent (append-only)
 ```
 
+</details>
+
 ## 4. Lifecycles (state machines)
 
 **Document**
+
+![4. Lifecycles (state machines): Document](diagrams/architecture-4-document.png)
+
+<details><summary>Diagram source (Mermaid)</summary>
 
 ```mermaid
 stateDiagram-v2
@@ -116,7 +139,13 @@ stateDiagram-v2
   READY --> MATCHED: match job ran
 ```
 
+</details>
+
 **Exception**
+
+![4. Lifecycles (state machines): Exception](diagrams/architecture-5-exception.png)
+
+<details><summary>Diagram source (Mermaid)</summary>
 
 ```mermaid
 stateDiagram-v2
@@ -128,11 +157,17 @@ stateDiagram-v2
   DISPUTED --> WRITTEN_OFF
 ```
 
+</details>
+
 Every arrow writes an `AuditEvent`. Informational exceptions (e.g. a
 correctly billed short-ship) start `OPEN` but are excluded from the default
 queue view.
 
 ## 5. Data model (overview)
+
+![5. Data model (overview)](diagrams/architecture-6-data-model-overview.png)
+
+<details><summary>Diagram source (Mermaid)</summary>
 
 ```mermaid
 erDiagram
@@ -149,6 +184,8 @@ erDiagram
   AuditEvent }o--|| User : "actor (or system)"
 ```
 
+</details>
+
 Key design points:
 - **`DocumentSet`** = everything sharing a PO number. It's created when the
   first doc for that PO arrives, so a set can be incomplete (`MISSING_DOCUMENT`).
@@ -164,6 +201,10 @@ Key design points:
 
 ## 6. LLM client (inside `core`)
 
+![6. LLM client (inside core)](diagrams/architecture-7-llm-client-inside-core.png)
+
+<details><summary>Diagram source (Mermaid)</summary>
+
 ```mermaid
 flowchart LR
   caller[extract / fuzzy-match] --> cache{cache hit?<br/>key = doc hash + prompt version + model}
@@ -175,6 +216,8 @@ flowchart LR
   zod -->|invalid JSON| repair[one repair retry] --> prov
   out --> log[(LlmCall row)]
 ```
+
+</details>
 
 Details are in ADR-0002. The provider is chosen by `LLM_PROVIDER`, and models
 by `LLM_MODEL_EXTRACT` and `LLM_MODEL_MATCH`.
@@ -199,6 +242,10 @@ Details are in ADR-0003.
 
 ## 8. Evals pipeline
 
+![8. Evals pipeline](diagrams/architecture-8-evals-pipeline.png)
+
+<details><summary>Diagram source (Mermaid)</summary>
+
 ```mermaid
 flowchart LR
   gen[generator<br/>seed=42] --> golden[(evals/golden<br/>PDFs + ground_truth.json)]
@@ -212,6 +259,8 @@ flowchart LR
   cmp -->|yes| fail[CI fails]
   cmp -->|no| pass[CI passes]
 ```
+
+</details>
 
 Details are in ADR-0006.
 

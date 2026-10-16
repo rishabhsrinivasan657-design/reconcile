@@ -163,6 +163,8 @@ strings or numbers into the decimal type.
 ## Conventions
 
 - Node LTS, pnpm, ESM. Lint with ESLint and format with Prettier.
+- Diagrams: Mermaid source in a collapsed `<details>` block plus a rendered
+  PNG in `docs/diagrams/`, so they show in every viewer. Re-render after edits.
 - Validate env with Zod at startup (`packages/core/src/env.ts`).
   `.env.example` lists every var. Never commit secrets.
 - API: JSON, Zod-validated request/response, OpenAPI generated from the schemas.

@@ -7,6 +7,10 @@
 
 ## 1. Overview
 
+![1. Overview](../../diagrams/milestones-m1-design-1-overview.png)
+
+<details><summary>Diagram source (Mermaid)</summary>
+
 ```mermaid
 flowchart LR
   subgraph generator [packages/generator]
@@ -23,6 +27,8 @@ flowchart LR
   core[packages/core<br/>Zod: groundTruthSchema, enums] -.validates.-> truth
   cat -.-> seed[packages/db seed]
 ```
+
+</details>
 
 There are three workstreams, built in this order on the branch:
 **(A) repo and tooling → (B) database → (C) generator**, followed by docs (D).
@@ -56,7 +62,8 @@ pnpm-workspace.yaml           packages/*, evals
 tsconfig.base.json            strict, noUncheckedIndexedAccess, ESM
 eslint.config.js              includes the core import restriction (ADR-0001)
 vitest.workspace.ts
-scripts/check-docs.ts         link check + Mermaid syntax check (B-10)
+scripts/check-docs.ts         link check + diagram freshness check (B-10)
+scripts/render-diagrams.ts    `pnpm docs:diagrams`: Mermaid → PNG + manifest
 packages/core/                schemas/ (groundTruth, enums, money), env.ts
 packages/db/                  prisma/schema.prisma, migrations/, seed.ts, test/
 packages/generator/           catalog/, templates/, planter/, truth/, render/, scan/, cli.ts
@@ -76,10 +83,16 @@ evals/golden-ci/              committed CI subset
 - **CI (AC-4):** a single workflow on `pull_request` and `push: main`.
   - Job `check`: install (pnpm cache) → lint → typecheck → `docs:check`.
   - Job `test`: a Postgres 17 service container → `prisma migrate deploy` → `pnpm test`.
-- **Docs check (B-10):** a TS script that resolves every relative Markdown link
-  and parses each Mermaid block with `@mermaid-js/parser` (no browser). If that
-  parser doesn't support a diagram type we use, the fallback is rendering with
-  `@mermaid-js/mermaid-cli` in CI only (see §9 Risks).
+- **Diagrams as images:** Markdown viewers outside GitHub don't render Mermaid.
+  So every diagram is committed as a **PNG** next to its source (kept in a
+  collapsed `<details>` block). `pnpm docs:diagrams` renders the PNGs with
+  `@mermaid-js/mermaid-cli` (a dev dependency) and writes
+  `docs/diagrams/manifest.json`, which maps each image to the sha256 of its
+  source. Rendering also proves the Mermaid syntax is valid.
+- **Docs check (B-10):** a TS script that (1) resolves every relative Markdown
+  link and image, and (2) checks that every Mermaid block's hash matches the
+  manifest. That catches "edited the diagram, forgot to re-render." CI doesn't
+  render (PNG bytes differ across OSes), it only compares hashes.
 
 ## 5. Workstream B: database
 
@@ -340,7 +353,7 @@ terms (planted error, line key, answer key).
 ## 8. Planned commits (on `feat/m1-foundation`)
 
 1. `chore: scaffold pnpm workspace, TS, ESLint, Prettier, Vitest`
-2. `ci: add GitHub Actions workflow and docs check`
+2. `ci: add GitHub Actions workflow, docs check, and diagram rendering`
 3. `chore(db): docker compose for postgres and redis`
 4. `feat(core): env loader and shared enums/money schema`
 5. `feat(db): prisma schema and initial migration`
@@ -363,7 +376,7 @@ Each commit builds and passes tests.
 |---|---|
 | A PDF or PNG differs byte-for-byte across machines (fonts, antialiasing) | The AC-16 test compares two runs **on the same machine**. CI never regenerates the committed subset, it only reads it. |
 | pdfkit adds non-deterministic bytes (e.g. the `/ID` trailer) | Fixed metadata. The AC-16 test catches it, and the fallback is to override the ID with a hash of the content. |
-| `@mermaid-js/parser` doesn't cover flowchart, sequence, or state diagrams | Fallback: `mermaid-cli` in the CI job only |
+| mermaid-cli pulls in headless Chromium (~150 MB dev dependency) | Only needed locally when diagrams change. CI only compares hashes. |
 | Prisma 7's adapter setup is new | Follow the official Postgres adapter guide. It's isolated in `packages/db`. |
 | Synthetic layouts are too easy | 6 families, varied fonts and labels, multi-page tables, scans. Revisit after the M3 extraction metrics. |
 | Committed golden subset bloats the repo | Estimated at ~5–10 MB. Measured at commit time; above 20 MB we reduce PNG resolution. |
