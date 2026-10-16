@@ -1,0 +1,6 @@
+pnpm-lock.yaml
+docs/
+evals/golden*/
+*.md
+packages/db/prisma/migrations/
+packages/db/src/generated/

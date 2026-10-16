@@ -1,0 +1,9 @@
+packages:
+  - packages/*
+  - evals
+onlyBuiltDependencies:
+  - '@prisma/client'
+  - '@prisma/engines'
+  - prisma
+  - esbuild
+  - puppeteer
