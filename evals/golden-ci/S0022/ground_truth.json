@@ -1,0 +1,404 @@
+{
+  "schemaVersion": 1,
+  "setId": "S0022",
+  "seed": 42,
+  "generatorVersion": "0.2.0",
+  "poNumber": "HP-PO-104372",
+  "vendorCode": "TDLB",
+  "documents": [
+    {
+      "file": "po.pdf",
+      "role": "po",
+      "type": "PO",
+      "format": "pdf",
+      "template": "classic",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0915,
+            0.2121,
+            0.2759,
+            0.2258
+          ],
+          "value": "Tideline Beverage Company"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.8178,
+            0.0985,
+            0.9183,
+            0.1121
+          ],
+          "value": "HP-PO-104372"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.8447,
+            0.1162,
+            0.9183,
+            0.1298
+          ],
+          "value": "2026-07-06"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.2901,
+                0.1623,
+                0.303
+              ],
+              "value": "TDLB12621"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.2901,
+                0.4776,
+                0.303
+              ],
+              "value": "Tideline Orange Cold-Pressed Juice, 52 fl oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.2901,
+                0.634,
+                0.303
+              ],
+              "value": 26
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.2901,
+                0.6664,
+                0.303
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.2901,
+                0.7941,
+                0.303
+              ],
+              "value": "36.02"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8616,
+                0.2901,
+                0.9118,
+                0.303
+              ],
+              "value": "936.52"
+            }
+          }
+        ],
+        "subtotal": {
+          "page": 1,
+          "bbox": [
+            0.8586,
+            0.3232,
+            0.9118,
+            0.3369
+          ],
+          "value": "936.52"
+        },
+        "total": {
+          "page": 1,
+          "bbox": [
+            0.8586,
+            0.346,
+            0.9118,
+            0.3596
+          ],
+          "value": "936.52"
+        }
+      }
+    },
+    {
+      "file": "rr.png",
+      "role": "rr",
+      "type": "RR",
+      "format": "png",
+      "template": "erp",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0772,
+            0.1977,
+            0.2734,
+            0.2115
+          ],
+          "value": "Tideline Beverage Company"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.2395,
+            0.1279,
+            0.3181,
+            0.1407
+          ],
+          "value": "RCV-500663"
+        },
+        "poNumber": {
+          "page": 1,
+          "bbox": [
+            0.6676,
+            0.1239,
+            0.7619,
+            0.1369
+          ],
+          "value": "HP-PO-104372"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.2398,
+            0.1429,
+            0.3262,
+            0.1558
+          ],
+          "value": "2026-07-12"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.219,
+                0.285,
+                0.2853,
+                0.297
+              ],
+              "value": "TDLB12621"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.3334,
+                0.2817,
+                0.657,
+                0.296
+              ],
+              "value": "Tideline Orange Cold-Pressed Juice, 52 fl oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.1324,
+                0.2862,
+                0.1473,
+                0.2978
+              ],
+              "value": 26
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.1602,
+                0.286,
+                0.1751,
+                0.2975
+              ],
+              "value": "CS"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "file": "inv-1.pdf",
+      "role": "inv-1",
+      "type": "INVOICE",
+      "format": "pdf",
+      "template": "erp",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0817,
+            0.0783,
+            0.2778,
+            0.0904
+          ],
+          "value": "Tideline Beverage Company"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.2451,
+            0.1263,
+            0.3157,
+            0.1384
+          ],
+          "value": "INV-59519"
+        },
+        "poNumber": {
+          "page": 1,
+          "bbox": [
+            0.6732,
+            0.1263,
+            0.7673,
+            0.1384
+          ],
+          "value": "HP-PO-104372"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.2451,
+            0.1414,
+            0.3314,
+            0.1535
+          ],
+          "value": "2026-07-10"
+        },
+        "dueDate": {
+          "page": 1,
+          "bbox": [
+            0.6732,
+            0.1414,
+            0.7595,
+            0.1535
+          ],
+          "value": "2026-08-09"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.2831,
+                0.5237,
+                0.2945
+              ],
+              "value": "TDLB12621"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.2831,
+                0.4118,
+                0.2945
+              ],
+              "value": "Tideline Orange Cold-Pressed Juice, 52 fl oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.2831,
+                0.6928,
+                0.2945
+              ],
+              "value": 26
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.2831,
+                0.5866,
+                0.2945
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7573,
+                0.2831,
+                0.7941,
+                0.2945
+              ],
+              "value": "36.02"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8676,
+                0.2831,
+                0.9118,
+                0.2945
+              ],
+              "value": "936.52"
+            }
+          }
+        ],
+        "subtotal": {
+          "page": 1,
+          "bbox": [
+            0.8588,
+            0.3169,
+            0.9118,
+            0.3306
+          ],
+          "value": "936.52"
+        },
+        "tax": {
+          "page": 1,
+          "bbox": [
+            0.8765,
+            0.3396,
+            0.9118,
+            0.3533
+          ],
+          "value": "0.00"
+        },
+        "shipping": {
+          "page": 1,
+          "bbox": [
+            0.8588,
+            0.3624,
+            0.9118,
+            0.376
+          ],
+          "value": "120.00"
+        },
+        "total": {
+          "page": 1,
+          "bbox": [
+            0.8412,
+            0.3851,
+            0.9118,
+            0.3987
+          ],
+          "value": "1056.52"
+        }
+      }
+    }
+  ],
+  "lineMatches": [
+    {
+      "po": "po:1",
+      "rr": "rr:1",
+      "inv": "inv-1:1"
+    }
+  ],
+  "exceptions": [],
+  "planted": []
+}

@@ -1,0 +1,40 @@
+{
+  "name": "reconcile",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.34.7",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc -p tsconfig.json && pnpm -r --parallel typecheck",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "docs:check": "tsx scripts/check-docs.ts",
+    "docs:diagrams": "tsx scripts/render-diagrams.ts",
+    "postinstall": "pnpm --filter @reconcile/db exec prisma generate",
+    "db:generate": "pnpm --filter @reconcile/db exec prisma generate",
+    "db:migrate": "pnpm --filter @reconcile/db exec prisma migrate dev",
+    "db:deploy": "pnpm --filter @reconcile/db exec prisma migrate deploy",
+    "db:seed": "pnpm --filter @reconcile/db exec prisma db seed",
+    "db:reset": "pnpm --filter @reconcile/db exec prisma migrate reset --force",
+    "generate": "tsx packages/generator/src/cli.ts",
+    "generate:ci": "tsx packages/generator/src/cli.ts --ci",
+    "generate:samples": "tsx packages/generator/src/samples.ts"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@mermaid-js/mermaid-cli": "^11.17.0",
+    "@types/node": "^24.19.2",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.10",
+    "tsx": "^4.23.15",
+    "typescript": "6.0.3",
+    "typescript-eslint": "^8.71.2",
+    "vitest": "^5.0.5"
+  }
+}

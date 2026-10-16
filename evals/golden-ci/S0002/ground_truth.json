@@ -1,0 +1,1274 @@
+{
+  "schemaVersion": 1,
+  "setId": "S0002",
+  "seed": 42,
+  "generatorVersion": "0.2.0",
+  "poNumber": "HP-PO-104024",
+  "vendorCode": "TDLB",
+  "documents": [
+    {
+      "file": "po.pdf",
+      "role": "po",
+      "type": "PO",
+      "format": "pdf",
+      "template": "classic",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0915,
+            0.2121,
+            0.2759,
+            0.2258
+          ],
+          "value": "Tideline Beverage Company"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.8178,
+            0.0985,
+            0.9183,
+            0.1121
+          ],
+          "value": "HP-PO-104024"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.8447,
+            0.1162,
+            0.9183,
+            0.1298
+          ],
+          "value": "2026-03-16"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.2901,
+                0.1623,
+                0.303
+              ],
+              "value": "TDLB12541"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.2901,
+                0.5192,
+                0.303
+              ],
+              "value": "Tideline Black Cherry Sparkling Water, 12 fl oz 8-pk"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6263,
+                0.2901,
+                0.634,
+                0.303
+              ],
+              "value": 4
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.2901,
+                0.6664,
+                0.303
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.2901,
+                0.7941,
+                0.303
+              ],
+              "value": "14.05"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8693,
+                0.2901,
+                0.9118,
+                0.303
+              ],
+              "value": "56.20"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3128,
+                0.1623,
+                0.3257
+              ],
+              "value": "TDLB12286"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3128,
+                0.5155,
+                0.3257
+              ],
+              "value": "Tideline Carrot Ginger Cold-Pressed Juice, 52 fl oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.3128,
+                0.634,
+                0.3257
+              ],
+              "value": 32
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.3128,
+                0.6664,
+                0.3257
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.3128,
+                0.7941,
+                0.3257
+              ],
+              "value": "37.90"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.3128,
+                0.9118,
+                0.3257
+              ],
+              "value": "1212.80"
+            }
+          },
+          {
+            "lineNo": 3,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3355,
+                0.1623,
+                0.3484
+              ],
+              "value": "TDLB12621"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3355,
+                0.4776,
+                0.3484
+              ],
+              "value": "Tideline Orange Cold-Pressed Juice, 52 fl oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.3355,
+                0.634,
+                0.3484
+              ],
+              "value": 56
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.3355,
+                0.6664,
+                0.3484
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.3355,
+                0.7941,
+                0.3484
+              ],
+              "value": "36.02"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.3355,
+                0.9118,
+                0.3484
+              ],
+              "value": "2017.12"
+            }
+          },
+          {
+            "lineNo": 4,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3583,
+                0.1623,
+                0.3711
+              ],
+              "value": "TDLB12394"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3583,
+                0.4774,
+                0.3711
+              ],
+              "value": "Tideline Lime Sparkling Water, 12 fl oz 12-pk"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.3583,
+                0.634,
+                0.3711
+              ],
+              "value": 27
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.3583,
+                0.6664,
+                0.3711
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.3583,
+                0.7941,
+                0.3711
+              ],
+              "value": "21.51"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8616,
+                0.3583,
+                0.9118,
+                0.3711
+              ],
+              "value": "580.77"
+            }
+          },
+          {
+            "lineNo": 5,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.381,
+                0.1623,
+                0.3939
+              ],
+              "value": "TDLB12028"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.381,
+                0.5094,
+                0.3939
+              ],
+              "value": "Tideline Green Apple Cold-Pressed Juice, 12 fl oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.381,
+                0.634,
+                0.3939
+              ],
+              "value": 38
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.381,
+                0.6664,
+                0.3939
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.381,
+                0.7941,
+                0.3939
+              ],
+              "value": "14.78"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8616,
+                0.381,
+                0.9118,
+                0.3939
+              ],
+              "value": "561.64"
+            }
+          },
+          {
+            "lineNo": 6,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4037,
+                0.1623,
+                0.4166
+              ],
+              "value": "TDLB12092"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.4037,
+                0.5091,
+                0.4166
+              ],
+              "value": "Tideline Grapefruit Sparkling Water, 12 fl oz 12-pk"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.4037,
+                0.634,
+                0.4166
+              ],
+              "value": 17
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.4037,
+                0.6664,
+                0.4166
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.4037,
+                0.7941,
+                0.4166
+              ],
+              "value": "21.50"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8616,
+                0.4037,
+                0.9118,
+                0.4166
+              ],
+              "value": "365.50"
+            }
+          }
+        ],
+        "subtotal": {
+          "page": 1,
+          "bbox": [
+            0.8464,
+            0.4369,
+            0.9118,
+            0.4505
+          ],
+          "value": "4794.03"
+        },
+        "total": {
+          "page": 1,
+          "bbox": [
+            0.8464,
+            0.4596,
+            0.9118,
+            0.4732
+          ],
+          "value": "4794.03"
+        }
+      }
+    },
+    {
+      "file": "rr.pdf",
+      "role": "rr",
+      "type": "RR",
+      "format": "pdf",
+      "template": "boxed",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0882,
+            0.2222,
+            0.2397,
+            0.2351
+          ],
+          "value": "Tideline Beverage Company"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.0882,
+            0.1338,
+            0.162,
+            0.1475
+          ],
+          "value": "RCV-500041"
+        },
+        "poNumber": {
+          "page": 1,
+          "bbox": [
+            0.3671,
+            0.1338,
+            0.4569,
+            0.1475
+          ],
+          "value": "HP-PO-104024"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.646,
+            0.1338,
+            0.716,
+            0.1475
+          ],
+          "value": "2026-03-24"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3015,
+                0.1519,
+                0.3143
+              ],
+              "value": "TDLB12028"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3015,
+                0.4705,
+                0.3143
+              ],
+              "value": "Tideline Green Apple Cold-Pressed Juice, 12 fl oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8981,
+                0.3015,
+                0.9118,
+                0.3143
+              ],
+              "value": 38
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7908,
+                0.3015,
+                0.8059,
+                0.3143
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3267,
+                0.1519,
+                0.3396
+              ],
+              "value": "TDLB12092"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3267,
+                0.472,
+                0.3396
+              ],
+              "value": "Tideline Grapefruit Sparkling Water, 12 fl oz 12-pk"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8981,
+                0.3267,
+                0.9118,
+                0.3396
+              ],
+              "value": 17
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7908,
+                0.3267,
+                0.8059,
+                0.3396
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 3,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.352,
+                0.1519,
+                0.3648
+              ],
+              "value": "TDLB12286"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.352,
+                0.4767,
+                0.3648
+              ],
+              "value": "Tideline Carrot Ginger Cold-Pressed Juice, 52 fl oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8981,
+                0.352,
+                0.9118,
+                0.3648
+              ],
+              "value": 32
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7908,
+                0.352,
+                0.8059,
+                0.3648
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 4,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3772,
+                0.1519,
+                0.3901
+              ],
+              "value": "TDLB12394"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3772,
+                0.444,
+                0.3901
+              ],
+              "value": "Tideline Lime Sparkling Water, 12 fl oz 12-pk"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8981,
+                0.3772,
+                0.9118,
+                0.3901
+              ],
+              "value": 27
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7908,
+                0.3772,
+                0.8059,
+                0.3901
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 5,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4025,
+                0.1519,
+                0.4153
+              ],
+              "value": "TDLB12541"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.4025,
+                0.4791,
+                0.4153
+              ],
+              "value": "Tideline Black Cherry Sparkling Water, 12 fl oz 8-pk"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.9049,
+                0.4025,
+                0.9118,
+                0.4153
+              ],
+              "value": 4
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7908,
+                0.4025,
+                0.8059,
+                0.4153
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 6,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4277,
+                0.1519,
+                0.4406
+              ],
+              "value": "TDLB12621"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.4277,
+                0.4429,
+                0.4406
+              ],
+              "value": "Tideline Orange Cold-Pressed Juice, 52 fl oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8981,
+                0.4277,
+                0.9118,
+                0.4406
+              ],
+              "value": 56
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7908,
+                0.4277,
+                0.8059,
+                0.4406
+              ],
+              "value": "CS"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "file": "inv-1.pdf",
+      "role": "inv-1",
+      "type": "INVOICE",
+      "format": "pdf",
+      "template": "erp",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0817,
+            0.0783,
+            0.2778,
+            0.0904
+          ],
+          "value": "Tideline Beverage Company"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.2451,
+            0.1263,
+            0.3157,
+            0.1384
+          ],
+          "value": "INV-41668"
+        },
+        "poNumber": {
+          "page": 1,
+          "bbox": [
+            0.6732,
+            0.1263,
+            0.7673,
+            0.1384
+          ],
+          "value": "HP-PO-104024"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.2451,
+            0.1414,
+            0.3314,
+            0.1535
+          ],
+          "value": "2026-03-28"
+        },
+        "dueDate": {
+          "page": 1,
+          "bbox": [
+            0.6732,
+            0.1414,
+            0.7595,
+            0.1535
+          ],
+          "value": "2026-04-27"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.2831,
+                0.5237,
+                0.2945
+              ],
+              "value": "TDLB12541"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.2831,
+                0.4197,
+                0.293
+              ],
+              "value": "Tideline Black Cherry Sparkling Water, 12 fl oz 8-pk"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6855,
+                0.2831,
+                0.6928,
+                0.2945
+              ],
+              "value": 4
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.2831,
+                0.5866,
+                0.2945
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7573,
+                0.2831,
+                0.7941,
+                0.2945
+              ],
+              "value": "14.05"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.875,
+                0.2831,
+                0.9118,
+                0.2945
+              ],
+              "value": "56.20"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.2983,
+                0.5237,
+                0.3097
+              ],
+              "value": "TDLB12286"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.2983,
+                0.4383,
+                0.3089
+              ],
+              "value": "Tideline Carrot Ginger Cold-Pressed Juice, 52 fl oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.2983,
+                0.6928,
+                0.3097
+              ],
+              "value": 32
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.2983,
+                0.5866,
+                0.3097
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7573,
+                0.2983,
+                0.7941,
+                0.3097
+              ],
+              "value": "37.90"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8529,
+                0.2983,
+                0.9118,
+                0.3097
+              ],
+              "value": "1212.80"
+            }
+          },
+          {
+            "lineNo": 3,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.3134,
+                0.5237,
+                0.3248
+              ],
+              "value": "TDLB12621"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3134,
+                0.4118,
+                0.3248
+              ],
+              "value": "Tideline Orange Cold-Pressed Juice, 52 fl oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.3134,
+                0.6928,
+                0.3248
+              ],
+              "value": 56
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.3134,
+                0.5866,
+                0.3248
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7573,
+                0.3134,
+                0.7941,
+                0.3248
+              ],
+              "value": "36.02"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8529,
+                0.3134,
+                0.9118,
+                0.3248
+              ],
+              "value": "2017.12"
+            }
+          },
+          {
+            "lineNo": 4,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.3286,
+                0.5237,
+                0.34
+              ],
+              "value": "TDLB12394"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3286,
+                0.4192,
+                0.34
+              ],
+              "value": "Tideline Lime Sparkling Water, 12 fl oz 12-pk"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.3286,
+                0.6928,
+                0.34
+              ],
+              "value": 27
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.3286,
+                0.5866,
+                0.34
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7573,
+                0.3286,
+                0.7941,
+                0.34
+              ],
+              "value": "21.51"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8676,
+                0.3286,
+                0.9118,
+                0.34
+              ],
+              "value": "580.77"
+            }
+          },
+          {
+            "lineNo": 5,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.3438,
+                0.5237,
+                0.3551
+              ],
+              "value": "TDLB12028"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3438,
+                0.4246,
+                0.3544
+              ],
+              "value": "Tideline Green Apple Cold-Pressed Juice, 12 fl oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.3438,
+                0.6928,
+                0.3551
+              ],
+              "value": 38
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.3438,
+                0.5866,
+                0.3551
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7573,
+                0.3438,
+                0.7941,
+                0.3551
+              ],
+              "value": "14.78"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8676,
+                0.3438,
+                0.9118,
+                0.3551
+              ],
+              "value": "561.64"
+            }
+          },
+          {
+            "lineNo": 6,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.3589,
+                0.5237,
+                0.3703
+              ],
+              "value": "TDLB12092"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3589,
+                0.4383,
+                0.3695
+              ],
+              "value": "Tideline Grapefruit Sparkling Water, 12 fl oz 12-pk"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.3589,
+                0.6928,
+                0.3703
+              ],
+              "value": 17
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.3589,
+                0.5866,
+                0.3703
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7573,
+                0.3589,
+                0.7941,
+                0.3703
+              ],
+              "value": "21.50"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8676,
+                0.3589,
+                0.9118,
+                0.3703
+              ],
+              "value": "365.50"
+            }
+          }
+        ],
+        "subtotal": {
+          "page": 1,
+          "bbox": [
+            0.8412,
+            0.3927,
+            0.9118,
+            0.4063
+          ],
+          "value": "4794.03"
+        },
+        "tax": {
+          "page": 1,
+          "bbox": [
+            0.8765,
+            0.4154,
+            0.9118,
+            0.429
+          ],
+          "value": "0.00"
+        },
+        "shipping": {
+          "page": 1,
+          "bbox": [
+            0.8588,
+            0.4381,
+            0.9118,
+            0.4518
+          ],
+          "value": "120.00"
+        },
+        "total": {
+          "page": 1,
+          "bbox": [
+            0.8412,
+            0.4609,
+            0.9118,
+            0.4745
+          ],
+          "value": "4914.03"
+        }
+      }
+    }
+  ],
+  "lineMatches": [
+    {
+      "po": "po:1",
+      "rr": "rr:5",
+      "inv": "inv-1:1"
+    },
+    {
+      "po": "po:2",
+      "rr": "rr:3",
+      "inv": "inv-1:2"
+    },
+    {
+      "po": "po:3",
+      "rr": "rr:6",
+      "inv": "inv-1:3"
+    },
+    {
+      "po": "po:4",
+      "rr": "rr:4",
+      "inv": "inv-1:4"
+    },
+    {
+      "po": "po:5",
+      "rr": "rr:1",
+      "inv": "inv-1:5"
+    },
+    {
+      "po": "po:6",
+      "rr": "rr:2",
+      "inv": "inv-1:6"
+    }
+  ],
+  "exceptions": [],
+  "planted": []
+}

@@ -17,7 +17,7 @@ Priority: **P1** next after the current plan · **P2** valuable later · **P3** 
 | B-06 | Shopify / Stripe / accounting integrations | P3 | PRD non-goals |
 | B-07 | Exception trend dashboard for managers | P2 | PRD §2 |
 | B-08 | Confidence calibration chart in eval output | P2 | PRD §11 |
-| B-09 | Create the GitHub repo; push `main` and tags before M1's first PR | P1 | M0 retro |
+| ~~B-09~~ | ~~Create the GitHub repo; push `main` and tags before M1's first PR~~ ✅ done 2026-10-16 | P1 | M0 retro |
 | B-10 | CI docs check: relative links and Mermaid syntax | P1 | M0 retro |
 | B-11 | Move the repo out of the temporary session folder | P1 | M0 retro |
 

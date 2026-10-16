@@ -1,0 +1,11 @@
+{
+  "docs/diagrams/architecture-1-system-context-who-talks-to-reconcile.png": "63f2cd34db6f42892bc813bf91b2ec81651bf3fea3009926da9990ff6bb0dbfb",
+  "docs/diagrams/architecture-2-containers-the-moving-parts.png": "b88db638e0486d09b4514d14ec9d353499d035dacce4aa64a5c64ee09d4afda6",
+  "docs/diagrams/architecture-3-main-flow-upload-exception.png": "3ddc56358f71b0ae0bb4de9656256b88a3ba2fc6d0d47aeb31de849e42ca5a57",
+  "docs/diagrams/architecture-4-document.png": "ce0d524101623c6856b80068fb9c3cf972f3ecd11abec7a063c71d665729a415",
+  "docs/diagrams/architecture-5-exception.png": "7c6a75683e0e566a9ccf803dc4df87ac9cb5f886526ac6cac70ec55081e5b990",
+  "docs/diagrams/architecture-6-data-model-overview.png": "7a1843a323cfca1b102df21c3163ab1cd9f40394aecb2151dcad5f403bde7486",
+  "docs/diagrams/architecture-7-llm-client-inside-core.png": "3d42c5306cf2342d3a5e464c6fb7698fca2d4322efa9aabae232f345ea1b6d61",
+  "docs/diagrams/architecture-8-evals-pipeline.png": "d841ef03cd9c14fdcb8ebfeb736da7a3adcf9765cbd41ab7d0d4eb945ad0a101",
+  "docs/diagrams/milestones-m1-design-1-overview.png": "489081baf21f694591c0ef269608244c744b4a6409dc5666dab0e24cd04de2cf"
+}

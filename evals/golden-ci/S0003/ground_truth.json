@@ -1,0 +1,2318 @@
+{
+  "schemaVersion": 1,
+  "setId": "S0003",
+  "seed": 42,
+  "generatorVersion": "0.2.0",
+  "poNumber": "HP-PO-104043",
+  "vendorCode": "GRNV",
+  "documents": [
+    {
+      "file": "po.pdf",
+      "role": "po",
+      "type": "PO",
+      "format": "pdf",
+      "template": "classic",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0915,
+            0.2121,
+            0.2418,
+            0.2258
+          ],
+          "value": "Greenvale Snacks LLC"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.8178,
+            0.0985,
+            0.9183,
+            0.1121
+          ],
+          "value": "HP-PO-104043"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.8447,
+            0.1162,
+            0.9183,
+            0.1298
+          ],
+          "value": "2026-04-30"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.2901,
+                0.167,
+                0.303
+              ],
+              "value": "GRNV15655"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.2901,
+                0.4628,
+                0.303
+              ],
+              "value": "Greenvale White Cheddar Popcorn, 4.4 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.2901,
+                0.634,
+                0.303
+              ],
+              "value": 29
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.2901,
+                0.6664,
+                0.303
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.2901,
+                0.7941,
+                0.303
+              ],
+              "value": "29.99"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8616,
+                0.2901,
+                0.9118,
+                0.303
+              ],
+              "value": "869.71"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3128,
+                0.167,
+                0.3257
+              ],
+              "value": "GRNV15232"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3128,
+                0.4361,
+                0.3257
+              ],
+              "value": "Greenvale Kettle Corn Popcorn, 10 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.3128,
+                0.634,
+                0.3257
+              ],
+              "value": 17
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.3128,
+                0.6664,
+                0.3257
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.3128,
+                0.7941,
+                0.3257
+              ],
+              "value": "53.50"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8616,
+                0.3128,
+                0.9118,
+                0.3257
+              ],
+              "value": "909.50"
+            }
+          },
+          {
+            "lineNo": 3,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3355,
+                0.167,
+                0.3484
+              ],
+              "value": "GRNV15032"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3355,
+                0.4541,
+                0.3484
+              ],
+              "value": "Greenvale Lightly Salted Popcorn, 4.4 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.3355,
+                0.634,
+                0.3484
+              ],
+              "value": 36
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.3355,
+                0.6664,
+                0.3484
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.3355,
+                0.7941,
+                0.3484
+              ],
+              "value": "28.46"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.3355,
+                0.9118,
+                0.3484
+              ],
+              "value": "1024.56"
+            }
+          },
+          {
+            "lineNo": 4,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3583,
+                0.167,
+                0.3711
+              ],
+              "value": "GRNV15520"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3583,
+                0.4112,
+                0.3711
+              ],
+              "value": "Greenvale BBQ Kettle Chips, 8 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.3583,
+                0.634,
+                0.3711
+              ],
+              "value": 31
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.3583,
+                0.6664,
+                0.3711
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.3583,
+                0.7941,
+                0.3711
+              ],
+              "value": "39.45"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.3583,
+                0.9118,
+                0.3711
+              ],
+              "value": "1222.95"
+            }
+          },
+          {
+            "lineNo": 5,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.381,
+                0.167,
+                0.3939
+              ],
+              "value": "GRNV15686"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.381,
+                0.44,
+                0.3939
+              ],
+              "value": "Greenvale Kettle Corn Popcorn, 4.4 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.381,
+                0.634,
+                0.3939
+              ],
+              "value": 59
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.381,
+                0.6664,
+                0.3939
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.381,
+                0.7941,
+                0.3939
+              ],
+              "value": "27.64"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.381,
+                0.9118,
+                0.3939
+              ],
+              "value": "1630.76"
+            }
+          },
+          {
+            "lineNo": 6,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4037,
+                0.167,
+                0.4166
+              ],
+              "value": "GRNV15147"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.4037,
+                0.4344,
+                0.4166
+              ],
+              "value": "Greenvale Sea Salt Kettle Chips, 8 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.4037,
+                0.634,
+                0.4166
+              ],
+              "value": 30
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.4037,
+                0.6664,
+                0.4166
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.4037,
+                0.7941,
+                0.4166
+              ],
+              "value": "42.16"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.4037,
+                0.9118,
+                0.4166
+              ],
+              "value": "1264.80"
+            }
+          },
+          {
+            "lineNo": 7,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4265,
+                0.167,
+                0.4393
+              ],
+              "value": "GRNV15835"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.4265,
+                0.4699,
+                0.4393
+              ],
+              "value": "Greenvale Salt & Vinegar Kettle Chips, 8 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.4265,
+                0.634,
+                0.4393
+              ],
+              "value": 25
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.4265,
+                0.6664,
+                0.4393
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.4265,
+                0.7941,
+                0.4393
+              ],
+              "value": "42.54"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.4265,
+                0.9118,
+                0.4393
+              ],
+              "value": "1063.50"
+            }
+          },
+          {
+            "lineNo": 8,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4492,
+                0.167,
+                0.4621
+              ],
+              "value": "GRNV15692"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.4492,
+                0.4502,
+                0.4621
+              ],
+              "value": "Greenvale Lightly Salted Popcorn, 10 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.4492,
+                0.634,
+                0.4621
+              ],
+              "value": 51
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.4492,
+                0.6664,
+                0.4621
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.4492,
+                0.7941,
+                0.4621
+              ],
+              "value": "53.17"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.4492,
+                0.9118,
+                0.4621
+              ],
+              "value": "2711.67"
+            }
+          },
+          {
+            "lineNo": 9,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4719,
+                0.167,
+                0.4848
+              ],
+              "value": "GRNV15250"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.4719,
+                0.4379,
+                0.4848
+              ],
+              "value": "Greenvale Jalapeno Kettle Chips, 5 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.4719,
+                0.634,
+                0.4848
+              ],
+              "value": 44
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.4719,
+                0.6664,
+                0.4848
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.4719,
+                0.7941,
+                0.4848
+              ],
+              "value": "28.74"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.4719,
+                0.9118,
+                0.4848
+              ],
+              "value": "1264.56"
+            }
+          },
+          {
+            "lineNo": 10,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4946,
+                0.167,
+                0.5075
+              ],
+              "value": "GRNV15447"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.4946,
+                0.4589,
+                0.5075
+              ],
+              "value": "Greenvale White Cheddar Popcorn, 10 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.4946,
+                0.634,
+                0.5075
+              ],
+              "value": 12
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.4946,
+                0.6664,
+                0.5075
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.4946,
+                0.7941,
+                0.5075
+              ],
+              "value": "50.84"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8616,
+                0.4946,
+                0.9118,
+                0.5075
+              ],
+              "value": "610.08"
+            }
+          },
+          {
+            "lineNo": 11,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.5174,
+                0.167,
+                0.5302
+              ],
+              "value": "GRNV15560"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.5174,
+                0.4379,
+                0.5302
+              ],
+              "value": "Greenvale Jalapeno Kettle Chips, 8 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.5174,
+                0.634,
+                0.5302
+              ],
+              "value": 27
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.5174,
+                0.6664,
+                0.5302
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.5174,
+                0.7941,
+                0.5302
+              ],
+              "value": "42.94"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.5174,
+                0.9118,
+                0.5302
+              ],
+              "value": "1159.38"
+            }
+          },
+          {
+            "lineNo": 12,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.5401,
+                0.167,
+                0.553
+              ],
+              "value": "GRNV15456"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.5401,
+                0.4344,
+                0.553
+              ],
+              "value": "Greenvale Sea Salt Kettle Chips, 5 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.5401,
+                0.634,
+                0.553
+              ],
+              "value": 25
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.5401,
+                0.6664,
+                0.553
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.5401,
+                0.7941,
+                0.553
+              ],
+              "value": "28.81"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8616,
+                0.5401,
+                0.9118,
+                0.553
+              ],
+              "value": "720.25"
+            }
+          }
+        ],
+        "subtotal": {
+          "page": 1,
+          "bbox": [
+            0.8382,
+            0.5732,
+            0.9118,
+            0.5869
+          ],
+          "value": "14451.72"
+        },
+        "total": {
+          "page": 1,
+          "bbox": [
+            0.8382,
+            0.596,
+            0.9118,
+            0.6096
+          ],
+          "value": "14451.72"
+        }
+      }
+    },
+    {
+      "file": "rr.png",
+      "role": "rr",
+      "type": "RR",
+      "format": "png",
+      "template": "boxed",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.077,
+            0.2295,
+            0.1983,
+            0.2454
+          ],
+          "value": "Greenvale Snacks LLC"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.0733,
+            0.1423,
+            0.1476,
+            0.1578
+          ],
+          "value": "RCV-500071"
+        },
+        "poNumber": {
+          "page": 1,
+          "bbox": [
+            0.3521,
+            0.135,
+            0.4424,
+            0.1509
+          ],
+          "value": "HP-PO-104043"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.6308,
+            0.1287,
+            0.7014,
+            0.1441
+          ],
+          "value": "2026-05-03"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0802,
+                0.3101,
+                0.147,
+                0.3245
+              ],
+              "value": "GRNV15032"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.1946,
+                0.3035,
+                0.415,
+                0.3217
+              ],
+              "value": "Greenvale Lightly Salted Popcorn, 4.4 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8897,
+                0.2915,
+                0.9039,
+                0.3046
+              ],
+              "value": 36
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7825,
+                0.2941,
+                0.7981,
+                0.3072
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0813,
+                0.3353,
+                0.1481,
+                0.3498
+              ],
+              "value": "GRNV15147"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.1956,
+                0.3292,
+                0.3962,
+                0.347
+              ],
+              "value": "Greenvale Sea Salt Kettle Chips, 8 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8908,
+                0.3167,
+                0.905,
+                0.3299
+              ],
+              "value": 30
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7835,
+                0.3193,
+                0.7991,
+                0.3325
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 3,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0823,
+                0.3606,
+                0.1491,
+                0.375
+              ],
+              "value": "GRNV15232"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.1967,
+                0.3544,
+                0.4001,
+                0.3722
+              ],
+              "value": "Greenvale Kettle Corn Popcorn, 10 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8918,
+                0.342,
+                0.906,
+                0.3551
+              ],
+              "value": 17
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7846,
+                0.3446,
+                0.8002,
+                0.3577
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 4,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0833,
+                0.3858,
+                0.1501,
+                0.4003
+              ],
+              "value": "GRNV15250"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.1977,
+                0.3795,
+                0.4039,
+                0.3975
+              ],
+              "value": "Greenvale Jalapeno Kettle Chips, 5 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8928,
+                0.3671,
+                0.9071,
+                0.3804
+              ],
+              "value": 44
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7856,
+                0.3697,
+                0.8012,
+                0.383
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 5,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0844,
+                0.411,
+                0.1512,
+                0.4255
+              ],
+              "value": "GRNV15447"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.1987,
+                0.4044,
+                0.4213,
+                0.4227
+              ],
+              "value": "Greenvale White Cheddar Popcorn, 10 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8939,
+                0.3924,
+                0.9081,
+                0.4056
+              ],
+              "value": 12
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7866,
+                0.395,
+                0.8023,
+                0.4082
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 6,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0854,
+                0.4362,
+                0.1522,
+                0.4508
+              ],
+              "value": "GRNV15456"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.1998,
+                0.4301,
+                0.4004,
+                0.4479
+              ],
+              "value": "Greenvale Sea Salt Kettle Chips, 5 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8949,
+                0.4176,
+                0.9091,
+                0.4308
+              ],
+              "value": 25
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7877,
+                0.4202,
+                0.8033,
+                0.4335
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 7,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0865,
+                0.4615,
+                0.1533,
+                0.4759
+              ],
+              "value": "GRNV15520"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2008,
+                0.4559,
+                0.3803,
+                0.4731
+              ],
+              "value": "Greenvale BBQ Kettle Chips, 8 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.896,
+                0.4429,
+                0.9102,
+                0.456
+              ],
+              "value": 31
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7887,
+                0.4455,
+                0.8043,
+                0.4587
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 8,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0875,
+                0.4867,
+                0.1543,
+                0.5012
+              ],
+              "value": "GRNV15560"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2019,
+                0.4805,
+                0.4081,
+                0.4984
+              ],
+              "value": "Greenvale Jalapeno Kettle Chips, 8 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.897,
+                0.4681,
+                0.9112,
+                0.4813
+              ],
+              "value": 27
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7898,
+                0.4707,
+                0.8054,
+                0.484
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 9,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0886,
+                0.512,
+                0.1554,
+                0.5265
+              ],
+              "value": "GRNV15655"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2029,
+                0.5053,
+                0.4292,
+                0.5237
+              ],
+              "value": "Greenvale White Cheddar Popcorn, 4.4 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.898,
+                0.4934,
+                0.9123,
+                0.5066
+              ],
+              "value": 29
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7908,
+                0.496,
+                0.8064,
+                0.5092
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 10,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0896,
+                0.5372,
+                0.1564,
+                0.5517
+              ],
+              "value": "GRNV15686"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2039,
+                0.5309,
+                0.4111,
+                0.5489
+              ],
+              "value": "Greenvale Kettle Corn Popcorn, 4.4 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8991,
+                0.5186,
+                0.9133,
+                0.5318
+              ],
+              "value": 59
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7918,
+                0.5212,
+                0.8075,
+                0.5344
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 11,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0906,
+                0.5625,
+                0.1574,
+                0.577
+              ],
+              "value": "GRNV15692"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.205,
+                0.556,
+                0.4218,
+                0.5742
+              ],
+              "value": "Greenvale Lightly Salted Popcorn, 10 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.9001,
+                0.5439,
+                0.9143,
+                0.5571
+              ],
+              "value": 51
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7929,
+                0.5465,
+                0.8085,
+                0.5597
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 12,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0917,
+                0.5877,
+                0.1585,
+                0.6022
+              ],
+              "value": "GRNV15835"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.206,
+                0.5808,
+                0.439,
+                0.5994
+              ],
+              "value": "Greenvale Salt & Vinegar Kettle Chips, 8 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.9012,
+                0.569,
+                0.9154,
+                0.5823
+              ],
+              "value": 25
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7939,
+                0.5716,
+                0.8095,
+                0.5849
+              ],
+              "value": "CS"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "file": "inv-1.pdf",
+      "role": "inv-1",
+      "type": "INVOICE",
+      "format": "pdf",
+      "template": "letterhead",
+      "pages": 2,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.3252,
+            0.053,
+            0.6748,
+            0.0833
+          ],
+          "value": "Greenvale Snacks LLC"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.1778,
+            0.1692,
+            0.222,
+            0.1836
+          ],
+          "value": "13732"
+        },
+        "poNumber": {
+          "page": 1,
+          "bbox": [
+            0.1912,
+            0.1881,
+            0.2998,
+            0.2025
+          ],
+          "value": "HP-PO-104043"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.1864,
+            0.2071,
+            0.268,
+            0.2215
+          ],
+          "value": "2026-05-05"
+        },
+        "dueDate": {
+          "page": 1,
+          "bbox": [
+            0.1613,
+            0.226,
+            0.2429,
+            0.2404
+          ],
+          "value": "2026-06-04"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.4448,
+                0.5434,
+                0.4592
+              ],
+              "value": "GRNV15655"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4448,
+                0.3929,
+                0.4592
+              ],
+              "value": "Greenvale White Cheddar Popcorn, 4.4 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6764,
+                0.4448,
+                0.6928,
+                0.4592
+              ],
+              "value": 29
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.4448,
+                0.5906,
+                0.4592
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7485,
+                0.4448,
+                0.7941,
+                0.4592
+              ],
+              "value": "29.99"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.858,
+                0.4448,
+                0.9118,
+                0.4592
+              ],
+              "value": "869.71"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.4751,
+                0.5434,
+                0.4895
+              ],
+              "value": "GRNV15232"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4751,
+                0.3608,
+                0.4895
+              ],
+              "value": "Greenvale Kettle Corn Popcorn, 10 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6764,
+                0.4751,
+                0.6928,
+                0.4895
+              ],
+              "value": 17
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.4751,
+                0.5906,
+                0.4895
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7485,
+                0.4751,
+                0.7941,
+                0.4895
+              ],
+              "value": "53.50"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.858,
+                0.4751,
+                0.9118,
+                0.4895
+              ],
+              "value": "909.50"
+            }
+          },
+          {
+            "lineNo": 3,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.5054,
+                0.5434,
+                0.5198
+              ],
+              "value": "GRNV15032"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.5054,
+                0.3833,
+                0.5198
+              ],
+              "value": "Greenvale Lightly Salted Popcorn, 4.4 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6764,
+                0.5054,
+                0.6928,
+                0.5198
+              ],
+              "value": 36
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.5054,
+                0.5906,
+                0.5198
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7485,
+                0.5054,
+                0.7941,
+                0.5198
+              ],
+              "value": "28.46"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8451,
+                0.5054,
+                0.9118,
+                0.5198
+              ],
+              "value": "1024.56"
+            }
+          },
+          {
+            "lineNo": 4,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.5357,
+                0.5434,
+                0.5501
+              ],
+              "value": "GRNV15520"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.5357,
+                0.3272,
+                0.5501
+              ],
+              "value": "Greenvale BBQ Kettle Chips, 8 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6764,
+                0.5357,
+                0.6928,
+                0.5501
+              ],
+              "value": 31
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.5357,
+                0.5906,
+                0.5501
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7485,
+                0.5357,
+                0.7941,
+                0.5501
+              ],
+              "value": "39.45"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8451,
+                0.5357,
+                0.9118,
+                0.5501
+              ],
+              "value": "1222.95"
+            }
+          },
+          {
+            "lineNo": 5,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.566,
+                0.5434,
+                0.5804
+              ],
+              "value": "GRNV15686"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.566,
+                0.3655,
+                0.5804
+              ],
+              "value": "Greenvale Kettle Corn Popcorn, 4.4 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6764,
+                0.566,
+                0.6928,
+                0.5804
+              ],
+              "value": 59
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.566,
+                0.5906,
+                0.5804
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7485,
+                0.566,
+                0.7941,
+                0.5804
+              ],
+              "value": "27.64"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8451,
+                0.566,
+                0.9118,
+                0.5804
+              ],
+              "value": "1630.76"
+            }
+          },
+          {
+            "lineNo": 6,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.5963,
+                0.5434,
+                0.6107
+              ],
+              "value": "GRNV15147"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.5963,
+                0.3522,
+                0.6107
+              ],
+              "value": "Greenvale Sea Salt Kettle Chips, 8 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6764,
+                0.5963,
+                0.6928,
+                0.6107
+              ],
+              "value": 30
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.5963,
+                0.5906,
+                0.6107
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7485,
+                0.5963,
+                0.7941,
+                0.6107
+              ],
+              "value": "42.16"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8451,
+                0.5963,
+                0.9118,
+                0.6107
+              ],
+              "value": "1264.80"
+            }
+          },
+          {
+            "lineNo": 7,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.6266,
+                0.5434,
+                0.641
+              ],
+              "value": "GRNV15835"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.6266,
+                0.3999,
+                0.641
+              ],
+              "value": "Greenvale Salt & Vinegar Kettle Chips, 8 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6764,
+                0.6266,
+                0.6928,
+                0.641
+              ],
+              "value": 25
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.6266,
+                0.5906,
+                0.641
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7485,
+                0.6266,
+                0.7941,
+                0.641
+              ],
+              "value": "42.54"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8451,
+                0.6266,
+                0.9118,
+                0.641
+              ],
+              "value": "1063.50"
+            }
+          },
+          {
+            "lineNo": 8,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.6569,
+                0.5434,
+                0.6713
+              ],
+              "value": "GRNV15692"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.6569,
+                0.3786,
+                0.6713
+              ],
+              "value": "Greenvale Lightly Salted Popcorn, 10 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6764,
+                0.6569,
+                0.6928,
+                0.6713
+              ],
+              "value": 51
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.6569,
+                0.5906,
+                0.6713
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7485,
+                0.6569,
+                0.7941,
+                0.6713
+              ],
+              "value": "53.17"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8451,
+                0.6569,
+                0.9118,
+                0.6713
+              ],
+              "value": "2711.67"
+            }
+          },
+          {
+            "lineNo": 9,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.6872,
+                0.5434,
+                0.7016
+              ],
+              "value": "GRNV15250"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.6872,
+                0.3597,
+                0.7016
+              ],
+              "value": "Greenvale Jalapeno Kettle Chips, 5 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6764,
+                0.6872,
+                0.6928,
+                0.7016
+              ],
+              "value": 44
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.6872,
+                0.5906,
+                0.7016
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7485,
+                0.6872,
+                0.7941,
+                0.7016
+              ],
+              "value": "28.74"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8451,
+                0.6872,
+                0.9118,
+                0.7016
+              ],
+              "value": "1264.56"
+            }
+          },
+          {
+            "lineNo": 10,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.7175,
+                0.5434,
+                0.7319
+              ],
+              "value": "GRNV15447"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.7175,
+                0.3882,
+                0.7319
+              ],
+              "value": "Greenvale White Cheddar Popcorn, 10 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6764,
+                0.7175,
+                0.6928,
+                0.7319
+              ],
+              "value": 12
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.7175,
+                0.5906,
+                0.7319
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7485,
+                0.7175,
+                0.7941,
+                0.7319
+              ],
+              "value": "50.84"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.858,
+                0.7175,
+                0.9118,
+                0.7319
+              ],
+              "value": "610.08"
+            }
+          },
+          {
+            "lineNo": 11,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.7478,
+                0.5434,
+                0.7622
+              ],
+              "value": "GRNV15560"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.7478,
+                0.3597,
+                0.7622
+              ],
+              "value": "Greenvale Jalapeno Kettle Chips, 8 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6764,
+                0.7478,
+                0.6928,
+                0.7622
+              ],
+              "value": 27
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.7478,
+                0.5906,
+                0.7622
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7485,
+                0.7478,
+                0.7941,
+                0.7622
+              ],
+              "value": "42.94"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8451,
+                0.7478,
+                0.9118,
+                0.7622
+              ],
+              "value": "1159.38"
+            }
+          },
+          {
+            "lineNo": 12,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.7781,
+                0.5434,
+                0.7925
+              ],
+              "value": "GRNV15456"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.7781,
+                0.3522,
+                0.7925
+              ],
+              "value": "Greenvale Sea Salt Kettle Chips, 5 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6764,
+                0.7781,
+                0.6928,
+                0.7925
+              ],
+              "value": 25
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.7781,
+                0.5906,
+                0.7925
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7485,
+                0.7781,
+                0.7941,
+                0.7925
+              ],
+              "value": "28.81"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.858,
+                0.7781,
+                0.9118,
+                0.7925
+              ],
+              "value": "720.25"
+            }
+          }
+        ],
+        "subtotal": {
+          "page": 2,
+          "bbox": [
+            0.8408,
+            0.0783,
+            0.9118,
+            0.0919
+          ],
+          "value": "14451.72"
+        },
+        "tax": {
+          "page": 2,
+          "bbox": [
+            0.8764,
+            0.101,
+            0.9118,
+            0.1146
+          ],
+          "value": "0.00"
+        },
+        "shipping": {
+          "page": 2,
+          "bbox": [
+            0.8686,
+            0.1237,
+            0.9118,
+            0.1374
+          ],
+          "value": "75.00"
+        },
+        "total": {
+          "page": 2,
+          "bbox": [
+            0.8358,
+            0.1465,
+            0.9118,
+            0.1601
+          ],
+          "value": "14526.72"
+        }
+      }
+    }
+  ],
+  "lineMatches": [
+    {
+      "po": "po:1",
+      "rr": "rr:9",
+      "inv": "inv-1:1"
+    },
+    {
+      "po": "po:2",
+      "rr": "rr:3",
+      "inv": "inv-1:2"
+    },
+    {
+      "po": "po:3",
+      "rr": "rr:1",
+      "inv": "inv-1:3"
+    },
+    {
+      "po": "po:4",
+      "rr": "rr:7",
+      "inv": "inv-1:4"
+    },
+    {
+      "po": "po:5",
+      "rr": "rr:10",
+      "inv": "inv-1:5"
+    },
+    {
+      "po": "po:6",
+      "rr": "rr:2",
+      "inv": "inv-1:6"
+    },
+    {
+      "po": "po:7",
+      "rr": "rr:12",
+      "inv": "inv-1:7"
+    },
+    {
+      "po": "po:8",
+      "rr": "rr:11",
+      "inv": "inv-1:8"
+    },
+    {
+      "po": "po:9",
+      "rr": "rr:4",
+      "inv": "inv-1:9"
+    },
+    {
+      "po": "po:10",
+      "rr": "rr:5",
+      "inv": "inv-1:10"
+    },
+    {
+      "po": "po:11",
+      "rr": "rr:8",
+      "inv": "inv-1:11"
+    },
+    {
+      "po": "po:12",
+      "rr": "rr:6",
+      "inv": "inv-1:12"
+    }
+  ],
+  "exceptions": [],
+  "planted": []
+}
