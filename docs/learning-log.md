@@ -108,3 +108,33 @@ answered two open questions (Q1, Q2).
   and docs stay comparable.
 
 **Remember:** if you can't draw it or explain the trade-off, you're not ready to code it.
+
+---
+
+## M0 · Testing, review, release, and retro (2026-10-16)
+
+**In one line:** check the work, approve it, ship it with a version number, then learn from it.
+
+**What we did:** checked every doc link and confirmed each requirement maps
+to a milestone. Merged the branch into `main`, tagged **v0.1.0**, and wrote a
+retrospective.
+
+**Key ideas**
+- **Testing isn't just code.** For docs, "tests" are checks: links work, every
+  requirement is traced. Automate the checks when you can, since computers
+  don't get bored.
+- **Review = a second pair of eyes before merging.** Here, that was your
+  approval at the gate. Normally it happens on a pull request (PR).
+- **Branch → merge.** Work happens on a side branch, so `main` always holds
+  approved work only. `--no-ff` keeps a visible "merge" bubble in history,
+  showing what shipped together.
+- **Semantic Versioning (`MAJOR.MINOR.PATCH`).** `0.x` means "still early,
+  things may change." Each milestone bumps MINOR (v0.2.0 next), and a bug fix
+  bumps PATCH.
+- **Tag + CHANGELOG = a release.** The tag marks the exact commit. The
+  changelog tells humans what changed.
+- **Retrospective:** what went well, what didn't, lessons, follow-ups. It's
+  blameless and specific, and follow-ups go into the backlog so they actually
+  happen.
+
+**Remember:** shipping isn't the end of a cycle. The retro is what makes the next cycle better.
