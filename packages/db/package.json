@@ -16,6 +16,7 @@
     "@prisma/adapter-pg": "7.10.1",
     "@prisma/client": "7.10.1",
     "@reconcile/core": "workspace:*",
+    "@reconcile/generator": "workspace:*",
     "zod": "^4.6.7"
   }
 }
