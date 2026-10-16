@@ -76,3 +76,35 @@ answered two open questions (Q1, Q2).
   **scope creep** (a project slowly growing until it never ships).
 
 **Remember:** the cheapest bug fix is one made in a document.
+
+---
+
+## M0 · Design (2026-10-16)
+
+**In one line:** draw the blueprints. Decide *how* we'll build it before writing code.
+
+**What we did:** wrote `architecture.md` (diagrams of the system), six
+**ADRs** (decision records), and templates for the docs every milestone will produce.
+
+**Key ideas**
+- **Zoom levels.** Architecture is shown like a map, from far to close:
+  - *Context:* who uses the system and what it talks to.
+  - *Containers:* the big running parts (web, api, worker, database).
+  - *Flows and states:* what happens step by step, and the life of a document
+    or exception (e.g. `OPEN → DISPUTED → WRITTEN_OFF`).
+- **Separation of concerns.** Each part has one job and a list of things it
+  must *not* do (e.g. the UI never touches the database). Clear borders keep
+  bugs contained and code testable.
+- **Pure core.** The business logic (`core`) does no I/O, so it can be tested
+  instantly without servers. Think of it as the engine on a test bench, outside the car.
+- **ADR (Architecture Decision Record).** A one-page note per big decision:
+  *context → options → choice → trade-offs.* Six months later, it answers "why
+  did we do it this way?" ADRs are never rewritten. A new one replaces an old one.
+- **Trade-offs are explicit.** Every ADR lists the downsides (➖) we accept.
+  There are no perfect choices, only conscious ones.
+- **Design for the constraint.** The free-tier LLM limit shaped the design:
+  a cache, a shared rate limiter, rules before AI, and replay-mode CI.
+- **Templates.** Every milestone fills the same forms, so nothing gets skipped
+  and docs stay comparable.
+
+**Remember:** if you can't draw it or explain the trade-off, you're not ready to code it.
