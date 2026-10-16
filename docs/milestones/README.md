@@ -5,7 +5,7 @@ Each milestone gets a folder `Mx/` with `requirements.md`, `design.md`,
 
 | Milestone | Status |
 |---|---|
-| M0 Requirements and design | Design gate |
+| M0 Requirements and design | ✅ Released v0.1.0 (2026-10-16) |
 | M1 Foundation and synthetic data | Not started |
 | M2 Matching engine and eval harness | Not started |
 | M3 LLM client and extraction | Not started |
@@ -15,4 +15,4 @@ Each milestone gets a folder `Mx/` with `requirements.md`, `design.md`,
 | M7 Deploy | Not started |
 
 M0 is documentation-only. Its "requirements" are the PRD and its "design" is
-`architecture.md` plus the ADRs, so it has no `M0/` folder.
+`architecture.md` plus the ADRs, so its folder holds only the retro.
