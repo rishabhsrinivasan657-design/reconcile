@@ -1,6 +1,6 @@
 # ADR-0008: Build the answer key from planted errors; curated data instead of Faker
 
-- **Status:** Proposed
+- **Status:** Accepted (2026-10-16)
 - **Date:** 2026-10-16
 - **Requirements:** FR-09, FR-15, NFR-05 · M1 AC-10, AC-12, AC-13
 

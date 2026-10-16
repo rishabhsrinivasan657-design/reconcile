@@ -89,17 +89,23 @@ IDs are stable. Design docs, tests, and PRs reference them.
   configurable tolerances.
 - FR-08. For lines left unmatched, use an LLM fuzzy description match that
   returns a candidate, a confidence, and reasoning. Store the reasoning.
-- FR-09. Raise these exceptions:
+- FR-09. Raise these exceptions. **Each billed unit is counted at most once.**
+  For a matched line with ordered `o`, received `r`, billed `b`, PO price `pₒ`,
+  and invoice price `pᵢ` (tolerances configurable):
 
-  | Type | Rule (tolerances configurable) |
-  |---|---|
-  | `SHORT_SHIP` | received qty < ordered qty. If the invoice bills only what was received, it's flagged *informational* with $0 AP impact (still a supplier-performance signal). |
-  | `OVER_SHIP` | received qty > ordered qty |
-  | `PRICE_VARIANCE` | invoice unit price ≠ PO unit price |
-  | `QTY_BILLED_NOT_RECEIVED` | invoice qty > received qty. Impact = (billed − received) × invoice unit price. |
-  | `MISSING_DOCUMENT` | a set lacks PO, RR, or invoice after a grace period |
-  | `DUPLICATE_INVOICE` | same vendor + invoice number, or same vendor + total within a date window |
-  | `UNMATCHED_LINE` | a line on one document has no counterpart after all matching steps |
+  | Type | Condition | Dollar impact | Informational when |
+  |---|---|---|---|
+  | `SHORT_SHIP` | `r < o` | `(b − r) × pᵢ` if `b > r` | `b ≤ r` ($0, supplier-performance signal) |
+  | `OVER_SHIP` | `r > o` | `(min(b, r) − o) × pᵢ` if positive | `b ≤ o` ($0) |
+  | `QTY_BILLED_NOT_RECEIVED` | `r ≥ o` and `b > r` | `(b − r) × pᵢ` | never |
+  | `PRICE_VARIANCE` | `pᵢ ≠ pₒ` | `(pᵢ − pₒ) × min(b, r)` (negative = undercharge) | never |
+  | `UNMATCHED_LINE` | invoice line with no PO line / PO line never invoiced | line total / $0 | PO line never invoiced |
+  | `MISSING_DOCUMENT` | set lacks RR or PO / lacks invoice (after a grace period) | invoice total / $0 | invoice missing |
+  | `DUPLICATE_INVOICE` | same vendor + invoice number, or same vendor + total within a date window | duplicate's total | never |
+
+  Example: ordered 10, received 8, billed 10 at $5.00 (PO $4.80) gives
+  `SHORT_SHIP` $10.00 + `PRICE_VARIANCE` $1.60 = $11.60.
+  `QTY_BILLED_NOT_RECEIVED` is not also raised.
 
 - FR-10. Each exception records its dollar impact, the lines and documents
   involved, and a human-readable explanation.
@@ -177,6 +183,7 @@ default. See `CLAUDE.md` for full detail.
 |---|---|---|
 | Q1 | Should we flag being billed for goods that never arrived? | Yes: new exception type `QTY_BILLED_NOT_RECEIVED` (FR-09) |
 | Q2 | Does a short-ship that's billed correctly still count? | Yes, raised as *informational* with $0 AP impact (FR-09) |
+| Q3 | A short-ship billed in full fits two exception types. Count the dollars twice? | No: each billed unit is counted once (FR-09 table, decided at the M1 Design gate) |
 
 ## 11. Risks
 

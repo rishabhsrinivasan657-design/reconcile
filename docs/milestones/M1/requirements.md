@@ -67,6 +67,7 @@ demo data and the answer key that every later milestone is measured against.
   - SKU omitted on the invoice
   - missing document (PO, RR, or invoice)
   - duplicate invoice
+  - extra unordered line on the invoice (produces `UNMATCHED_LINE`; added at the M1 Design gate)
 
   After each run, the command prints a summary table of how many of each type were planted.
 - [ ] **AC-13 Answer key.** `ground_truth.json` validates against a Zod schema

@@ -1,6 +1,6 @@
 # ADR-0007: Render PDFs with pdfkit; simulate scans with pdfjs + @napi-rs/canvas
 
-- **Status:** Proposed
+- **Status:** Accepted (2026-10-16)
 - **Date:** 2026-10-16
 - **Requirements:** FR-15, NFR-01, NFR-05 · M1 AC-11, AC-15, AC-16
 

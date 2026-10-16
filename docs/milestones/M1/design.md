@@ -1,6 +1,6 @@
 # M1: Foundation and synthetic data. Design
 
-- **Status:** Draft, awaiting approval at the M1 Design gate
+- **Status:** Approved (2026-10-16)
 - **Implements:** AC-1 … AC-19 from [`requirements.md`](requirements.md)
 - **New ADRs:** [0007](../../adr/0007-pdf-rendering-and-scans.md),
   [0008](../../adr/0008-generator-truth-from-planted-errors.md)
@@ -258,12 +258,11 @@ price `pᵢ`:
 - `QTY_BILLED_NOT_RECEIVED` is not raised here, because `r < o` puts the
   over-billing under `SHORT_SHIP`.
 
-> ⚠️ **Needs your approval:** this refines PRD FR-09. If approved, I'll update
-> FR-09's table to match.
+> ✅ Approved at the Design gate. PRD FR-09 has been updated to match.
 
-**Gap found in AC-12:** `UNMATCHED_LINE` has no planted error that produces it,
-so its recall couldn't be measured. I propose adding the error type **"extra
-unordered line on invoice"**, with a configurable rate like the others.
+**Gap found in AC-12:** `UNMATCHED_LINE` had no planted error that produces it.
+**"Extra unordered line on invoice"** was added (approved), with a configurable
+rate like the others.
 
 The planted errors map to the answer key like this:
 
@@ -276,7 +275,7 @@ The planted errors map to the answer key like this:
 | price change | `pᵢ = pₒ × (1 ± 2–15%)` | `PRICE_VARIANCE` |
 | description typo/abbrev | text mutated on RR and/or invoice | none (the match must still succeed) |
 | SKU omitted on invoice | invoice line has no SKU | none (needs a fuzzy match) |
-| extra invoice line *(new)* | adds an unordered catalog item | `UNMATCHED_LINE` |
+| extra invoice line | adds an unordered catalog item | `UNMATCHED_LINE` |
 | missing document | drop the RR, PO, or invoice file | `MISSING_DOCUMENT` |
 | duplicate invoice | second invoice file | `DUPLICATE_INVOICE` |
 
