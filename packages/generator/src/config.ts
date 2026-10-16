@@ -27,7 +27,7 @@ export const DEFAULT_RATES: Rates = {
     sku_omitted: 0.12,
     extra_invoice_line: 0.08,
     missing_document: 0.08,
-    duplicate_invoice: 0.06,
+    duplicate_invoice: 0.08,
   },
 };
 
