@@ -16,5 +16,5 @@ M0: requirements and design. Documentation only, no code.
 - `QTY_BILLED_NOT_RECEIVED` exception type; informational short-ships (PRD decisions Q1, Q2).
 - M0 design: architecture doc, ADRs 0001–0006, doc and PR templates.
 
-[Unreleased]: https://github.com/OWNER/reconcile/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/OWNER/reconcile/releases/tag/v0.1.0
+[Unreleased]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/rishabhsrinivasan657-design/reconcile/releases/tag/v0.1.0

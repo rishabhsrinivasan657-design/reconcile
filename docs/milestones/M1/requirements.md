@@ -1,6 +1,6 @@
 # M1: Foundation and synthetic data. Requirements
 
-- **Status:** Draft, awaiting approval at the M1 Requirements gate
+- **Status:** Approved (2026-10-16)
 - **PRD links:** US-01 · FR-15 · NFR-02, NFR-05, NFR-06, NFR-07, NFR-08
 - **Target release:** v0.2.0
 
@@ -26,7 +26,7 @@ demo data and the answer key that every later milestone is measured against.
   `pnpm install` → `docker compose up -d` → `pnpm db:migrate` → `pnpm db:seed`.
 - [ ] **AC-2 Workspace.** A pnpm workspace containing only the packages this
   milestone needs: `packages/core`, `packages/db`, `packages/generator`, and
-  `evals/`. Other apps are added in their own milestones (see Q2).
+  `evals/`. Other apps are added in their own milestones (decision Q2).
 - [ ] **AC-3 Quality commands.** `pnpm lint`, `pnpm typecheck`, and `pnpm test`
   all pass. TypeScript runs in strict mode. ESLint blocks `packages/core`
   from importing Prisma, Fastify, Next, or BullMQ (ADR-0001).
@@ -113,13 +113,9 @@ demo data and the answer key that every later milestone is measured against.
   needed at build time.
 - Tax and shipping are simple: a flat rate and a flat fee per vendor.
 
-## Open questions (need your answer at this gate)
+## Decisions (2026-10-16)
 
-- **Q1. GitHub repo.** AC-4 (CI) needs a GitHub remote. Will you create an
-  empty repo (e.g. `reconcile`) and share the URL, or should I create it with
-  the `gh` CLI if you're signed in? Pushing also backs up the work, since this
-  folder is temporary.
-- **Q2. Placeholder apps.** I propose *not* creating empty `apps/web`,
-  `apps/api`, `apps/worker`, or `packages/mcp` now. Each gets added in the
-  milestone that uses it, so nothing exists before it's needed. Alternatively,
-  stub them now so the full layout is visible from day one. Which do you prefer?
+| # | Question | Decision |
+|---|---|---|
+| Q1 | GitHub repo for CI | Created a private repo, [rishabhsrinivasan657-design/reconcile](https://github.com/rishabhsrinivasan657-design/reconcile). `main`, `v0.1.0`, and this branch are pushed. It can be made public later for the portfolio. |
+| Q2 | Stub the future apps now? | No. Each app is added in the milestone that uses it. |
