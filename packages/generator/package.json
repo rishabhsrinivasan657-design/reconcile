@@ -1,0 +1,29 @@
+{
+  "name": "@reconcile/generator",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./catalog": "./src/catalog/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/ibm-plex-sans": "^5.3.0",
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/lato": "^5.3.0",
+    "@fontsource/roboto-condensed": "^5.3.0",
+    "@fontsource/source-serif-4": "^5.3.1",
+    "@napi-rs/canvas": "^1.0.11",
+    "@reconcile/core": "workspace:*",
+    "pdfjs-dist": "^6.4.299",
+    "pdfkit": "^0.20.2",
+    "pure-rand": "^8.4.2"
+  },
+  "devDependencies": {
+    "@types/pdfkit": "^0.17.6"
+  }
+}
