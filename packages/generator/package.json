@@ -21,7 +21,8 @@
     "@reconcile/core": "workspace:*",
     "pdfjs-dist": "^6.4.299",
     "pdfkit": "^0.20.2",
-    "pure-rand": "^8.4.2"
+    "pure-rand": "^8.4.2",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@types/pdfkit": "^0.17.6"
