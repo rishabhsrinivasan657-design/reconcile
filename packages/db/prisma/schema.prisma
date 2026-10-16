@@ -1,0 +1,238 @@
+// Source of truth for the data model. Overview: docs/architecture.md §5, M1 design §5.1.
+// Money is Decimal(14,4) everywhere (ADR-0004). AuditEvent is append-only (ADR-0005).
+
+generator client {
+  provider            = "prisma-client"
+  output              = "../src/generated/prisma"
+  moduleFormat        = "esm"
+  importFileExtension = "ts"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum DocType {
+  PO
+  RR
+  INVOICE
+}
+
+enum DocStatus {
+  UPLOADED
+  EXTRACTING
+  NEEDS_REVIEW
+  READY
+  MATCHED
+  FAILED
+}
+
+enum ExceptionType {
+  SHORT_SHIP
+  OVER_SHIP
+  PRICE_VARIANCE
+  QTY_BILLED_NOT_RECEIVED
+  MISSING_DOCUMENT
+  DUPLICATE_INVOICE
+  UNMATCHED_LINE
+}
+
+enum ExceptionStatus {
+  OPEN
+  APPROVED
+  DISPUTED
+  WRITTEN_OFF
+}
+
+enum ExceptionActionType {
+  APPROVE
+  DISPUTE
+  WRITE_OFF
+}
+
+enum MatchMethod {
+  SKU
+  FUZZY_LLM
+  MANUAL
+}
+
+enum ExtractionSource {
+  LLM
+  HUMAN
+}
+
+enum LlmPurpose {
+  EXTRACT
+  FUZZY_MATCH
+}
+
+enum ActorType {
+  USER
+  SYSTEM
+}
+
+model User {
+  id        String                  @id @default(cuid())
+  email     String                  @unique
+  name      String
+  createdAt DateTime                @default(now())
+  actions   ExceptionActionRecord[]
+}
+
+model Vendor {
+  id            String        @id @default(cuid())
+  code          String        @unique
+  name          String
+  address       String
+  invoicePrefix String
+  catalogItems  CatalogItem[]
+  documents     Document[]
+  documentSets  DocumentSet[]
+}
+
+model CatalogItem {
+  id          String  @id @default(cuid())
+  vendorId    String
+  vendor      Vendor  @relation(fields: [vendorId], references: [id])
+  sku         String
+  description String
+  uom         String
+  packSize    Int
+  unitPrice   Decimal @db.Decimal(14, 4)
+
+  @@unique([vendorId, sku])
+}
+
+/// Everything sharing a PO number. Can be incomplete (MISSING_DOCUMENT).
+model DocumentSet {
+  id        String     @id @default(cuid())
+  poNumber  String     @unique
+  vendorId  String?
+  vendor    Vendor?    @relation(fields: [vendorId], references: [id])
+  documents Document[]
+  matchRuns MatchRun[]
+  createdAt DateTime   @default(now())
+}
+
+model Document {
+  id          String       @id @default(cuid())
+  setId       String?
+  set         DocumentSet? @relation(fields: [setId], references: [id])
+  vendorId    String?
+  vendor      Vendor?      @relation(fields: [vendorId], references: [id])
+  type        DocType?
+  status      DocStatus    @default(UPLOADED)
+  sha256      String       @unique
+  storagePath String
+  mimeType    String
+  pageCount   Int?
+  docNumber   String?
+  createdAt   DateTime     @default(now())
+  extractions Extraction[]
+  llmCalls    LlmCall[]
+}
+
+/// Versioned: re-extraction or human correction adds a row, never overwrites.
+model Extraction {
+  id              String           @id @default(cuid())
+  documentId      String
+  document        Document         @relation(fields: [documentId], references: [id])
+  version         Int
+  source          ExtractionSource
+  promptVersion   String?
+  model           String?
+  raw             Json?
+  data            Json
+  fieldConfidence Json
+  createdAt       DateTime         @default(now())
+
+  @@unique([documentId, version])
+}
+
+/// Versioned: re-matching creates a new run; decisions carry over by Exception.fingerprint.
+model MatchRun {
+  id         String      @id @default(cuid())
+  setId      String
+  set        DocumentSet @relation(fields: [setId], references: [id])
+  version    Int
+  config     Json
+  createdAt  DateTime    @default(now())
+  lineMatch  LineMatch[]
+  exceptions Exception[]
+
+  @@unique([setId, version])
+}
+
+model LineMatch {
+  id         String      @id @default(cuid())
+  matchRunId String
+  matchRun   MatchRun    @relation(fields: [matchRunId], references: [id])
+  poLineKey  String?
+  rrLineKey  String?
+  invLineKey String?
+  method     MatchMethod
+  confidence Decimal?    @db.Decimal(5, 4)
+  reasoning  String?
+}
+
+model Exception {
+  id            String                  @id @default(cuid())
+  matchRunId    String
+  matchRun      MatchRun                @relation(fields: [matchRunId], references: [id])
+  /// type + PO + line keys; stable across match runs.
+  fingerprint   String
+  type          ExceptionType
+  status        ExceptionStatus         @default(OPEN)
+  informational Boolean                 @default(false)
+  amount        Decimal                 @db.Decimal(14, 4)
+  explanation   String
+  lineKeys      Json
+  documentIds   Json
+  createdAt     DateTime                @default(now())
+  actions       ExceptionActionRecord[]
+
+  @@index([fingerprint])
+}
+
+model ExceptionActionRecord {
+  id          String              @id @default(cuid())
+  exceptionId String
+  exception   Exception           @relation(fields: [exceptionId], references: [id])
+  userId      String
+  user        User                @relation(fields: [userId], references: [id])
+  action      ExceptionActionType
+  note        String
+  createdAt   DateTime            @default(now())
+}
+
+/// Append-only: a trigger rejects UPDATE and DELETE (ADR-0005).
+model AuditEvent {
+  id         BigInt    @id @default(autoincrement())
+  actorType  ActorType
+  actorId    String?
+  action     String
+  entityType String
+  entityId   String
+  before     Json?
+  after      Json?
+  createdAt  DateTime  @default(now())
+
+  @@index([entityType, entityId])
+}
+
+model LlmCall {
+  id            String     @id @default(cuid())
+  documentId    String?
+  document      Document?  @relation(fields: [documentId], references: [id])
+  provider      String
+  model         String
+  promptVersion String
+  purpose       LlmPurpose
+  latencyMs     Int
+  inputTokens   Int
+  outputTokens  Int
+  cacheHit      Boolean
+  costUsd       Decimal    @db.Decimal(12, 6)
+  error         String?
+  createdAt     DateTime   @default(now())
+}

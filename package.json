@@ -14,7 +14,13 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "docs:check": "tsx scripts/check-docs.ts",
-    "docs:diagrams": "tsx scripts/render-diagrams.ts"
+    "docs:diagrams": "tsx scripts/render-diagrams.ts",
+    "postinstall": "pnpm --filter @reconcile/db exec prisma generate",
+    "db:generate": "pnpm --filter @reconcile/db exec prisma generate",
+    "db:migrate": "pnpm --filter @reconcile/db exec prisma migrate dev",
+    "db:deploy": "pnpm --filter @reconcile/db exec prisma migrate deploy",
+    "db:seed": "pnpm --filter @reconcile/db exec prisma db seed",
+    "db:reset": "pnpm --filter @reconcile/db exec prisma migrate reset --force"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
