@@ -86,7 +86,9 @@ The matching engine is a pure function: `(po, rr, inv[], config) → MatchResult
       The reasoning is stored and shown in the UI.
    Tolerances live in config (per vendor overrides later), not code.
 4. **Exceptions.** Types: `SHORT_SHIP`, `OVER_SHIP`, `PRICE_VARIANCE`,
-   `MISSING_DOCUMENT`, `DUPLICATE_INVOICE`, `UNMATCHED_LINE`.
+   `QTY_BILLED_NOT_RECEIVED`, `MISSING_DOCUMENT`, `DUPLICATE_INVOICE`,
+   `UNMATCHED_LINE`. A short-ship that's billed correctly is *informational*
+   ($0 AP impact). Exact rules live in `docs/prd.md` FR-09.
    Each has a dollar impact and links to the lines and docs involved.
    A human can **approve / dispute / write off** with a required note.
    Duplicate-invoice detection is deterministic (vendor + invoice number,
