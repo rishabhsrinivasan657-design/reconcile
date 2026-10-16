@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | **Draft**, awaiting approval at the M0 Design gate |
+| Status | **Approved** at the M0 Design gate (2026-10-16) |
 | Last updated | 2026-10-16 |
 | Requirements | [`prd.md`](prd.md) |
 | Decisions | [`adr/`](adr/) |

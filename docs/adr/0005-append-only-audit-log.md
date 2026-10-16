@@ -1,6 +1,6 @@
 # ADR-0005: Append-only audit log enforced by a Postgres trigger
 
-- **Status:** Proposed
+- **Status:** Accepted (2026-10-16)
 - **Date:** 2026-10-16
 - **Requirements:** FR-12, NFR-06
 

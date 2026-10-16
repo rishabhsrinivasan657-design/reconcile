@@ -1,6 +1,6 @@
 # ADR-0004: Money as decimals, never floats
 
-- **Status:** Proposed
+- **Status:** Accepted (2026-10-16)
 - **Date:** 2026-10-16
 - **Requirements:** NFR-07
 

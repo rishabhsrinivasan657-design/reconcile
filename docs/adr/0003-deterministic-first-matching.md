@@ -1,6 +1,6 @@
 # ADR-0003: Deterministic rules first; LLM only for fuzzy description matching
 
-- **Status:** Proposed
+- **Status:** Accepted (2026-10-16)
 - **Date:** 2026-10-16
 - **Requirements:** FR-07, FR-08, FR-09, NFR-05, NFR-10
 

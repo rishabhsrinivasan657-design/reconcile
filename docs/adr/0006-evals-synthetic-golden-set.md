@@ -1,6 +1,6 @@
 # ADR-0006: Seeded synthetic golden set, replay-mode CI, 2-point regression gate
 
-- **Status:** Proposed
+- **Status:** Accepted (2026-10-16)
 - **Date:** 2026-10-16
 - **Requirements:** FR-15, FR-16, FR-17, NFR-05
 

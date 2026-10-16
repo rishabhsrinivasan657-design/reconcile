@@ -1,6 +1,6 @@
 # ADR-0002: LLM behind a provider interface, with a shared rate limiter and response cache
 
-- **Status:** Proposed
+- **Status:** Accepted (2026-10-16)
 - **Date:** 2026-10-16
 - **Requirements:** NFR-01, NFR-03, NFR-04, FR-18
 

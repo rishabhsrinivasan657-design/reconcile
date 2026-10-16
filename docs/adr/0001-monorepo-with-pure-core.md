@@ -1,6 +1,6 @@
 # ADR-0001: pnpm monorepo with a pure `core` package
 
-- **Status:** Proposed
+- **Status:** Accepted (2026-10-16)
 - **Date:** 2026-10-16
 - **Requirements:** NFR-05, NFR-08
 
