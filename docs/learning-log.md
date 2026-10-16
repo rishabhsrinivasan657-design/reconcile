@@ -1,48 +1,78 @@
 # Learning log
 
-One entry per SDLC phase: what we did, the concept behind it, and why real
-teams do it.
+A plain-language diary of how this project is built. Each entry covers one
+step: **what we did, the idea behind it, and why real teams bother.**
+
+## The SDLC in 30 seconds
+
+Think of building a house:
+
+| Phase | House version | Question it answers |
+|---|---|---|
+| 0. Planning | Budget, plot, rough timeline | *Should we build this, and roughly how?* |
+| 1. Requirements | "3 bedrooms, 2 baths, under $X" | *What exactly do we need?* |
+| 2. Design | Blueprints | *How will we build it?* |
+| 3. Implementation | Construction | *Build it.* |
+| 4. Testing | Inspection | *Does it work, and does it meet the requirements?* |
+| 5. Review and release | Final walkthrough, hand over keys | *Is it good enough to ship?* |
+| 6. Maintenance | Repairs | *Fix what breaks after launch.* |
+| 7. Retrospective | "Next time, order the windows earlier" | *How do we get better?* |
+
+**The big rule:** mistakes get more expensive the later you find them. Moving
+a wall on a blueprint is free. Moving it after it's built is not. That's why
+the early phases exist, and why each one ends with a **gate**: an approval
+before moving on.
 
 ---
 
-## M0 · Phase 0: Planning (2026-10-15)
+## M0 · Planning (2026-10-15)
 
-**What we did:** Wrote `CLAUDE.md` (constraints, architecture sketch, working
-agreement) and a milestone plan with acceptance criteria.
+**In one line:** decide the boundaries before building anything.
 
-**Concept:** *Planning* fixes the boundaries before anyone builds: budget
-($0), tech stack, what's in and out of scope, and the order of delivery.
-Splitting work into **independently shippable milestones** means that if the
-project stops at any point, you still have something that works and can be
-demoed.
+**What we did:** wrote `CLAUDE.md` (the rules of the project) and split the
+work into milestones M0–M7.
 
-**Why teams do it:** Without it, projects drift. Each milestone having
-acceptance criteria answers "are we done?" with a checklist instead of a feeling.
+**Key ideas**
+- **Constraints first.** $0 budget, TypeScript, run locally. These rule out
+  options early, so we don't waste time on them.
+- **Milestones that each work on their own.** If the project stopped after
+  any milestone, there'd still be something that works and can be demoed.
+  That beats one giant "done at the end" plan.
+- **Acceptance criteria.** A checklist that defines "done" for each milestone,
+  so "are we done?" has a factual answer.
+
+**Remember:** a plan is a set of boundaries, not a prediction.
 
 ---
 
-## M0 · Phase 1: Requirements (2026-10-16)
+## M0 · Requirements (2026-10-16)
 
-**What we did:** Wrote the PRD (`docs/prd.md`), the glossary, and the backlog.
+**In one line:** write down *what* to build and *why*, but not *how*.
 
-**Concepts:**
-- **PRD (Product Requirements Document):** says *what* to build and *why*,
-  never *how*. The "how" belongs in the design phase.
-- **Personas → user stories → functional requirements.** A user story ("As an
-  AP clerk I want… so that…") captures value from the user's view. Functional
-  requirements (FR-xx) are the precise, testable behaviors that deliver it.
-  Non-functional requirements (NFR-xx) are qualities: cost, performance,
-  auditability.
-- **Stable IDs and traceability:** every story and requirement gets an ID, and
-  later design docs, tests, and PRs cite those IDs. That lets you answer "why
-  does this code exist?" and "is every requirement tested?"
-- **Assumptions and open questions are written down**, not left implicit. An
-  unrecorded assumption is a future bug.
-- **Success metrics vs. regression gates:** absolute targets say where we want
-  to be. The CI gate only says "don't get worse." Both are useful, for different jobs.
-- **Backlog:** a parking lot that keeps scope creep out of the current milestone
-  without losing good ideas.
+**What we did:** wrote the PRD (`prd.md`), a glossary, and a backlog. Then we
+answered two open questions (Q1, Q2).
 
-**Why teams do it:** Changing a requirement on paper costs minutes. Changing it
-after it's coded, tested, and deployed costs days. The Requirements gate is the
-cheapest place to catch a misunderstanding.
+**Key ideas**
+- **PRD (Product Requirements Document):** the single source of truth for what
+  the product must do. The "how" waits for the Design phase.
+- **Personas:** the people who use the product (e.g. an AP clerk). Requirements
+  are written for them, not for the code.
+- **Three layers of requirements**, from fuzzy to precise:
+  1. **User story:** "As an AP clerk, I want to see exceptions sorted by dollar
+     impact, so that I fix the costly ones first." It captures *value*.
+  2. **Functional requirement (FR):** a testable behavior. "Each exception
+     records its dollar impact."
+  3. **Non-functional requirement (NFR):** a quality. "Costs $0 to run." "The
+     audit log can't be edited."
+- **IDs (US-01, FR-09…):** later, tests and PRs say "this implements FR-09."
+  This is called **traceability**: every line of code traces back to a reason.
+- **Assumptions and open questions are written down.** A silent assumption is a
+  bug waiting to happen. Q1 is the proof: writing the rules out exposed a
+  missing check, "billed for goods that never arrived", which became
+  `QTY_BILLED_NOT_RECEIVED`.
+- **Targets vs. gates:** targets are where we want to be ("F1 ≥ 0.95"). The CI
+  gate only says "don't get worse than last time." Both are useful.
+- **Backlog:** a parking lot for good ideas that aren't for now. It prevents
+  **scope creep** (a project slowly growing until it never ships).
+
+**Remember:** the cheapest bug fix is one made in a document.

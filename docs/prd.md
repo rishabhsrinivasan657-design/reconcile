@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | **Draft**, awaiting approval at the M0 Requirements gate |
+| Status | **Approved** at the M0 Requirements gate (2026-10-16) |
 | Owner | Rishabh Srinivasan |
 | Last updated | 2026-10-16 |
 
@@ -93,9 +93,10 @@ IDs are stable. Design docs, tests, and PRs reference them.
 
   | Type | Rule (tolerances configurable) |
   |---|---|
-  | `SHORT_SHIP` | received qty < ordered qty |
+  | `SHORT_SHIP` | received qty < ordered qty. If the invoice bills only what was received, it's flagged *informational* with $0 AP impact (still a supplier-performance signal). |
   | `OVER_SHIP` | received qty > ordered qty |
   | `PRICE_VARIANCE` | invoice unit price ≠ PO unit price |
+  | `QTY_BILLED_NOT_RECEIVED` | invoice qty > received qty. Impact = (billed − received) × invoice unit price. |
   | `MISSING_DOCUMENT` | a set lacks PO, RR, or invoice after a grace period |
   | `DUPLICATE_INVOICE` | same vendor + invoice number, or same vendor + total within a date window |
   | `UNMATCHED_LINE` | a line on one document has no counterpart after all matching steps |
@@ -159,7 +160,7 @@ TypeScript pnpm monorepo (Next.js, Fastify, BullMQ, Prisma/Postgres, Redis),
 Docker Compose, Vitest + Playwright, GitHub Actions, and Gemini free tier by
 default. See `CLAUDE.md` for full detail.
 
-## 9. Assumptions (defaults to confirm at this gate)
+## 9. Assumptions (confirmed 2026-10-16)
 
 | # | Assumption | If wrong… |
 |---|---|---|
@@ -170,16 +171,12 @@ default. See `CLAUDE.md` for full detail.
 | A5 | Single currency (USD) and single UOM per line ("each" or "case"). No UOM conversion. | UOM conversion becomes its own feature |
 | A6 | One PO has one receiving report and one or more invoices. Partial receipts across multiple RRs are deferred. | Matching must aggregate across RRs |
 
-## 10. Open questions
+## 10. Decisions log
 
-- Q1. **Billed vs. received.** Classic 3-way match also flags *invoice qty >
-  received qty* (being billed for goods that never arrived). That's arguably
-  the most important AP check, and it isn't in the exception list. Proposal:
-  add `QTY_BILLED_NOT_RECEIVED`, with dollar impact = (billed − received) ×
-  invoice price.
-- Q2. Should `SHORT_SHIP` carry a dollar impact when the invoice already bills
-  only for the received qty? Proposal: yes, but marked *informational*
-  (impact $0 to AP, still a supplier-performance signal).
+| # | Question | Decision (2026-10-16) |
+|---|---|---|
+| Q1 | Should we flag being billed for goods that never arrived? | Yes: new exception type `QTY_BILLED_NOT_RECEIVED` (FR-09) |
+| Q2 | Does a short-ship that's billed correctly still count? | Yes, raised as *informational* with $0 AP impact (FR-09) |
 
 ## 11. Risks
 
