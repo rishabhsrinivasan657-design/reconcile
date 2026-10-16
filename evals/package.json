@@ -1,0 +1,7 @@
+{
+  "name": "@reconcile/evals",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Eval harness (M2) and golden datasets. golden-ci/ is the committed 20-set CI subset."
+}

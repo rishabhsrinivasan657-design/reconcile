@@ -1,0 +1,588 @@
+{
+  "schemaVersion": 1,
+  "setId": "S0019",
+  "seed": 42,
+  "generatorVersion": "0.2.0",
+  "poNumber": "HP-PO-104306",
+  "vendorCode": "SNPK",
+  "documents": [
+    {
+      "file": "po.pdf",
+      "role": "po",
+      "type": "PO",
+      "format": "pdf",
+      "template": "classic",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0915,
+            0.2121,
+            0.2204,
+            0.2258
+          ],
+          "value": "Sunpeak Foods Co."
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.8178,
+            0.0985,
+            0.9183,
+            0.1121
+          ],
+          "value": "HP-PO-104306"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.8447,
+            0.1162,
+            0.9183,
+            0.1298
+          ],
+          "value": "2026-04-04"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.2901,
+                0.1508,
+                0.303
+              ],
+              "value": "SN-10026"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.2901,
+                0.4418,
+                0.303
+              ],
+              "value": "Sunpeak Crunchy Peanut Butter, 28 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.2901,
+                0.634,
+                0.303
+              ],
+              "value": 21
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.2901,
+                0.6664,
+                0.303
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.2901,
+                0.7941,
+                0.303
+              ],
+              "value": "51.30"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.2901,
+                0.9118,
+                0.303
+              ],
+              "value": "1077.30"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3128,
+                0.1508,
+                0.3257
+              ],
+              "value": "SN-10401"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3128,
+                0.4418,
+                0.3257
+              ],
+              "value": "Sunpeak Crunchy Peanut Butter, 16 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.3128,
+                0.634,
+                0.3257
+              ],
+              "value": 22
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.3128,
+                0.6664,
+                0.3257
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.3128,
+                0.7941,
+                0.3257
+              ],
+              "value": "33.47"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8616,
+                0.3128,
+                0.9118,
+                0.3257
+              ],
+              "value": "736.34"
+            }
+          }
+        ],
+        "subtotal": {
+          "page": 1,
+          "bbox": [
+            0.8464,
+            0.346,
+            0.9118,
+            0.3596
+          ],
+          "value": "1813.64"
+        },
+        "total": {
+          "page": 1,
+          "bbox": [
+            0.8464,
+            0.3687,
+            0.9118,
+            0.3823
+          ],
+          "value": "1813.64"
+        }
+      }
+    },
+    {
+      "file": "rr.png",
+      "role": "rr",
+      "type": "RR",
+      "format": "png",
+      "template": "erp",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0973,
+            0.1829,
+            0.2311,
+            0.1992
+          ],
+          "value": "Sunpeak Foods Co."
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.2642,
+            0.1187,
+            0.3431,
+            0.1332
+          ],
+          "value": "RCV-500567"
+        },
+        "poNumber": {
+          "page": 1,
+          "bbox": [
+            0.6919,
+            0.132,
+            0.7866,
+            0.147
+          ],
+          "value": "HP-PO-104306"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.2634,
+            0.1338,
+            0.3502,
+            0.1485
+          ],
+          "value": "2026-04-08"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.2331,
+                0.2746,
+                0.2925,
+                0.2879
+              ],
+              "value": "SN-10026"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.3475,
+                0.2782,
+                0.6125,
+                0.2978
+              ],
+              "value": "Sunpeak Crunchy Peanut Butter, 28 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.1466,
+                0.2719,
+                0.1619,
+                0.2838
+              ],
+              "value": 21
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.1744,
+                0.2728,
+                0.1897,
+                0.2847
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.2324,
+                0.2898,
+                0.2917,
+                0.303
+              ],
+              "value": "SN-10401"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.3467,
+                0.2934,
+                0.6117,
+                0.313
+              ],
+              "value": "Sunpeak Crunchy Peanut Butter, 16 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.1458,
+                0.2871,
+                0.1611,
+                0.299
+              ],
+              "value": 22
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.1736,
+                0.288,
+                0.1889,
+                0.2998
+              ],
+              "value": "CS"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "file": "inv-1.pdf",
+      "role": "inv-1",
+      "type": "INVOICE",
+      "format": "pdf",
+      "template": "classic",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0817,
+            0.0631,
+            0.2952,
+            0.0843
+          ],
+          "value": "Sunpeak Foods Co."
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.8406,
+            0.0985,
+            0.9183,
+            0.1121
+          ],
+          "value": "SN5445071"
+        },
+        "poNumber": {
+          "page": 1,
+          "bbox": [
+            0.8178,
+            0.1162,
+            0.9183,
+            0.1298
+          ],
+          "value": "HP-PO-104306"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.8447,
+            0.1338,
+            0.9183,
+            0.1475
+          ],
+          "value": "2026-04-11"
+        },
+        "dueDate": {
+          "page": 1,
+          "bbox": [
+            0.8447,
+            0.1515,
+            0.9183,
+            0.1652
+          ],
+          "value": "2026-05-26"
+        },
+        "currency": {
+          "page": 1,
+          "bbox": [
+            0.8873,
+            0.1869,
+            0.9183,
+            0.2005
+          ],
+          "value": "USD"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3254,
+                0.1508,
+                0.3383
+              ],
+              "value": "SN-10026"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3254,
+                0.4418,
+                0.3383
+              ],
+              "value": "Sunpeak Crunchy Peanut Butter, 28 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.3254,
+                0.634,
+                0.3383
+              ],
+              "value": 21
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.3254,
+                0.6664,
+                0.3383
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.3254,
+                0.7941,
+                0.3383
+              ],
+              "value": "51.30"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.3254,
+                0.9118,
+                0.3383
+              ],
+              "value": "1077.30"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3482,
+                0.1508,
+                0.361
+              ],
+              "value": "SN-10401"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3482,
+                0.4418,
+                0.361
+              ],
+              "value": "Sunpeak Crunchy Peanut Butter, 16 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.3482,
+                0.634,
+                0.361
+              ],
+              "value": 22
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.3482,
+                0.6664,
+                0.361
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.3482,
+                0.7941,
+                0.361
+              ],
+              "value": "33.47"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8616,
+                0.3482,
+                0.9118,
+                0.361
+              ],
+              "value": "736.34"
+            }
+          }
+        ],
+        "subtotal": {
+          "page": 1,
+          "bbox": [
+            0.8464,
+            0.3813,
+            0.9118,
+            0.3949
+          ],
+          "value": "1813.64"
+        },
+        "tax": {
+          "page": 1,
+          "bbox": [
+            0.875,
+            0.404,
+            0.9118,
+            0.4177
+          ],
+          "value": "0.00"
+        },
+        "shipping": {
+          "page": 1,
+          "bbox": [
+            0.8668,
+            0.4268,
+            0.9118,
+            0.4404
+          ],
+          "value": "25.00"
+        },
+        "total": {
+          "page": 1,
+          "bbox": [
+            0.8464,
+            0.4495,
+            0.9118,
+            0.4631
+          ],
+          "value": "1838.64"
+        }
+      }
+    }
+  ],
+  "lineMatches": [
+    {
+      "po": "po:1",
+      "rr": "rr:1",
+      "inv": "inv-1:1"
+    },
+    {
+      "po": "po:2",
+      "rr": "rr:2",
+      "inv": "inv-1:2"
+    }
+  ],
+  "exceptions": [],
+  "planted": []
+}

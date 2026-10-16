@@ -1,0 +1,3005 @@
+{
+  "schemaVersion": 1,
+  "setId": "S0083",
+  "seed": 42,
+  "generatorVersion": "0.2.0",
+  "poNumber": "HP-PO-105400",
+  "vendorCode": "ASHP",
+  "documents": [
+    {
+      "file": "po.pdf",
+      "role": "po",
+      "type": "PO",
+      "format": "pdf",
+      "template": "classic",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0915,
+            0.2121,
+            0.2389,
+            0.2258
+          ],
+          "value": "Ashpoint Paper Goods"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.8178,
+            0.0985,
+            0.9183,
+            0.1121
+          ],
+          "value": "HP-PO-105400"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.8447,
+            0.1162,
+            0.9183,
+            0.1298
+          ],
+          "value": "2026-08-18"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.2901,
+                0.1647,
+                0.303
+              ],
+              "value": "ASHP24362"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.2901,
+                0.4363,
+                0.303
+              ],
+              "value": "Ashpoint Dinner 3-Ply Napkins, 500 ct"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.2901,
+                0.634,
+                0.303
+              ],
+              "value": 32
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.2901,
+                0.6664,
+                0.303
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.2901,
+                0.7941,
+                0.303
+              ],
+              "value": "60.02"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.2901,
+                0.9118,
+                0.303
+              ],
+              "value": "1920.64"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3128,
+                0.1647,
+                0.3257
+              ],
+              "value": "ASHP24656"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3128,
+                0.3948,
+                0.3257
+              ],
+              "value": "Ashpoint White Napkins, 500 ct"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.3128,
+                0.634,
+                0.3257
+              ],
+              "value": 51
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.3128,
+                0.6664,
+                0.3257
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.3128,
+                0.7941,
+                0.3257
+              ],
+              "value": "64.43"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.3128,
+                0.9118,
+                0.3257
+              ],
+              "value": "3285.93"
+            }
+          },
+          {
+            "lineNo": 3,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3355,
+                0.1647,
+                0.3484
+              ],
+              "value": "ASHP24347"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3355,
+                0.3891,
+                0.3484
+              ],
+              "value": "Ashpoint Kraft Napkins, 250 ct"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.3355,
+                0.634,
+                0.3484
+              ],
+              "value": 48
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.3355,
+                0.6664,
+                0.3484
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.3355,
+                0.7941,
+                0.3484
+              ],
+              "value": "33.68"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.3355,
+                0.9118,
+                0.3484
+              ],
+              "value": "1616.64"
+            }
+          },
+          {
+            "lineNo": 4,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3583,
+                0.1647,
+                0.3711
+              ],
+              "value": "ASHP24268"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3583,
+                0.414,
+                0.3711
+              ],
+              "value": "Ashpoint 2-Ply Bath Tissue, 24 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.3583,
+                0.634,
+                0.3711
+              ],
+              "value": 44
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.3583,
+                0.6664,
+                0.3711
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.3583,
+                0.7941,
+                0.3711
+              ],
+              "value": "80.75"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.3583,
+                0.9118,
+                0.3711
+              ],
+              "value": "3553.00"
+            }
+          },
+          {
+            "lineNo": 5,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.381,
+                0.1647,
+                0.3939
+              ],
+              "value": "ASHP24311"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.381,
+                0.4407,
+                0.3939
+              ],
+              "value": "Ashpoint Recycled Paper Towels, 6 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.381,
+                0.634,
+                0.3939
+              ],
+              "value": 30
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.381,
+                0.6664,
+                0.3939
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.381,
+                0.7941,
+                0.3939
+              ],
+              "value": "47.44"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.381,
+                0.9118,
+                0.3939
+              ],
+              "value": "1423.20"
+            }
+          },
+          {
+            "lineNo": 6,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4037,
+                0.1647,
+                0.4166
+              ],
+              "value": "ASHP24137"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.4037,
+                0.4363,
+                0.4166
+              ],
+              "value": "Ashpoint Dinner 3-Ply Napkins, 250 ct"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.4037,
+                0.634,
+                0.4166
+              ],
+              "value": 40
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.4037,
+                0.6664,
+                0.4166
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.4037,
+                0.7941,
+                0.4166
+              ],
+              "value": "32.17"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.4037,
+                0.9118,
+                0.4166
+              ],
+              "value": "1286.80"
+            }
+          },
+          {
+            "lineNo": 7,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4265,
+                0.1647,
+                0.4393
+              ],
+              "value": "ASHP24633"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.4265,
+                0.475,
+                0.4393
+              ],
+              "value": "Ashpoint Recycled 2-Ply Bath Tissue, 12 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6263,
+                0.4265,
+                0.634,
+                0.4393
+              ],
+              "value": 8
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.4265,
+                0.6664,
+                0.4393
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.4265,
+                0.7941,
+                0.4393
+              ],
+              "value": "41.37"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8616,
+                0.4265,
+                0.9118,
+                0.4393
+              ],
+              "value": "330.96"
+            }
+          },
+          {
+            "lineNo": 8,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4492,
+                0.1647,
+                0.4621
+              ],
+              "value": "ASHP24515"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.4492,
+                0.414,
+                0.4621
+              ],
+              "value": "Ashpoint 2-Ply Bath Tissue, 12 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.4492,
+                0.634,
+                0.4621
+              ],
+              "value": 12
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.4492,
+                0.6664,
+                0.4621
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.4492,
+                0.7941,
+                0.4621
+              ],
+              "value": "38.09"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8616,
+                0.4492,
+                0.9118,
+                0.4621
+              ],
+              "value": "457.08"
+            }
+          },
+          {
+            "lineNo": 9,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4719,
+                0.1647,
+                0.4848
+              ],
+              "value": "ASHP24049"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.4719,
+                0.4737,
+                0.4848
+              ],
+              "value": "Ashpoint Select-a-Size Paper Towels, 12 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.4719,
+                0.634,
+                0.4848
+              ],
+              "value": 31
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.4719,
+                0.6664,
+                0.4848
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.4719,
+                0.7941,
+                0.4848
+              ],
+              "value": "82.63"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.4719,
+                0.9118,
+                0.4848
+              ],
+              "value": "2561.53"
+            }
+          },
+          {
+            "lineNo": 10,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4946,
+                0.1647,
+                0.5075
+              ],
+              "value": "ASHP24713"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.4946,
+                0.475,
+                0.5075
+              ],
+              "value": "Ashpoint Recycled 2-Ply Bath Tissue, 24 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.4946,
+                0.634,
+                0.5075
+              ],
+              "value": 11
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.4946,
+                0.6664,
+                0.5075
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.4946,
+                0.7941,
+                0.5075
+              ],
+              "value": "69.43"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8616,
+                0.4946,
+                0.9118,
+                0.5075
+              ],
+              "value": "763.73"
+            }
+          },
+          {
+            "lineNo": 11,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.5174,
+                0.1647,
+                0.5302
+              ],
+              "value": "ASHP24440"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.5174,
+                0.4485,
+                0.5302
+              ],
+              "value": "Ashpoint Recycled Paper Towels, 12 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.5174,
+                0.634,
+                0.5302
+              ],
+              "value": 15
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.5174,
+                0.6664,
+                0.5302
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.5174,
+                0.7941,
+                0.5302
+              ],
+              "value": "86.32"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.5174,
+                0.9118,
+                0.5302
+              ],
+              "value": "1294.80"
+            }
+          }
+        ],
+        "subtotal": {
+          "page": 1,
+          "bbox": [
+            0.8382,
+            0.5505,
+            0.9118,
+            0.5641
+          ],
+          "value": "18494.31"
+        },
+        "total": {
+          "page": 1,
+          "bbox": [
+            0.8382,
+            0.5732,
+            0.9118,
+            0.5869
+          ],
+          "value": "18494.31"
+        }
+      }
+    },
+    {
+      "file": "rr.png",
+      "role": "rr",
+      "type": "RR",
+      "format": "png",
+      "template": "boxed",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0966,
+            0.2146,
+            0.2194,
+            0.2298
+          ],
+          "value": "Ashpoint Paper Goods"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.0993,
+            0.1263,
+            0.1735,
+            0.1413
+          ],
+          "value": "RCV-502568"
+        },
+        "poNumber": {
+          "page": 1,
+          "bbox": [
+            0.3781,
+            0.1314,
+            0.4683,
+            0.1468
+          ],
+          "value": "HP-PO-105400"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.6569,
+            0.1366,
+            0.7273,
+            0.1516
+          ],
+          "value": "2026-08-21"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0941,
+                0.2939,
+                0.1603,
+                0.3079
+              ],
+              "value": "ASHP24049"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2085,
+                0.296,
+                0.4484,
+                0.3133
+              ],
+              "value": "Ashpoint Select-a-Size Paper Towels, 12 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.9038,
+                0.3089,
+                0.9179,
+                0.322
+              ],
+              "value": 31
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7965,
+                0.307,
+                0.812,
+                0.32
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0933,
+                0.3191,
+                0.1595,
+                0.3332
+              ],
+              "value": "ASHP24137"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2077,
+                0.3212,
+                0.4136,
+                0.3379
+              ],
+              "value": "Ashpoint Dinner 3-Ply Napkins, 250 ct"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.903,
+                0.3341,
+                0.9171,
+                0.3473
+              ],
+              "value": 40
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7957,
+                0.3321,
+                0.8112,
+                0.3453
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 3,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0925,
+                0.3444,
+                0.1587,
+                0.3584
+              ],
+              "value": "ASHP24268"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2069,
+                0.3465,
+                0.3943,
+                0.3628
+              ],
+              "value": "Ashpoint 2-Ply Bath Tissue, 24 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.9022,
+                0.3594,
+                0.9163,
+                0.3725
+              ],
+              "value": 44
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7949,
+                0.3574,
+                0.8104,
+                0.3705
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 4,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0917,
+                0.3696,
+                0.1579,
+                0.3837
+              ],
+              "value": "ASHP24311"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2061,
+                0.3717,
+                0.4177,
+                0.3885
+              ],
+              "value": "Ashpoint Recycled Paper Towels, 6 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.9014,
+                0.3846,
+                0.9155,
+                0.3978
+              ],
+              "value": 30
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7941,
+                0.3826,
+                0.8096,
+                0.3958
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 5,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.091,
+                0.3949,
+                0.1571,
+                0.4089
+              ],
+              "value": "ASHP24347"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2053,
+                0.397,
+                0.3725,
+                0.4129
+              ],
+              "value": "Ashpoint Kraft Napkins, 250 ct"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.9006,
+                0.4099,
+                0.9147,
+                0.423
+              ],
+              "value": 48
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7934,
+                0.4079,
+                0.8088,
+                0.421
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 6,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0902,
+                0.4201,
+                0.1563,
+                0.4342
+              ],
+              "value": "ASHP24362"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2045,
+                0.4222,
+                0.4105,
+                0.4389
+              ],
+              "value": "Ashpoint Dinner 3-Ply Napkins, 500 ct"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8998,
+                0.4351,
+                0.9139,
+                0.4483
+              ],
+              "value": 32
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7926,
+                0.4331,
+                0.8081,
+                0.4463
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 7,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0894,
+                0.4454,
+                0.1556,
+                0.4594
+              ],
+              "value": "ASHP24440"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2037,
+                0.4475,
+                0.4223,
+                0.4643
+              ],
+              "value": "Ashpoint Recycled Paper Towels, 12 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.899,
+                0.4604,
+                0.9131,
+                0.4735
+              ],
+              "value": 13
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7918,
+                0.4584,
+                0.8073,
+                0.4715
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 8,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0886,
+                0.4706,
+                0.1548,
+                0.4847
+              ],
+              "value": "ASHP24515"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.203,
+                0.4727,
+                0.3904,
+                0.4891
+              ],
+              "value": "Ashpoint 2-Ply Bath Tissue, 12 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8983,
+                0.4856,
+                0.9124,
+                0.4987
+              ],
+              "value": 12
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.791,
+                0.4836,
+                0.8065,
+                0.4968
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 9,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0878,
+                0.4959,
+                0.154,
+                0.51
+              ],
+              "value": "ASHP24633"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2022,
+                0.498,
+                0.4418,
+                0.5153
+              ],
+              "value": "Ashpoint Recycled 2-Ply Bath Tissue, 12 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.9043,
+                0.511,
+                0.9116,
+                0.524
+              ],
+              "value": 8
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7902,
+                0.5089,
+                0.8057,
+                0.5221
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 10,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.087,
+                0.5211,
+                0.1532,
+                0.5352
+              ],
+              "value": "ASHP24656"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2014,
+                0.5232,
+                0.3729,
+                0.5392
+              ],
+              "value": "Ashpoint White Napkins, 500 ct"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8967,
+                0.5361,
+                0.9108,
+                0.5492
+              ],
+              "value": 51
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7894,
+                0.5341,
+                0.8049,
+                0.5473
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 11,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0862,
+                0.5463,
+                0.1524,
+                0.5605
+              ],
+              "value": "ASHP24713"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2006,
+                0.5485,
+                0.4402,
+                0.5658
+              ],
+              "value": "Ashpoint Recycled 2-Ply Bath Tissue, 24 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8959,
+                0.5614,
+                0.91,
+                0.5745
+              ],
+              "value": 11
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7886,
+                0.5594,
+                0.8041,
+                0.5726
+              ],
+              "value": "CS"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "file": "inv-1.pdf",
+      "role": "inv-1",
+      "type": "INVOICE",
+      "format": "pdf",
+      "template": "erp",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0817,
+            0.0783,
+            0.2386,
+            0.0904
+          ],
+          "value": "Ashpoint Paper Goods"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.2451,
+            0.1263,
+            0.3392,
+            0.1384
+          ],
+          "value": "ASHP-9889581"
+        },
+        "poNumber": {
+          "page": 1,
+          "bbox": [
+            0.6732,
+            0.1263,
+            0.7673,
+            0.1384
+          ],
+          "value": "HP-PO-105400"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.2451,
+            0.1414,
+            0.3314,
+            0.1535
+          ],
+          "value": "2026-08-23"
+        },
+        "dueDate": {
+          "page": 1,
+          "bbox": [
+            0.6732,
+            0.1414,
+            0.7595,
+            0.1535
+          ],
+          "value": "2026-09-22"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.2831,
+                0.5237,
+                0.2945
+              ],
+              "value": "ASHP24362"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.2831,
+                0.3603,
+                0.2945
+              ],
+              "value": "Ashpoint Dinner 3-Ply Napkins, 500 ct"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.2831,
+                0.6928,
+                0.2945
+              ],
+              "value": 35
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.2831,
+                0.5866,
+                0.2945
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.2831,
+                0.7941,
+                0.2945
+              ],
+              "value": "60.02"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8529,
+                0.2831,
+                0.9118,
+                0.2945
+              ],
+              "value": "2100.70"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.2983,
+                0.5237,
+                0.3097
+              ],
+              "value": "ASHP24656"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.2983,
+                0.3088,
+                0.3097
+              ],
+              "value": "Ashpoint White Napkins, 500 ct"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.2983,
+                0.6928,
+                0.3097
+              ],
+              "value": 51
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.2983,
+                0.5866,
+                0.3097
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.2983,
+                0.7941,
+                0.3097
+              ],
+              "value": "64.43"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8529,
+                0.2983,
+                0.9118,
+                0.3097
+              ],
+              "value": "3285.93"
+            }
+          },
+          {
+            "lineNo": 3,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.3134,
+                0.5237,
+                0.3248
+              ],
+              "value": "ASHP24347"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3134,
+                0.3088,
+                0.3248
+              ],
+              "value": "Ashpoint Kraft Napkins, 250 ct"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.3134,
+                0.6928,
+                0.3248
+              ],
+              "value": 48
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.3134,
+                0.5866,
+                0.3248
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.3134,
+                0.7941,
+                0.3248
+              ],
+              "value": "33.68"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8529,
+                0.3134,
+                0.9118,
+                0.3248
+              ],
+              "value": "1616.64"
+            }
+          },
+          {
+            "lineNo": 4,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.3286,
+                0.5237,
+                0.34
+              ],
+              "value": "ASHP24268"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3286,
+                0.3456,
+                0.34
+              ],
+              "value": "Ashpoint 2-Ply Bath Tissue, 24 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.3286,
+                0.6928,
+                0.34
+              ],
+              "value": 44
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.3286,
+                0.5866,
+                0.34
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.3286,
+                0.7941,
+                0.34
+              ],
+              "value": "80.75"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8529,
+                0.3286,
+                0.9118,
+                0.34
+              ],
+              "value": "3553.00"
+            }
+          },
+          {
+            "lineNo": 5,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.3438,
+                0.5237,
+                0.3551
+              ],
+              "value": "ASHP24311"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3438,
+                0.3676,
+                0.3551
+              ],
+              "value": "Ashpoint Recycled Paper Towels, 6 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.3438,
+                0.6928,
+                0.3551
+              ],
+              "value": 30
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.3438,
+                0.5866,
+                0.3551
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.3438,
+                0.7941,
+                0.3551
+              ],
+              "value": "47.44"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8529,
+                0.3438,
+                0.9118,
+                0.3551
+              ],
+              "value": "1423.20"
+            }
+          },
+          {
+            "lineNo": 6,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.3589,
+                0.5237,
+                0.3703
+              ],
+              "value": "ASHP24137"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3589,
+                0.3603,
+                0.3703
+              ],
+              "value": "Ashpoint Dinner 3-Ply Napkins, 250 ct"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.3589,
+                0.6928,
+                0.3703
+              ],
+              "value": 40
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.3589,
+                0.5866,
+                0.3703
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.3589,
+                0.7941,
+                0.3703
+              ],
+              "value": "32.17"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8529,
+                0.3589,
+                0.9118,
+                0.3703
+              ],
+              "value": "1286.80"
+            }
+          },
+          {
+            "lineNo": 7,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.3741,
+                0.5237,
+                0.3854
+              ],
+              "value": "ASHP24633"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3741,
+                0.4118,
+                0.3854
+              ],
+              "value": "Ashpoint Recycled 2-Ply Bath Tissue, 12 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6855,
+                0.3741,
+                0.6928,
+                0.3854
+              ],
+              "value": 8
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.3741,
+                0.5866,
+                0.3854
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.3741,
+                0.7941,
+                0.3854
+              ],
+              "value": "41.37"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8676,
+                0.3741,
+                0.9118,
+                0.3854
+              ],
+              "value": "330.96"
+            }
+          },
+          {
+            "lineNo": 8,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.3892,
+                0.5237,
+                0.4006
+              ],
+              "value": "ASHP24515"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3892,
+                0.3456,
+                0.4006
+              ],
+              "value": "Ashpoint 2-Ply Bath Tissue, 12 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.3892,
+                0.6928,
+                0.4006
+              ],
+              "value": 12
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.3892,
+                0.5866,
+                0.4006
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.3892,
+                0.7941,
+                0.4006
+              ],
+              "value": "38.09"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8676,
+                0.3892,
+                0.9118,
+                0.4006
+              ],
+              "value": "457.08"
+            }
+          },
+          {
+            "lineNo": 9,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.4044,
+                0.5237,
+                0.4157
+              ],
+              "value": "ASHP24049"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4044,
+                0.4118,
+                0.4157
+              ],
+              "value": "Ashpoint Select-a-Size Paper Towels, 12 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.4044,
+                0.6928,
+                0.4157
+              ],
+              "value": 31
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.4044,
+                0.5866,
+                0.4157
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.4044,
+                0.7941,
+                0.4157
+              ],
+              "value": "82.63"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8529,
+                0.4044,
+                0.9118,
+                0.4157
+              ],
+              "value": "2561.53"
+            }
+          },
+          {
+            "lineNo": 10,
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4195,
+                0.4118,
+                0.4309
+              ],
+              "value": "Ashpoint Recycled 2-Ply Bath Tissue, 24 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.4195,
+                0.6928,
+                0.4309
+              ],
+              "value": 11
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.4195,
+                0.5866,
+                0.4309
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.4195,
+                0.7941,
+                0.4309
+              ],
+              "value": "69.43"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8676,
+                0.4195,
+                0.9118,
+                0.4309
+              ],
+              "value": "763.73"
+            }
+          },
+          {
+            "lineNo": 11,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.4347,
+                0.5237,
+                0.446
+              ],
+              "value": "ASHP24440"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4347,
+                0.375,
+                0.446
+              ],
+              "value": "Ashpoint Recycled Paper Towels, 12 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.4347,
+                0.6928,
+                0.446
+              ],
+              "value": 15
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.4347,
+                0.5866,
+                0.446
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.4347,
+                0.7941,
+                0.446
+              ],
+              "value": "86.32"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8529,
+                0.4347,
+                0.9118,
+                0.446
+              ],
+              "value": "1294.80"
+            }
+          }
+        ],
+        "subtotal": {
+          "page": 1,
+          "bbox": [
+            0.8324,
+            0.4684,
+            0.9118,
+            0.4821
+          ],
+          "value": "18674.37"
+        },
+        "tax": {
+          "page": 1,
+          "bbox": [
+            0.8412,
+            0.4912,
+            0.9118,
+            0.5048
+          ],
+          "value": "1307.21"
+        },
+        "shipping": {
+          "page": 1,
+          "bbox": [
+            0.8588,
+            0.5139,
+            0.9118,
+            0.5275
+          ],
+          "value": "120.00"
+        },
+        "total": {
+          "page": 1,
+          "bbox": [
+            0.8324,
+            0.5366,
+            0.9118,
+            0.5503
+          ],
+          "value": "20101.58"
+        }
+      }
+    },
+    {
+      "file": "inv-2.pdf",
+      "role": "inv-2",
+      "type": "INVOICE",
+      "format": "pdf",
+      "template": "erp",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0817,
+            0.0783,
+            0.2386,
+            0.0904
+          ],
+          "value": "Ashpoint Paper Goods"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.2451,
+            0.1263,
+            0.3392,
+            0.1384
+          ],
+          "value": "ASHP-9889581"
+        },
+        "poNumber": {
+          "page": 1,
+          "bbox": [
+            0.6732,
+            0.1263,
+            0.7673,
+            0.1384
+          ],
+          "value": "HP-PO-105400"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.2451,
+            0.1414,
+            0.3314,
+            0.1535
+          ],
+          "value": "2026-09-07"
+        },
+        "dueDate": {
+          "page": 1,
+          "bbox": [
+            0.6732,
+            0.1414,
+            0.7595,
+            0.1535
+          ],
+          "value": "2026-10-07"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.2831,
+                0.5237,
+                0.2945
+              ],
+              "value": "ASHP24362"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.2831,
+                0.3603,
+                0.2945
+              ],
+              "value": "Ashpoint Dinner 3-Ply Napkins, 500 ct"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.2831,
+                0.6928,
+                0.2945
+              ],
+              "value": 35
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.2831,
+                0.5866,
+                0.2945
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.2831,
+                0.7941,
+                0.2945
+              ],
+              "value": "60.02"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8529,
+                0.2831,
+                0.9118,
+                0.2945
+              ],
+              "value": "2100.70"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.2983,
+                0.5237,
+                0.3097
+              ],
+              "value": "ASHP24656"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.2983,
+                0.3088,
+                0.3097
+              ],
+              "value": "Ashpoint White Napkins, 500 ct"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.2983,
+                0.6928,
+                0.3097
+              ],
+              "value": 51
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.2983,
+                0.5866,
+                0.3097
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.2983,
+                0.7941,
+                0.3097
+              ],
+              "value": "64.43"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8529,
+                0.2983,
+                0.9118,
+                0.3097
+              ],
+              "value": "3285.93"
+            }
+          },
+          {
+            "lineNo": 3,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.3134,
+                0.5237,
+                0.3248
+              ],
+              "value": "ASHP24347"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3134,
+                0.3088,
+                0.3248
+              ],
+              "value": "Ashpoint Kraft Napkins, 250 ct"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.3134,
+                0.6928,
+                0.3248
+              ],
+              "value": 48
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.3134,
+                0.5866,
+                0.3248
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.3134,
+                0.7941,
+                0.3248
+              ],
+              "value": "33.68"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8529,
+                0.3134,
+                0.9118,
+                0.3248
+              ],
+              "value": "1616.64"
+            }
+          },
+          {
+            "lineNo": 4,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.3286,
+                0.5237,
+                0.34
+              ],
+              "value": "ASHP24268"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3286,
+                0.3456,
+                0.34
+              ],
+              "value": "Ashpoint 2-Ply Bath Tissue, 24 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.3286,
+                0.6928,
+                0.34
+              ],
+              "value": 44
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.3286,
+                0.5866,
+                0.34
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.3286,
+                0.7941,
+                0.34
+              ],
+              "value": "80.75"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8529,
+                0.3286,
+                0.9118,
+                0.34
+              ],
+              "value": "3553.00"
+            }
+          },
+          {
+            "lineNo": 5,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.3438,
+                0.5237,
+                0.3551
+              ],
+              "value": "ASHP24311"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3438,
+                0.3676,
+                0.3551
+              ],
+              "value": "Ashpoint Recycled Paper Towels, 6 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.3438,
+                0.6928,
+                0.3551
+              ],
+              "value": 30
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.3438,
+                0.5866,
+                0.3551
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.3438,
+                0.7941,
+                0.3551
+              ],
+              "value": "47.44"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8529,
+                0.3438,
+                0.9118,
+                0.3551
+              ],
+              "value": "1423.20"
+            }
+          },
+          {
+            "lineNo": 6,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.3589,
+                0.5237,
+                0.3703
+              ],
+              "value": "ASHP24137"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3589,
+                0.3603,
+                0.3703
+              ],
+              "value": "Ashpoint Dinner 3-Ply Napkins, 250 ct"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.3589,
+                0.6928,
+                0.3703
+              ],
+              "value": 40
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.3589,
+                0.5866,
+                0.3703
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.3589,
+                0.7941,
+                0.3703
+              ],
+              "value": "32.17"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8529,
+                0.3589,
+                0.9118,
+                0.3703
+              ],
+              "value": "1286.80"
+            }
+          },
+          {
+            "lineNo": 7,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.3741,
+                0.5237,
+                0.3854
+              ],
+              "value": "ASHP24633"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3741,
+                0.4118,
+                0.3854
+              ],
+              "value": "Ashpoint Recycled 2-Ply Bath Tissue, 12 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6855,
+                0.3741,
+                0.6928,
+                0.3854
+              ],
+              "value": 8
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.3741,
+                0.5866,
+                0.3854
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.3741,
+                0.7941,
+                0.3854
+              ],
+              "value": "41.37"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8676,
+                0.3741,
+                0.9118,
+                0.3854
+              ],
+              "value": "330.96"
+            }
+          },
+          {
+            "lineNo": 8,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.3892,
+                0.5237,
+                0.4006
+              ],
+              "value": "ASHP24515"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3892,
+                0.3456,
+                0.4006
+              ],
+              "value": "Ashpoint 2-Ply Bath Tissue, 12 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.3892,
+                0.6928,
+                0.4006
+              ],
+              "value": 12
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.3892,
+                0.5866,
+                0.4006
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.3892,
+                0.7941,
+                0.4006
+              ],
+              "value": "38.09"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8676,
+                0.3892,
+                0.9118,
+                0.4006
+              ],
+              "value": "457.08"
+            }
+          },
+          {
+            "lineNo": 9,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.4044,
+                0.5237,
+                0.4157
+              ],
+              "value": "ASHP24049"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4044,
+                0.4118,
+                0.4157
+              ],
+              "value": "Ashpoint Select-a-Size Paper Towels, 12 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.4044,
+                0.6928,
+                0.4157
+              ],
+              "value": 31
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.4044,
+                0.5866,
+                0.4157
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.4044,
+                0.7941,
+                0.4157
+              ],
+              "value": "82.63"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8529,
+                0.4044,
+                0.9118,
+                0.4157
+              ],
+              "value": "2561.53"
+            }
+          },
+          {
+            "lineNo": 10,
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4195,
+                0.4118,
+                0.4309
+              ],
+              "value": "Ashpoint Recycled 2-Ply Bath Tissue, 24 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.4195,
+                0.6928,
+                0.4309
+              ],
+              "value": 11
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.4195,
+                0.5866,
+                0.4309
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.4195,
+                0.7941,
+                0.4309
+              ],
+              "value": "69.43"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8676,
+                0.4195,
+                0.9118,
+                0.4309
+              ],
+              "value": "763.73"
+            }
+          },
+          {
+            "lineNo": 11,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.4575,
+                0.4347,
+                0.5237,
+                0.446
+              ],
+              "value": "ASHP24440"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4347,
+                0.375,
+                0.446
+              ],
+              "value": "Ashpoint Recycled Paper Towels, 12 roll"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6781,
+                0.4347,
+                0.6928,
+                0.446
+              ],
+              "value": 15
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.5719,
+                0.4347,
+                0.5866,
+                0.446
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7574,
+                0.4347,
+                0.7941,
+                0.446
+              ],
+              "value": "86.32"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8529,
+                0.4347,
+                0.9118,
+                0.446
+              ],
+              "value": "1294.80"
+            }
+          }
+        ],
+        "subtotal": {
+          "page": 1,
+          "bbox": [
+            0.8324,
+            0.4684,
+            0.9118,
+            0.4821
+          ],
+          "value": "18674.37"
+        },
+        "tax": {
+          "page": 1,
+          "bbox": [
+            0.8412,
+            0.4912,
+            0.9118,
+            0.5048
+          ],
+          "value": "1307.21"
+        },
+        "shipping": {
+          "page": 1,
+          "bbox": [
+            0.8588,
+            0.5139,
+            0.9118,
+            0.5275
+          ],
+          "value": "120.00"
+        },
+        "total": {
+          "page": 1,
+          "bbox": [
+            0.8324,
+            0.5366,
+            0.9118,
+            0.5503
+          ],
+          "value": "20101.58"
+        }
+      }
+    }
+  ],
+  "lineMatches": [
+    {
+      "po": "po:1",
+      "rr": "rr:6",
+      "inv": "inv-1:1"
+    },
+    {
+      "po": "po:2",
+      "rr": "rr:10",
+      "inv": "inv-1:2"
+    },
+    {
+      "po": "po:3",
+      "rr": "rr:5",
+      "inv": "inv-1:3"
+    },
+    {
+      "po": "po:4",
+      "rr": "rr:3",
+      "inv": "inv-1:4"
+    },
+    {
+      "po": "po:5",
+      "rr": "rr:4",
+      "inv": "inv-1:5"
+    },
+    {
+      "po": "po:6",
+      "rr": "rr:2",
+      "inv": "inv-1:6"
+    },
+    {
+      "po": "po:7",
+      "rr": "rr:9",
+      "inv": "inv-1:7"
+    },
+    {
+      "po": "po:8",
+      "rr": "rr:8",
+      "inv": "inv-1:8"
+    },
+    {
+      "po": "po:9",
+      "rr": "rr:1",
+      "inv": "inv-1:9"
+    },
+    {
+      "po": "po:10",
+      "rr": "rr:11",
+      "inv": "inv-1:10"
+    },
+    {
+      "po": "po:11",
+      "rr": "rr:7",
+      "inv": "inv-1:11"
+    }
+  ],
+  "exceptions": [
+    {
+      "type": "QTY_BILLED_NOT_RECEIVED",
+      "lineKeys": [
+        "po:1",
+        "rr:6",
+        "inv-1:1"
+      ],
+      "documentRoles": [
+        "po",
+        "rr",
+        "inv-1"
+      ],
+      "amount": "180.06",
+      "informational": false
+    },
+    {
+      "type": "SHORT_SHIP",
+      "lineKeys": [
+        "po:11",
+        "rr:7",
+        "inv-1:11"
+      ],
+      "documentRoles": [
+        "po",
+        "rr",
+        "inv-1"
+      ],
+      "amount": "172.64",
+      "informational": false
+    },
+    {
+      "type": "DUPLICATE_INVOICE",
+      "lineKeys": [],
+      "documentRoles": [
+        "inv-1",
+        "inv-2"
+      ],
+      "amount": "20101.58",
+      "informational": false
+    }
+  ],
+  "planted": [
+    {
+      "type": "short_ship_billed_full",
+      "lineKeys": [
+        "po:11",
+        "rr:7",
+        "inv-1:11"
+      ],
+      "details": {
+        "ordered": 15,
+        "received": 13,
+        "billed": 15
+      }
+    },
+    {
+      "type": "billed_not_received",
+      "lineKeys": [
+        "po:1",
+        "rr:6",
+        "inv-1:1"
+      ],
+      "details": {
+        "ordered": 32,
+        "received": 32,
+        "billed": 35
+      }
+    },
+    {
+      "type": "sku_omitted",
+      "lineKeys": [
+        "po:10",
+        "rr:11",
+        "inv-1:10"
+      ],
+      "details": {
+        "sku": "ASHP24713"
+      }
+    },
+    {
+      "type": "duplicate_invoice",
+      "lineKeys": [],
+      "details": {
+        "invoiceNumber": "ASHP-9889581"
+      }
+    }
+  ]
+}

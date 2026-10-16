@@ -1,0 +1,414 @@
+{
+  "schemaVersion": 1,
+  "setId": "S0012",
+  "seed": 42,
+  "generatorVersion": "0.2.0",
+  "poNumber": "HP-PO-104187",
+  "vendorCode": "NRTF",
+  "documents": [
+    {
+      "file": "po.pdf",
+      "role": "po",
+      "type": "PO",
+      "format": "pdf",
+      "template": "classic",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0915,
+            0.2121,
+            0.2485,
+            0.2258
+          ],
+          "value": "Northfield Frozen Foods"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.8178,
+            0.0985,
+            0.9183,
+            0.1121
+          ],
+          "value": "HP-PO-104187"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.8447,
+            0.1162,
+            0.9183,
+            0.1298
+          ],
+          "value": "2026-03-08"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.2901,
+                0.1515,
+                0.303
+              ],
+              "value": "NR-19067"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.2901,
+                0.4661,
+                0.303
+              ],
+              "value": "Northfield Teriyaki Veggie Fried Rice, 16 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.2901,
+                0.634,
+                0.303
+              ],
+              "value": 49
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.2901,
+                0.6664,
+                0.303
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.2901,
+                0.7941,
+                0.303
+              ],
+              "value": "41.09"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.2901,
+                0.9118,
+                0.303
+              ],
+              "value": "2013.41"
+            }
+          }
+        ],
+        "subtotal": {
+          "page": 1,
+          "bbox": [
+            0.8464,
+            0.3232,
+            0.9118,
+            0.3369
+          ],
+          "value": "2013.41"
+        },
+        "total": {
+          "page": 1,
+          "bbox": [
+            0.8464,
+            0.346,
+            0.9118,
+            0.3596
+          ],
+          "value": "2013.41"
+        }
+      }
+    },
+    {
+      "file": "rr.png",
+      "role": "rr",
+      "type": "RR",
+      "format": "png",
+      "template": "erp",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0983,
+            0.1822,
+            0.2792,
+            0.2002
+          ],
+          "value": "Northfield Frozen Foods"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.2653,
+            0.1182,
+            0.3443,
+            0.1329
+          ],
+          "value": "RCV-500360"
+        },
+        "poNumber": {
+          "page": 1,
+          "bbox": [
+            0.6931,
+            0.1324,
+            0.7877,
+            0.1476
+          ],
+          "value": "HP-PO-104187"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.2645,
+            0.1333,
+            0.3514,
+            0.1483
+          ],
+          "value": "2026-03-17"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.2338,
+                0.2741,
+                0.2932,
+                0.2875
+              ],
+              "value": "NR-19067"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.3481,
+                0.2779,
+                0.672,
+                0.3
+              ],
+              "value": "Northfield Teriyaki Veggie Fried Rice, 16 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.1473,
+                0.2713,
+                0.1626,
+                0.2831
+              ],
+              "value": 49
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.1751,
+                0.2722,
+                0.1904,
+                0.2841
+              ],
+              "value": "CS"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "file": "inv-1.pdf",
+      "role": "inv-1",
+      "type": "INVOICE",
+      "format": "pdf",
+      "template": "twocol",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.3532,
+            0.0505,
+            0.6468,
+            0.0747
+          ],
+          "value": "Northfield Frozen Foods"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.8298,
+            0.1212,
+            0.9101,
+            0.1341
+          ],
+          "value": "INV-289176"
+        },
+        "poNumber": {
+          "page": 1,
+          "bbox": [
+            0.8105,
+            0.1414,
+            0.9101,
+            0.1543
+          ],
+          "value": "HP-PO-104187"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.8323,
+            0.1616,
+            0.9101,
+            0.1745
+          ],
+          "value": "2026-03-18"
+        },
+        "dueDate": {
+          "page": 1,
+          "bbox": [
+            0.8323,
+            0.1818,
+            0.9101,
+            0.1947
+          ],
+          "value": "2026-05-02"
+        },
+        "currency": {
+          "page": 1,
+          "bbox": [
+            0.8821,
+            0.2222,
+            0.9101,
+            0.2351
+          ],
+          "value": "USD"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3103,
+                0.1539,
+                0.3232
+              ],
+              "value": "NR-19067"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3103,
+                0.4677,
+                0.3232
+              ],
+              "value": "Northfield Teriyaki Veggie Fried Rice, 16 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6173,
+                0.3103,
+                0.634,
+                0.3232
+              ],
+              "value": 49
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.3103,
+                0.6638,
+                0.3232
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7487,
+                0.3103,
+                0.7941,
+                0.3232
+              ],
+              "value": "41.09"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8459,
+                0.3103,
+                0.9118,
+                0.3232
+              ],
+              "value": "2013.41"
+            }
+          }
+        ],
+        "subtotal": {
+          "page": 1,
+          "bbox": [
+            0.842,
+            0.3434,
+            0.9118,
+            0.3571
+          ],
+          "value": "2013.41"
+        },
+        "tax": {
+          "page": 1,
+          "bbox": [
+            0.8725,
+            0.3662,
+            0.9118,
+            0.3798
+          ],
+          "value": "0.00"
+        },
+        "shipping": {
+          "page": 1,
+          "bbox": [
+            0.8637,
+            0.3889,
+            0.9118,
+            0.4025
+          ],
+          "value": "75.00"
+        },
+        "total": {
+          "page": 1,
+          "bbox": [
+            0.8409,
+            0.4116,
+            0.9118,
+            0.4253
+          ],
+          "value": "2088.41"
+        }
+      }
+    }
+  ],
+  "lineMatches": [
+    {
+      "po": "po:1",
+      "rr": "rr:1",
+      "inv": "inv-1:1"
+    }
+  ],
+  "exceptions": [],
+  "planted": []
+}

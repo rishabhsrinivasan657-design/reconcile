@@ -1,0 +1,705 @@
+{
+  "schemaVersion": 1,
+  "setId": "S0064",
+  "seed": 42,
+  "generatorVersion": "0.2.0",
+  "poNumber": "HP-PO-105081",
+  "vendorCode": "BRKC",
+  "documents": [
+    {
+      "file": "po.pdf",
+      "role": "po",
+      "type": "PO",
+      "format": "pdf",
+      "template": "classic",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0915,
+            0.2121,
+            0.2815,
+            0.2258
+          ],
+          "value": "Brookcrest Dairy Alternatives"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.8178,
+            0.0985,
+            0.9183,
+            0.1121
+          ],
+          "value": "HP-PO-105081"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.8447,
+            0.1162,
+            0.9183,
+            0.1298
+          ],
+          "value": "2026-08-28"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.2901,
+                0.1469,
+                0.303
+              ],
+              "value": "11081-06"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.2901,
+                0.5331,
+                0.303
+              ],
+              "value": "Brookcrest Unsweetened Vanilla Almond Milk, 32 fl oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6263,
+                0.2901,
+                0.634,
+                0.303
+              ],
+              "value": 7
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.2901,
+                0.6664,
+                0.303
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.2901,
+                0.7941,
+                0.303
+              ],
+              "value": "14.55"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8616,
+                0.2901,
+                0.9118,
+                0.303
+              ],
+              "value": "101.85"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3128,
+                0.1469,
+                0.3257
+              ],
+              "value": "11266-06"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3128,
+                0.4645,
+                0.3257
+              ],
+              "value": "Brookcrest Unsweetened Oat Milk, 64 fl oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.3128,
+                0.634,
+                0.3257
+              ],
+              "value": 25
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.3128,
+                0.6664,
+                0.3257
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.3128,
+                0.7941,
+                0.3257
+              ],
+              "value": "35.53"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8616,
+                0.3128,
+                0.9118,
+                0.3257
+              ],
+              "value": "888.25"
+            }
+          }
+        ],
+        "subtotal": {
+          "page": 1,
+          "bbox": [
+            0.8586,
+            0.346,
+            0.9118,
+            0.3596
+          ],
+          "value": "990.10"
+        },
+        "total": {
+          "page": 1,
+          "bbox": [
+            0.8586,
+            0.3687,
+            0.9118,
+            0.3823
+          ],
+          "value": "990.10"
+        }
+      }
+    },
+    {
+      "file": "rr.png",
+      "role": "rr",
+      "type": "RR",
+      "format": "png",
+      "template": "erp",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0772,
+            0.1974,
+            0.3049,
+            0.2115
+          ],
+          "value": "Brookcrest Dairy Alternatives"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.2396,
+            0.1279,
+            0.3181,
+            0.1407
+          ],
+          "value": "RCV-501966"
+        },
+        "poNumber": {
+          "page": 1,
+          "bbox": [
+            0.6676,
+            0.124,
+            0.7619,
+            0.1369
+          ],
+          "value": "HP-PO-105081"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.2398,
+            0.1429,
+            0.3263,
+            0.1558
+          ],
+          "value": "2026-09-11"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.219,
+                0.2851,
+                0.278,
+                0.297
+              ],
+              "value": "11081-06"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.3334,
+                0.2812,
+                0.7159,
+                0.296
+              ],
+              "value": "Brookcrest Unsweetened Vanilla Almond Milk, 32 fl oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.1398,
+                0.2862,
+                0.1473,
+                0.2977
+              ],
+              "value": 9
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.1602,
+                0.286,
+                0.1751,
+                0.2975
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.2192,
+                0.3003,
+                0.2782,
+                0.3122
+              ],
+              "value": "11266-06"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.3336,
+                0.2971,
+                0.6353,
+                0.3112
+              ],
+              "value": "Brookcrest Unsweetened Oat Milk, 64 fl oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.1326,
+                0.3014,
+                0.1475,
+                0.3129
+              ],
+              "value": 25
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.1604,
+                0.3012,
+                0.1753,
+                0.3127
+              ],
+              "value": "CS"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "file": "inv-1.pdf",
+      "role": "inv-1",
+      "type": "INVOICE",
+      "format": "pdf",
+      "template": "modern",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.66,
+            0.048,
+            0.9183,
+            0.0646
+          ],
+          "value": "Brookcrest Dairy Alternatives"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.0817,
+            0.1338,
+            0.1526,
+            0.149
+          ],
+          "value": "1882948"
+        },
+        "poNumber": {
+          "page": 1,
+          "bbox": [
+            0.2908,
+            0.1338,
+            0.4087,
+            0.149
+          ],
+          "value": "HP-PO-105081"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.5,
+            0.1338,
+            0.5972,
+            0.149
+          ],
+          "value": "2026-09-14"
+        },
+        "dueDate": {
+          "page": 1,
+          "bbox": [
+            0.7092,
+            0.1338,
+            0.8028,
+            0.149
+          ],
+          "value": "2026-10-14"
+        },
+        "currency": {
+          "page": 1,
+          "bbox": [
+            0.2908,
+            0.1768,
+            0.3253,
+            0.1919
+          ],
+          "value": "USD"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.2222,
+                0.3163,
+                0.2837,
+                0.3299
+              ],
+              "value": "11081-06"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.3366,
+                0.3163,
+                0.6697,
+                0.3284
+              ],
+              "value": "Brookcrest Unsweetened Vanilla Almond Milk, 32 fl oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.1412,
+                0.3163,
+                0.1503,
+                0.3299
+              ],
+              "value": 9
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.1634,
+                0.3163,
+                0.1836,
+                0.3299
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7489,
+                0.3163,
+                0.7941,
+                0.3299
+              ],
+              "value": "14.55"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8569,
+                0.3163,
+                0.9118,
+                0.3299
+              ],
+              "value": "130.95"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.2222,
+                0.3441,
+                0.2866,
+                0.3577
+              ],
+              "value": "11266-06"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.3366,
+                0.3441,
+                0.6337,
+                0.3577
+              ],
+              "value": "Brookcrest Unsweetened Oat Milk, 64 fl oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.1326,
+                0.3441,
+                0.1503,
+                0.3577
+              ],
+              "value": 25
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.1634,
+                0.3441,
+                0.1836,
+                0.3577
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.746,
+                0.3441,
+                0.7941,
+                0.3577
+              ],
+              "value": "35.53"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8538,
+                0.3441,
+                0.9118,
+                0.3577
+              ],
+              "value": "888.25"
+            }
+          },
+          {
+            "lineNo": 3,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.2222,
+                0.3718,
+                0.286,
+                0.3855
+              ],
+              "value": "11225-06"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.3366,
+                0.3718,
+                0.6203,
+                0.3855
+              ],
+              "value": "Brookcrest Original Almond Milk, 64 fl oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.1412,
+                0.3718,
+                0.1503,
+                0.3855
+              ],
+              "value": 3
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.1634,
+                0.3718,
+                0.1836,
+                0.3855
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7491,
+                0.3718,
+                0.7941,
+                0.3855
+              ],
+              "value": "24.51"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8644,
+                0.3718,
+                0.9118,
+                0.3855
+              ],
+              "value": "73.53"
+            }
+          }
+        ],
+        "subtotal": {
+          "page": 1,
+          "bbox": [
+            0.8448,
+            0.4078,
+            0.9118,
+            0.4215
+          ],
+          "value": "1092.73"
+        },
+        "tax": {
+          "page": 1,
+          "bbox": [
+            0.8718,
+            0.4306,
+            0.9118,
+            0.4442
+          ],
+          "value": "0.00"
+        },
+        "shipping": {
+          "page": 1,
+          "bbox": [
+            0.8718,
+            0.4533,
+            0.9118,
+            0.4669
+          ],
+          "value": "0.00"
+        },
+        "total": {
+          "page": 1,
+          "bbox": [
+            0.81,
+            0.4735,
+            0.9118,
+            0.4932
+          ],
+          "value": "1092.73"
+        }
+      }
+    }
+  ],
+  "lineMatches": [
+    {
+      "po": "po:1",
+      "rr": "rr:1",
+      "inv": "inv-1:1"
+    },
+    {
+      "po": "po:2",
+      "rr": "rr:2",
+      "inv": "inv-1:2"
+    },
+    {
+      "inv": "inv-1:3"
+    }
+  ],
+  "exceptions": [
+    {
+      "type": "OVER_SHIP",
+      "lineKeys": [
+        "po:1",
+        "rr:1",
+        "inv-1:1"
+      ],
+      "documentRoles": [
+        "po",
+        "rr",
+        "inv-1"
+      ],
+      "amount": "29.10",
+      "informational": false
+    },
+    {
+      "type": "UNMATCHED_LINE",
+      "lineKeys": [
+        "inv-1:3"
+      ],
+      "documentRoles": [
+        "inv-1"
+      ],
+      "amount": "73.53",
+      "informational": false
+    }
+  ],
+  "planted": [
+    {
+      "type": "over_ship",
+      "lineKeys": [
+        "po:1",
+        "rr:1",
+        "inv-1:1"
+      ],
+      "details": {
+        "ordered": 7,
+        "received": 9,
+        "billed": 9
+      }
+    },
+    {
+      "type": "extra_invoice_line",
+      "lineKeys": [
+        "inv-1:3"
+      ],
+      "details": {
+        "sku": "11225-06",
+        "qty": 3
+      }
+    }
+  ]
+}

@@ -1,0 +1,1026 @@
+{
+  "schemaVersion": 1,
+  "setId": "S0001",
+  "seed": 42,
+  "generatorVersion": "0.2.0",
+  "poNumber": "HP-PO-104012",
+  "vendorCode": "HRVM",
+  "documents": [
+    {
+      "file": "po.png",
+      "role": "po",
+      "type": "PO",
+      "format": "png",
+      "template": "classic",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0869,
+            0.2145,
+            0.2418,
+            0.2297
+          ],
+          "value": "Harvest Mill Bakery Inc."
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.8113,
+            0.0945,
+            0.912,
+            0.1091
+          ],
+          "value": "HP-PO-104012"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.8385,
+            0.1122,
+            0.9123,
+            0.1265
+          ],
+          "value": "2026-08-26"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0849,
+                0.2934,
+                0.1484,
+                0.307
+              ],
+              "value": "HR-13874"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.1993,
+                0.2904,
+                0.4683,
+                0.3059
+              ],
+              "value": "Harvest Mill Rosemary Seed Crackers, 9 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6151,
+                0.2888,
+                0.6308,
+                0.3019
+              ],
+              "value": 28
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6437,
+                0.2885,
+                0.6632,
+                0.3016
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7482,
+                0.2873,
+                0.7909,
+                0.3006
+              ],
+              "value": "50.37"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8466,
+                0.2862,
+                0.9086,
+                0.2997
+              ],
+              "value": "1410.36"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0852,
+                0.3161,
+                0.1487,
+                0.3297
+              ],
+              "value": "HR-13272"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.1996,
+                0.3131,
+                0.4707,
+                0.3286
+              ],
+              "value": "Harvest Mill Everything Seed Crackers, 5 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6155,
+                0.3115,
+                0.6312,
+                0.3246
+              ],
+              "value": 34
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6441,
+                0.3112,
+                0.6636,
+                0.3243
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7486,
+                0.31,
+                0.7913,
+                0.3233
+              ],
+              "value": "32.09"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.847,
+                0.3089,
+                0.909,
+                0.3224
+              ],
+              "value": "1091.06"
+            }
+          },
+          {
+            "lineNo": 3,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0856,
+                0.3388,
+                0.1491,
+                0.3524
+              ],
+              "value": "HR-13595"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2,
+                0.3358,
+                0.4674,
+                0.3513
+              ],
+              "value": "Harvest Mill Dark Chocolate Granola, 12 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6159,
+                0.3342,
+                0.6316,
+                0.3473
+              ],
+              "value": 37
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6445,
+                0.3339,
+                0.664,
+                0.347
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7489,
+                0.3327,
+                0.7916,
+                0.346
+              ],
+              "value": "42.48"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8473,
+                0.3316,
+                0.9093,
+                0.3451
+              ],
+              "value": "1571.76"
+            }
+          },
+          {
+            "lineNo": 4,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.086,
+                0.3616,
+                0.1495,
+                0.375
+              ],
+              "value": "HR-13263"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2004,
+                0.3586,
+                0.4677,
+                0.374
+              ],
+              "value": "Harvest Mill Dark Chocolate Granola, 24 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6162,
+                0.357,
+                0.6319,
+                0.37
+              ],
+              "value": 33
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6448,
+                0.3567,
+                0.6643,
+                0.3697
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7493,
+                0.3555,
+                0.792,
+                0.3687
+              ],
+              "value": "77.23"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8477,
+                0.3544,
+                0.9097,
+                0.3678
+              ],
+              "value": "2548.59"
+            }
+          },
+          {
+            "lineNo": 5,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0863,
+                0.3843,
+                0.1498,
+                0.3978
+              ],
+              "value": "HR-13521"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2007,
+                0.3813,
+                0.4718,
+                0.3968
+              ],
+              "value": "Harvest Mill Everything Seed Crackers, 9 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6166,
+                0.3797,
+                0.6323,
+                0.3928
+              ],
+              "value": 23
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6452,
+                0.3794,
+                0.6647,
+                0.3925
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7497,
+                0.3782,
+                0.7924,
+                0.3915
+              ],
+              "value": "52.40"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8481,
+                0.3771,
+                0.9101,
+                0.3906
+              ],
+              "value": "1205.20"
+            }
+          },
+          {
+            "lineNo": 6,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0867,
+                0.407,
+                0.1502,
+                0.4205
+              ],
+              "value": "HR-13418"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2011,
+                0.4041,
+                0.4591,
+                0.4195
+              ],
+              "value": "Harvest Mill Sea Salt Seed Crackers, 9 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6169,
+                0.4024,
+                0.6327,
+                0.4155
+              ],
+              "value": 16
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6455,
+                0.4021,
+                0.665,
+                0.4152
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.75,
+                0.4009,
+                0.7927,
+                0.4142
+              ],
+              "value": "52.74"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.86,
+                0.3998,
+                0.9104,
+                0.4131
+              ],
+              "value": "843.84"
+            }
+          },
+          {
+            "lineNo": 7,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0871,
+                0.4298,
+                0.1506,
+                0.4432
+              ],
+              "value": "HR-13183"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2014,
+                0.4267,
+                0.4782,
+                0.4421
+              ],
+              "value": "Harvest Mill Coconut Cashew Granola, 24 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6173,
+                0.4252,
+                0.633,
+                0.4382
+              ],
+              "value": 54
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6459,
+                0.4249,
+                0.6654,
+                0.4379
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7504,
+                0.4237,
+                0.7931,
+                0.4369
+              ],
+              "value": "72.35"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8488,
+                0.4226,
+                0.9108,
+                0.436
+              ],
+              "value": "3906.90"
+            }
+          },
+          {
+            "lineNo": 8,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0874,
+                0.4525,
+                0.1509,
+                0.466
+              ],
+              "value": "HR-13655"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2018,
+                0.4494,
+                0.4786,
+                0.4649
+              ],
+              "value": "Harvest Mill Coconut Cashew Granola, 12 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6177,
+                0.4479,
+                0.6334,
+                0.461
+              ],
+              "value": 22
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6463,
+                0.4476,
+                0.6658,
+                0.4607
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7508,
+                0.4464,
+                0.7935,
+                0.4597
+              ],
+              "value": "40.28"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8608,
+                0.4453,
+                0.9112,
+                0.4586
+              ],
+              "value": "886.16"
+            }
+          }
+        ],
+        "subtotal": {
+          "page": 1,
+          "bbox": [
+            0.8379,
+            0.4784,
+            0.9117,
+            0.4928
+          ],
+          "value": "13463.87"
+        },
+        "total": {
+          "page": 1,
+          "bbox": [
+            0.8383,
+            0.5012,
+            0.9121,
+            0.5155
+          ],
+          "value": "13463.87"
+        }
+      }
+    },
+    {
+      "file": "rr.pdf",
+      "role": "rr",
+      "type": "RR",
+      "format": "pdf",
+      "template": "boxed",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0882,
+            0.2222,
+            0.2176,
+            0.2351
+          ],
+          "value": "Harvest Mill Bakery Inc."
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.0882,
+            0.1338,
+            0.162,
+            0.1475
+          ],
+          "value": "RCV-500022"
+        },
+        "poNumber": {
+          "page": 1,
+          "bbox": [
+            0.3671,
+            0.1338,
+            0.4569,
+            0.1475
+          ],
+          "value": "HP-PO-104012"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.646,
+            0.1338,
+            0.716,
+            0.1475
+          ],
+          "value": "2026-09-06"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3015,
+                0.1419,
+                0.3143
+              ],
+              "value": "HR-13183"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3015,
+                0.4449,
+                0.3143
+              ],
+              "value": "Harvest Mill Coconut Cashew Granola, 24 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8981,
+                0.3015,
+                0.9118,
+                0.3143
+              ],
+              "value": 54
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7908,
+                0.3015,
+                0.8059,
+                0.3143
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3267,
+                0.1419,
+                0.3396
+              ],
+              "value": "HR-13263"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3267,
+                0.4365,
+                0.3396
+              ],
+              "value": "Harvest Mill Dark Chocolate Granola, 24 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8981,
+                0.3267,
+                0.9118,
+                0.3396
+              ],
+              "value": 33
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7908,
+                0.3267,
+                0.8059,
+                0.3396
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 3,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.352,
+                0.1419,
+                0.3648
+              ],
+              "value": "HR-13272"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.352,
+                0.4388,
+                0.3648
+              ],
+              "value": "Harvest Mill Everything Seed Crackers, 5 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8981,
+                0.352,
+                0.9118,
+                0.3648
+              ],
+              "value": 34
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7908,
+                0.352,
+                0.8059,
+                0.3648
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 4,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3772,
+                0.1419,
+                0.3901
+              ],
+              "value": "HR-13418"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3772,
+                0.4267,
+                0.3901
+              ],
+              "value": "Harvest Mill Sea Salt Seed Crackers, 9 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8981,
+                0.3772,
+                0.9118,
+                0.3901
+              ],
+              "value": 16
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7908,
+                0.3772,
+                0.8059,
+                0.3901
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 5,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4025,
+                0.1419,
+                0.4153
+              ],
+              "value": "HR-13521"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.4025,
+                0.4388,
+                0.4153
+              ],
+              "value": "Harvest Mill Everything Seed Crackers, 9 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8981,
+                0.4025,
+                0.9118,
+                0.4153
+              ],
+              "value": 23
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7908,
+                0.4025,
+                0.8059,
+                0.4153
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 6,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4277,
+                0.1419,
+                0.4406
+              ],
+              "value": "HR-13595"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.4277,
+                0.4365,
+                0.4406
+              ],
+              "value": "Harvest Mill Dark Chocolate Granola, 12 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8981,
+                0.4277,
+                0.9118,
+                0.4406
+              ],
+              "value": 37
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7908,
+                0.4277,
+                0.8059,
+                0.4406
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 7,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.453,
+                0.1419,
+                0.4658
+              ],
+              "value": "HR-13655"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.453,
+                0.4449,
+                0.4658
+              ],
+              "value": "Harvest Mill Coconut Cashew Granola, 12 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8981,
+                0.453,
+                0.9118,
+                0.4658
+              ],
+              "value": 22
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7908,
+                0.453,
+                0.8059,
+                0.4658
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 8,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.4782,
+                0.1419,
+                0.4911
+              ],
+              "value": "HR-13874"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.4782,
+                0.4364,
+                0.4911
+              ],
+              "value": "Harvest Mill Rosemary Seed Crackers, 9 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.8981,
+                0.4782,
+                0.9118,
+                0.4911
+              ],
+              "value": 28
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.7908,
+                0.4782,
+                0.8059,
+                0.4911
+              ],
+              "value": "CS"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "lineMatches": [
+    {
+      "po": "po:1",
+      "rr": "rr:8"
+    },
+    {
+      "po": "po:2",
+      "rr": "rr:3"
+    },
+    {
+      "po": "po:3",
+      "rr": "rr:6"
+    },
+    {
+      "po": "po:4",
+      "rr": "rr:2"
+    },
+    {
+      "po": "po:5",
+      "rr": "rr:5"
+    },
+    {
+      "po": "po:6",
+      "rr": "rr:4"
+    },
+    {
+      "po": "po:7",
+      "rr": "rr:1"
+    },
+    {
+      "po": "po:8",
+      "rr": "rr:7"
+    }
+  ],
+  "exceptions": [
+    {
+      "type": "MISSING_DOCUMENT",
+      "lineKeys": [],
+      "documentRoles": [
+        "inv-1"
+      ],
+      "amount": "0.00",
+      "informational": true
+    }
+  ],
+  "planted": [
+    {
+      "type": "missing_document",
+      "lineKeys": [],
+      "details": {
+        "missing": "inv-1"
+      }
+    }
+  ]
+}

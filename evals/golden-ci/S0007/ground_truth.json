@@ -1,0 +1,588 @@
+{
+  "schemaVersion": 1,
+  "setId": "S0007",
+  "seed": 42,
+  "generatorVersion": "0.2.0",
+  "poNumber": "HP-PO-104115",
+  "vendorCode": "NRTF",
+  "documents": [
+    {
+      "file": "po.pdf",
+      "role": "po",
+      "type": "PO",
+      "format": "pdf",
+      "template": "classic",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0915,
+            0.2121,
+            0.2485,
+            0.2258
+          ],
+          "value": "Northfield Frozen Foods"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.8178,
+            0.0985,
+            0.9183,
+            0.1121
+          ],
+          "value": "HP-PO-104115"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.8447,
+            0.1162,
+            0.9183,
+            0.1298
+          ],
+          "value": "2026-02-22"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.2901,
+                0.1515,
+                0.303
+              ],
+              "value": "NR-19830"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.2901,
+                0.4884,
+                0.303
+              ],
+              "value": "Northfield Bean & Cheese Frozen Burrito, 6 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.2901,
+                0.634,
+                0.303
+              ],
+              "value": 20
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.2901,
+                0.6664,
+                0.303
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.2901,
+                0.7941,
+                0.303
+              ],
+              "value": "38.59"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8616,
+                0.2901,
+                0.9118,
+                0.303
+              ],
+              "value": "771.80"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3128,
+                0.1515,
+                0.3257
+              ],
+              "value": "NR-19005"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3128,
+                0.4494,
+                0.3257
+              ],
+              "value": "Northfield Breakfast Frozen Burrito, 6 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6185,
+                0.3128,
+                0.634,
+                0.3257
+              ],
+              "value": 37
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.3128,
+                0.6664,
+                0.3257
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7516,
+                0.3128,
+                0.7941,
+                0.3257
+              ],
+              "value": "38.38"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.85,
+                0.3128,
+                0.9118,
+                0.3257
+              ],
+              "value": "1420.06"
+            }
+          }
+        ],
+        "subtotal": {
+          "page": 1,
+          "bbox": [
+            0.8464,
+            0.346,
+            0.9118,
+            0.3596
+          ],
+          "value": "2191.86"
+        },
+        "total": {
+          "page": 1,
+          "bbox": [
+            0.8464,
+            0.3687,
+            0.9118,
+            0.3823
+          ],
+          "value": "2191.86"
+        }
+      }
+    },
+    {
+      "file": "rr.pdf",
+      "role": "rr",
+      "type": "RR",
+      "format": "pdf",
+      "template": "erp",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.0817,
+            0.1957,
+            0.2621,
+            0.2078
+          ],
+          "value": "Northfield Frozen Foods"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.2451,
+            0.1263,
+            0.3235,
+            0.1384
+          ],
+          "value": "RCV-500216"
+        },
+        "poNumber": {
+          "page": 1,
+          "bbox": [
+            0.6732,
+            0.1263,
+            0.7673,
+            0.1384
+          ],
+          "value": "HP-PO-104115"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.2451,
+            0.1414,
+            0.3314,
+            0.1535
+          ],
+          "value": "2026-03-01"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.2222,
+                0.2831,
+                0.281,
+                0.2945
+              ],
+              "value": "NR-19005"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.3366,
+                0.2831,
+                0.6381,
+                0.2945
+              ],
+              "value": "Northfield Breakfast Frozen Burrito, 6 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.1356,
+                0.2831,
+                0.1503,
+                0.2945
+              ],
+              "value": 37
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.1634,
+                0.2831,
+                0.1781,
+                0.2945
+              ],
+              "value": "CS"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.2222,
+                0.2983,
+                0.281,
+                0.3097
+              ],
+              "value": "NR-19830"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.3366,
+                0.2983,
+                0.6675,
+                0.3097
+              ],
+              "value": "Northfield Bean & Cheese Frozen Burrito, 6 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.1356,
+                0.2983,
+                0.1503,
+                0.3097
+              ],
+              "value": 20
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.1634,
+                0.2983,
+                0.1781,
+                0.3097
+              ],
+              "value": "CS"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "file": "inv-1.pdf",
+      "role": "inv-1",
+      "type": "INVOICE",
+      "format": "pdf",
+      "template": "twocol",
+      "pages": 1,
+      "fields": {
+        "vendorName": {
+          "page": 1,
+          "bbox": [
+            0.3532,
+            0.0505,
+            0.6468,
+            0.0747
+          ],
+          "value": "Northfield Frozen Foods"
+        },
+        "docNumber": {
+          "page": 1,
+          "bbox": [
+            0.8298,
+            0.1212,
+            0.9101,
+            0.1341
+          ],
+          "value": "INV-590859"
+        },
+        "poNumber": {
+          "page": 1,
+          "bbox": [
+            0.8105,
+            0.1414,
+            0.9101,
+            0.1543
+          ],
+          "value": "HP-PO-104115"
+        },
+        "date": {
+          "page": 1,
+          "bbox": [
+            0.8323,
+            0.1616,
+            0.9101,
+            0.1745
+          ],
+          "value": "2026-02-27"
+        },
+        "dueDate": {
+          "page": 1,
+          "bbox": [
+            0.8323,
+            0.1818,
+            0.9101,
+            0.1947
+          ],
+          "value": "2026-04-13"
+        },
+        "currency": {
+          "page": 1,
+          "bbox": [
+            0.8821,
+            0.2222,
+            0.9101,
+            0.2351
+          ],
+          "value": "USD"
+        },
+        "lines": [
+          {
+            "lineNo": 1,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.3103,
+                0.1539,
+                0.3232
+              ],
+              "value": "NR-19830"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.3103,
+                0.4874,
+                0.3232
+              ],
+              "value": "Northfield Bean & Cheese Frozen Burrito, 6 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6173,
+                0.3103,
+                0.634,
+                0.3232
+              ],
+              "value": 20
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.3103,
+                0.6638,
+                0.3232
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7487,
+                0.3103,
+                0.7941,
+                0.3232
+              ],
+              "value": "38.59"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.858,
+                0.3103,
+                0.9118,
+                0.3232
+              ],
+              "value": "771.80"
+            }
+          },
+          {
+            "lineNo": 2,
+            "sku": {
+              "page": 1,
+              "bbox": [
+                0.0882,
+                0.333,
+                0.1539,
+                0.3459
+              ],
+              "value": "NR-19005"
+            },
+            "description": {
+              "page": 1,
+              "bbox": [
+                0.2026,
+                0.333,
+                0.453,
+                0.3459
+              ],
+              "value": "Northfield Breakfast Frozen Burrito, 6 oz"
+            },
+            "qty": {
+              "page": 1,
+              "bbox": [
+                0.6173,
+                0.333,
+                0.634,
+                0.3459
+              ],
+              "value": 37
+            },
+            "uom": {
+              "page": 1,
+              "bbox": [
+                0.6471,
+                0.333,
+                0.6638,
+                0.3459
+              ],
+              "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7487,
+                0.333,
+                0.7941,
+                0.3459
+              ],
+              "value": "38.38"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8459,
+                0.333,
+                0.9118,
+                0.3459
+              ],
+              "value": "1420.06"
+            }
+          }
+        ],
+        "subtotal": {
+          "page": 1,
+          "bbox": [
+            0.842,
+            0.3662,
+            0.9118,
+            0.3798
+          ],
+          "value": "2191.86"
+        },
+        "tax": {
+          "page": 1,
+          "bbox": [
+            0.8725,
+            0.3889,
+            0.9118,
+            0.4025
+          ],
+          "value": "0.00"
+        },
+        "shipping": {
+          "page": 1,
+          "bbox": [
+            0.8637,
+            0.4116,
+            0.9118,
+            0.4253
+          ],
+          "value": "75.00"
+        },
+        "total": {
+          "page": 1,
+          "bbox": [
+            0.8409,
+            0.4343,
+            0.9118,
+            0.448
+          ],
+          "value": "2266.86"
+        }
+      }
+    }
+  ],
+  "lineMatches": [
+    {
+      "po": "po:1",
+      "rr": "rr:2",
+      "inv": "inv-1:1"
+    },
+    {
+      "po": "po:2",
+      "rr": "rr:1",
+      "inv": "inv-1:2"
+    }
+  ],
+  "exceptions": [],
+  "planted": []
+}
