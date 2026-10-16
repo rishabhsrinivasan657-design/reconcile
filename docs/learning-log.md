@@ -169,3 +169,36 @@ that maps each criterion to a check.
   needed. Less to build, less to break.
 
 **Remember:** an hour of design saves a day of rework.
+
+---
+
+## M1 · Implementation and testing (2026-10-16)
+
+**In one line:** build in small, provable steps, then check every promise in the checklist.
+
+**What we did:** 17 small commits (tooling → database → generator → docs), a
+draft pull request with CI, then ran the test plan: 18 of 19 criteria fully pass.
+
+**Key ideas**
+- **Small commits.** Each commit does one thing and still works. If something
+  breaks, you can find the exact step that broke it.
+- **Spike first.** Before building the PDF engine, a 20-line throwaway test
+  ("spike") proved the risky part worked (deterministic PDFs that turn into images).
+  Cheap insurance against building on sand.
+- **Tests at different levels.**
+  - *Unit tests* check one piece in isolation (the dollar-impact formula).
+  - *Integration tests* check pieces working together (the real database
+    rejecting an edit to the audit log).
+  - *Manual checks* catch what code can't easily judge (do the invoices look
+    real? do the boxes sit on the text?).
+- **Guardrails as tests.** "Core must not import the database" is enforced by a
+  lint rule, and a test proves the rule works.
+- **CI (Continuous Integration).** GitHub runs the checks on every push, on a
+  clean machine. "Works on my laptop" becomes "works everywhere."
+- **Deviations are written down, not hidden.** Real building always differs from
+  the plan (a font that wouldn't embed, a rate too low). Design §10 records each
+  difference and why.
+- **Report honestly.** One criterion is only partly done (CI red-path demo), and
+  the test plan says so.
+
+**Remember:** "done" means proven against the checklist, not "I think it works."
