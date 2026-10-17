@@ -433,3 +433,27 @@ AI eval, replayed with no key), tagged **v0.4.0**, published the release, and wr
   credible than a perfect-looking table.
 
 **Remember:** the retro's job is to change what you do next time. Write lessons as actions.
+
+---
+
+## M4 · Requirements (2026-10-17)
+
+**In one line:** turn scripts into a running service that people (and programs) can use.
+
+**What we did:** wrote 13 acceptance criteria for the upload API, the background
+worker, the AI fuzzy matcher, and an end-to-end test of the real pipeline.
+
+**Key ideas**
+- **API + worker split.** The API answers fast ("got your file"). Slow work (reading with
+  AI) happens in a background *worker* pulling jobs from a *queue*. Users never wait on the AI.
+- **Idempotency.** Uploading the same file twice, or retrying a job, must not create
+  duplicates. Every job is safe to run again.
+- **Versioned results.** Re-matching creates a new version instead of overwriting, and a
+  human's earlier decision follows the exception forward (by its *fingerprint*).
+- **Prove the scoreboard measures the real thing.** Running the CI subset through the
+  actual API and worker must give the same answers as the eval. Otherwise the eval
+  could be grading a toy.
+- **Give the AI a fair test.** The text matcher already scores 100, so we need harder
+  cases (Q2) before the AI can show value, or show that it adds none.
+
+**Remember:** a feature isn't done when the function works. It's done when the system using it works.
