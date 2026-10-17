@@ -32,6 +32,8 @@ export interface MatchException {
 
 export interface MatchGroup {
   poNumber: string;
+  /** Plain-English notes about assumptions (e.g. a misread PO number was tolerated). */
+  notes: string[];
   documents: { id: string; role: DocRoleInGroup }[];
   lineMatches: LineMatch[];
   exceptions: MatchException[];
@@ -57,4 +59,7 @@ export interface FuzzyCandidate {
  * Scores description-only pairings between two sets of leftover lines (ADR-0003, ADR-0009).
  * Returns candidate pairs; the pipeline picks a one-to-one assignment above the threshold.
  */
-export type FuzzyMatcher = (left: FuzzyLine[], right: FuzzyLine[]) => FuzzyCandidate[];
+export type FuzzyMatcher = (
+  left: FuzzyLine[],
+  right: FuzzyLine[],
+) => FuzzyCandidate[] | Promise<FuzzyCandidate[]>;
