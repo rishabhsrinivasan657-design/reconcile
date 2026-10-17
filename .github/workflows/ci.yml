@@ -59,3 +59,17 @@ jobs:
       - run: pnpm --filter @reconcile/db exec prisma generate
       - run: pnpm --filter @reconcile/db exec prisma migrate deploy
       - run: pnpm test
+
+  evals:
+    name: Evals (CI subset)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Score matching against the committed answer keys (fails on a > 2 point drop)
+        run: pnpm eval --check-baseline
