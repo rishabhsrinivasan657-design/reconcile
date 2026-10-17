@@ -74,7 +74,104 @@ export const ExceptionView = z.object({
   documentIds: z.array(z.string()),
   carriedOverFromId: z.string().nullable(),
   matchRunVersion: z.number(),
+  vendorName: z.string().nullable(),
+  decision: z
+    .object({
+      action: z.enum(['APPROVE', 'DISPUTE', 'WRITE_OFF']),
+      note: z.string(),
+      by: z.string(),
+      at: z.string(),
+    })
+    .nullable()
+    .describe('The latest human decision, if any'),
 });
+
+export const Line = z.object({
+  docId: z.string(),
+  docNumber: z.string().nullable(),
+  lineNo: z.number(),
+  sku: z.string().nullable(),
+  description: z.string(),
+  qty: z.number(),
+  uom: z.string(),
+  unitPrice: z.string().nullable(),
+  lineTotal: z.string().nullable(),
+});
+
+export const ExceptionDetail = ExceptionView.extend({
+  comparison: z
+    .array(
+      z.object({
+        po: Line.nullable(),
+        rr: Line.nullable(),
+        invoice: Line.nullable(),
+        method: z.string().nullable(),
+        reason: z.string().nullable(),
+      }),
+    )
+    .describe('Each involved line next to its partners on the other documents'),
+  documents: z.array(
+    z.object({
+      id: z.string(),
+      type: z.enum(['PO', 'RR', 'INVOICE']).nullable(),
+      docNumber: z.string().nullable(),
+    }),
+  ),
+});
+
+export const Decision = z.object({
+  action: z.enum(['APPROVE', 'DISPUTE', 'WRITE_OFF']),
+  note: z.string().max(2000).describe('Required: why. Saved to the PO history.'),
+});
+
+export const Correction = z.object({
+  fields: z
+    .record(z.string(), z.union([z.string(), z.number()]))
+    .describe('Field path → corrected value, e.g. { "total": "1284.50", "lines.0.qty": 12 }'),
+});
+
+export const CorrectionResult = z.object({
+  version: z.number(),
+  warnings: z.array(z.string()).describe('Math checks that still fail after the correction'),
+  rematching: z.array(z.string()).describe('PO numbers queued for re-matching'),
+});
+
+export const HistoryEntry = z.object({
+  id: z.string(),
+  at: z.string(),
+  action: z.string(),
+  actor: z.object({ type: z.enum(['USER', 'SYSTEM']), name: z.string().nullable() }),
+  entityType: z.string(),
+  entityId: z.string(),
+  summary: z.string().describe('Plain-English description'),
+  note: z.string().nullable(),
+  poNumber: z.string().nullable(),
+});
+
+export const Overview = z.object({
+  moneyAtRisk: z.string(),
+  openProblems: z.number(),
+  informational: z.number(),
+  decidedThisWeek: z.number(),
+  byType: z.array(z.object({ type: ExceptionType, count: z.number(), amount: z.string() })),
+  sets: z.object({
+    total: z.number(),
+    matched: z.number(),
+    waiting: z.number(),
+    needsReview: z.number(),
+  }),
+  documents: z.object({ total: z.number(), needsReview: z.number(), failed: z.number() }),
+  ai: z.object({
+    documentsRead: z.number(),
+    costPerDocumentUsd: z.string().nullable(),
+    medianSecondsPerDocument: z.number().nullable(),
+    slowestSeconds: z.number().nullable(),
+    cachedShare: z.number().describe('Share of AI calls answered from saved answers (0–1)'),
+  }),
+  recent: z.array(HistoryEntry),
+});
+
+export const Me = z.object({ id: z.string(), name: z.string(), email: z.string() });
 
 export const SetSummary = z.object({
   poNumber: z.string(),

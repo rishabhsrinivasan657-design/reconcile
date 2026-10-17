@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createPrismaClient } from '@reconcile/db';
-import { createQueues, loadPipelineEnv, LocalStorage } from '@reconcile/pipeline';
+import { createQueues, loadPipelineEnv, LocalStorage, redisEventBus } from '@reconcile/pipeline';
 import { Redis } from 'ioredis';
 import { buildApp } from './app.ts';
 
@@ -17,6 +17,7 @@ const app = await buildApp({
   db,
   storage: new LocalStorage(path.resolve(env.STORAGE_DIR)),
   queues,
+  events: redisEventBus(redis),
   pingRedis: () => redis.ping(),
 });
 
