@@ -15,7 +15,7 @@ export type MatchConfig = z.infer<typeof MatchConfig>;
 
 export const DEFAULT_MATCH_CONFIG: MatchConfig = {
   qtyTolerance: { abs: 0, pct: 0 },
-  priceTolerance: { abs: '0.01', pct: '0.005' },
+  priceTolerance: { abs: '0.01', pct: '0.2' }, // DEMO ONLY: deliberately broken
   duplicateWindowDays: 45,
   fuzzyThreshold: 0.75,
 };
