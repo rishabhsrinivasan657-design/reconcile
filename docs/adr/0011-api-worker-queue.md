@@ -1,6 +1,6 @@
 # ADR-0011: An API for quick answers, a worker for slow work, and a queue between them
 
-- **Status:** Proposed
+- **Status:** Accepted (2026-10-17)
 - **Date:** 2026-10-17
 - **Requirements:** FR-01, FR-13, NFR-03 · M4 AC-1, AC-4, AC-5, AC-7
 

@@ -1,6 +1,6 @@
 # M4: Upload, background processing, and AI matching. Design
 
-- **Status:** Draft, waiting for your approval
+- **Status:** Approved (2026-10-17)
 - **Builds:** AC-1 … AC-16 from [`requirements.md`](requirements.md)
 - **New decision record:** [ADR-0011](../../adr/0011-api-worker-queue.md) (how the upload service and the background helper work together)
 
