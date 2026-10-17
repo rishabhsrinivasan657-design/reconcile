@@ -218,7 +218,14 @@ export class LlmClient {
   }
 
   async generateStructured<T>(req: StructuredRequest<T>): Promise<StructuredResult<T>> {
-    const key = cacheKey([...req.cacheKeyParts, req.promptVersion, this.provider, this.model]);
+    // Generation settings change answers, so they're part of the key too.
+    const key = cacheKey([
+      ...req.cacheKeyParts,
+      req.promptVersion,
+      this.provider,
+      this.model,
+      `effort=${this.opts.env.LLM_REASONING_EFFORT}`,
+    ]);
     const base = {
       provider: this.provider,
       model: this.model,

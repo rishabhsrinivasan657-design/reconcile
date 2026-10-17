@@ -17,7 +17,13 @@ const F = <T extends z.ZodType>(value: T) =>
   });
 
 export const ExtractionAnswer = z.object({
-  docType: z.enum(['PO', 'RR', 'INVOICE']).describe('PURCHASE ORDER, RECEIVING REPORT, or INVOICE'),
+  // Models sometimes wrap docType like the other fields ({ v: 'INVOICE', ... }); accept both.
+  docType: z
+    .preprocess(
+      (x) => (x && typeof x === 'object' && 'v' in x ? (x as { v: unknown }).v : x),
+      z.enum(['PO', 'RR', 'INVOICE']),
+    )
+    .describe('PURCHASE ORDER, RECEIVING REPORT, or INVOICE'),
   vendorName: F(z.string()),
   docNumber: F(z.string()).describe(
     'this document’s own number (PO number, receipt number, or invoice number)',

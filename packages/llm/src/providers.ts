@@ -23,6 +23,8 @@ export interface ModelOptions {
   baseUrl?: string;
 }
 
+const GEMINI_THINKING = { minimal: 'LOW', low: 'LOW', medium: 'MEDIUM', high: 'HIGH' } as const;
+
 function requireKey(value: string | undefined, name: string): string {
   if (!value)
     throw new Error(`${name} is not set. Add it to your .env (never paste keys in chat).`);
@@ -57,6 +59,8 @@ export function createChatModel(o: ModelOptions): BaseChatModel {
         // JSON output without a response_schema (see PROVIDER_LIMITS.gemini).
         json: true,
         temperature: 0,
+        // Hidden "thinking" tokens are billed as output; extraction needs little of it.
+        thinkingConfig: { thinkingLevel: GEMINI_THINKING[o.env.LLM_REASONING_EFFORT] },
         ...(o.baseUrl ? { baseUrl: o.baseUrl } : {}),
       });
     case 'anthropic':
