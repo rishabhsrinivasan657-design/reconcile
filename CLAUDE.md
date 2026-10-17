@@ -186,7 +186,9 @@ pnpm generate --seed 42 --sets 100 --out evals/golden
 pnpm generate:ci                   # rebuild committed evals/golden-ci (20 sets)
 pnpm lint | typecheck | test | format
 pnpm docs:diagrams | docs:check
-pnpm eval [--check-baseline | --update-baseline]
+pnpm eval [--stage match|extract|e2e|all] [--check-baseline | --update-baseline]
+pnpm eval:record                   # live LLM run on the CI subset (writes evals/cache)
+pnpm extract <file.pdf|png>        # read one document with the LLM
 # later: pnpm dev, pnpm test:e2e
 ```
 

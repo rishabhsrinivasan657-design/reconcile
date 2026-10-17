@@ -5,10 +5,10 @@ An AI **3-way match** agent for distributors and CPG brands. It reconciles
 invoices**, then flags short-ships, price mismatches, and other exceptions for
 a human to approve, dispute, or write off.
 
-> **Status: M2, matching engine and evals.** The repo, database, a generator
-> for realistic labeled test documents, the matching engine, and the eval
-> scoreboard are in place. Reading documents with an LLM, the UI, and the MCP
-> server come in later milestones (see [the milestone list](docs/milestones/README.md)).
+> **Status: M3, the AI reads documents.** The generator, the matching engine,
+> LLM extraction (Gemini free tier by default, swappable), and a three-stage
+> eval scoreboard are in place. The worker/API, UI, and MCP server come in later
+> milestones (see [the milestone list](docs/milestones/README.md)).
 
 Everything runs locally for **$0**: Docker Compose (Postgres, Redis),
 TypeScript end to end, and the Gemini free tier later on.
@@ -156,6 +156,48 @@ description-based pairing and its reason.
 values), so this measures the matching rules alone. Scores will drop once M3
 reads real PDFs with an LLM, and that drop is exactly what the next milestone measures.
 
+## Reading documents with an LLM
+
+```bash
+# one-time: get a free Gemini key at aistudio.google.com and add GEMINI_API_KEY=… to .env
+pnpm extract evals/golden-ci/S0010/inv-1.pdf
+```
+
+```
+inv-1.pdf · 1 page(s) · gemini/gemini-3.5-flash-lite
+  INVOICE  INV-967018 (conf 1.00)  vendor: Northfield Frozen Foods  date: 2026-03-26  PO: HP-PO-104157
+  #  SKU        description                                   qty    price       total  min conf
+  1  NR-19263   Northfield Steak Fajita Frozen Burrito, 6 oz   45  $243.24  $10,945.80  1.00
+  …
+  ✓ no review needed
+  tokens 1575 in / 3333 out · $0.00881 · 7193 ms
+```
+
+- **Providers:** `LLM_PROVIDER=gemini|groq|openai|anthropic|ollama` via LangChain.js. Our own
+  layer adds a response cache, rate and token limits, retries, a hard spend cap for paid
+  providers, and a call log ([ADR-0010](docs/adr/0010-langchain-provider-switching.md)).
+- **Trust, but verify:** every field has a confidence and a location. Math checks (qty × price,
+  line sum, totals) lower confidence on failure. When the lines don't add up to the printed
+  subtotal, extraction asks once more with the evidence (self-check). Anything doubtful is
+  flagged for review.
+
+### Eval stages
+
+| Stage | What it measures | CI subset, `gemini-3.5-flash-lite` |
+|---|---|---|
+| `match` | Matching on perfect inputs | 100 on every metric |
+| `extract` | Reading accuracy (fields vs the answer key) | **F1 99.9** (PDF 100.0, scans 99.7) |
+| `e2e` | Reading → matching → exceptions | link F1 97.4 · exception P/R **84.2 / 94.1** |
+
+```bash
+pnpm eval --stage all            # replays recorded answers in evals/cache: no key, no cost
+pnpm eval:record                 # live: records new answers (cached, rate-limited, capped)
+```
+
+The gap between `match` and `e2e` is the cost of reading errors. In M3 it comes almost
+entirely from one confidently misread PO number (`107093` → `10793`), which splits a set into
+false "missing document" alarms (backlog B-17).
+
 ## Repository layout
 
 ```
@@ -163,6 +205,8 @@ packages/core        Zod schemas (answer key, money, enums), env loader
 packages/db          Prisma schema + migrations, append-only audit log, seed
 packages/generator   Synthetic PO / RR / invoice generator
 packages/core        + matching engine: grouping, line pairing, FR-09 exceptions
+packages/llm         LLM client: LangChain providers + cache, limits, budget, call log
+packages/extraction  PDF/scan → typed document with confidence, checks, review flag
 evals/               Eval harness (pnpm eval), baseline.json, committed 20-set CI subset
 docs/                PRD, architecture, ADRs, milestone docs, learning log
 ```
@@ -176,7 +220,8 @@ docs/                PRD, architecture, ADRs, milestone docs, learning log
 | `pnpm db:migrate` / `db:seed` / `db:reset` | Database |
 | `pnpm docs:diagrams` | Re-render Mermaid diagrams to PNG after editing them |
 | `pnpm docs:check` | Check links and diagram freshness (runs in CI) |
-| `pnpm eval` | Score matching against the answer keys (see above) |
+| `pnpm eval` | Score match / extract / e2e against the answer keys (see above) |
+| `pnpm extract <file>` | Read one document with the LLM |
 
 ## How this project is built
 
