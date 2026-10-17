@@ -1,5 +1,10 @@
 import { Decimal, lineKey, PlantedErrorType, toCents, type PlantedError } from '@reconcile/core';
-import { ABBREVIATIONS } from './catalog/data.ts';
+import {
+  ABBREVIATIONS,
+  VENDOR_PRODUCT_NAMES,
+  VENDOR_VARIANT_WORDS,
+  VENDORS,
+} from './catalog/data.ts';
 import type { Catalog, CatalogItem, VendorProfile } from './catalog/index.ts';
 import { LINE_ERRORS, NEEDS_COMPLETE_SET, type Rates } from './config.ts';
 import { addDays, EPOCH } from './dates.ts';
@@ -62,6 +67,29 @@ export function vendorWordOrder(description: string, brand: string): string {
   if (rest.length < 2) return description.toUpperCase();
   const reordered = [...rest.slice(1), rest[0]].join(' ');
   return `${brand} ${reordered}${size ? `, ${size}` : ''}`;
+}
+
+/**
+ * "Sunpeak Crunchy Almond Butter, 12 oz" -> "Chunky Nut Spread, Almond, 12 oz".
+ * Returns undefined when the product has no vendor names on file.
+ */
+export function vendorProductName(
+  rng: Rng,
+  description: string,
+  vendorCode: string,
+): string | undefined {
+  const spec = VENDORS.find((v) => v.code === vendorCode);
+  if (!spec) return undefined;
+  const [head = '', size] = description.split(/, (?=[^,]*$)/);
+  const product = spec.products.find((p) => head.endsWith(` ${p.name}`));
+  const names = product ? VENDOR_PRODUCT_NAMES[product.name] : undefined;
+  if (!product || !names) return undefined;
+  let variant = head.slice(spec.brand.length + 1, head.length - product.name.length - 1).trim();
+  for (const [from, to] of Object.entries(VENDOR_VARIANT_WORDS)) {
+    variant = variant.replace(new RegExp(`\\b${from}\\b`), to);
+  }
+  // A vendor's own invoice rarely repeats its brand on every line; variant first, as many ERPs print.
+  return `${variant ? `${variant} ` : ''}${rng.pick(names)}${size ? `, ${size}` : ''}`;
 }
 
 function chooseErrors(rng: Rng, rates: Rates): PlantedErrorType[] {
@@ -195,6 +223,16 @@ export function buildSet(catalog: Catalog, rates: Rates, seed: number, index: nu
           reworded,
           ...(w.invDescription !== w.item.description ? { primaryReworded: w.invDescription } : {}),
         });
+        break;
+      }
+      case 'vendor_name': {
+        // M4 AC-15: the vendor's own wording for the product, and no SKU. Size and unit stay.
+        const renamed = vendorProductName(plantRng, w.item.description, vendor.code);
+        if (renamed) {
+          w.invSkuOmitted = true;
+          w.invDescription = renamed;
+          Object.assign(details, { original: w.item.description, vendorName: renamed });
+        }
         break;
       }
       case 'price_noise': {

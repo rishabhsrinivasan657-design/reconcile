@@ -1,0 +1,22 @@
+{
+  "keyParts": ["be902246b53001973237ae3f8e26102f90f004255a542754bde3d4992c9249ec"],
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "promptVersion": "fuzzy.v1",
+  "data": {
+    "pairs": [
+      {
+        "a": 5,
+        "b": 5,
+        "confidence": 0.85,
+        "reason": "Mesa Norte Mild Salsa matches Gentle Tomato Dip in size (16 oz) and quantity (49 CS), representing a supplier naming variation."
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 321,
+    "outputTokens": 50
+  },
+  "latencyMs": 556,
+  "costUsd": 0.0002213
+}

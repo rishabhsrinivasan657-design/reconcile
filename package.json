@@ -26,12 +26,16 @@
     "generate:samples": "tsx packages/generator/src/samples.ts",
     "eval": "tsx evals/src/cli.ts",
     "extract": "tsx packages/extraction/src/cli.ts",
-    "eval:record": "tsx evals/src/cli.ts --stage all --live"
+    "eval:record": "tsx evals/src/cli.ts --stage all --live",
+    "dev": "concurrently -k -n api,worker -c blue,magenta \"pnpm --filter @reconcile/api dev\" \"pnpm --filter @reconcile/worker dev\"",
+    "dev:api": "pnpm --filter @reconcile/api dev",
+    "dev:worker": "pnpm --filter @reconcile/worker dev"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@mermaid-js/mermaid-cli": "^11.17.0",
     "@types/node": "^24.19.2",
+    "concurrently": "^10.0.6",
     "eslint": "^10.13.0",
     "globals": "^17.13.0",
     "prettier": "^3.9.10",

@@ -10,17 +10,18 @@ import type { FuzzyMatcher, LineMatch, MatchException, MatchGroup, MatchResult }
 export * from './config.ts';
 export * from './types.ts';
 export { descriptionSimilarity, textSimilarityMatcher, tokenize } from './fuzzy.ts';
-export { normalizeSku, normalizePo } from './normalize.ts';
+export { normalizeSku, normalizePo, normalizeVendor } from './normalize.ts';
+export { withinOneEdit } from './group.ts';
 export { usd } from './exceptions.ts';
 
 /**
  * Group documents by PO, detect duplicates, pair lines, and raise FR-09 exceptions with
  * explanations (M2). Pure and deterministic: no I/O (AC-8).
  */
-export function matchDocuments(
+export async function matchDocuments(
   docs: readonly ExtractedDocument[],
   opts: { config?: Partial<MatchConfig>; fuzzy?: FuzzyMatcher } = {},
-): MatchResult {
+): Promise<MatchResult> {
   const cfg = resolveMatchConfig(opts.config);
   const fuzzy = opts.fuzzy ?? textSimilarityMatcher;
   const { groups, unassigned } = groupByPo(docs);
@@ -29,7 +30,8 @@ export function matchDocuments(
     cfg.duplicateWindowDays,
   );
 
-  const out: MatchGroup[] = groups.map((g) => {
+  const out: MatchGroup[] = [];
+  for (const g of groups) {
     const po = g.docs.find((d) => d.type === 'PO');
     const rr = g.docs.find((d) => d.type === 'RR');
     const invoices = g.docs.filter((d) => d.type === 'INVOICE');
@@ -47,9 +49,9 @@ export function matchDocuments(
     )[];
     // Lines are linked whenever two documents exist, so a clerk can see them side by side.
     const links = po
-      ? pairLines(po, rr, inv, fuzzy, cfg.fuzzyThreshold)
+      ? await pairLines(po, rr, inv, fuzzy, cfg.fuzzyThreshold)
       : rr && inv
-        ? pairWithoutPo(rr, inv, fuzzy, cfg.fuzzyThreshold)
+        ? await pairWithoutPo(rr, inv, fuzzy, cfg.fuzzyThreshold)
         : [];
     const present = [po, rr, inv].filter((d) => d !== undefined);
     if (present.length >= 2) {
@@ -72,8 +74,9 @@ export function matchDocuments(
       }
     }
 
-    return {
+    out.push({
       poNumber: g.poNumber,
+      notes: g.notes,
       documents: g.docs.map((d) => ({
         id: d.id,
         role:
@@ -87,8 +90,8 @@ export function matchDocuments(
       })),
       lineMatches,
       exceptions,
-    };
-  });
+    });
+  }
 
   return { groups: out, unassigned };
 }

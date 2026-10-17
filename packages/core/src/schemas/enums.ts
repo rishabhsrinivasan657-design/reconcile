@@ -39,5 +39,7 @@ export const PlantedErrorType = z.enum([
   'duplicate_invoice',
   // Appended last so earlier types keep their random streams (generator 0.3.0, M2 AC-16).
   'price_noise',
+  // Vendor's own product wording, no SKU (generator 0.5.0, M4 AC-15).
+  'vendor_name',
 ]);
 export type PlantedErrorType = z.infer<typeof PlantedErrorType>;

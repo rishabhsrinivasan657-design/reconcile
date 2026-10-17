@@ -267,4 +267,17 @@ describe('JSON-mode parsing (Gemini, Groq)', () => {
       total: '1.00',
     });
   });
+
+  it('keeps the complete part of an answer that stopped early', () => {
+    expect(
+      parseJsonText(
+        '{"a":{"v":"x","c":1},"lines":[{"q":1},{"q":2}],"shipping":{"v":"$0.00"},"total":{',
+      ),
+    ).toEqual({ a: { v: 'x', c: 1 }, lines: [{ q: 1 }, { q: 2 }], shipping: { v: '$0.00' } });
+    expect(parseJsonText('{"lines":[{"q":1},{"q":')).toEqual({ lines: [{ q: 1 }] });
+    expect(parseJsonText('{"s":"a, b {not real","n":1,"x":')).toEqual({
+      s: 'a, b {not real',
+      n: 1,
+    });
+  });
 });

@@ -1,0 +1,22 @@
+{
+  "keyParts": ["fc5035b06ff24e6bf84c279d09d806497802ad351d233af9044e1e9bb3eb218d"],
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "promptVersion": "fuzzy.v1",
+  "data": {
+    "pairs": [
+      {
+        "a": 10,
+        "b": 10,
+        "confidence": 1,
+        "reason": "Exact match on product name (with minor typo 'Rceycled'), unit, and quantity."
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 337,
+    "outputTokens": 41
+  },
+  "latencyMs": 740,
+  "costUsd": 0.0002036
+}

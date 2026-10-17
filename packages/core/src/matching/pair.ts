@@ -17,12 +17,12 @@ interface SidePair {
 }
 
 /** Pair PO lines with lines on another document: exact SKU first, then fuzzy (M2 AC-3). */
-function pairWith(
+async function pairWith(
   poLines: readonly ExtractedLine[],
   otherLines: readonly ExtractedLine[],
   fuzzy: FuzzyMatcher,
   threshold: number,
-): Map<number, SidePair> {
+): Promise<Map<number, SidePair>> {
   const result = new Map<number, SidePair>();
   const used = new Set<number>();
 
@@ -43,7 +43,7 @@ function pairWith(
   // Two lines that both carry SKUs and still didn't match are different products.
   const skuConflict = (a: ExtractedLine, b: ExtractedLine) =>
     Boolean(a.sku && b.sku && normalizeSku(a.sku) !== normalizeSku(b.sku));
-  const candidates = fuzzy(leftPo, leftOther)
+  const candidates = (await fuzzy(leftPo, leftOther))
     .filter((c) => c.score >= threshold)
     .filter((c) => {
       const a = leftPo.find((l) => l.lineNo === c.left);
@@ -64,13 +64,13 @@ function pairWith(
  * Link the lines of an incomplete set that has no PO: the RR against the invoice. Used so line
  * matches are still shown; exceptions for incomplete sets are only MISSING_DOCUMENT.
  */
-export function pairWithoutPo(
+export async function pairWithoutPo(
   rr: ExtractedDocument,
   inv: ExtractedDocument,
   fuzzy: FuzzyMatcher,
   threshold: number,
-): PairLink[] {
-  const pairs = pairWith(rr.lines, inv.lines, fuzzy, threshold);
+): Promise<PairLink[]> {
+  const pairs = await pairWith(rr.lines, inv.lines, fuzzy, threshold);
   const usedInv = new Set([...pairs.values()].map((s) => s.other.lineNo));
   return [
     ...rr.lines.map((l): PairLink => {
@@ -89,15 +89,19 @@ export function pairWithoutPo(
 }
 
 /** Link the lines of a PO, its RR, and its primary invoice. Unpaired lines become one-sided links. */
-export function pairLines(
+export async function pairLines(
   po: ExtractedDocument,
   rr: ExtractedDocument | undefined,
   inv: ExtractedDocument | undefined,
   fuzzy: FuzzyMatcher,
   threshold: number,
-): PairLink[] {
-  const toRr = rr ? pairWith(po.lines, rr.lines, fuzzy, threshold) : new Map<number, SidePair>();
-  const toInv = inv ? pairWith(po.lines, inv.lines, fuzzy, threshold) : new Map<number, SidePair>();
+): Promise<PairLink[]> {
+  const toRr = rr
+    ? await pairWith(po.lines, rr.lines, fuzzy, threshold)
+    : new Map<number, SidePair>();
+  const toInv = inv
+    ? await pairWith(po.lines, inv.lines, fuzzy, threshold)
+    : new Map<number, SidePair>();
   const links: PairLink[] = [];
 
   for (const p of po.lines) {

@@ -5,10 +5,10 @@ An AI **3-way match** agent for distributors and CPG brands. It reconciles
 invoices**, then flags short-ships, price mismatches, and other exceptions for
 a human to approve, dispute, or write off.
 
-> **Status: M3, the AI reads documents.** The generator, the matching engine,
-> LLM extraction (Gemini free tier by default, swappable), and a three-stage
-> eval scoreboard are in place. The worker/API, UI, and MCP server come in later
-> milestones (see [the milestone list](docs/milestones/README.md)).
+> **Status: M4, a running backend.** Upload a document and Reconcile reads it with
+> AI, files it under its PO, matches the set, and serves the results through an API,
+> all in the background. The website (M5) and the AI-assistant connector (M6)
+> come next (see [the milestone list](docs/milestones/README.md)).
 
 Everything runs locally for **$0**: Docker Compose (Postgres, Redis),
 TypeScript end to end, and the Gemini free tier later on.
@@ -156,6 +156,38 @@ description-based pairing and its reason.
 values), so this measures the matching rules alone. Scores will drop once M3
 reads real PDFs with an LLM, and that drop is exactly what the next milestone measures.
 
+## Running Reconcile as a service
+
+```bash
+docker compose up -d && pnpm db:migrate && pnpm db:seed
+pnpm dev                                   # starts the API (port 3001) and the background worker
+curl -F file=@evals/golden-ci/S0010/po.pdf localhost:3001/documents
+curl -F file=@evals/golden-ci/S0010/rr.pdf localhost:3001/documents
+curl -F file=@evals/golden-ci/S0010/inv-1.pdf localhost:3001/documents
+curl localhost:3001/sets/HP-PO-104157     # a few seconds later: matched, with its problems explained
+open http://localhost:3001/docs            # the live manual: every address, with a "try it" button
+```
+
+To try it **without an API key or quota**, add `LLM_MODE=replay` and
+`LLM_ANSWER_CACHE_DIR=evals/cache` to `.env`. The worker then uses the recorded AI
+answers for the test documents.
+
+**How it works:** the API saves your file and adds a "read this" job to a to-do list
+(a queue in Redis). The worker picks it up, reads the document with the AI, files it
+under its PO, and matches the PO once it has its documents. Some details:
+- **Same file twice?** Recognized by its fingerprint and not processed again.
+- **Missing a document?** Reconcile waits 7 days before saying so, because documents often arrive days apart.
+- **Unsure reading, or a PO number that looks misread?** The PO is still matched but labeled **provisional, needs review**, with a note.
+- **Re-matching** creates a new version, and a decision on a problem carries over to the same problem.
+
+| Address | What you get |
+|---|---|
+| `POST /documents` | Upload a PDF, PNG, or JPEG (form field `file`, max 10 MB) |
+| `GET /documents`, `/documents/:id`, `/documents/:id/file` | Documents, what the AI read and how sure it was, the original file |
+| `GET /sets`, `/sets/:poNumber` | Each PO's status, line matches (with the AI's reasons), problems, notes |
+| `GET /exceptions`, `/exceptions/:id` | Current problems, filterable by type, status, PO |
+| `GET /health`, `/docs` | Health check, live manual |
+
 ## Reading documents with an LLM
 
 ```bash
@@ -185,18 +217,33 @@ inv-1.pdf · 1 page(s) · gemini/gemini-3.5-flash-lite
 
 | Stage | What it measures | CI subset, `gemini-3.5-flash-lite` |
 |---|---|---|
-| `match` | Matching on perfect inputs | 100 on every metric |
-| `extract` | Reading accuracy (fields vs the answer key) | **F1 99.9** (PDF 100.0, scans 99.7) |
-| `e2e` | Reading → matching → exceptions | link F1 97.4 · exception P/R **84.2 / 94.1** |
+| `match` | Matching on perfect inputs (hybrid line pairing) | 100 on every metric |
+| `extract` | Reading accuracy (fields vs the answer key) | **F1 99.8** (PDF 99.9, scans 99.5) |
+| `e2e` | Reading → matching → exceptions | **100** on every metric |
 
 ```bash
 pnpm eval --stage all            # replays recorded answers in evals/cache: no key, no cost
 pnpm eval:record                 # live: records new answers (cached, rate-limited, capped)
 ```
 
-The gap between `match` and `e2e` is the cost of reading errors. In M3 it comes almost
-entirely from one confidently misread PO number (`107093` → `10793`), which splits a set into
-false "missing document" alarms (backlog B-17).
+In M3 the gap between `match` and `e2e` came from one confidently misread PO number. M4
+groups a PO number that's one character off with the same vendor's PO, and labels it for
+review, which closed the gap.
+
+### Does the AI matcher earn its place?
+
+Some invoices describe products in the vendor's own words ("Chunky Nut Spread, Almond, 12 oz"
+for "Sunpeak Crunchy Almond Butter, 12 oz"), with no SKU. `pnpm eval --fuzzy text|llm|hybrid`
+compares three ways of pairing such lines:
+
+| Pairing | CI subset (exception precision) | 200 stress sets | AI calls |
+|---|---|---|---|
+| `text` (word similarity) | 89.5 | 96.8 | 0 |
+| `llm` (AI only) | 100 | not run (daily quota) | 3 on CI |
+| **`hybrid`** (text first, AI for the rest) | **100** | **98.3** | 1 on CI, 2 on stress |
+
+Hybrid is the default: the AI only sees the lines the word matcher couldn't pair
+confidently, and it explains every pair it makes.
 
 ## Repository layout
 
@@ -206,6 +253,9 @@ packages/db          Prisma schema + migrations, append-only audit log, seed
 packages/generator   Synthetic PO / RR / invoice generator
 packages/core        + matching engine: grouping, line pairing, FR-09 exceptions
 packages/llm         LLM client: LangChain providers + cache, limits, budget, call log
+packages/pipeline    Shared by API + worker: storage, upload, read a document, match a PO, history log
+apps/api             The upload/results service (Fastify) with a live manual at /docs
+apps/worker          The background helper: read and match jobs (BullMQ on Redis)
 packages/extraction  PDF/scan → typed document with confidence, checks, review flag
 evals/               Eval harness (pnpm eval), baseline.json, committed 20-set CI subset
 docs/                PRD, architecture, ADRs, milestone docs, learning log
@@ -222,6 +272,7 @@ docs/                PRD, architecture, ADRs, milestone docs, learning log
 | `pnpm docs:check` | Check links and diagram freshness (runs in CI) |
 | `pnpm eval` | Score match / extract / e2e against the answer keys (see above) |
 | `pnpm extract <file>` | Read one document with the LLM |
+| `pnpm dev` | Start the API and the worker together |
 
 ## How this project is built
 

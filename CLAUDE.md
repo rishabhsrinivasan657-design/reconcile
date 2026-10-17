@@ -189,7 +189,8 @@ pnpm docs:diagrams | docs:check
 pnpm eval [--stage match|extract|e2e|all] [--check-baseline | --update-baseline]
 pnpm eval:record                   # live LLM run on the CI subset (writes evals/cache)
 pnpm extract <file.pdf|png>        # read one document with the LLM
-# later: pnpm dev, pnpm test:e2e
+pnpm dev                           # API (port 3001) + worker; manual at /docs
+# later: pnpm test:e2e
 ```
 
 Toolchain pins: TypeScript 6.0 (typescript-eslint doesn't support 7), Prisma 7.10 (npm
@@ -240,6 +241,18 @@ test → PR → patch tag) and are recorded in `CHANGELOG.md`. That is the
   Requirements gate. It never gets silently absorbed.
 - Keep docs short: a page per artifact is usually enough. Use templates in
   `docs/templates/`.
+
+## Writing style (all docs and messages)
+
+The owner is building a project like this for the first time. Everything written
+for people (milestone docs, README, ADRs, learning log, PR descriptions, chat)
+uses **plain, everyday language**:
+
+- Say what something does and why it matters *before* any technical term.
+- Define a technical word in a few plain words the first time it appears.
+- Short sentences. Examples and analogies help. Avoid acronyms where a word works.
+- Keep IDs like AC-1 or FR-09 (they link docs together), but always describe them in words.
+- Concise, but don't drop information. Code comments can stay technical.
 
 ## Working agreement with Claude
 
