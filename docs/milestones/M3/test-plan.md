@@ -6,9 +6,10 @@ Written in the Design phase and executed in the Testing phase.
 
 | AC | How it's verified | Type | Result |
 |---|---|---|---|
-| AC-1 Providers | Provider factory returns the right LangChain class per `LLM_PROVIDER`. Each provider runs one structured call against recorded/mocked HTTP. Gemini runs live during recording. | unit + live | ⬜ |
+| AC-1 Providers | Provider factory returns the right LangChain class per `LLM_PROVIDER`. Each provider runs one structured call against recorded/mocked HTTP. OpenAI runs live during recording. | unit + live | ⬜ |
 | AC-2 Limits | Fake clock: an 11th request in a minute waits at RPM 10; a daily budget hit fails with the resume message. 429 + `Retry-After: 3` → waits 3 s; 5 failures → error; every attempt logged. | unit | ⬜ |
 | AC-3 Cache | Second extraction of the same file: 0 provider calls (spy). Different prompt version/model → miss. A prompt text change without a version bump fails the lock test. | unit | ⬜ |
+| AC-4b Budget guard | Ledger at $3.99 + a $0.02 call → refused before sending; cached calls still served | unit | ⬜ |
 | AC-4 Call log | `pnpm extract` with a DB writes `LlmCall` rows (incl. cache hits). Memory sink fills the results file. No key-like strings in logs or results. | integration + unit | ⬜ |
 | AC-5 Read documents | Live: every CI-subset document (PDF multi-page and PNG) extracts and validates | live (recording) | ⬜ |
 | AC-6 Validate | Invalid answer → one repair retry → success; twice invalid → `FAILED`. Each math check fires on a crafted bad answer. | unit | ⬜ |
@@ -31,7 +32,7 @@ Written in the Design phase and executed in the Testing phase.
 ## Manual demo steps
 1. `pnpm extract evals/golden-ci/S0010/inv-1.pdf`
 2. `pnpm eval --stage all --replay`
-3. Compare the `match` and `e2e` columns, then the Flash-Lite vs. Flash table.
+3. Compare the `match` and `e2e` columns, then the gpt-6-luna vs. gpt-5-mini table.
 
 ## Results summary
 _Filled in during the Testing phase._

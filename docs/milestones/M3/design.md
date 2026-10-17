@@ -63,8 +63,8 @@ const { data, usage, latencyMs, cacheHit, costUsd } = await llm.generateStructur
 
 | `LLM_PROVIDER` | LangChain class | Key / URL env | Status in M3 |
 |---|---|---|---|
-| `gemini` (default) | `ChatGoogleGenerativeAI` (`@langchain/google-genai`) | `GEMINI_API_KEY` | Live (free tier) |
-| `openai` | `ChatOpenAI` (`@langchain/openai`) | `OPENAI_API_KEY` | Mocked HTTP tests |
+| `openai` (default) | `ChatOpenAI` (`@langchain/openai`) | `OPENAI_API_KEY` | Live (owner's $5 credit, capped) |
+| `gemini` | `ChatGoogleGenerativeAI` (`@langchain/google-genai`) | `GEMINI_API_KEY` | Mocked; live any time with a free key |
 | `anthropic` | `ChatAnthropic` (`@langchain/anthropic`) | `ANTHROPIC_API_KEY` | Mocked HTTP tests |
 | `ollama` | `ChatOllama` (`@langchain/ollama`) | `OLLAMA_BASE_URL` | Mocked; live later as fallback |
 
@@ -76,20 +76,25 @@ const { data, usage, latencyMs, cacheHit, costUsd } = await llm.generateStructur
 - **LangChain's built-in retries are off** (`maxRetries: 0`). Our retry layer owns
   that, so the limiter and the log see every attempt.
 
-### 2.3 Default model and limits
+### 2.3 Default model, budget, and limits
 
-The models were checked against Google's pricing page on 2026-10-17. The
-free-tier models include Gemini 3.8 Flash, 3.6 Flash, and 3.5 Flash-Lite.
+Prices were checked on OpenAI's pricing page on 2026-10-17.
 
-- **Default:** `LLM_MODEL_EXTRACT=gemini-3.5-flash-lite`. It's the cheapest at list
-  price ($0.30 / $2.50 per 1M input/output tokens), and Flash-Lite models usually
-  get the largest free quota.
-- **Experiment:** the eval records `gemini-3.8-flash` ($0.75 / $3.75) on the CI
-  subset too and reports both side by side. If Flash-Lite misses the accuracy
-  target, the default becomes Flash, and that's decided with numbers.
-- **Free-tier limits** are only published inside AI Studio, so they're settings:
-  `LLM_RPM` (default 10) and `LLM_RPD` (default 250). You read your real limits
-  in AI Studio and adjust.
+- **Default:** `LLM_PROVIDER=openai`, `LLM_MODEL_EXTRACT=gpt-6-luna` ($0.10 / $0.50 per
+  1M input/output tokens). OpenAI's model page recommends it for cost-sensitive,
+  high-volume work, and says all its latest models accept images.
+- **Experiment:** `gpt-5-mini` ($0.25 / $2.00) is recorded on the CI subset too and
+  reported side by side. The default is then decided with numbers. Gemini (free)
+  can be added to the comparison later with a free key.
+- **Cost estimate:** about 2k input and 2.5k output tokens per page gives
+  **~$0.0015 per document with Luna**. That's ~$0.10 to record the CI subset, and
+  ~$0.30 for the comparison model. The whole milestone should use well under $1
+  of your $5.
+- **Budget guard (AC-4b):** `LLM_BUDGET_USD=4.00`. The spend ledger lives in the cache
+  folder, every live call adds its estimated cost, and a call that would cross the
+  cap is refused before it's sent.
+- **Rate limits:** `LLM_RPM` (default 30) and `LLM_RPD` (default 1000) are plenty
+  for OpenAI's paid tier 1. Tune them if you ever hit 429s.
 
 ### 2.4 Limiter and retry (AC-2)
 
@@ -115,8 +120,8 @@ free-tier models include Gemini 3.8 Flash, 3.6 Flash, and 3.5 Flash-Lite.
 
 ### 2.6 Cost and call log (AC-4)
 
-- **Price table** (`prices.ts`): list prices per 1M tokens for the Gemini models,
-  with the date checked. Unknown models log `costUsd = null` ("price unknown")
+- **Price table** (`prices.ts`): list prices per 1M tokens for the OpenAI and Gemini
+  models we use, with the date checked. The budget guard depends on it. Unknown models log `costUsd = null` ("price unknown")
   rather than a guess.
 - **Sinks:** `PrismaSink` writes `LlmCall` rows (CLI, when `DATABASE_URL` is set).
   `MemorySink` collects calls for the eval results file (CI has no DB). Cache hits
@@ -241,13 +246,13 @@ re-recorded, and if it drops below 100, the reason goes in the commit message.
 Implementation runs fully on mocks until the live recording step. At that point
 I'll pause and ask you to do three things:
 
-1. Open aistudio.google.com, then **Get API key**, then **Create API key**.
-2. Add `GEMINI_API_KEY=…` to your own `.env`. **Never paste it in chat.**
-3. Note your free-tier limits shown in AI Studio and set `LLM_RPM` / `LLM_RPD` if
-   they differ from the defaults.
+1. At platform.openai.com → **API keys**, **create a new key**. The one pasted in
+   chat earlier must be deleted, since it's exposed.
+2. Add `OPENAI_API_KEY=…` to your own `.env` with a text editor. **Never paste it in chat.**
+3. Optional: in the OpenAI dashboard, set a project spending limit too, as a second safety net.
 
 Then I run `pnpm eval:record`, which takes about 60 calls (one per CI-subset
-document) per model.
+document) per model, costing roughly $0.10 with Luna.
 
 ## 7. Planned commits (`feat/m3-llm-extraction`)
 
@@ -262,7 +267,7 @@ document) per model.
 9. `feat(extraction): pnpm extract CLI`
 10. `feat(evals): extract stage metrics (fields, locations, review, cost)`
 11. `feat(evals): e2e stage, replay mode, per-stage baselines`
-12. `chore(evals): record CI subset (gemini-3.5-flash-lite, gemini-3.8-flash)` *(needs your key)*
+12. `chore(evals): record CI subset (gpt-6-luna, gpt-5-mini)` *(needs your key)*
 13. `ci: replay all stages`
 14. `docs: README extraction and evals, .env.example`
 
@@ -270,7 +275,9 @@ document) per model.
 
 | Risk | Mitigation |
 |---|---|
-| Free-tier quota runs out mid-recording | Daily budget counter. The cache keeps progress; re-running resumes where it stopped. |
+| Spending more than intended | Hard `LLM_BUDGET_USD` cap checked *before* each live call. Cache-first, so nothing is paid for twice. Optional OpenAI dashboard limit. |
+| `gpt-6-luna` is a reasoning model and bills hidden reasoning tokens as output | Reasoning effort set to minimal if supported. Real usage is logged per call, so the estimate gets corrected with data. |
+| OpenAI models give weak bounding boxes | The location metric is reported, not gated (Q3). The review UI falls back to page-level highlights. |
 | LangChain's structured output for Gemini mishandles nullable or nested schemas | The schema is kept flat-ish. Fallback: `method: 'jsonMode'` plus our Zod parse, which already happens anyway. |
 | LangChain version churn | Pinned versions. Everything LangChain-specific lives in one file (the provider factory), so swapping it out touches one file (ADR-0010). |
 | Self-reported confidence is meaningless | Math checks adjust it, and the catch rate measures whether flags actually catch errors |

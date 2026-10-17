@@ -381,3 +381,8 @@ metrics, and wrote ADR-0010.
   or logs, and a test checks that no key-like text leaks into results.
 
 **Remember:** the AI is a component. Your guarantees come from the system around it.
+
+**Update (same day): changing course at a gate.** You chose OpenAI (your $5 credit)
+over Gemini's free tier. That breaks the original "$0" rule, so we didn't just switch.
+We updated the rule itself (CLAUDE.md, PRD NFR-01) and added a **hard spending cap**
+in code. A good change is written down and guarded, not slipped in.

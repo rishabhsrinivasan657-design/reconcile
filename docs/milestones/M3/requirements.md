@@ -31,7 +31,7 @@ re-running evals spends no quota, and CI replays saved responses with no API key
 ### A. LLM client (ADR-0002)
 
 - [ ] **AC-1 One interface, four providers.** `generateStructured()` works the same
-  for Gemini, Ollama, Anthropic, and OpenAI, chosen by `LLM_PROVIDER`. Provider
+  for OpenAI (default, live), Gemini, Ollama, and Anthropic, chosen by `LLM_PROVIDER`. Provider
   switching uses **LangChain.js** chat models underneath our own cache, limiter, and
   log (decision Q4, ADR-0010). Model IDs
   come from env. Gemini is implemented and tested live. The other three are
@@ -44,6 +44,9 @@ re-running evals spends no quota, and CI replays saved responses with no API key
   plus prompt version, provider, and model. A second extraction of the same
   document makes **zero** API calls. A changed prompt can't silently reuse old
   answers: a test fails if a prompt's text changes without a version bump.
+- [ ] **AC-4b Budget guard.** Estimated spend from all live calls is tracked on
+  disk. Once it reaches `LLM_BUDGET_USD` (default $4.00 of the owner's $5 credit),
+  live calls are refused with a clear message. Cached and replayed calls still work.
 - [ ] **AC-4 Call log.** Every call is logged as an `LlmCall` row: provider,
   model, prompt version, purpose, latency, input/output tokens, cache hit,
   estimated cost at list price, and error. Without a database (CI), the log goes
@@ -109,8 +112,7 @@ re-running evals spends no quota, and CI replays saved responses with no API key
 
 ## Assumptions
 
-- Documents are synthetic, so sending them to a hosted free-tier LLM raises no
-  privacy issue (free-tier inputs may be used by the provider to improve models).
+- Documents are synthetic, so sending them to a hosted LLM raises no privacy issue.
 - Free-tier limits are low and change over time. Recording the CI subset (about 60
   documents) fits in a day's quota. A full 100-set run may take more than one day,
   and the cache makes that fine.
@@ -124,4 +126,5 @@ re-running evals spends no quota, and CI replays saved responses with no API key
 | Q1 | Gemini API key | **Yes:** the owner creates a free Gemini key during implementation and puts it in their own `.env`. (A key pasted in chat was an OpenAI key and is being revoked. Keys are never pasted into chat or committed.) |
 | Q2 | Local model (Ollama) | **Later, as a fallback.** The adapter is built and tested with mocks now. |
 | Q3 | Score bounding boxes | **Yes:** reported, not gated |
+| Q5 | Which provider by default | **OpenAI** (owner's choice at the Design gate, using their prepaid $5 credit). Default model `gpt-6-luna`, which OpenAI recommends for cost-sensitive volume. A hard budget cap (AC-4b) protects the credit. Gemini's free tier remains a supported $0 option. This replaces Q1's Gemini key. |
 | Q4 | Framework for provider switching | **LangChain.js** (owner's choice over the Vercel AI SDK and the hand-written client). Our cache, rate limiter, call log, and replay stay ours. LangGraph isn't used, since there's no multi-step agent yet. Recorded in ADR-0010, superseding the "own adapters" part of ADR-0002. |
