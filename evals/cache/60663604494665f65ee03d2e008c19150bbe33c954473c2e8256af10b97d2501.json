@@ -1,0 +1,527 @@
+{
+  "keyParts": ["4aa16f51159fdcf556d499b4fe026e7e39d5a7defcf38677c693bd3a4090df0f"],
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "promptVersion": "extract.v2",
+  "data": {
+    "docType": "RR",
+    "vendorName": {
+      "v": "Pearl & Birch Personal Care",
+      "c": 1,
+      "p": 1,
+      "b": [224, 88, 235, 238]
+    },
+    "docNumber": {
+      "v": "RCV-504127",
+      "c": 1,
+      "p": 1,
+      "b": [135, 88, 145, 161]
+    },
+    "poNumber": {
+      "v": "HP-PO-106269",
+      "c": 1,
+      "p": 1,
+      "b": [135, 367, 145, 456]
+    },
+    "date": {
+      "v": "2026-01-20",
+      "c": 1,
+      "p": 1,
+      "b": [135, 645, 145, 716]
+    },
+    "dueDate": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "lines": [
+      {
+        "sku": {
+          "v": "17011-01",
+          "c": 1,
+          "p": 1,
+          "b": [302, 89, 313, 138]
+        },
+        "description": {
+          "v": "Pearl & Birch Moisture Shampoo, 24 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [302, 202, 313, 425]
+        },
+        "qty": {
+          "v": 78,
+          "c": 1,
+          "p": 1,
+          "b": [302, 897, 313, 911]
+        },
+        "uom": {
+          "v": "EA",
+          "c": 1,
+          "p": 1,
+          "b": [302, 791, 313, 804]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "17051-01",
+          "c": 1,
+          "p": 1,
+          "b": [328, 88, 338, 138]
+        },
+        "description": {
+          "v": "Pearl & Birch Unscented Body Lotion, 16 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [328, 202, 339, 449]
+        },
+        "qty": {
+          "v": 11,
+          "c": 1,
+          "p": 1,
+          "b": [328, 903, 338, 911]
+        },
+        "uom": {
+          "v": "EA",
+          "c": 1,
+          "p": 1,
+          "b": [328, 791, 338, 804]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "17165-01",
+          "c": 1,
+          "p": 1,
+          "b": [353, 89, 363, 138]
+        },
+        "description": {
+          "v": "Pearl & Birch Charcoal Bar Soap, 5 oz",
+          "c": 1,
+          "p": 1,
+          "b": [353, 202, 364, 406]
+        },
+        "qty": {
+          "v": 48,
+          "c": 1,
+          "p": 1,
+          "b": [353, 897, 363, 911]
+        },
+        "uom": {
+          "v": "EA",
+          "c": 1,
+          "p": 1,
+          "b": [353, 791, 363, 804]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "17413-01",
+          "c": 1,
+          "p": 1,
+          "b": [378, 89, 388, 138]
+        },
+        "description": {
+          "v": "Pearl & Birch Coconut Body Lotion, 8 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [378, 202, 389, 429]
+        },
+        "qty": {
+          "v": 6,
+          "c": 1,
+          "p": 1,
+          "b": [378, 904, 388, 911]
+        },
+        "uom": {
+          "v": "EA",
+          "c": 1,
+          "p": 1,
+          "b": [378, 791, 388, 804]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "17418-01",
+          "c": 1,
+          "p": 1,
+          "b": [403, 89, 413, 138]
+        },
+        "description": {
+          "v": "Pearl & Birch Daily Shampoo, 12 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [403, 202, 414, 402]
+        },
+        "qty": {
+          "v": 47,
+          "c": 1,
+          "p": 1,
+          "b": [403, 897, 413, 911]
+        },
+        "uom": {
+          "v": "EA",
+          "c": 1,
+          "p": 1,
+          "b": [403, 791, 413, 804]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "17447-01",
+          "c": 1,
+          "p": 1,
+          "b": [428, 89, 438, 138]
+        },
+        "description": {
+          "v": "Pearl & Birch Volumizing Shampoo, 12 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [428, 202, 439, 437]
+        },
+        "qty": {
+          "v": 138,
+          "c": 1,
+          "p": 1,
+          "b": [428, 892, 438, 911]
+        },
+        "uom": {
+          "v": "EA",
+          "c": 1,
+          "p": 1,
+          "b": [428, 791, 438, 804]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "17463-01",
+          "c": 1,
+          "p": 1,
+          "b": [454, 89, 464, 138]
+        },
+        "description": {
+          "v": "Pearl & Birch Moisture Shampoo, 12 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [454, 202, 465, 425]
+        },
+        "qty": {
+          "v": 89,
+          "c": 1,
+          "p": 1,
+          "b": [454, 897, 464, 911]
+        },
+        "uom": {
+          "v": "EA",
+          "c": 1,
+          "p": 1,
+          "b": [454, 791, 464, 804]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "17605-01",
+          "c": 1,
+          "p": 1,
+          "b": [479, 89, 489, 138]
+        },
+        "description": {
+          "v": "Pearl & Birch Unscented Body Lotion, 8 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [479, 202, 490, 441]
+        },
+        "qty": {
+          "v": 9,
+          "c": 1,
+          "p": 1,
+          "b": [479, 904, 489, 911]
+        },
+        "uom": {
+          "v": "EA",
+          "c": 1,
+          "p": 1,
+          "b": [479, 791, 489, 804]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "17631-01",
+          "c": 1,
+          "p": 1,
+          "b": [504, 89, 514, 138]
+        },
+        "description": {
+          "v": "Pearl & Birch Volumizing Shampoo, 24 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [504, 202, 515, 437]
+        },
+        "qty": {
+          "v": 34,
+          "c": 1,
+          "p": 1,
+          "b": [504, 897, 514, 911]
+        },
+        "uom": {
+          "v": "EA",
+          "c": 1,
+          "p": 1,
+          "b": [504, 791, 514, 804]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "17839-01",
+          "c": 1,
+          "p": 1,
+          "b": [529, 89, 539, 138]
+        },
+        "description": {
+          "v": "Pearl & Birch Eucalyptus Bar Soap, 5 oz",
+          "c": 1,
+          "p": 1,
+          "b": [529, 202, 540, 416]
+        },
+        "qty": {
+          "v": 5,
+          "c": 1,
+          "p": 1,
+          "b": [529, 904, 539, 911]
+        },
+        "uom": {
+          "v": "EA",
+          "c": 1,
+          "p": 1,
+          "b": [529, 791, 539, 804]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "17846-01",
+          "c": 1,
+          "p": 1,
+          "b": [554, 89, 564, 138]
+        },
+        "description": {
+          "v": "Pearl & Birch Coconut Body Lotion, 16 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [554, 202, 565, 435]
+        },
+        "qty": {
+          "v": 34,
+          "c": 1,
+          "p": 1,
+          "b": [554, 897, 564, 911]
+        },
+        "uom": {
+          "v": "EA",
+          "c": 1,
+          "p": 1,
+          "b": [554, 791, 564, 804]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "17862-01",
+          "c": 1,
+          "p": 1,
+          "b": [579, 89, 589, 138]
+        },
+        "description": {
+          "v": "Pearl & Birch Oatmeal Bar Soap, 5 oz",
+          "c": 1,
+          "p": 1,
+          "b": [579, 202, 590, 404]
+        },
+        "qty": {
+          "v": 14,
+          "c": 1,
+          "p": 1,
+          "b": [579, 897, 589, 911]
+        },
+        "uom": {
+          "v": "EA",
+          "c": 1,
+          "p": 1,
+          "b": [579, 791, 589, 804]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      }
+    ],
+    "subtotal": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "tax": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "shipping": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "total": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    }
+  },
+  "usage": {
+    "inputTokens": 1575,
+    "outputTokens": 2222
+  },
+  "latencyMs": 5321,
+  "costUsd": 0.0060275
+}

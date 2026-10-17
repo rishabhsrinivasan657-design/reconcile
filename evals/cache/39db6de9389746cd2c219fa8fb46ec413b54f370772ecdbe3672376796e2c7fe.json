@@ -1,0 +1,22 @@
+{
+  "keyParts": ["0d77e06d4cbeb2f8f0caac303196f0b076df3a080a061772c9d6ccd636ff4ff7"],
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "promptVersion": "fuzzy.v1",
+  "data": {
+    "pairs": [
+      {
+        "a": 6,
+        "b": 6,
+        "confidence": 0.9,
+        "reason": "Unscented Body Lotion matches Fragrance Free Moisturizing Cream in size (16 fl oz) and quantity"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 332,
+    "outputTokens": 43
+  },
+  "latencyMs": 599,
+  "costUsd": 0.0002071
+}

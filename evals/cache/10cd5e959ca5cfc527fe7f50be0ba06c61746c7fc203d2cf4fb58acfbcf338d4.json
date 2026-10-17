@@ -1,0 +1,88 @@
+{
+  "keyParts": ["e41e54c82962167791bf0d06d8d790c378957a9c554717f65d0b0dec3a4a778e"],
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "promptVersion": "fuzzy.v1",
+  "data": {
+    "pairs": [
+      {
+        "a": 1,
+        "b": 1,
+        "confidence": 0.99,
+        "reason": "Teriyaki Seaweed Snacks, 0.35 oz 6-pk matches exactly"
+      },
+      {
+        "a": 2,
+        "b": 2,
+        "confidence": 0.99,
+        "reason": "Mushroom Miso Bone Broth, 32 fl oz matches exactly"
+      },
+      {
+        "a": 3,
+        "b": 3,
+        "confidence": 0.99,
+        "reason": "Sesame Seaweed Snacks, 0.35 oz 6-pk matches exactly"
+      },
+      {
+        "a": 4,
+        "b": 4,
+        "confidence": 0.99,
+        "reason": "Sea Salt Seaweed Snacks, 0.17 oz 12-pk matches exactly"
+      },
+      {
+        "a": 5,
+        "b": 5,
+        "confidence": 0.99,
+        "reason": "Wasabi Seaweed Snacks, 0.35 oz 6-pk matches exactly"
+      },
+      {
+        "a": 6,
+        "b": 6,
+        "confidence": 0.99,
+        "reason": "Beef Bone Broth, 16 fl oz matches exactly"
+      },
+      {
+        "a": 7,
+        "b": 7,
+        "confidence": 0.9,
+        "reason": "Sea Salt Seaweed Snacks matches Salted Nori Crisps, 0.35 oz 6-pk"
+      },
+      {
+        "a": 8,
+        "b": 8,
+        "confidence": 0.99,
+        "reason": "Wasabi Seaweed Snacks, 0.17 oz 12-pk matches exactly"
+      },
+      {
+        "a": 9,
+        "b": 9,
+        "confidence": 0.95,
+        "reason": "Beef Bone Broth, 32 fl oz matches with slight typo in B"
+      },
+      {
+        "a": 10,
+        "b": 10,
+        "confidence": 0.95,
+        "reason": "Sesame Seaweed Snacks, 0.17 oz 12-pk matches abbreviated B description"
+      },
+      {
+        "a": 11,
+        "b": 11,
+        "confidence": 0.99,
+        "reason": "Mushroom Miso Bone Broth, 16 fl oz matches exactly"
+      },
+      {
+        "a": 12,
+        "b": 12,
+        "confidence": 0.99,
+        "reason": "Teriyaki Seaweed Snacks, 0.17 oz 12-pk matches exactly"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 1093,
+    "outputTokens": 710
+  },
+  "latencyMs": 1582,
+  "costUsd": 0.0021029
+}
