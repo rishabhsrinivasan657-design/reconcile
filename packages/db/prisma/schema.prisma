@@ -224,6 +224,8 @@ model LlmCall {
   id            String     @id @default(cuid())
   documentId    String?
   document      Document?  @relation(fields: [documentId], references: [id])
+  /// Free-form reference when there's no Document row yet (CLI, evals), e.g. a file path.
+  documentRef   String?
   provider      String
   model         String
   promptVersion String
@@ -232,7 +234,8 @@ model LlmCall {
   inputTokens   Int
   outputTokens  Int
   cacheHit      Boolean
-  costUsd       Decimal    @db.Decimal(12, 6)
+  /// Null when the model's list price is unknown (never a guess).
+  costUsd       Decimal?   @db.Decimal(12, 6)
   error         String?
   createdAt     DateTime   @default(now())
 }
