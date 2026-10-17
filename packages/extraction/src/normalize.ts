@@ -23,13 +23,34 @@ export function toUnitPriceString(d: Decimal): string {
   return rounded.decimalPlaces() <= 2 ? rounded.toFixed(2) : rounded.toFixed();
 }
 
-/** Accept YYYY-MM-DD only, and only real calendar dates. */
+const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+
+/**
+ * A real calendar date as YYYY-MM-DD, or null. Models are asked for ISO dates but sometimes copy
+ * the printed form, so the common US/ISO printed formats are accepted too:
+ * 2026-09-04, 09/04/2026, 04-SEP-2026, September 4, 2026, Sep 4 2026.
+ */
 export function parseIsoDate(raw: string | null | undefined): string | null {
-  if (!raw || !/^\d{4}-\d{2}-\d{2}$/.test(raw.trim())) return null;
-  const d = new Date(`${raw.trim()}T00:00:00Z`);
-  return !Number.isNaN(d.getTime()) && d.toISOString().slice(0, 10) === raw.trim()
-    ? raw.trim()
-    : null;
+  if (!raw) return null;
+  const s = raw.trim();
+  let y: number | undefined;
+  let m: number | undefined;
+  let d: number | undefined;
+  let hit: RegExpMatchArray | null;
+  if ((hit = s.match(/^(\d{4})-(\d{2})-(\d{2})$/))) [y, m, d] = [+hit[1]!, +hit[2]!, +hit[3]!];
+  else if ((hit = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/)))
+    [m, d, y] = [+hit[1]!, +hit[2]!, +hit[3]!];
+  else if ((hit = s.match(/^(\d{1,2})[- ]([A-Za-z]{3,9})[- ](\d{4})$/))) {
+    [d, y] = [+hit[1]!, +hit[3]!];
+    m = MONTHS.indexOf(hit[2]!.slice(0, 3).toLowerCase()) + 1;
+  } else if ((hit = s.match(/^([A-Za-z]{3,9})\.? (\d{1,2}),? (\d{4})$/))) {
+    [d, y] = [+hit[2]!, +hit[3]!];
+    m = MONTHS.indexOf(hit[1]!.slice(0, 3).toLowerCase()) + 1;
+  }
+  if (!y || !m || !d || m < 1) return null;
+  const iso = `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+  const date = new Date(`${iso}T00:00:00Z`);
+  return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === iso ? iso : null;
 }
 
 /** Gemini-style [ymin, xmin, ymax, xmax] on 0-1000 -> our [x0, y0, x1, y1] on 0-1. */

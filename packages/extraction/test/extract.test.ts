@@ -48,10 +48,15 @@ describe('normalization (AC-6, AC-7)', () => {
     expect(toUnitPriceString(parseMoney('0.0425')!)).toBe('0.0425');
     expect(toUnitPriceString(parseMoney('4.8')!)).toBe('4.80');
   });
-  it('accepts only real ISO dates', () => {
+  it('accepts real dates in ISO and common printed formats', () => {
     expect(parseIsoDate('2026-02-28')).toBe('2026-02-28');
     expect(parseIsoDate('2026-02-30')).toBeNull();
-    expect(parseIsoDate('02/28/2026')).toBeNull();
+    expect(parseIsoDate('02/28/2026')).toBe('2026-02-28');
+    expect(parseIsoDate('September 4, 2026')).toBe('2026-09-04');
+    expect(parseIsoDate('04-SEP-2026')).toBe('2026-09-04');
+    expect(parseIsoDate('Sep 4 2026')).toBe('2026-09-04');
+    expect(parseIsoDate('Smarch 4, 2026')).toBeNull();
+    expect(parseIsoDate('soon')).toBeNull();
   });
   it('converts [ymin,xmin,ymax,xmax] 0-1000 boxes to [x0,y0,x1,y1] 0-1', () => {
     expect(convertBox([100, 200, 120, 300])).toEqual([0.2, 0.1, 0.3, 0.12]);

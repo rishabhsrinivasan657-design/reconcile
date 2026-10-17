@@ -61,6 +61,8 @@ export async function extractDocument(
     schema: ExtractionAnswer,
     jsonShape: EXTRACT_PROMPT.jsonShape,
     cacheKeyParts: [fileHash],
+    // Output room is shared with hidden "thinking"; one answer was cut off at 8K.
+    maxOutputTokens: 16_000,
     documentRef: opts.id,
   });
   const built = buildResult(res.data, opts.id, threshold);
