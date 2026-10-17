@@ -16,8 +16,10 @@ import { matchDocuments, type ExtractedDocument } from '@reconcile/core';
 import {
   EXTRACT_PROMPT,
   extractDocument,
+  fuzzyFor,
   mimeFor,
   type ExtractionResult,
+  type FuzzyStrategy,
 } from '@reconcile/extraction';
 import {
   FileCacheStore,
@@ -59,6 +61,8 @@ const { values } = parseArgs({
     provider: { type: 'string' },
     model: { type: 'string' },
     concurrency: { type: 'string', default: '4' },
+    // Default = the strategy the system uses (chosen by this eval in M4: hybrid).
+    fuzzy: { type: 'string', default: 'hybrid' },
     'check-baseline': { type: 'boolean', default: false },
     'update-baseline': { type: 'boolean', default: false },
   },
@@ -72,6 +76,30 @@ if (!stages.every((s) => ['match', 'extract', 'e2e'].includes(s)))
   throw new Error('--stage must be match, extract, e2e, or all');
 if (values.provider && !PROVIDERS.includes(values.provider as Provider))
   throw new Error(`--provider must be one of: ${PROVIDERS.join(', ')}`);
+
+const fuzzyStrategy = values.fuzzy as FuzzyStrategy;
+if (!['text', 'llm', 'hybrid'].includes(fuzzyStrategy))
+  throw new Error('--fuzzy must be text, llm, or hybrid');
+
+// One LLM client for reading documents and AI line pairing; replays recordings unless --live.
+const needsLlm = fuzzyStrategy !== 'text' || stages.includes('extract') || stages.includes('e2e');
+const llmEnv = needsLlm ? loadLlmEnv() : undefined;
+const provider = (values.provider as Provider | undefined) ?? llmEnv?.LLM_PROVIDER ?? 'gemini';
+const model = values.model ?? llmEnv?.LLM_MODEL_EXTRACT ?? '';
+const sink = new MemorySink();
+if (needsLlm && values.live) console.log(`key: ${describeKeySource(provider, shellKeys)}`);
+const llm = llmEnv
+  ? new LlmClient({
+      env: llmEnv,
+      provider,
+      model,
+      sink,
+      cache: new FileCacheStore(path.join(evalsDir, 'cache')),
+      mode: values.live ? 'live' : 'replay',
+      stateDir: path.resolve(evalsDir, '..', llmEnv.LLM_CACHE_DIR),
+    })
+  : undefined;
+const fuzzy = fuzzyFor(fuzzyStrategy, llm);
 
 const dataDir = values.dir ? path.resolve(values.dir) : SUBSETS[subset];
 const subsetName = values.dir ? path.basename(dataDir) : subset;
@@ -106,7 +134,10 @@ function gate(
 ) {
   const base = gateable ? baselines[stage] : undefined;
   const sameRun =
-    base && base.subset === subsetName && (!extra.model || base.model === extra.model);
+    base &&
+    base.subset === subsetName &&
+    (!extra.model || base.model === extra.model) &&
+    (stage === 'extract' || (base.fuzzy ?? 'text') === fuzzyStrategy);
   const rows = compare(scores, sameRun ? base.metrics : undefined);
   if (values['update-baseline'] && gateable) {
     writeStageBaseline({
@@ -115,6 +146,7 @@ function gate(
       sets: sets.length,
       generatorVersion,
       ...extra,
+      ...(stage === 'extract' ? {} : { fuzzy: fuzzyStrategy }),
       metrics: scores,
     });
     console.log(`  baseline updated for stage "${stage}" (commit it with a reason)`);
@@ -133,7 +165,7 @@ function gate(
 // ---- match (perfect inputs) ----------------------------------------------------------
 async function runMatch(docsBySet: LoadedSet[], label: string) {
   const pile = docsBySet.flatMap((s) => s.docs).sort((a, b) => a.id.localeCompare(b.id));
-  const result = await matchDocuments(pile);
+  const result = await matchDocuments(pile, fuzzy ? { fuzzy } : {});
   return { result, report: score(docsBySet, result), label };
 }
 
@@ -148,7 +180,7 @@ if (stages.includes('match')) {
   timings.sort((a, b) => a - b);
   const rows = gate('match', report.scores as unknown as Record<string, number>);
   printScores(
-    `Reconcile eval · stage: match · inputs: answer keys · subset: ${subsetName} (${report.counts.sets} sets, ${report.counts.documents} docs)`,
+    `Reconcile eval · stage: match · pairing: ${fuzzyStrategy} · inputs: answer keys · subset: ${subsetName} (${report.counts.sets} sets, ${report.counts.documents} docs)`,
     rows,
   );
   console.log(
@@ -171,21 +203,7 @@ if (stages.includes('match')) {
 }
 
 // ---- extraction (needed by extract and e2e) -------------------------------------------
-if (stages.includes('extract') || stages.includes('e2e')) {
-  const env = loadLlmEnv();
-  const provider = (values.provider as Provider | undefined) ?? env.LLM_PROVIDER;
-  const model = values.model ?? env.LLM_MODEL_EXTRACT;
-  const sink = new MemorySink();
-  if (values.live) console.log(`key: ${describeKeySource(provider, shellKeys)}`);
-  const llm = new LlmClient({
-    env,
-    provider,
-    model,
-    sink,
-    cache: new FileCacheStore(path.join(evalsDir, 'cache')),
-    mode: values.live ? 'live' : 'replay',
-    stateDir: path.resolve(evalsDir, '..', env.LLM_CACHE_DIR),
-  });
+if (llm && (stages.includes('extract') || stages.includes('e2e'))) {
   const jobs = sets.flatMap((s) =>
     s.truth.documents.map((d) => ({ set: s, doc: d, docId: `${s.truth.setId}/${d.role}` })),
   );
@@ -302,7 +320,7 @@ if (stages.includes('extract') || stages.includes('e2e')) {
       promptVersion: EXTRACT_PROMPT.version,
     });
     printScores(
-      `Reconcile eval · stage: e2e · ${provider}/${model} reads → matcher · subset: ${subsetName}`,
+      `Reconcile eval · stage: e2e · ${provider}/${model} reads → matcher (pairing: ${fuzzyStrategy}) · subset: ${subsetName}`,
       rows,
     );
     const perfect = (results.stages as Record<string, { scores?: Record<string, number> }>).match
@@ -331,6 +349,23 @@ if (stages.includes('extract') || stages.includes('e2e')) {
       comparison: rows,
     };
   }
+}
+
+// ---- AI line-pairing usage (when the fuzzy strategy uses the AI) -------------------------
+if (fuzzyStrategy !== 'text') {
+  const calls = sink.calls.filter((c) => c.purpose === 'FUZZY_MATCH');
+  const cost = calls.every((c) => c.costUsd !== null)
+    ? calls.reduce((t, c) => t + (c.costUsd ?? 0), 0)
+    : null;
+  const ms = calls.map((c) => c.latencyMs).sort((x, y) => x - y);
+  console.log(
+    `\n  AI line pairing (${fuzzyStrategy}): ${calls.length} call(s) · ${cost === null ? 'cost unknown' : `$${cost.toFixed(4)} at list price`} · p50 ${ms[Math.floor(ms.length / 2)] ?? 0} ms`,
+  );
+  (results as Record<string, unknown>).fuzzy = {
+    strategy: fuzzyStrategy,
+    calls: calls.length,
+    costUsd: cost,
+  };
 }
 
 // ---- results file (never contains secrets) ---------------------------------------------

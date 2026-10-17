@@ -33,6 +33,8 @@ export interface StageBaseline {
   provider?: string;
   model?: string;
   promptVersion?: string;
+  /** How tricky lines were paired (match and e2e stages). */
+  fuzzy?: 'text' | 'llm' | 'hybrid';
   metrics: Record<string, number>;
 }
 
