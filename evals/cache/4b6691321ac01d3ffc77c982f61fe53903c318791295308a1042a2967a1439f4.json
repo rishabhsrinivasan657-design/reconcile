@@ -1,0 +1,527 @@
+{
+  "keyParts": ["389195ef553673b39ed9b4058acb7ba88050f05ffb2eeac881d207e1e98771a4"],
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "promptVersion": "extract.v2",
+  "data": {
+    "docType": "RR",
+    "vendorName": {
+      "v": "KELP & STONE NATURALS",
+      "c": 1,
+      "p": 1,
+      "b": [199, 73, 207, 240]
+    },
+    "docNumber": {
+      "v": "RCV-505634",
+      "c": 1,
+      "p": 1,
+      "b": [128, 237, 135, 313]
+    },
+    "poNumber": {
+      "v": "HP-PO-107093",
+      "c": 1,
+      "p": 1,
+      "b": [122, 664, 130, 757]
+    },
+    "date": {
+      "v": "2026-04-12",
+      "c": 1,
+      "p": 1,
+      "b": [143, 236, 151, 323]
+    },
+    "dueDate": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "lines": [
+      {
+        "sku": {
+          "v": "KLPS21052",
+          "c": 1,
+          "p": 1,
+          "b": [285, 217, 292, 284]
+        },
+        "description": {
+          "v": "Kelp & Stone Wasabi Seaweed Snacks, 0.17 oz 12-pk",
+          "c": 1,
+          "p": 1,
+          "b": [281, 332, 291, 702]
+        },
+        "qty": {
+          "v": 44,
+          "c": 1,
+          "p": 1,
+          "b": [286, 132, 292, 142]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [286, 158, 292, 175]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "KLPS21081",
+          "c": 1,
+          "p": 1,
+          "b": [300, 217, 307, 284]
+        },
+        "description": {
+          "v": "Kelp & Stone Beef Bone Broth, 16 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [297, 331, 306, 612]
+        },
+        "qty": {
+          "v": 57,
+          "c": 1,
+          "p": 1,
+          "b": [302, 130, 307, 143]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [302, 159, 307, 175]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "KLPS21091",
+          "c": 1,
+          "p": 1,
+          "b": [315, 217, 322, 284]
+        },
+        "description": {
+          "v": "Kelp & Stone Teriyaki Seaweed Snacks, 0.17 oz 12-pk",
+          "c": 1,
+          "p": 1,
+          "b": [310, 332, 320, 708]
+        },
+        "qty": {
+          "v": 25,
+          "c": 1,
+          "p": 1,
+          "b": [318, 131, 323, 142]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [317, 159, 323, 174]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "KLPS21222",
+          "c": 1,
+          "p": 1,
+          "b": [330, 217, 337, 284]
+        },
+        "description": {
+          "v": "Kelp & Stone Sesame Seaweed Snacks, 0.35 oz 6-pk",
+          "c": 1,
+          "p": 1,
+          "b": [325, 332, 336, 688]
+        },
+        "qty": {
+          "v": 18,
+          "c": 1,
+          "p": 1,
+          "b": [333, 131, 338, 143]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [332, 158, 338, 175]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "KLPS21332",
+          "c": 1,
+          "p": 1,
+          "b": [345, 217, 352, 284]
+        },
+        "description": {
+          "v": "Kelp & Stone Sesame Seaweed Snacks, 0.17 oz 12-pk",
+          "c": 1,
+          "p": 1,
+          "b": [341, 332, 351, 695]
+        },
+        "qty": {
+          "v": 15,
+          "c": 1,
+          "p": 1,
+          "b": [348, 131, 353, 142]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [347, 159, 353, 175]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "KLPS21367",
+          "c": 1,
+          "p": 1,
+          "b": [360, 217, 367, 283]
+        },
+        "description": {
+          "v": "Kelp & Stone Sea Salt Seaweed Snacks, 0.17 oz 12-pk",
+          "c": 1,
+          "p": 1,
+          "b": [356, 334, 366, 709]
+        },
+        "qty": {
+          "v": 30,
+          "c": 1,
+          "p": 1,
+          "b": [363, 131, 368, 142]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [362, 158, 368, 175]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "KLPS21369",
+          "c": 1,
+          "p": 1,
+          "b": [376, 217, 382, 284]
+        },
+        "description": {
+          "v": "Kelp & Stoen Teriyaki Swd Snacks, 0.35OZ 6-pk",
+          "c": 1,
+          "p": 1,
+          "b": [372, 333, 382, 664]
+        },
+        "qty": {
+          "v": 58,
+          "c": 1,
+          "p": 1,
+          "b": [378, 131, 384, 142]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [378, 158, 384, 175]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "KLPS21371",
+          "c": 1,
+          "p": 1,
+          "b": [391, 217, 397, 284]
+        },
+        "description": {
+          "v": "Kelp & Stone Beef Bone Broth, 32 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [387, 333, 397, 605]
+        },
+        "qty": {
+          "v": 55,
+          "c": 1,
+          "p": 1,
+          "b": [393, 132, 399, 142]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [393, 158, 399, 174]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "KLPS21439",
+          "c": 1,
+          "p": 1,
+          "b": [406, 217, 412, 284]
+        },
+        "description": {
+          "v": "Kelp & Stone Mushroom Miso Bone Broth, 16 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [402, 333, 412, 683]
+        },
+        "qty": {
+          "v": 34,
+          "c": 1,
+          "p": 1,
+          "b": [408, 131, 414, 142]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [408, 158, 414, 174]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "KLPS21516",
+          "c": 1,
+          "p": 1,
+          "b": [421, 217, 427, 284]
+        },
+        "description": {
+          "v": "Kelp & Stone Sea Salt Seaweed Snacks, 0.35 oz 6-pk",
+          "c": 1,
+          "p": 1,
+          "b": [417, 333, 427, 703]
+        },
+        "qty": {
+          "v": 29,
+          "c": 1,
+          "p": 1,
+          "b": [423, 133, 429, 142]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [423, 159, 429, 174]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "KLPS21797",
+          "c": 1,
+          "p": 1,
+          "b": [436, 218, 443, 284]
+        },
+        "description": {
+          "v": "Kelp & Stone Mushroom Miso Bone Broth, 32 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [432, 333, 441, 682]
+        },
+        "qty": {
+          "v": 25,
+          "c": 1,
+          "p": 1,
+          "b": [438, 132, 444, 143]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [438, 159, 444, 175]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "KLPS21798",
+          "c": 1,
+          "p": 1,
+          "b": [451, 218, 458, 284]
+        },
+        "description": {
+          "v": "Kelp & Stone Wasabi Seaweed Snacks, 0.35 oz 6-pk",
+          "c": 1,
+          "p": 1,
+          "b": [447, 333, 456, 689]
+        },
+        "qty": {
+          "v": 12,
+          "c": 1,
+          "p": 1,
+          "b": [453, 132, 459, 143]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [453, 159, 459, 175]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      }
+    ],
+    "subtotal": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "tax": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "shipping": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "total": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    }
+  },
+  "usage": {
+    "inputTokens": 1575,
+    "outputTokens": 2815
+  },
+  "latencyMs": 11752,
+  "costUsd": 0.00751
+}

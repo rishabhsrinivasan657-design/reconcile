@@ -1,0 +1,413 @@
+{
+  "keyParts": ["8a36aba7e340c840281bfc662b1d4492a5d832e8f48e809904c4aa3f8690825a"],
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "promptVersion": "extract.v2",
+  "data": {
+    "docType": "RR",
+    "vendorName": {
+      "v": "Bluewater Seafood Co.",
+      "c": 1,
+      "p": 1,
+      "b": [224, 87, 236, 211]
+    },
+    "docNumber": {
+      "v": "RCV-501356",
+      "c": 1,
+      "p": 1,
+      "b": [135, 88, 146, 161]
+    },
+    "poNumber": {
+      "v": "HP-PO-104737",
+      "c": 1,
+      "p": 1,
+      "b": [135, 366, 145, 456]
+    },
+    "date": {
+      "v": "2026-04-02",
+      "c": 1,
+      "p": 1,
+      "b": [135, 645, 145, 715]
+    },
+    "dueDate": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "lines": [
+      {
+        "sku": {
+          "v": "20009-12",
+          "c": 1,
+          "p": 1,
+          "b": [303, 87, 313, 139]
+        },
+        "description": {
+          "v": "Bluewater in Water Albacore Tuna, 12 oz",
+          "c": 1,
+          "p": 1,
+          "b": [303, 202, 314, 422]
+        },
+        "qty": {
+          "v": 24,
+          "c": 1,
+          "p": 1,
+          "b": [303, 897, 313, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [303, 791, 313, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "20020-12",
+          "c": 1,
+          "p": 1,
+          "b": [328, 88, 338, 139]
+        },
+        "description": {
+          "v": "Bluewater in Olive Oil Albacore Tuna, 5 oz",
+          "c": 1,
+          "p": 1,
+          "b": [328, 202, 339, 428]
+        },
+        "qty": {
+          "v": 38,
+          "c": 1,
+          "p": 1,
+          "b": [328, 897, 338, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [328, 791, 338, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "20089-12",
+          "c": 1,
+          "p": 1,
+          "b": [353, 88, 363, 139]
+        },
+        "description": {
+          "v": "Bluewater No Salt Added Albacore Tuna, 5 oz",
+          "c": 1,
+          "p": 1,
+          "b": [353, 202, 364, 450]
+        },
+        "qty": {
+          "v": 21,
+          "c": 1,
+          "p": 1,
+          "b": [353, 898, 363, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [353, 791, 363, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "20124-12",
+          "c": 1,
+          "p": 1,
+          "b": [378, 88, 388, 139]
+        },
+        "description": {
+          "v": "Bluewater Skinless Boneless Pink Salmon, 6OZ",
+          "c": 1,
+          "p": 1,
+          "b": [378, 202, 389, 459]
+        },
+        "qty": {
+          "v": 49,
+          "c": 1,
+          "p": 1,
+          "b": [378, 897, 388, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [378, 791, 388, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "20153-12",
+          "c": 1,
+          "p": 1,
+          "b": [403, 87, 413, 139]
+        },
+        "description": {
+          "v": "Bluewater in Olive Oil Wild Sardines, 4.4 oz",
+          "c": 1,
+          "p": 1,
+          "b": [403, 202, 414, 435]
+        },
+        "qty": {
+          "v": 47,
+          "c": 1,
+          "p": 1,
+          "b": [403, 897, 413, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [403, 791, 413, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "20175-12",
+          "c": 1,
+          "p": 1,
+          "b": [428, 87, 438, 139]
+        },
+        "description": {
+          "v": "Bluewater Smoked Wild Sardines, 4.4 oz",
+          "c": 1,
+          "p": 1,
+          "b": [428, 202, 438, 421]
+        },
+        "qty": {
+          "v": 35,
+          "c": 1,
+          "p": 1,
+          "b": [428, 897, 438, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [428, 791, 438, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "20241-12",
+          "c": 1,
+          "p": 1,
+          "b": [453, 87, 463, 139]
+        },
+        "description": {
+          "v": "Bluewater Smoked Pink Salmon, 6 oz",
+          "c": 1,
+          "p": 1,
+          "b": [453, 202, 463, 403]
+        },
+        "qty": {
+          "v": 2,
+          "c": 1,
+          "p": 1,
+          "b": [453, 905, 463, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [453, 791, 463, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "20595-12",
+          "c": 1,
+          "p": 1,
+          "b": [479, 87, 488, 139]
+        },
+        "description": {
+          "v": "Bluewater in Water Albacore Tuna, 5 oz",
+          "c": 1,
+          "p": 1,
+          "b": [479, 202, 488, 416]
+        },
+        "qty": {
+          "v": 46,
+          "c": 1,
+          "p": 1,
+          "b": [479, 897, 488, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [479, 791, 488, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "20882-12",
+          "c": 1,
+          "p": 1,
+          "b": [504, 87, 514, 139]
+        },
+        "description": {
+          "v": "Bluewater Smoked Pink Salmon, 14.75 oz",
+          "c": 1,
+          "p": 1,
+          "b": [504, 202, 514, 428]
+        },
+        "qty": {
+          "v": 20,
+          "c": 1,
+          "p": 1,
+          "b": [504, 897, 514, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [504, 791, 514, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      }
+    ],
+    "subtotal": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "tax": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "shipping": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "total": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    }
+  },
+  "usage": {
+    "inputTokens": 1575,
+    "outputTokens": 1755
+  },
+  "latencyMs": 5647,
+  "costUsd": 0.00486
+}

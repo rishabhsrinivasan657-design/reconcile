@@ -1,0 +1,109 @@
+{
+  "keyParts": ["e2b18ab32f3d036fc6f09b67af95777b2440e8474c9d8a0c9a183370b1ab581c"],
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "promptVersion": "extract.v2",
+  "data": {
+    "docType": "PO",
+    "vendorName": {
+      "v": "Northfield Frozen Foods",
+      "c": 1,
+      "p": 1,
+      "b": [211, 91, 222, 249]
+    },
+    "docNumber": {
+      "v": "HP-PO-104187",
+      "c": 1,
+      "p": 1,
+      "b": [99, 818, 106, 917]
+    },
+    "poNumber": {
+      "v": null,
+      "c": 1,
+      "p": 1,
+      "b": null
+    },
+    "date": {
+      "v": "2026-03-08",
+      "c": 1,
+      "p": 1,
+      "b": [116, 844, 124, 917]
+    },
+    "dueDate": {
+      "v": null,
+      "c": 1,
+      "p": 1,
+      "b": null
+    },
+    "lines": [
+      {
+        "sku": {
+          "v": "NR-19067",
+          "c": 1,
+          "p": 1,
+          "b": [290, 88, 298, 152]
+        },
+        "description": {
+          "v": "Northfield Teriyaki Veggie Fried Rice, 16 oz",
+          "c": 1,
+          "p": 1,
+          "b": [289, 202, 299, 466]
+        },
+        "qty": {
+          "v": 49,
+          "c": 1,
+          "p": 1,
+          "b": [290, 617, 298, 633]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [290, 647, 298, 665]
+        },
+        "unitPrice": {
+          "v": "$41.09",
+          "c": 1,
+          "p": 1,
+          "b": [289, 751, 298, 793]
+        },
+        "lineTotal": {
+          "v": "$2,013.41",
+          "c": 1,
+          "p": 1,
+          "b": [289, 849, 298, 910]
+        }
+      }
+    ],
+    "subtotal": {
+      "v": "$2,013.41",
+      "c": 1,
+      "p": 1,
+      "b": [322, 845, 331, 910]
+    },
+    "tax": {
+      "v": null,
+      "c": 1,
+      "p": 1,
+      "b": null
+    },
+    "shipping": {
+      "v": null,
+      "c": 1,
+      "p": 1,
+      "b": null
+    },
+    "total": {
+      "v": "$2,013.41",
+      "c": 1,
+      "p": 1,
+      "b": [345, 846, 354, 910]
+    }
+  },
+  "usage": {
+    "inputTokens": 3228,
+    "outputTokens": 1027
+  },
+  "latencyMs": 4170,
+  "costUsd": 0.0035359000000000002
+}

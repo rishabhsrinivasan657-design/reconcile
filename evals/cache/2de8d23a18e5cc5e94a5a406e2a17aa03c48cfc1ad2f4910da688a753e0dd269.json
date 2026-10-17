@@ -1,0 +1,489 @@
+{
+  "keyParts": ["65b731a0e38aa1368209ffe86194fdceb1b78611ba8e4fd1e5e4ceff89782024"],
+  "provider": "gemini",
+  "model": "gemini-3.8-flash",
+  "promptVersion": "extract.v2",
+  "data": {
+    "docType": "RR",
+    "vendorName": {
+      "v": "MESA NORTE PANTRY",
+      "c": 0.99,
+      "p": 1,
+      "b": [193, 80, 203, 217]
+    },
+    "docNumber": {
+      "v": "RCV-500219",
+      "c": 0.99,
+      "p": 1,
+      "b": [125, 245, 133, 326]
+    },
+    "poNumber": {
+      "v": "HP-PO-104131",
+      "c": 0.99,
+      "p": 1,
+      "b": [125, 671, 133, 767]
+    },
+    "date": {
+      "v": "2026-07-06",
+      "c": 0.99,
+      "p": 1,
+      "b": [140, 245, 148, 333]
+    },
+    "dueDate": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "lines": [
+      {
+        "sku": {
+          "v": "MSNT18082",
+          "c": 0.99,
+          "p": 1,
+          "b": [281, 222, 291, 289]
+        },
+        "description": {
+          "v": "Mesa Norte White Corn Tortillas, 80 ct",
+          "c": 0.99,
+          "p": 1,
+          "b": [281, 335, 291, 614]
+        },
+        "qty": {
+          "v": 59,
+          "c": 0.99,
+          "p": 1,
+          "b": [281, 136, 291, 152]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 0.99,
+          "p": 1,
+          "b": [281, 164, 289, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "MSNT18087",
+          "c": 0.99,
+          "p": 1,
+          "b": [297, 222, 305, 289]
+        },
+        "description": {
+          "v": "Mesa Norte Roja Hot Salsa, 16 oz",
+          "c": 0.99,
+          "p": 1,
+          "b": [296, 335, 306, 573]
+        },
+        "qty": {
+          "v": 50,
+          "c": 0.99,
+          "p": 1,
+          "b": [297, 136, 305, 152]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 0.99,
+          "p": 1,
+          "b": [297, 163, 305, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "MSNT18154",
+          "c": 0.99,
+          "p": 1,
+          "b": [311, 222, 321, 289]
+        },
+        "description": {
+          "v": "Mesa Norte Vegetarian Pinto Refried Beans, 29 oz",
+          "c": 0.99,
+          "p": 1,
+          "b": [311, 335, 321, 690]
+        },
+        "qty": {
+          "v": 55,
+          "c": 0.99,
+          "p": 1,
+          "b": [311, 137, 321, 152]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 0.99,
+          "p": 1,
+          "b": [312, 163, 320, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "MSNT18227",
+          "c": 0.99,
+          "p": 1,
+          "b": [326, 222, 336, 289]
+        },
+        "description": {
+          "v": "Mesa Norte Vegetarian Pinto Refried Beans, 16 oz",
+          "c": 0.99,
+          "p": 1,
+          "b": [326, 335, 336, 690]
+        },
+        "qty": {
+          "v": 26,
+          "c": 0.99,
+          "p": 1,
+          "b": [326, 137, 336, 151]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 0.99,
+          "p": 1,
+          "b": [326, 164, 336, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "MSNT18291",
+          "c": 0.99,
+          "p": 1,
+          "b": [341, 222, 351, 289]
+        },
+        "description": {
+          "v": "Mesa Norte Black Refried Beans, 29 oz",
+          "c": 0.99,
+          "p": 1,
+          "b": [341, 335, 351, 608]
+        },
+        "qty": {
+          "v": 5,
+          "c": 0.99,
+          "p": 1,
+          "b": [342, 143, 350, 152]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 0.99,
+          "p": 1,
+          "b": [342, 163, 350, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "MSNT18608",
+          "c": 0.99,
+          "p": 1,
+          "b": [356, 222, 366, 289]
+        },
+        "description": {
+          "v": "Mesa Norte Verde Salsa, 16 oz",
+          "c": 0.99,
+          "p": 1,
+          "b": [356, 336, 366, 550]
+        },
+        "qty": {
+          "v": 27,
+          "c": 0.99,
+          "p": 1,
+          "b": [357, 136, 365, 152]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 0.99,
+          "p": 1,
+          "b": [357, 163, 365, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "MSNT18631",
+          "c": 0.99,
+          "p": 1,
+          "b": [371, 222, 381, 289]
+        },
+        "description": {
+          "v": "Mesa Norte Pinto Refried Beans, 29 oz",
+          "c": 0.99,
+          "p": 1,
+          "b": [371, 335, 381, 608]
+        },
+        "qty": {
+          "v": 57,
+          "c": 0.99,
+          "p": 1,
+          "b": [371, 136, 381, 152]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 0.99,
+          "p": 1,
+          "b": [371, 164, 381, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "MSNT18786",
+          "c": 0.99,
+          "p": 1,
+          "b": [387, 222, 396, 289]
+        },
+        "description": {
+          "v": "Mesa Norte Pinto Refried Beans, 16 oz",
+          "c": 0.99,
+          "p": 1,
+          "b": [387, 335, 396, 608]
+        },
+        "qty": {
+          "v": 54,
+          "c": 0.99,
+          "p": 1,
+          "b": [387, 136, 395, 152]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 0.99,
+          "p": 1,
+          "b": [387, 163, 395, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "MSNT18852",
+          "c": 0.99,
+          "p": 1,
+          "b": [401, 222, 411, 289]
+        },
+        "description": {
+          "v": "Mesa Norte Mild Salsa, 16 oz",
+          "c": 0.99,
+          "p": 1,
+          "b": [401, 335, 411, 543]
+        },
+        "qty": {
+          "v": 55,
+          "c": 0.99,
+          "p": 1,
+          "b": [402, 136, 410, 152]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 0.99,
+          "p": 1,
+          "b": [402, 163, 410, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "MSNT18855",
+          "c": 0.99,
+          "p": 1,
+          "b": [417, 222, 426, 289]
+        },
+        "description": {
+          "v": "Mesa Norte Black Refried Beans, 16 oz",
+          "c": 0.99,
+          "p": 1,
+          "b": [417, 335, 426, 608]
+        },
+        "qty": {
+          "v": 2,
+          "c": 0.99,
+          "p": 1,
+          "b": [417, 143, 425, 152]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 0.99,
+          "p": 1,
+          "b": [417, 163, 425, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "MSNT18867",
+          "c": 0.99,
+          "p": 1,
+          "b": [432, 222, 441, 289]
+        },
+        "description": {
+          "v": "Mesa Norte White Corn Tortillas, 30 ct",
+          "c": 0.99,
+          "p": 1,
+          "b": [432, 335, 441, 614]
+        },
+        "qty": {
+          "v": 58,
+          "c": 0.99,
+          "p": 1,
+          "b": [432, 136, 440, 152]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 0.99,
+          "p": 1,
+          "b": [432, 163, 440, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      }
+    ],
+    "subtotal": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "tax": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "shipping": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "total": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    }
+  },
+  "usage": {
+    "inputTokens": 1575,
+    "outputTokens": 2547
+  },
+  "latencyMs": 37529,
+  "costUsd": 0.0107325
+}

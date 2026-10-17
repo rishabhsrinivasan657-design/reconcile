@@ -1,0 +1,413 @@
+{
+  "keyParts": ["6efa1bb5da29d9617fd522c7d9f1cf64fad497a50e992e1ec1ba5d790da32dda"],
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "promptVersion": "extract.v2",
+  "data": {
+    "docType": "RR",
+    "vendorName": {
+      "v": "Orchard Lane Preserves",
+      "c": 1,
+      "p": 1,
+      "b": [224, 88, 235, 219]
+    },
+    "docNumber": {
+      "v": "RCV-500463",
+      "c": 1,
+      "p": 1,
+      "b": [135, 88, 145, 162]
+    },
+    "poNumber": {
+      "v": "HP-PO-104254",
+      "c": 1,
+      "p": 1,
+      "b": [135, 367, 144, 456]
+    },
+    "date": {
+      "v": "2026-09-11",
+      "c": 1,
+      "p": 1,
+      "b": [135, 646, 145, 715]
+    },
+    "dueDate": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "lines": [
+      {
+        "sku": {
+          "v": "OR-22019",
+          "c": 1,
+          "p": 1,
+          "b": [303, 89, 311, 142]
+        },
+        "description": {
+          "v": "Orchard Lane Wild Blueberry Fruit Preserves, 10 oz",
+          "c": 1,
+          "p": 1,
+          "b": [303, 203, 313, 478]
+        },
+        "qty": {
+          "v": 33,
+          "c": 1,
+          "p": 1,
+          "b": [303, 898, 311, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [303, 791, 311, 805]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "OR-22090",
+          "c": 1,
+          "p": 1,
+          "b": [329, 88, 337, 141]
+        },
+        "description": {
+          "v": "Orchard Lane Orange Blossom Raw Honey, 24 oz",
+          "c": 1,
+          "p": 1,
+          "b": [328, 203, 338, 467]
+        },
+        "qty": {
+          "v": 15,
+          "c": 1,
+          "p": 1,
+          "b": [329, 898, 337, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [329, 791, 337, 805]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "OR-22292",
+          "c": 1,
+          "p": 1,
+          "b": [354, 88, 362, 141]
+        },
+        "description": {
+          "v": "Orchard Lane Clover Raw Honey, 24 oz",
+          "c": 1,
+          "p": 1,
+          "b": [354, 203, 363, 412]
+        },
+        "qty": {
+          "v": 35,
+          "c": 1,
+          "p": 1,
+          "b": [354, 898, 362, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [354, 791, 362, 805]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "OR-22391",
+          "c": 1,
+          "p": 1,
+          "b": [379, 88, 388, 141]
+        },
+        "description": {
+          "v": "Orchard Lane Wild Blueberry Fruit Preserves, 18 oz",
+          "c": 1,
+          "p": 1,
+          "b": [379, 203, 389, 478]
+        },
+        "qty": {
+          "v": 59,
+          "c": 1,
+          "p": 1,
+          "b": [379, 898, 387, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [379, 791, 387, 805]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "OR-22444",
+          "c": 1,
+          "p": 1,
+          "b": [405, 88, 413, 141]
+        },
+        "description": {
+          "v": "Orchard Lane Blackberry Fruit Preserves, 10 oz",
+          "c": 1,
+          "p": 1,
+          "b": [405, 203, 414, 458]
+        },
+        "qty": {
+          "v": 34,
+          "c": 1,
+          "p": 1,
+          "b": [405, 898, 413, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [405, 791, 413, 805]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "OR-22455",
+          "c": 1,
+          "p": 1,
+          "b": [430, 88, 438, 141]
+        },
+        "description": {
+          "v": "Orchard Lane Apricot Fruit Preserves, 18 oz",
+          "c": 1,
+          "p": 1,
+          "b": [430, 203, 439, 439]
+        },
+        "qty": {
+          "v": 27,
+          "c": 1,
+          "p": 1,
+          "b": [430, 898, 438, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [430, 791, 438, 805]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "OR-22658",
+          "c": 1,
+          "p": 1,
+          "b": [456, 88, 463, 141]
+        },
+        "description": {
+          "v": "Orchard Lane Wildflower Raw Honey, 12 oz",
+          "c": 1,
+          "p": 1,
+          "b": [455, 203, 465, 436]
+        },
+        "qty": {
+          "v": 10,
+          "c": 1,
+          "p": 1,
+          "b": [456, 898, 463, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [456, 791, 463, 805]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "OR-22728",
+          "c": 1,
+          "p": 1,
+          "b": [481, 89, 489, 141]
+        },
+        "description": {
+          "v": "Orchard Lane Strawberry Fruit Preserves, 10 oz",
+          "c": 1,
+          "p": 1,
+          "b": [481, 203, 490, 459]
+        },
+        "qty": {
+          "v": 10,
+          "c": 1,
+          "p": 1,
+          "b": [481, 898, 489, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [481, 791, 489, 805]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "OR-22885",
+          "c": 1,
+          "p": 1,
+          "b": [506, 88, 514, 141]
+        },
+        "description": {
+          "v": "Orchard Lane Clover Raw Honey, 12 oz",
+          "c": 1,
+          "p": 1,
+          "b": [506, 203, 515, 412]
+        },
+        "qty": {
+          "v": 10,
+          "c": 1,
+          "p": 1,
+          "b": [506, 898, 514, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [506, 791, 514, 805]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      }
+    ],
+    "subtotal": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "tax": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "shipping": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "total": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    }
+  },
+  "usage": {
+    "inputTokens": 1575,
+    "outputTokens": 1742
+  },
+  "latencyMs": 4985,
+  "costUsd": 0.0048275
+}
