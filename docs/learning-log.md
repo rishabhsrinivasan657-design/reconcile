@@ -329,3 +329,28 @@ request to prove the gate fails.
   (B-16), not about celebrating 100.
 
 **Remember:** a retro without a follow-up action is just a diary entry.
+
+---
+
+## M3 · Requirements (2026-10-17)
+
+**In one line:** let the AI read the documents, and plan how to trust (or distrust) what it reads.
+
+**What we did:** wrote 17 acceptance criteria covering a swappable AI client,
+document extraction with confidence and review flags, two new eval stages, and
+harder test data (B-16).
+
+**Key ideas**
+- **Never trust the AI blindly.** Every field gets a confidence score, and math checks
+  (qty × price = total) catch mistakes the AI won't admit. Doubtful documents go to a human.
+- **Measure the AI's effect in steps.** *Extract* scores reading alone. *E2E* scores
+  reading plus matching. Comparing E2E with the perfect-input *match* stage shows
+  exactly how much the AI's reading errors cost.
+- **Catch rate.** Of the fields the AI got wrong, how many did we flag for review?
+  A high catch rate means humans can trust the fields that *weren't* flagged.
+- **Free-tier engineering.** A cache, a rate limiter, and replay mode mean evals cost
+  nothing to re-run, and CI needs no secret key.
+- **Vendor independence.** One interface, four AI providers. Switching is a setting,
+  not a rewrite.
+
+**Remember:** an AI system is only as good as your ability to tell when it's wrong.

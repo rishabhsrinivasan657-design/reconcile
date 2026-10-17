@@ -24,7 +24,7 @@ Priority: **P1** next after the current plan · **P2** valuable later · **P3** 
 | ~~B-13~~ | ~~Branch protection on `main` requiring CI~~ ✅ enabled 2026-10-17 (M2 Q2) | P1 | M1 retro |
 | B-14 | More SKUs per vendor so sets reach 25 lines and more multi-page documents | P2 | M1 retro |
 | ~~B-15~~ | ~~Benign within-tolerance noise for precision evals~~ ✅ M2 (`price_noise`) | P2 | M1 retro |
-| B-16 | Harder fuzzy cases: let `sku_omitted` lines also get a reworded/abbreviated description, so the text matcher (and the M4 LLM) face real ambiguity. M2 scores 100 partly because these never combine. | P1 | M2 implementation |
+| B-16 | Harder fuzzy cases: let `sku_omitted` lines also get a reworded/abbreviated description, so the text matcher (and the M4 LLM) face real ambiguity. M2 scores 100 partly because these never combine. | P1 | M2 implementation (→ in M3 scope, AC-16) |
 
 ## Tech debt
 
