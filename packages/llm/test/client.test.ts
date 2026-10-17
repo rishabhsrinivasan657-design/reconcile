@@ -5,6 +5,7 @@ import { MemoryCacheStore } from '../src/cache.ts';
 import { LlmClient, ReplayMiss, type Invoker } from '../src/client.ts';
 import { DailyBudgetExceeded, RateLimiter } from '../src/limiter.ts';
 import { estimateCost } from '../src/prices.ts';
+import { parseJsonText } from '../src/providers.ts';
 import { withRetry } from '../src/retry.ts';
 import { MemorySink } from '../src/sinks.ts';
 import { fakeClock, testEnv, tmpDir } from './helpers.ts';
@@ -254,5 +255,13 @@ describe('validation and repair', () => {
       }).generateStructured(req()),
     ).rejects.toThrow(/after one repair/);
     expect(sink.calls.at(-1)?.error).toMatch(/schema validation failed/);
+  });
+});
+
+describe('JSON-mode parsing (Gemini, Groq)', () => {
+  it('parses plain or fenced JSON, and returns null for prose', () => {
+    expect(parseJsonText('{"total":"1.00"}')).toEqual({ total: '1.00' });
+    expect(parseJsonText('```json\n{"total":"1.00"}\n```')).toEqual({ total: '1.00' });
+    expect(parseJsonText('Sure! Here is the data.')).toBeNull();
   });
 });

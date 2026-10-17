@@ -77,7 +77,9 @@ export const PROVIDER_LIMITS: Record<
   }
 > = {
   // Gemini free tier: limits are shown per account in AI Studio; conservative defaults.
-  gemini: { maxImages: 20, imageTokens: 1300, rpm: 10, rpd: 250, jsonMode: false },
+  // JSON mode: Gemini's response_schema rejects the `type: [T, "null"]` LangChain emits for
+  // nullable fields, so the shape goes in the prompt and our Zod validation enforces it.
+  gemini: { maxImages: 20, imageTokens: 1300, rpm: 10, rpd: 250, jsonMode: true },
   // Groq free tier: 30 RPM, 1K RPD, 8K TPM, 200K TPD (and 1K output tokens/min on qwen3.8-27b).
   groq: {
     maxImages: 3,

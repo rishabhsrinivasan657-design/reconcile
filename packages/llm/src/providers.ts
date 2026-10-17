@@ -54,6 +54,9 @@ export function createChatModel(o: ModelOptions): BaseChatModel {
         ...common,
         apiKey: requireKey(o.env.GEMINI_API_KEY, 'GEMINI_API_KEY'),
         maxOutputTokens: o.maxOutputTokens,
+        // JSON output without a response_schema (see PROVIDER_LIMITS.gemini).
+        json: true,
+        temperature: 0,
         ...(o.baseUrl ? { baseUrl: o.baseUrl } : {}),
       });
     case 'anthropic':
@@ -92,13 +95,6 @@ export async function invokeStructured(
   images: readonly ImagePart[],
   jsonMode = false,
 ): Promise<InvokeResult> {
-  // JSON mode: the provider guarantees valid JSON; the shape comes from the prompt and our Zod
-  // validation (with one repair) enforces it.
-  const runnable = chat.withStructuredOutput(schema as never, {
-    name: 'answer',
-    includeRaw: true,
-    ...(jsonMode ? { method: 'jsonMode' } : {}),
-  });
   const content = [
     { type: 'text' as const, text: userText },
     ...images.map((img) => ({
@@ -106,11 +102,22 @@ export async function invokeStructured(
       image_url: { url: `data:${img.mimeType};base64,${Buffer.from(img.data).toString('base64')}` },
     })),
   ];
-  const res = (await runnable.invoke([
-    new SystemMessage(system),
-    new HumanMessage({ content }),
-  ])) as {
-    raw: { usage_metadata?: { input_tokens?: number; output_tokens?: number }; content?: unknown };
+  const messages = [new SystemMessage(system), new HumanMessage({ content })];
+
+  if (jsonMode) {
+    // JSON mode: a plain call whose text is JSON. The shape comes from the prompt; our Zod
+    // validation (with one repair) enforces it, so providers' schema quirks don't matter.
+    const msg = await chat.invoke(messages);
+    const meta = msg.usage_metadata;
+    return {
+      parsed: parseJsonText(textOf(msg.content)),
+      usage: { inputTokens: meta?.input_tokens ?? 0, outputTokens: meta?.output_tokens ?? 0 },
+    };
+  }
+
+  const runnable = chat.withStructuredOutput(schema as never, { name: 'answer', includeRaw: true });
+  const res = (await runnable.invoke(messages)) as {
+    raw: { usage_metadata?: { input_tokens?: number; output_tokens?: number } };
     parsed: unknown;
   };
   const meta = res.raw?.usage_metadata;
@@ -118,4 +125,26 @@ export async function invokeStructured(
     parsed: res.parsed ?? null,
     usage: { inputTokens: meta?.input_tokens ?? 0, outputTokens: meta?.output_tokens ?? 0 },
   };
+}
+
+function textOf(content: unknown): string {
+  if (typeof content === 'string') return content;
+  return Array.isArray(content)
+    ? content
+        .map((p) => (typeof p === 'string' ? p : ((p as { text?: string }).text ?? '')))
+        .join('')
+    : String(content ?? '');
+}
+
+/** Parse a JSON answer, tolerating ```json fences; returns null when it isn't JSON. */
+export function parseJsonText(text: string): unknown {
+  const stripped = text
+    .trim()
+    .replace(/^```(?:json)?\s*/i, '')
+    .replace(/\s*```$/, '');
+  try {
+    return JSON.parse(stripped);
+  } catch {
+    return null;
+  }
 }
