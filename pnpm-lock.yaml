@@ -44,6 +44,12 @@ importers:
       '@reconcile/core':
         specifier: workspace:*
         version: link:../packages/core
+      '@reconcile/extraction':
+        specifier: workspace:*
+        version: link:../packages/extraction
+      '@reconcile/llm':
+        specifier: workspace:*
+        version: link:../packages/llm
 
   packages/core:
     dependencies:
