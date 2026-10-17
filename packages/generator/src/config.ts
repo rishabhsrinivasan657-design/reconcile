@@ -28,6 +28,7 @@ export const DEFAULT_RATES: Rates = {
     extra_invoice_line: 0.08,
     missing_document: 0.08,
     duplicate_invoice: 0.08,
+    price_noise: 0.15,
   },
 };
 
@@ -57,6 +58,7 @@ export const LINE_ERRORS = [
   'price_change',
   'description_typo',
   'sku_omitted',
+  'price_noise',
 ] as const satisfies readonly PlantedErrorType[];
 
 /** These only show up when all three documents can be matched, so a missing document skips them. */

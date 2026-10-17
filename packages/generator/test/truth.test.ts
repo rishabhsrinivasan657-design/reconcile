@@ -56,6 +56,14 @@ describe('lineImpacts: count each billed unit once', () => {
     ]);
   });
 
+  it('price noise inside tolerance raises nothing; just outside does (AC-16)', () => {
+    expect(lineImpacts(10, 10, 10, '30.00', '30.15')).toEqual([]);
+    expect(lineImpacts(10, 10, 10, '1.00', '0.99')).toEqual([]);
+    expect(lineImpacts(10, 10, 10, '30.00', '30.16')).toEqual([
+      { type: 'PRICE_VARIANCE', amount: '1.60', informational: false },
+    ]);
+  });
+
   it('worked example: ordered 10, received 8, billed 10 at $5.00 vs PO $4.80 = $11.60', () => {
     const impacts = lineImpacts(10, 8, 10, '4.80', '5.00');
     expect(impacts).toEqual([

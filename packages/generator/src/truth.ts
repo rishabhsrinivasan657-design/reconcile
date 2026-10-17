@@ -8,6 +8,9 @@ import {
 } from '@reconcile/core';
 import type { DocSpec, LineLink, SetSpec } from './model.ts';
 
+/** PRD default price tolerance: prices within max($0.01, 0.5%) count as equal. */
+export const PRICE_TOLERANCE = { abs: '0.01', pct: '0.005' } as const;
+
 export interface LineImpact {
   type: ExceptionType;
   amount: string;
@@ -49,7 +52,8 @@ export function lineImpacts(
   if (r >= o && b > r) {
     out.push({ type: 'QTY_BILLED_NOT_RECEIVED', amount: money(b - r), informational: false });
   }
-  if (!new Decimal(pInv).equals(pPo)) {
+  const tolerance = Decimal.max(PRICE_TOLERANCE.abs, new Decimal(pPo).times(PRICE_TOLERANCE.pct));
+  if (new Decimal(pInv).minus(pPo).abs().greaterThan(tolerance)) {
     const amount = toCents(new Decimal(pInv).minus(pPo).times(Math.min(b, r)));
     out.push({ type: 'PRICE_VARIANCE', amount, informational: false });
   }

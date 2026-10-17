@@ -72,6 +72,19 @@ describe('planted errors (M1 AC-12)', () => {
   });
 });
 
+describe('price noise (M2 AC-16)', () => {
+  it('is always 1 cent or more, and inside max($0.01, 0.5%)', () => {
+    for (const set of sets(only('price_noise'), 60)) {
+      const p = set.planted.find((x) => x.type === 'price_noise')!;
+      const po = new Decimal(p.details.poPrice as string);
+      const diff = new Decimal(p.details.invoicePrice as string).minus(po).abs();
+      expect(diff.greaterThanOrEqualTo('0.01')).toBe(true);
+      expect(diff.lessThanOrEqualTo(Decimal.max('0.01', po.times('0.005')))).toBe(true);
+      expect(expectedExceptions(set)).toEqual([]);
+    }
+  });
+});
+
 describe('document arithmetic (M1 AC-14)', () => {
   it('qty x price = line total, lines sum to subtotal, totals add up', () => {
     for (const set of sets()) {

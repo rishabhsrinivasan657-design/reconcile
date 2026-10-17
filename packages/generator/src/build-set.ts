@@ -3,6 +3,7 @@ import { ABBREVIATIONS } from './catalog/data.ts';
 import type { Catalog, CatalogItem, VendorProfile } from './catalog/index.ts';
 import { LINE_ERRORS, NEEDS_COMPLETE_SET, type Rates } from './config.ts';
 import { addDays, EPOCH } from './dates.ts';
+import { PRICE_TOLERANCE } from './truth.ts';
 import type { DocSpec, LineLink, LineSpec, SetSpec } from './model.ts';
 import { Rng } from './rng.ts';
 
@@ -161,6 +162,17 @@ export function buildSet(catalog: Catalog, rates: Rates, seed: number, index: nu
         w.invSkuOmitted = true;
         Object.assign(details, { sku: w.item.sku });
         break;
+      case 'price_noise': {
+        // A near miss: a few cents off, but inside the default tolerance, so no exception.
+        const po = new Decimal(w.poPrice);
+        const tolerance = Decimal.max(PRICE_TOLERANCE.abs, po.times(PRICE_TOLERANCE.pct));
+        const maxCents = Math.max(1, tolerance.times(80).floor().toNumber());
+        const k = plantRng.int(1, maxCents);
+        const sign = plantRng.chance(0.5) || po.lessThanOrEqualTo('0.05') ? 1 : -1;
+        w.invPrice = toCents(po.plus(new Decimal(k).dividedBy(100).times(sign)));
+        Object.assign(details, { poPrice: w.poPrice, invoicePrice: w.invPrice });
+        break;
+      }
     }
     planted.push({ type, lineKeys: [], details }); // keys filled in once line numbers exist
   }
