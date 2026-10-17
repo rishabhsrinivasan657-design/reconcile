@@ -1,6 +1,6 @@
 # ADR-0012: How the website is built
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-10-17
 - **Requirements:** M5 AC-1 … AC-13, FR-11, FR-12
 

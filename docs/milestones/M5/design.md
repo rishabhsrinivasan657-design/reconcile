@@ -1,6 +1,6 @@
 # M5: The website. Design
 
-- **Status:** Draft, waiting for your approval
+- **Status:** Approved (2026-10-17)
 - **Builds:** AC-1 … AC-13 from [`requirements.md`](requirements.md)
 - **New decision records:** [ADR-0012](../../adr/0012-website-stack.md) (how the website is
   built) and [ADR-0013](../../adr/0013-live-updates.md) (how live updates reach the browser)

@@ -1,6 +1,6 @@
 # ADR-0013: Live updates through Redis and server-sent events
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-10-17
 - **Requirements:** M5 AC-2, AC-3 (answer to M5 Q2: real-time)
 
