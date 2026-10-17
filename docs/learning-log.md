@@ -310,3 +310,22 @@ request to prove the gate fails.
   M2's requirements, so it went to the backlog for you to decide.
 
 **Remember:** a test that never fails might not be testing anything. Make it fail once on purpose.
+
+---
+
+## M2 · Review, release, and retro (2026-10-17)
+
+**In one line:** merge with CI as the gatekeeper, release v0.3.0, and question the perfect score.
+
+**What we did:** merged PR #2 once all three required checks passed, tagged
+**v0.3.0**, published the release, and wrote the retrospective.
+
+**Key ideas**
+- **CI as gatekeeper.** `main` now refuses merges unless lint, tests, and evals pass.
+  Review is no longer only "a person looked", but "a person looked *and* the machines agree".
+- **Applying last retro's lesson.** M1's merge leaked an email; this time we merged
+  locally. Retros only matter if the next milestone changes something.
+- **Healthy skepticism.** The retro's main point is about what our tests can't see
+  (B-16), not about celebrating 100.
+
+**Remember:** a retro without a follow-up action is just a diary entry.
