@@ -1,6 +1,6 @@
 # ADR-0002: LLM behind a provider interface, with a shared rate limiter and response cache
 
-- **Status:** Accepted (2026-10-16)
+- **Status:** Accepted (2026-10-16). The "own adapters" part is superseded by [ADR-0010](0010-langchain-provider-switching.md) (2026-10-17).
 - **Date:** 2026-10-16
 - **Requirements:** NFR-01, NFR-03, NFR-04, FR-18
 

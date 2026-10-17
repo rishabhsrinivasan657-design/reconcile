@@ -354,3 +354,30 @@ harder test data (B-16).
   not a rewrite.
 
 **Remember:** an AI system is only as good as your ability to tell when it's wrong.
+
+---
+
+## M3 · Design (2026-10-17)
+
+**In one line:** wrap the AI in our own safety layers, and let a framework handle only the provider details.
+
+**What we did:** designed the LLM client (LangChain.js underneath; our cache,
+rate limiter, retries, and cost log on top), the extraction steps, the new eval
+metrics, and wrote ADR-0010.
+
+**Key ideas**
+- **Superseding a decision.** We changed ADR-0002's "write our own adapters" to
+  "use LangChain" (ADR-0010). The old ADR isn't erased; its status line points to
+  the new one, so the history of *why* stays readable.
+- **Thin framework, thick guarantees.** LangChain only talks to providers. What
+  makes the project free, reproducible, and measurable is our code around it, so
+  swapping frameworks later touches one file.
+- **Check facts that change.** Model names, prices, and free-tier limits change
+  often. We checked Google's pricing page today and made limits settings instead
+  of hard-coding guesses.
+- **Decide with data.** Flash-Lite (cheaper) vs. Flash (smarter): we'll run both on
+  the same 20 sets and let the scoreboard choose.
+- **Secrets hygiene.** API keys live only in your local `.env`, never in chat, git,
+  or logs, and a test checks that no key-like text leaks into results.
+
+**Remember:** the AI is a component. Your guarantees come from the system around it.

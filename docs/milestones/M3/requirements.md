@@ -1,6 +1,6 @@
 # M3: LLM client and extraction. Requirements
 
-- **Status:** Draft, awaiting approval at the M3 Requirements gate
+- **Status:** Approved (2026-10-17)
 - **PRD links:** US-02, US-05, US-10 · FR-02–FR-05, FR-16, FR-18 · NFR-01, NFR-03, NFR-04, NFR-05
 - **Includes:** backlog B-16 (harder fuzzy test data)
 - **Target release:** v0.4.0
@@ -31,7 +31,9 @@ re-running evals spends no quota, and CI replays saved responses with no API key
 ### A. LLM client (ADR-0002)
 
 - [ ] **AC-1 One interface, four providers.** `generateStructured()` works the same
-  for Gemini, Ollama, Anthropic, and OpenAI, chosen by `LLM_PROVIDER`. Model IDs
+  for Gemini, Ollama, Anthropic, and OpenAI, chosen by `LLM_PROVIDER`. Provider
+  switching uses **LangChain.js** chat models underneath our own cache, limiter, and
+  log (decision Q4, ADR-0010). Model IDs
   come from env. Gemini is implemented and tested live. The other three are
   implemented and tested against recorded or mocked HTTP responses, since they
   have no free quota.
@@ -115,15 +117,11 @@ re-running evals spends no quota, and CI replays saved responses with no API key
 - Extraction is scored against what's **printed** on the page. If the AI "fixes" a
   printed typo, that counts as a reading error.
 
-## Open questions (need your answer at this gate)
+## Decisions (2026-10-17)
 
-- **Q1. Gemini API key.** You'll need a free key from Google AI Studio (any Google
-  account, no card). You paste it into your own `.env`, and I never see or handle
-  it. When we reach implementation I'll walk you through it in 3 steps. Is that OK?
-- **Q2. Local model (Ollama).** Optionally, we also run a free local model on your
-  Mac to compare against Gemini. That's about a 5 GB download, and it works
-  offline. *Recommended: later.* The adapter is built and tested now with mocks,
-  and a live run can happen any time.
-- **Q3. Bounding boxes.** Should the eval also score *where* the AI says each field
-  is (box overlap with the answer key), as a reported, ungated metric?
-  *Recommended: yes.* It's free to compute and makes the review UI (M5) trustworthy.
+| # | Question | Decision |
+|---|---|---|
+| Q1 | Gemini API key | **Yes:** the owner creates a free Gemini key during implementation and puts it in their own `.env`. (A key pasted in chat was an OpenAI key and is being revoked. Keys are never pasted into chat or committed.) |
+| Q2 | Local model (Ollama) | **Later, as a fallback.** The adapter is built and tested with mocks now. |
+| Q3 | Score bounding boxes | **Yes:** reported, not gated |
+| Q4 | Framework for provider switching | **LangChain.js** (owner's choice over the Vercel AI SDK and the hand-written client). Our cache, rate limiter, call log, and replay stay ours. LangGraph isn't used, since there's no multi-step agent yet. Recorded in ADR-0010, superseding the "own adapters" part of ADR-0002. |
