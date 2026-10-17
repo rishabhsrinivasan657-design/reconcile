@@ -6,6 +6,31 @@ All notable changes are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-17
+
+M3: LLM client and extraction ([PR #4](https://github.com/rishabhsrinivasan657-design/reconcile/pull/4)).
+
+### Added
+- `packages/llm`: LangChain.js providers (Gemini default, Groq, OpenAI, Anthropic, Ollama) behind
+  our own client: response cache, replay mode, request and token rate limits, retries (none for
+  billing/quota errors), a hard spend cap for paid providers, and an `LlmCall` log (ADR-0010).
+- `packages/extraction`: PDF/scan → typed document with per-field confidence and location;
+  lenient parsing; money, date, and box normalization; math checks; a self-check retry when lines
+  don't add up; review flag; hash-locked prompts (`extract.v2`, `extract.retry.v1`).
+- `pnpm extract <file>`: read one document and print fields, confidence, review reasons, cost.
+- Eval stages `extract` (field P/R/F1, PDF vs scan, location hit rate, review and catch rate,
+  cost, latency) and `e2e` (read → match), replaying recorded answers in CI with no key.
+- Generator 0.4.0: reworded SKU-less lines and SKU-less invoices (B-16).
+
+### Changed
+- Default LLM: Gemini free tier `gemini-3.5-flash-lite` (after OpenAI had no credit and Groq's
+  free vision model capped output). `$0` constraint restored; paid providers stay capped.
+- `evals/baseline.json` holds one baseline per stage; CI gates match, extract, and e2e.
+- `LlmCall.documentRef` added; `LlmCall.costUsd` nullable.
+
+### Results (CI subset)
+- extract: field F1 99.9 (PDF 100.0, scans 99.7); e2e: link F1 97.4, exception P/R 84.2 / 94.1.
+
 ## [0.3.0] - 2026-10-17
 
 M2: matching engine and eval harness ([PR #2](https://github.com/rishabhsrinivasan657-design/reconcile/pull/2)).
@@ -58,7 +83,8 @@ M0: requirements and design. Documentation only, no code.
 - `QTY_BILLED_NOT_RECEIVED` exception type; informational short-ships (PRD decisions Q1, Q2).
 - M0 design: architecture doc, ADRs 0001–0006, doc and PR templates.
 
-[Unreleased]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/rishabhsrinivasan657-design/reconcile/releases/tag/v0.1.0
