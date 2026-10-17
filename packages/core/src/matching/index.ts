@@ -10,7 +10,8 @@ import type { FuzzyMatcher, LineMatch, MatchException, MatchGroup, MatchResult }
 export * from './config.ts';
 export * from './types.ts';
 export { descriptionSimilarity, textSimilarityMatcher, tokenize } from './fuzzy.ts';
-export { normalizeSku, normalizePo } from './normalize.ts';
+export { normalizeSku, normalizePo, normalizeVendor } from './normalize.ts';
+export { withinOneEdit } from './group.ts';
 export { usd } from './exceptions.ts';
 
 /**
