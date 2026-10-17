@@ -508,3 +508,23 @@ whole thing end to end.
   on failure. Now commits only happen after the test run says "passed".
 
 **Remember:** a green test that can't turn red isn't evidence. Make sure your tests can fail.
+
+---
+
+## M4 · Review, release, and retro (2026-10-17)
+
+**In one line:** ship v0.5.0, the first version that runs as a real service, and be honest about the slip-ups.
+
+**What we did:** merged PR #5 after all three checks passed (including the full pipeline with a
+real database and Redis), tagged **v0.5.0**, published the release, and wrote the retro.
+
+**Key ideas**
+- **A release is a promise.** v0.5.0 means "you can run this and upload documents". The changelog
+  says what changed in words a user understands.
+- **Own the mistakes in writing.** The retro records the commit that went out with failing tests,
+  and the fix to the process (commit only after a passing test run). That's what makes a team
+  trust the process.
+- **Tomorrow's work comes from today's surprises.** The overconfident word matcher became backlog
+  item B-22. Nobody would have planned for it.
+
+**Remember:** a good retro changes a habit, not just a document.

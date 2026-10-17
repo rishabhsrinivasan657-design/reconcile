@@ -25,10 +25,13 @@ Priority: **P1** next after the current plan · **P2** valuable later · **P3** 
 | B-14 | More SKUs per vendor so sets reach 25 lines and more multi-page documents | P2 | M1 retro |
 | ~~B-15~~ | ~~Benign within-tolerance noise for precision evals~~ ✅ M2 (`price_noise`) | P2 | M1 retro |
 | ~~B-16~~ | Harder fuzzy cases: let `sku_omitted` lines also get a reworded/abbreviated description, so the text matcher (and the M4 LLM) face real ambiguity. M2 scores 100 partly because these never combine. | P1 | M2 implementation (→ done in M3, AC-16) |
-| B-17 | Tolerant grouping: when an RR/invoice's PO number is 1 character away from a PO of the same vendor with no match, group them and flag for review (a misread digit, `107093`→`10793`, caused 3 false MISSING_DOCUMENT alarms in M3's e2e eval) | P1 | M3 testing |
+| ~~B-17~~ | ~~Tolerant grouping for a PO number one character off~~ ✅ done in M4 (AC-14) | P1 | M3 testing |
 | B-18 | Date sanity checks: invoice/receipt dates vs the PO date (order, plausible year), day/month swap detection; two confident date misreads went unflagged in M3 | P2 | M3 testing |
 | B-19 | Re-record before each release (provider-side model drift isn't visible to replay CI) | P2 | M3 design risk |
 | B-20 | Finish the `gemini-3.8-flash` comparison on the CI subset: its free daily quota ran out after 15/60 documents (resumes from cache). On those 15: 100% precision but ~81 s/doc vs 7.5 s for Flash-Lite | P2 | M3 testing |
+| B-21 | Automated test for the worker's retry and quota-stop paths (closes M4 AC-4) | P2 | M4 testing |
+| B-22 | Let the AI double-check the word matcher's mid-confidence pairs (0.75–0.9): it gives ~0.8 to same-size different products, which hybrid then never sends to the AI | P1 | M4 testing |
+| B-23 | Run the AI-only pairing strategy on the stress sets when quota allows | P3 | M4 testing |
 
 ## Tech debt
 
