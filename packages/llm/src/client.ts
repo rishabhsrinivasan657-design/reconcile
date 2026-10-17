@@ -100,7 +100,12 @@ export class LlmClient {
     const tpm = env.LLM_TPM ?? caps.tpm;
     const tpd = env.LLM_TPD ?? caps.tpd;
     this.limiter = new RateLimiter(
-      { rpm: env.LLM_RPM, rpd: env.LLM_RPD, ...(tpm ? { tpm } : {}), ...(tpd ? { tpd } : {}) },
+      {
+        rpm: env.LLM_RPM ?? caps.rpm,
+        rpd: env.LLM_RPD ?? caps.rpd,
+        ...(tpm ? { tpm } : {}),
+        ...(tpd ? { tpd } : {}),
+      },
       path.join(stateDir, `_limits-${this.provider}.json`),
       this.clock,
     );

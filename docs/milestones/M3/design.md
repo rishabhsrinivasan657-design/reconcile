@@ -289,9 +289,9 @@ document) per model, costing roughly $0.10 with Luna.
 
 | Planned | Actual | Why |
 |---|---|---|
-| OpenAI `gpt-6-luna` live | **Groq free tier, `qwen/qwen3.8-27b`** (requirements Q6) | The OpenAI account reported "no credits remaining" on two keys. Groq's free plan keeps the project at $0. |
+| OpenAI `gpt-6-luna` live | First **Groq** (Q6), then **Gemini free tier, `gemini-3.5-flash-lite`** (Q7) | OpenAI reported "no credits remaining" on two keys. Groq's only vision model capped output at 1,000 tokens/minute on the free plan, less than one invoice needs. Gemini's free tier fits the original design. |
 | Provider-agnostic structured output | Groq uses **JSON mode**, plus a compact answer shape in the prompt (`jsonShape`) and our Zod validation with one repair | Groq's vision model documents JSON mode with images; strict JSON-schema output isn't confirmed for images |
-| Request-based limiter | Adds **tokens/minute and tokens/day** budgets (Groq free: 8K/min, 200K/day), corrected by actual usage after each call | Groq's binding limit is tokens, not requests |
+| Request-based limiter | Per-provider default limits (Gemini free: 10/min, 250/day), plus **tokens/minute and tokens/day** budgets (Groq free: 8K/min, 200K/day), corrected by actual usage after each call | Groq's binding limit is tokens, not requests |
 | Budget guard for every provider | Skipped for **free-tier providers** (Groq, Ollama); cost is reported at list price when known, otherwise "free tier" | A free plan can't bill; guessing a price would be worse than saying unknown |
 | `extract.v1` prompt text | Gained `jsonShape` before any answers were recorded, and its lock hash was regenerated | No cached answers existed for v1, so no stale reuse was possible |
 | Retry 429s | 429s meaning **no credits / quota** fail immediately | Found on the first live call: waiting can't fix billing |

@@ -16,9 +16,10 @@ well-tested, measurable, and honest about what the AI does and doesn't do.
    (Postgres, Redis). No paid SaaS, no hosted vector DBs. Paid LLM providers
    (e.g. the owner's OpenAI credit) are optional and guarded by a hard spending
    cap (`LLM_BUDGET_USD`, default 4.00). CI never spends: it replays recorded responses.
-2. **LLM = Groq free tier, `qwen/qwen3.8-27b` (vision) by default** (decided
-   2026-10-17), behind a provider interface. OpenAI, Gemini, Anthropic, and
-   Ollama are supported alternatives. Switch providers with an env var:
+2. **LLM = Gemini free tier, `gemini-3.5-flash-lite` by default** (decided
+   2026-10-17, after OpenAI had no credit and Groq's free vision model capped
+   output at 1K tokens/min), behind a provider interface. Groq, OpenAI,
+   Anthropic, and Ollama are supported alternatives. Switch providers with an env var:
    `LLM_PROVIDER=groq|openai|gemini|anthropic|ollama`. Model IDs come from env too
    (`LLM_MODEL_EXTRACT`, `LLM_MODEL_MATCH`). Never hardcode them in logic.
 3. **Assume tight rate limits.** Every LLM call goes through the shared

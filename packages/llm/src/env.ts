@@ -1,23 +1,24 @@
 import { loadEnv } from '@reconcile/core';
 import { z } from 'zod';
 
-export const PROVIDERS = ['groq', 'openai', 'gemini', 'anthropic', 'ollama'] as const;
+export const PROVIDERS = ['gemini', 'groq', 'openai', 'anthropic', 'ollama'] as const;
 export type Provider = (typeof PROVIDERS)[number];
 
 const num = (fallback: number) => z.coerce.number().positive().default(fallback);
 
 /** Every LLM setting comes from env (CLAUDE.md constraint 2). Keys are optional until used. */
 export const LlmEnv = z.object({
-  LLM_PROVIDER: z.enum(PROVIDERS).default('groq'),
-  LLM_MODEL_EXTRACT: z.string().min(1).default('qwen/qwen3.8-27b'),
+  LLM_PROVIDER: z.enum(PROVIDERS).default('gemini'),
+  LLM_MODEL_EXTRACT: z.string().min(1).default('gemini-3.5-flash-lite'),
   LLM_REASONING_EFFORT: z.enum(['minimal', 'low', 'medium', 'high']).default('low'),
   GROQ_API_KEY: z.string().min(1).optional(),
   OPENAI_API_KEY: z.string().min(1).optional(),
   GEMINI_API_KEY: z.string().min(1).optional(),
   ANTHROPIC_API_KEY: z.string().min(1).optional(),
   OLLAMA_BASE_URL: z.string().url().default('http://localhost:11434'),
-  LLM_RPM: num(30),
-  LLM_RPD: num(1000),
+  /** Requests per minute / per day. Default per provider (see PROVIDER_LIMITS). */
+  LLM_RPM: z.coerce.number().positive().optional(),
+  LLM_RPD: z.coerce.number().positive().optional(),
   /** Tokens per minute / per day. Default per provider (Groq free tier: 8K / 200K). */
   LLM_TPM: z.coerce.number().positive().optional(),
   LLM_TPD: z.coerce.number().positive().optional(),
@@ -65,11 +66,29 @@ export const FREE_TIER_PROVIDERS = new Set<Provider>(['groq', 'ollama']);
 /** Provider limits that matter for page images (Groq vision: 3 images, 2,048 tokens each). */
 export const PROVIDER_LIMITS: Record<
   Provider,
-  { maxImages: number; imageTokens: number; tpm?: number; tpd?: number; jsonMode: boolean }
+  {
+    maxImages: number;
+    imageTokens: number;
+    rpm: number;
+    rpd: number;
+    tpm?: number;
+    tpd?: number;
+    jsonMode: boolean;
+  }
 > = {
-  groq: { maxImages: 3, imageTokens: 2048, tpm: 8000, tpd: 200_000, jsonMode: true },
-  openai: { maxImages: 20, imageTokens: 1600, jsonMode: false },
-  gemini: { maxImages: 20, imageTokens: 1300, jsonMode: false },
-  anthropic: { maxImages: 20, imageTokens: 1600, jsonMode: false },
-  ollama: { maxImages: 4, imageTokens: 1000, jsonMode: false },
+  // Gemini free tier: limits are shown per account in AI Studio; conservative defaults.
+  gemini: { maxImages: 20, imageTokens: 1300, rpm: 10, rpd: 250, jsonMode: false },
+  // Groq free tier: 30 RPM, 1K RPD, 8K TPM, 200K TPD (and 1K output tokens/min on qwen3.8-27b).
+  groq: {
+    maxImages: 3,
+    imageTokens: 2048,
+    rpm: 30,
+    rpd: 1000,
+    tpm: 8000,
+    tpd: 200_000,
+    jsonMode: true,
+  },
+  openai: { maxImages: 20, imageTokens: 1600, rpm: 30, rpd: 1000, jsonMode: false },
+  anthropic: { maxImages: 20, imageTokens: 1600, rpm: 30, rpd: 1000, jsonMode: false },
+  ollama: { maxImages: 4, imageTokens: 1000, rpm: 60, rpd: 100_000, jsonMode: false },
 };

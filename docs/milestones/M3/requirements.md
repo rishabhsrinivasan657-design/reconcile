@@ -31,7 +31,7 @@ re-running evals spends no quota, and CI replays saved responses with no API key
 ### A. LLM client (ADR-0002)
 
 - [ ] **AC-1 One interface, four providers.** `generateStructured()` works the same
-  for Groq (default, live, free), OpenAI, Gemini, Ollama, and Anthropic, chosen by `LLM_PROVIDER`. Provider
+  for Gemini (default, live, free), Groq, OpenAI, Ollama, and Anthropic, chosen by `LLM_PROVIDER`. Provider
   switching uses **LangChain.js** chat models underneath our own cache, limiter, and
   log (decision Q4, ADR-0010). Model IDs
   come from env. Gemini is implemented and tested live. The other three are
@@ -126,6 +126,7 @@ re-running evals spends no quota, and CI replays saved responses with no API key
 | Q1 | Gemini API key | **Yes:** the owner creates a free Gemini key during implementation and puts it in their own `.env`. (A key pasted in chat was an OpenAI key and is being revoked. Keys are never pasted into chat or committed.) |
 | Q2 | Local model (Ollama) | **Later, as a fallback.** The adapter is built and tested with mocks now. |
 | Q3 | Score bounding boxes | **Yes:** reported, not gated |
+| Q7 | Provider after Groq's limit | **Gemini free tier** (owner's choice), `gemini-3.5-flash-lite`, with `gemini-3.8-flash` as the comparison model. Groq's only vision model (`qwen/qwen3.8-27b`) allows 1,000 output tokens/minute on the free plan, and one invoice needs about 2,500. Groq stays supported. Supersedes Q6's default. |
 | Q6 | Provider after OpenAI reported no credits | **Groq free tier** (owner's choice): `qwen/qwen3.8-27b`, Groq's generally available vision model (3 images per request, 2,048 tokens per image, JSON mode). Free-plan limits of about 8K tokens/minute and 200K/day mean recording the CI subset takes about 2 days; the cache resumes. This restores the original $0 rule. OpenAI stays supported for when credit is available. Supersedes Q5's default. |
 | Q5 | Which provider by default | **OpenAI** (owner's choice at the Design gate, using their prepaid $5 credit). Default model `gpt-6-luna`, which OpenAI recommends for cost-sensitive volume. A hard budget cap (AC-4b) protects the credit. Gemini's free tier remains a supported $0 option. This replaces Q1's Gemini key. |
 | Q4 | Framework for provider switching | **LangChain.js** (owner's choice over the Vercel AI SDK and the hand-written client). Our cache, rate limiter, call log, and replay stay ours. LangGraph isn't used, since there's no multi-step agent yet. Recorded in ADR-0010, superseding the "own adapters" part of ADR-0002. |
