@@ -9,7 +9,7 @@ export const PipelineEnv = z.object({
   /** Days to wait for a missing document before raising MISSING_DOCUMENT (M4 AC-6). */
   MISSING_DOC_GRACE_DAYS: z.coerce.number().min(0).default(7),
   /** How tricky lines are paired: text matcher, AI, or text first then AI (M4 AC-10). */
-  FUZZY_STRATEGY: z.enum(['text', 'llm', 'hybrid']).default('text'),
+  FUZZY_STRATEGY: z.enum(['text', 'llm', 'hybrid']).default('hybrid'),
   /** 'replay' uses only recorded AI answers (tests, CI); 'live' calls the provider. */
   LLM_MODE: z.enum(['live', 'replay']).default('live'),
   /** Where recorded/cached AI answers live. */

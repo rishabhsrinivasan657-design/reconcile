@@ -9,6 +9,7 @@ import {
   LocalStorage,
   RedisLimiter,
 } from '@reconcile/pipeline';
+import { fuzzyFor } from '@reconcile/extraction';
 import { Redis } from 'ioredis';
 import { startWorkers } from './workers.ts';
 
@@ -42,6 +43,8 @@ const workers = startWorkers({
   queues,
   connection,
   graceDays: env.MISSING_DOC_GRACE_DAYS,
+  // How tricky lines are paired; hybrid won the M4 comparison (text first, AI for the rest).
+  ...(fuzzyFor(env.FUZZY_STRATEGY, llm) ? { fuzzy: fuzzyFor(env.FUZZY_STRATEGY, llm)! } : {}),
   onEvent: (e) => console.log(`[${e.job}] ${e.ok ? '✓' : '✗'} ${e.detail}`),
 });
 console.log(
