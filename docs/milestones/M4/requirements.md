@@ -1,110 +1,120 @@
-# M4: API, worker, and AI fuzzy matching. Requirements
+# M4: Upload, background processing, and AI matching. Requirements
 
-- **Status:** Draft, awaiting approval at the M4 Requirements gate
-- **PRD links:** US-03, US-06 · FR-01, FR-02, FR-05, FR-06, FR-08, FR-12 (system events), FR-13 · NFR-03, NFR-09, NFR-10
-- **Target release:** v0.5.0
+- **Status:** Draft, waiting for your approval
+- **Links to the PRD:** US-03, US-06 · FR-01, FR-02, FR-05, FR-06, FR-08, FR-12, FR-13
+- **Release when done:** v0.5.0
 
-## Goal
+## In one sentence
 
-Reconcile becomes a **running backend**. You upload a PDF or scan, and a
-background worker reads it with the AI, files it under its PO, matches the set
-once it's complete, and saves the line matches and exceptions to the database.
-A REST API (with OpenAPI docs) serves all of it. That gives the UI (M5) and the
-MCP server (M6) one source of truth.
+Right now Reconcile only runs as commands you type. After M4, it's a **service
+that runs on its own**: you upload a document, and Reconcile reads it, files it,
+matches it, and saves the results, all automatically.
 
-An **AI fuzzy matcher** joins the text matcher, and the scoreboard measures
-whether it actually helps.
+## How it will work
 
-## User stories in scope
+1. **You upload** a PDF or photo of a document.
+2. Reconcile **saves the file** and puts it in a **to-do line** (a *queue*).
+3. A **helper program** (the *worker*) picks up the next document, **reads it
+   with the AI**, and figures out which PO it belongs to.
+4. When a PO has its documents, the worker **matches them** and saves the
+   problems it finds (the *exceptions*).
+5. Anyone, including the website in M5, can **ask Reconcile for the results**
+   through its *API* (a set of web addresses that return data).
 
-| ID | Story |
-|---|---|
-| US-03 | As an AP clerk, I want to upload a PO, receiving report, or invoice as PDF or image, so that it gets read without manual data entry. |
-| US-06 | As an AP clerk, I want documents grouped by PO and lines matched automatically, so that I only look at what doesn't match. |
+The upload is answered instantly, and the slow AI reading happens in the
+background. That's why there's a separate worker: nobody waits on the AI.
 
-## Acceptance criteria
+## User stories
 
-### A. Upload API (`apps/api`, Fastify)
+| ID | Who | Wants to… | So that… |
+|---|---|---|---|
+| US-03 | AP clerk | upload a PO, receiving report, or invoice (PDF or photo) | nobody has to type it in |
+| US-06 | AP clerk | have documents grouped by PO and matched automatically | they only look at what doesn't match |
 
-- [ ] **AC-1 Upload.** `POST /documents` accepts PDF, PNG, or JPEG up to 10 MB,
-  stores the file, creates a `Document` (status `UPLOADED`), writes an
-  `AuditEvent`, and queues it for extraction. Re-uploading the same file (same
-  sha256) returns the existing document and queues nothing (FR-01).
-- [ ] **AC-2 Read endpoints.** List and detail for documents (with extracted
-  fields, confidence, review reasons, status), the original file, PO sets (status:
-  waiting / matched / needs review), and exceptions (filter by status and type),
-  each with its explanation and the lines involved.
-- [ ] **AC-3 Contract.** Every request and response is Zod-validated, errors use
-  RFC 7807 problem JSON, and OpenAPI docs are generated from the same schemas and
-  served at `/docs` (FR-13).
+## What "done" means (acceptance criteria)
 
-### B. Worker (`apps/worker`, BullMQ)
+### A. Uploading and asking for results
 
-- [ ] **AC-4 Extract job.** Runs M3 extraction and saves a versioned `Extraction`.
-  It sets the document's type, number, vendor, and PO set, then the status to
-  `READY` or `NEEDS_REVIEW` (or `FAILED` after retries). It's idempotent per file
-  hash and prompt version.
-- [ ] **AC-5 Match job.** When a set gains a document, its PO's set is re-matched.
-  The result is a new `MatchRun` version with `LineMatch` and `Exception` rows,
-  and a decision already made on an exception carries over to the same exception
-  in later runs (by fingerprint).
-- [ ] **AC-6 Missing-document grace period.** `MISSING_DOCUMENT` is raised only
-  after a configurable grace period (default 7 days) with no new document. Until
-  then the set shows as *waiting*. A delayed job re-checks when the period ends.
-- [ ] **AC-7 Shared rate limit.** All worker processes share one LLM rate limiter
-  in Redis, so adding workers can't exceed the provider's free-tier limits
-  (ADR-0002).
-- [ ] **AC-8 Audit trail.** Every system state change (uploaded, extracted,
-  flagged, matched, exception raised) writes an `AuditEvent` in the same database
-  transaction (FR-12).
+- [ ] **AC-1 Upload a document.** You can send a PDF, PNG, or JPEG (up to 10 MB).
+  Reconcile saves it and starts processing it. If you upload the **exact same
+  file twice**, it recognizes it and doesn't process it again.
+- [ ] **AC-2 Ask for results.** There are web addresses to see:
+  - all documents, and one document in detail: what the AI read, how sure it was,
+    and anything that needs a human look
+  - the original file
+  - each PO: its documents and its status ("waiting for documents", "matched", or "needs review")
+  - all problems found, filtered by type or status, each with its plain-English explanation
+- [ ] **AC-3 Clear rules and a manual.** Every request and answer is checked
+  against a fixed format, and errors come back in one standard format. A **live
+  manual** at `/docs` lists every address and lets you try them in the browser.
 
-### C. AI fuzzy matcher
+### B. The background helper (worker)
 
-- [ ] **AC-9 LLM fuzzy matcher.** Behind the existing `FuzzyMatcher` interface:
-  for lines left over after SKU matching, the LLM proposes pairs with a confidence
-  and a **reason** (FR-08, NFR-10). Cached, rate-limited, logged, and replayable
-  like extraction.
-- [ ] **AC-10 Measured, not assumed.** `pnpm eval --fuzzy text|llm` compares the two
-  matchers on the same sets, side by side. The default is whichever scores better,
-  with cost and latency shown.
+- [ ] **AC-4 Reading.** The worker reads each document with the AI and saves what it
+  read as a new version, without overwriting older ones. It marks the document
+  **ready**, **needs review**, or **failed** (after a few retries). If it's asked
+  to read the same file twice, it does the work once.
+- [ ] **AC-5 Matching.** When a PO gets a new document, the worker matches that PO
+  again and saves the result as a new version. If a human already made a
+  decision on a problem, that decision **carries over** to the same problem in
+  the new version.
+- [ ] **AC-6 Patience with missing documents.** Documents often arrive days apart.
+  Reconcile waits (7 days by default) before saying "this PO is missing its
+  receiving report". Until then the PO shows as *waiting*.
+- [ ] **AC-7 Respecting the AI's speed limits.** Even with several workers
+  running, together they never go over the AI provider's free-tier limits. They
+  share one counter.
+- [ ] **AC-8 A record of everything.** Every automatic step (uploaded, read, flagged,
+  matched, problem found) is written to the unchangeable history (the *audit log*).
 
-### D. End to end
+### C. The AI joins the matching
 
-- [ ] **AC-11 Pipeline test.** An automated test uploads a document set through the
-  API, lets the worker process it (in replay mode, with no key), and checks the
-  exceptions served by the API against the answer key.
-- [ ] **AC-12 Pipeline = eval.** Running the CI subset through the real API and
-  worker gives the same exceptions as the `e2e` eval stage. That proves the
-  scoreboard measures the real system.
-- [ ] **AC-13 Docs.** The README covers running the stack (`pnpm dev`), uploading
-  with `curl`, and the API docs page.
+- [ ] **AC-9 AI matching for tricky lines.** For lines the simple rules can't pair
+  (no SKU, different wording), the AI can suggest pairs, and it **must explain
+  why** each time. It uses the same cache, speed limits, and cost tracking as
+  document reading.
+- [ ] **AC-10 Only if it helps.** The scoreboard compares the AI matcher with
+  today's text matcher on the same documents, including cost and speed. We use
+  whichever actually scores better.
 
-## Out of scope
+### D. Proving the whole thing works
 
-- The web UI, human actions (approve / dispute / write-off), and editing fields that
-  need review (M5). M4 serves them read-only.
-- The MCP server (M6). Authentication beyond the single seeded user.
+- [ ] **AC-11 Full test.** An automatic test uploads a set of documents, lets the
+  worker process them (using saved AI answers, so no key and no cost), and checks
+  the problems Reconcile reports against the answer key.
+- [ ] **AC-12 The scoreboard tells the truth.** Running the 20 test sets through
+  the **real** upload-and-worker path gives the same results as the scoreboard.
+  This proves the scoreboard measures the real system, not a shortcut.
+- [ ] **AC-13 Instructions.** The README explains how to start everything with
+  one command, upload a file, and open the manual.
 
-## Assumptions
+## Not in M4
 
-- Files are stored on local disk under `storage/`, behind a `Storage` interface
-  (S3 later). There's one seeded user and no login yet.
-- Matching is triggered per PO set. Cross-set duplicate invoices are still detected
-  (M2 logic) because the match job looks at the vendor's other invoices.
+- The website, and human actions like approve, dispute, or write off (M5)
+- Fixing fields the AI was unsure about (M5)
+- The AI-assistant connector (MCP, M6). Logins (we keep one built-in user for now).
 
-## Open questions (need your answer at this gate)
+## Things we're assuming
 
-- **Q1. Include B-17 (tolerant PO grouping)?** When an RR or invoice's PO number
-  is one character away from a PO of the same vendor, group them and flag it for
-  review. This fixes M3's biggest end-to-end error. *Recommended: yes* (small, high value).
-- **Q2. Harder fuzzy test data for the AI matcher?** Today the text matcher already
-  scores 100, so the AI can't show any value. Add a planted type where the
-  invoice uses the **vendor's own product name**, sharing few words with ours
-  ("Sunpeak Nut Spread, Crunchy Almond" vs "Sunpeak Crunchy Almond Butter").
-  *Recommended: yes.* Otherwise the AI-vs-text comparison is meaningless.
-- **Q3. Documents flagged for review: match now or wait?** The strict reading of
-  FR-05 is to hold them back until a human reviews them (the review screen
-  arrives in M5). *Recommended: match them now but mark the set "provisional,
-  needs review".* Clerks see everything early, and nothing is hidden.
-- **Q4. B-18 (date sanity checks): now or later?** *Recommended: later (M5).* It
-  keeps M4 focused on the backend.
+- Uploaded files are kept in a `storage/` folder on your computer. It's easy to
+  switch to cloud storage later.
+- Matching happens one PO at a time. Duplicate invoices are still caught across
+  POs, because the worker also looks at that vendor's other invoices.
+
+## Questions for you
+
+- **Q1. Fix misread PO numbers now (backlog B-17)?** If a document's PO number is
+  one character off from a real PO of the same vendor, group them anyway and
+  flag it for a human. This was the biggest error in M3's full-pipeline score.
+  *I recommend: yes.* It's small and makes a big difference.
+- **Q2. Harder test cases for the AI matcher?** The simple text matcher already gets
+  100%, so the AI has no room to show it's useful. We'd add invoices that use the
+  **vendor's own product names** ("Sunpeak Nut Spread, Crunchy Almond" instead of
+  "Sunpeak Crunchy Almond Butter"). *I recommend: yes.* Otherwise the comparison
+  tells us nothing.
+- **Q3. Documents the AI was unsure about: match them now, or wait for a human?**
+  Waiting is safest, but the review screen only arrives in M5. *I recommend:
+  match them now and label the PO "provisional, needs review",* so nothing is
+  hidden and nothing is treated as final.
+- **Q4. Date checks (backlog B-18): now or later?** *I recommend: later (M5),* to keep
+  M4 focused.

@@ -241,6 +241,18 @@ test → PR → patch tag) and are recorded in `CHANGELOG.md`. That is the
 - Keep docs short: a page per artifact is usually enough. Use templates in
   `docs/templates/`.
 
+## Writing style (all docs and messages)
+
+The owner is building a project like this for the first time. Everything written
+for people (milestone docs, README, ADRs, learning log, PR descriptions, chat)
+uses **plain, everyday language**:
+
+- Say what something does and why it matters *before* any technical term.
+- Define a technical word in a few plain words the first time it appears.
+- Short sentences. Examples and analogies help. Avoid acronyms where a word works.
+- Keep IDs like AC-1 or FR-09 (they link docs together), but always describe them in words.
+- Concise, but don't drop information. Code comments can stay technical.
+
 ## Working agreement with Claude
 
 - Follow the SDLC gates above, and stop at each one for review.
