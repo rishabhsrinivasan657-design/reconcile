@@ -528,3 +528,24 @@ real database and Redis), tagged **v0.5.0**, published the release, and wrote th
   item B-22. Nobody would have planned for it.
 
 **Remember:** a good retro changes a habit, not just a document.
+
+---
+
+## M5 · Requirements (2026-10-17)
+
+**In one line:** describe a polished product in testable terms, not adjectives.
+
+**What we did:** wrote 13 acceptance criteria for the website, plus three questions,
+including which visual direction to take.
+
+**Key ideas**
+- **"Polished" has to be testable.** Words like "professional" can't be checked, but these can:
+  a written style guide followed on every page, both themes finished, keyboard shortcuts,
+  designed loading/empty/error states, and accessibility scores.
+- **Design for the job, not the demo.** An AP clerk scans tables of money all day: numbers
+  aligned on the decimal, evidence side by side, the explanation first, and the next problem one
+  key away.
+- **Pick a direction before building.** Choosing the look first (and approving a mockup) is far
+  cheaper than restyling a finished site.
+
+**Remember:** if you can't say how you'll check "polished", you'll never know when you're done.
