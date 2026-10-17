@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "setId": "S0182",
   "seed": 42,
-  "generatorVersion": "0.4.0",
+  "generatorVersion": "0.5.0",
   "poNumber": "HP-PO-107093",
   "vendorCode": "KLPS",
   "documents": [
@@ -1776,10 +1776,10 @@
               "bbox": [
                 0.0882,
                 0.6266,
-                0.42,
+                0.2887,
                 0.641
               ],
-              "value": "Kelp & Stone Salt Seaweed Snacks Sea, 0.35 oz 6-pk"
+              "value": "Salted Nori Crisps, 0.35 oz 6-pk"
             },
             "qty": {
               "page": 1,
@@ -2247,6 +2247,18 @@
         "sku": "KLPS21081",
         "linesWithoutSku": 12,
         "reworded": 6
+      }
+    },
+    {
+      "type": "vendor_name",
+      "lineKeys": [
+        "po:7",
+        "rr:10",
+        "inv-1:7"
+      ],
+      "details": {
+        "original": "Kelp & Stone Sea Salt Seaweed Snacks, 0.35 oz 6-pk",
+        "vendorName": "Salted Nori Crisps, 0.35 oz 6-pk"
       }
     }
   ]
