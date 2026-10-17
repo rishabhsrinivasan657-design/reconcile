@@ -1,6 +1,6 @@
 # ADR-0009: A non-AI text-similarity matcher as the fuzzy baseline
 
-- **Status:** Proposed
+- **Status:** Accepted (2026-10-17)
 - **Date:** 2026-10-17
 - **Requirements:** FR-08, NFR-05, NFR-10 · M2 AC-3, decision Q1
 

@@ -1,6 +1,6 @@
 # M2: Matching engine and eval harness. Design
 
-- **Status:** Draft, awaiting approval at the M2 Design gate
+- **Status:** Approved (2026-10-17)
 - **Implements:** AC-1 … AC-16 from [`requirements.md`](requirements.md)
 - **New ADR:** [0009](../../adr/0009-baseline-fuzzy-matcher.md) (non-AI fuzzy matcher)
 
