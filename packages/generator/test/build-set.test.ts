@@ -5,7 +5,8 @@ import {
   type PlantedErrorType as Planted,
 } from '@reconcile/core';
 import { describe, expect, it } from 'vitest';
-import { buildSet, vendorWordOrder } from '../src/build-set.ts';
+import { buildSet, vendorProductName, vendorWordOrder } from '../src/build-set.ts';
+import { Rng } from '../src/rng.ts';
 import { buildCatalog } from '../src/catalog/index.ts';
 import { resolveRates } from '../src/config.ts';
 import { expectedExceptions } from '../src/truth.ts';
@@ -94,6 +95,31 @@ describe('reworded SKU-less lines (M3 AC-16, B-16)', () => {
     expect(vendorWordOrder('Harvest Mill Honey Almond Granola, 12 oz', 'Harvest Mill')).toBe(
       'Harvest Mill Almond Granola Honey, 12 oz',
     );
+  });
+});
+
+describe("vendor's own product names (M4 AC-15)", () => {
+  it('renames the product, keeps the variant meaning and size, drops brand and SKU', () => {
+    expect(vendorProductName(new Rng(1), 'Sunpeak Crunchy Almond Butter, 12 oz', 'SNPK')).toMatch(
+      /^Chunky (Nut Spread, Almond|Almond Nut Paste), 12 oz$/,
+    );
+    for (const set of sets(only('vendor_name'), 40)) {
+      const p = set.planted.find((x) => x.type === 'vendor_name')!;
+      if (!p.details.vendorName) continue;
+      const inv = set.docs.find((d) => d.role === 'inv-1')!;
+      const line = inv.lines.find((l) => l.description === p.details.vendorName)!;
+      expect(line.sku).toBeUndefined();
+      expect(String(p.details.vendorName).split(', ').at(-1)).toBe(
+        String(p.details.original).split(', ').at(-1),
+      );
+      expect(expectedExceptions(set)).toEqual([]);
+    }
+  });
+
+  it('every catalog product has vendor names', async () => {
+    const { VENDORS, VENDOR_PRODUCT_NAMES } = await import('../src/catalog/data.ts');
+    for (const v of VENDORS)
+      for (const p of v.products) expect(VENDOR_PRODUCT_NAMES[p.name], p.name).toBeDefined();
   });
 });
 
