@@ -157,7 +157,10 @@ export function parseJsonText(text: string): unknown {
   const start = stripped.indexOf('{');
   const end = stripped.lastIndexOf('}');
   if (start >= 0 && end > start) attempts.push(stripped.slice(start, end + 1));
-  for (const candidate of [...attempts, ...attempts.map((a) => a.replace(/,\s*([}\]])/g, '$1'))]) {
+  const truncated = start >= 0 ? closeTruncatedJson(stripped.slice(start)) : undefined;
+  const candidates = [...attempts, ...attempts.map((a) => a.replace(/,\s*([}\]])/g, '$1'))];
+  if (truncated) candidates.push(truncated);
+  for (const candidate of candidates) {
     try {
       return JSON.parse(candidate);
     } catch {
@@ -165,4 +168,38 @@ export function parseJsonText(text: string): unknown {
     }
   }
   return null;
+}
+
+/**
+ * Recover the complete part of a JSON answer that stopped early: drop the unfinished last
+ * member and close the open brackets. Seen live: a Gemini answer ended at `"total":{`.
+ * The caller's checks then flag whatever is missing for review.
+ */
+export function closeTruncatedJson(text: string): string | undefined {
+  const stack: string[] = [];
+  let inString = false;
+  let escaped = false;
+  let lastSafe = -1; // index after the last complete member at any depth
+  let safeStack: string[] = [];
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i]!;
+    if (inString) {
+      if (escaped) escaped = false;
+      else if (c === '\\') escaped = true;
+      else if (c === '"') inString = false;
+      continue;
+    }
+    if (c === '"') inString = true;
+    else if (c === '{' || c === '[') stack.push(c === '{' ? '}' : ']');
+    else if (c === '}' || c === ']') {
+      stack.pop();
+      lastSafe = i + 1;
+      safeStack = [...stack];
+    } else if (c === ',') {
+      lastSafe = i;
+      safeStack = [...stack];
+    }
+  }
+  if (stack.length === 0 || lastSafe < 0) return undefined;
+  return text.slice(0, lastSafe) + safeStack.reverse().join('');
 }
