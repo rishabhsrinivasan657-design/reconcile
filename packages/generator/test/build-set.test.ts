@@ -5,7 +5,7 @@ import {
   type PlantedErrorType as Planted,
 } from '@reconcile/core';
 import { describe, expect, it } from 'vitest';
-import { buildSet } from '../src/build-set.ts';
+import { buildSet, vendorWordOrder } from '../src/build-set.ts';
 import { buildCatalog } from '../src/catalog/index.ts';
 import { resolveRates } from '../src/config.ts';
 import { expectedExceptions } from '../src/truth.ts';
@@ -69,6 +69,31 @@ describe('planted errors (M1 AC-12)', () => {
     const clean = sets().filter((s) => s.planted.length === 0).length;
     expect(clean).toBeGreaterThanOrEqual(18);
     expect(clean).toBeLessThanOrEqual(42);
+  });
+});
+
+describe('reworded SKU-less lines (M3 AC-16, B-16)', () => {
+  it('rewords about 60% of SKU-less lines, sometimes the whole invoice; still no exception', () => {
+    const all = sets(only('sku_omitted'), 80).map((set) => ({ set, p: set.planted[0]! }));
+    const lines = all.reduce((n, { p }) => n + Number(p.details.linesWithoutSku), 0);
+    const reworded = all.reduce((n, { p }) => n + Number(p.details.reworded), 0);
+    expect(reworded / lines).toBeGreaterThanOrEqual(0.45);
+    expect(reworded / lines).toBeLessThanOrEqual(0.75);
+    expect(all.some(({ p }) => Number(p.details.linesWithoutSku) > 1)).toBe(true);
+    for (const { set } of all) {
+      const inv = set.docs.find((d) => d.role === 'inv-1')!;
+      expect(inv.lines.some((l) => l.sku === undefined)).toBe(true);
+      expect(expectedExceptions(set)).toEqual([]);
+    }
+  });
+
+  it('vendor word order moves the first word after the brand to the end', () => {
+    expect(vendorWordOrder('Sunpeak Crunchy Almond Butter, 12 oz', 'Sunpeak')).toBe(
+      'Sunpeak Almond Butter Crunchy, 12 oz',
+    );
+    expect(vendorWordOrder('Harvest Mill Honey Almond Granola, 12 oz', 'Harvest Mill')).toBe(
+      'Harvest Mill Almond Granola Honey, 12 oz',
+    );
   });
 });
 

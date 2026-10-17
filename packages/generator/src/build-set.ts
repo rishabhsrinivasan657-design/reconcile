@@ -48,6 +48,22 @@ export function mutateDescription(rng: Rng, text: string): string {
   return out === text ? `${text.replace(/,.*$/, '')} (${text.split(', ')[1] ?? 'ea'})` : out;
 }
 
+/** Share of SKU-less invoice lines that are also reworded (B-16, generator 0.4.0). */
+export const SKU_OMITTED_REWORD_RATE = 0.6;
+/** Share of `sku_omitted` sets where the vendor prints no SKUs on the whole invoice. */
+export const SKU_OMITTED_WHOLE_INVOICE_RATE = 0.3;
+
+/** "Sunpeak Crunchy Almond Butter, 12 oz" -> "Sunpeak Almond Butter Crunchy, 12 oz". */
+export function vendorWordOrder(description: string, brand: string): string {
+  const [head = '', size] = description.split(/, (?=[^,]*$)/);
+  const rest = head.startsWith(`${brand} `)
+    ? head.slice(brand.length + 1).split(' ')
+    : head.split(' ');
+  if (rest.length < 2) return description.toUpperCase();
+  const reordered = [...rest.slice(1), rest[0]].join(' ');
+  return `${brand} ${reordered}${size ? `, ${size}` : ''}`;
+}
+
 function chooseErrors(rng: Rng, rates: Rates): PlantedErrorType[] {
   if (rng.chance(rates.cleanSetRate)) return [];
   const types = PlantedErrorType.options;
@@ -158,10 +174,29 @@ export function buildSet(catalog: Catalog, rates: Rates, seed: number, index: nu
         });
         break;
       }
-      case 'sku_omitted':
-        w.invSkuOmitted = true;
-        Object.assign(details, { sku: w.item.sku });
+      case 'sku_omitted': {
+        // B-16: some vendors print no SKUs at all, and use their own wording. Several SKU-less
+        // lines in one invoice force the matcher to choose between similar descriptions.
+        const wholeInvoice = plantRng.chance(SKU_OMITTED_WHOLE_INVOICE_RATE);
+        const targets = wholeInvoice ? work : [w];
+        let reworded = 0;
+        for (const t of targets) {
+          t.invSkuOmitted = true;
+          if (plantRng.chance(SKU_OMITTED_REWORD_RATE)) {
+            t.invDescription = plantRng.chance(0.5)
+              ? mutateDescription(plantRng, t.invDescription)
+              : vendorWordOrder(t.invDescription, vendor.brand);
+            reworded++;
+          }
+        }
+        Object.assign(details, {
+          sku: w.item.sku,
+          linesWithoutSku: targets.length,
+          reworded,
+          ...(w.invDescription !== w.item.description ? { primaryReworded: w.invDescription } : {}),
+        });
         break;
+      }
       case 'price_noise': {
         // A near miss: a few cents off, but inside the default tolerance, so no exception.
         const po = new Decimal(w.poPrice);
