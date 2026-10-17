@@ -18,6 +18,13 @@ enum DocType {
   INVOICE
 }
 
+/// A PO set's state: still waiting for documents, matched, or needing a human look.
+enum SetStatus {
+  WAITING
+  MATCHED
+  NEEDS_REVIEW
+}
+
 enum DocStatus {
   UPLOADED
   EXTRACTING
@@ -105,13 +112,21 @@ model CatalogItem {
 
 /// Everything sharing a PO number. Can be incomplete (MISSING_DOCUMENT).
 model DocumentSet {
-  id        String     @id @default(cuid())
-  poNumber  String     @unique
-  vendorId  String?
-  vendor    Vendor?    @relation(fields: [vendorId], references: [id])
-  documents Document[]
-  matchRuns MatchRun[]
-  createdAt DateTime   @default(now())
+  id           String     @id @default(cuid())
+  poNumber     String     @unique
+  status       SetStatus  @default(WAITING)
+  /// Matched, but a document needs review or an assumption was made (M4 AC-16).
+  provisional  Boolean    @default(false)
+  /// Plain-English notes, e.g. a tolerated misread PO number (M4 AC-14).
+  notes        Json       @default("[]")
+  /// When the missing-document grace period ends (M4 AC-6); null when nothing is missing.
+  waitingUntil DateTime?
+  updatedAt    DateTime   @default(now()) @updatedAt
+  vendorId     String?
+  vendor       Vendor?    @relation(fields: [vendorId], references: [id])
+  documents    Document[]
+  matchRuns    MatchRun[]
+  createdAt    DateTime   @default(now())
 }
 
 model Document {
@@ -144,6 +159,9 @@ model Extraction {
   raw             Json?
   data            Json
   fieldConfidence Json
+  locations       Json?
+  reviewReasons   Json             @default("[]")
+  needsReview     Boolean          @default(false)
   createdAt       DateTime         @default(now())
 
   @@unique([documentId, version])
@@ -176,20 +194,22 @@ model LineMatch {
 }
 
 model Exception {
-  id            String                  @id @default(cuid())
-  matchRunId    String
-  matchRun      MatchRun                @relation(fields: [matchRunId], references: [id])
+  id                String                  @id @default(cuid())
+  matchRunId        String
+  matchRun          MatchRun                @relation(fields: [matchRunId], references: [id])
   /// type + PO + line keys; stable across match runs.
-  fingerprint   String
-  type          ExceptionType
-  status        ExceptionStatus         @default(OPEN)
-  informational Boolean                 @default(false)
-  amount        Decimal                 @db.Decimal(14, 4)
-  explanation   String
-  lineKeys      Json
-  documentIds   Json
-  createdAt     DateTime                @default(now())
-  actions       ExceptionActionRecord[]
+  fingerprint       String
+  /// The same exception in the previous match run, when a decision was carried over (M4 AC-5).
+  carriedOverFromId String?
+  type              ExceptionType
+  status            ExceptionStatus         @default(OPEN)
+  informational     Boolean                 @default(false)
+  amount            Decimal                 @db.Decimal(14, 4)
+  explanation       String
+  lineKeys          Json
+  documentIds       Json
+  createdAt         DateTime                @default(now())
+  actions           ExceptionActionRecord[]
 
   @@index([fingerprint])
 }
