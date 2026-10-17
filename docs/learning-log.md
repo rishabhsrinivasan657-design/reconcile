@@ -414,3 +414,22 @@ reality got in the way, recorded 60 real answers, and raised reading accuracy fr
   `~/.zshrc` silently overrode `.env`, so now the tools say which source they used.
 
 **Remember:** your first live run is a measurement, not a verdict.
+
+---
+
+## M3 · Review, release, and retro (2026-10-17)
+
+**In one line:** ship v0.4.0, and write down what surprised us so the next milestone starts smarter.
+
+**What we did:** merged PR #4 after all three required checks passed (including the
+AI eval, replayed with no key), tagged **v0.4.0**, published the release, and wrote the retro.
+
+**Key ideas**
+- **CI can test AI without calling the AI.** Recorded answers make the AI part of the
+  pipeline deterministic and free to test, which is the only way a quality gate can be fair.
+- **The plan meets reality.** Three provider surprises came from things no design doc
+  showed. The retro's top lesson: *make one cheap live call early*.
+- **Honest scoring.** We shipped with a partial criterion and said exactly why. That's more
+  credible than a perfect-looking table.
+
+**Remember:** the retro's job is to change what you do next time. Write lessons as actions.
