@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "setId": "S0182",
   "seed": 42,
-  "generatorVersion": "0.3.0",
+  "generatorVersion": "0.4.0",
   "poNumber": "HP-PO-107093",
   "vendorCode": "KLPS",
   "documents": [
@@ -1453,16 +1453,6 @@
         "lines": [
           {
             "lineNo": 1,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.4575,
-                0.4448,
-                0.5343,
-                0.4592
-              ],
-              "value": "KLPS21369"
-            },
             "description": {
               "page": 1,
               "bbox": [
@@ -1471,7 +1461,7 @@
                 0.4208,
                 0.4592
               ],
-              "value": "Kelp & Stone Teriyaki Seaweed Snacks, 0.35 oz 6-pk"
+              "value": "Kelp & Stone Seaweed Snacks Teriyaki, 0.35 oz 6-pk"
             },
             "qty": {
               "page": 1,
@@ -1516,16 +1506,6 @@
           },
           {
             "lineNo": 2,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.4575,
-                0.4751,
-                0.5343,
-                0.4895
-              ],
-              "value": "KLPS21797"
-            },
             "description": {
               "page": 1,
               "bbox": [
@@ -1579,16 +1559,6 @@
           },
           {
             "lineNo": 3,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.4575,
-                0.5054,
-                0.5343,
-                0.5198
-              ],
-              "value": "KLPS21222"
-            },
             "description": {
               "page": 1,
               "bbox": [
@@ -1597,7 +1567,7 @@
                 0.417,
                 0.5198
               ],
-              "value": "Kelp & Stone Sesame Seaweed Snacks, 0.35 oz 6-pk"
+              "value": "Kelp & Stone Seaweed Snacks Sesame, 0.35 oz 6-pk"
             },
             "qty": {
               "page": 1,
@@ -1642,16 +1612,6 @@
           },
           {
             "lineNo": 4,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.4575,
-                0.5357,
-                0.5343,
-                0.5501
-              ],
-              "value": "KLPS21367"
-            },
             "description": {
               "page": 1,
               "bbox": [
@@ -1705,16 +1665,6 @@
           },
           {
             "lineNo": 5,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.4575,
-                0.566,
-                0.5343,
-                0.5804
-              ],
-              "value": "KLPS21798"
-            },
             "description": {
               "page": 1,
               "bbox": [
@@ -1723,7 +1673,7 @@
                 0.4144,
                 0.5804
               ],
-              "value": "Kelp & Stone Wasabi Seaweed Snacks, 0.35 oz 6-pk"
+              "value": "Kelp & Stone Seaweed Snacks Wasabi, 0.35 oz 6-pk"
             },
             "qty": {
               "page": 1,
@@ -1821,16 +1771,6 @@
           },
           {
             "lineNo": 7,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.4575,
-                0.6266,
-                0.5343,
-                0.641
-              ],
-              "value": "KLPS21516"
-            },
             "description": {
               "page": 1,
               "bbox": [
@@ -1839,7 +1779,7 @@
                 0.42,
                 0.641
               ],
-              "value": "Kelp & Stone Sea Salt Seaweed Snacks, 0.35 oz 6-pk"
+              "value": "Kelp & Stone Salt Seaweed Snacks Sea, 0.35 oz 6-pk"
             },
             "qty": {
               "page": 1,
@@ -1884,16 +1824,6 @@
           },
           {
             "lineNo": 8,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.4575,
-                0.6569,
-                0.5343,
-                0.6713
-              ],
-              "value": "KLPS21052"
-            },
             "description": {
               "page": 1,
               "bbox": [
@@ -1947,25 +1877,15 @@
           },
           {
             "lineNo": 9,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.4575,
-                0.6872,
-                0.5343,
-                0.7016
-              ],
-              "value": "KLPS21371"
-            },
             "description": {
               "page": 1,
               "bbox": [
                 0.0882,
                 0.6872,
-                0.3375,
+                0.3396,
                 0.7016
               ],
-              "value": "Kelp & Stone Beef Bone Broth, 32 fl oz"
+              "value": "Kelp & Stoen Beef Bone Broth, 32 flOZ"
             },
             "qty": {
               "page": 1,
@@ -2010,25 +1930,15 @@
           },
           {
             "lineNo": 10,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.4575,
-                0.7175,
-                0.5343,
-                0.7319
-              ],
-              "value": "KLPS21332"
-            },
             "description": {
               "page": 1,
               "bbox": [
                 0.0882,
                 0.7175,
-                0.4248,
+                0.3974,
                 0.7319
               ],
-              "value": "Kelp & Stone Sesame Seaweed Snacks, 0.17 oz 12-pk"
+              "value": "Kelp & Stone Sesame Swd Snacks, 0.17 oz 12-pk"
             },
             "qty": {
               "page": 1,
@@ -2073,16 +1983,6 @@
           },
           {
             "lineNo": 11,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.4575,
-                0.7478,
-                0.5343,
-                0.7622
-              ],
-              "value": "KLPS21439"
-            },
             "description": {
               "page": 1,
               "bbox": [
@@ -2136,16 +2036,6 @@
           },
           {
             "lineNo": 12,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.4575,
-                0.7781,
-                0.5343,
-                0.7925
-              ],
-              "value": "KLPS21091"
-            },
             "description": {
               "page": 1,
               "bbox": [
@@ -2354,7 +2244,9 @@
         "inv-1:6"
       ],
       "details": {
-        "sku": "KLPS21081"
+        "sku": "KLPS21081",
+        "linesWithoutSku": 12,
+        "reworded": 6
       }
     }
   ]

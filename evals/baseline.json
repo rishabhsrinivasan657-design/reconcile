@@ -2,7 +2,7 @@
   "stage": "match",
   "subset": "ci",
   "sets": 20,
-  "generatorVersion": "0.3.0",
+  "generatorVersion": "0.4.0",
   "metrics": {
     "groupingAccuracy": 100,
     "linkPrecision": 100,

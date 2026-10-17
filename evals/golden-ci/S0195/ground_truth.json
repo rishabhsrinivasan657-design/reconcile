@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "setId": "S0195",
   "seed": 42,
-  "generatorVersion": "0.3.0",
+  "generatorVersion": "0.4.0",
   "poNumber": "HP-PO-107298",
   "vendorCode": "MSNT",
   "documents": [
@@ -1347,16 +1347,6 @@
         "lines": [
           {
             "lineNo": 1,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.4653,
-                0.2822,
-                0.5319,
-                0.2951
-              ],
-              "value": "MSNT18852"
-            },
             "description": {
               "page": 1,
               "bbox": [
@@ -1463,16 +1453,6 @@
           },
           {
             "lineNo": 3,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.4641,
-                0.3125,
-                0.5307,
-                0.3254
-              ],
-              "value": "MSNT18087"
-            },
             "description": {
               "page": 1,
               "bbox": [
@@ -1481,7 +1461,7 @@
                 0.3306,
                 0.3209
               ],
-              "value": "Mesa Norte Roja Hot Salsa, 16 oz"
+              "value": "Mesa Norte Hot Salsa Roja, 16 oz"
             },
             "qty": {
               "page": 1,
@@ -1526,16 +1506,6 @@
           },
           {
             "lineNo": 4,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.4636,
-                0.3277,
-                0.5302,
-                0.3406
-              ],
-              "value": "MSNT18855"
-            },
             "description": {
               "page": 1,
               "bbox": [
@@ -1544,7 +1514,7 @@
                 0.3668,
                 0.3369
               ],
-              "value": "Mesa Norte Black Refried Beans, 16 oz"
+              "value": "Mesa Norte Refried Beans Black, 16 oz"
             },
             "qty": {
               "page": 1,
@@ -1589,16 +1559,6 @@
           },
           {
             "lineNo": 5,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.463,
-                0.3429,
-                0.5296,
-                0.3557
-              ],
-              "value": "MSNT18631"
-            },
             "description": {
               "page": 1,
               "bbox": [
@@ -1652,25 +1612,15 @@
           },
           {
             "lineNo": 6,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.4624,
-                0.358,
-                0.529,
-                0.3709
-              ],
-              "value": "MSNT18291"
-            },
             "description": {
               "page": 1,
               "bbox": [
                 0.0933,
                 0.3497,
-                0.3657,
-                0.3672
+                0.3583,
+                0.367
               ],
-              "value": "Mesa Norte Black Refried Beans, 29 oz"
+              "value": "Mesa Norte Black Refried Beans, 29OZ"
             },
             "qty": {
               "page": 1,
@@ -1715,16 +1665,6 @@
           },
           {
             "lineNo": 7,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.4618,
-                0.3732,
-                0.5284,
-                0.386
-              ],
-              "value": "MSNT18750"
-            },
             "description": {
               "page": 1,
               "bbox": [
@@ -1778,16 +1718,6 @@
           },
           {
             "lineNo": 8,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.4613,
-                0.3883,
-                0.5279,
-                0.4012
-              ],
-              "value": "MSNT18154"
-            },
             "description": {
               "page": 1,
               "bbox": [
@@ -1796,7 +1726,7 @@
                 0.4454,
                 0.3993
               ],
-              "value": "Mesa Norte Vegetarian Pinto Refried Beans, 29 oz"
+              "value": "Mesa Norte Pinto Refried Beans Vegetarian, 29 oz"
             },
             "qty": {
               "page": 1,
@@ -1849,27 +1779,27 @@
                 0.5273,
                 0.4163
               ],
-              "value": "MSNT18227"
+              "value": "MSNT18608"
             },
             "description": {
               "page": 1,
               "bbox": [
                 0.0916,
                 0.3952,
-                0.4448,
-                0.4144
+                0.3052,
+                0.4113
               ],
-              "value": "Mesa Norte Vegetarian Pinto Refried Beans, 16 oz"
+              "value": "Mesa Norte Verde Salsa, 16 oz"
             },
             "qty": {
               "page": 1,
               "bbox": [
-                0.6886,
-                0.4086,
+                0.6812,
+                0.4085,
                 0.6963,
                 0.4201
               ],
-              "value": 5
+              "value": 10
             },
             "uom": {
               "page": 1,
@@ -1889,31 +1819,21 @@
                 0.7976,
                 0.4224
               ],
-              "value": "17.26"
+              "value": "26.21"
             },
             "lineTotal": {
               "page": 1,
               "bbox": [
-                0.878,
-                0.4129,
+                0.8706,
+                0.4127,
                 0.9152,
                 0.425
               ],
-              "value": "86.30"
+              "value": "262.10"
             }
           },
           {
             "lineNo": 10,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.4601,
-                0.4186,
-                0.5267,
-                0.4315
-              ],
-              "value": "MSNT18393"
-            },
             "description": {
               "page": 1,
               "bbox": [
@@ -1967,16 +1887,6 @@
           },
           {
             "lineNo": 11,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.4596,
-                0.4338,
-                0.5262,
-                0.4466
-              ],
-              "value": "MSNT18786"
-            },
             "description": {
               "page": 1,
               "bbox": [
@@ -2030,16 +1940,6 @@
           },
           {
             "lineNo": 12,
-            "sku": {
-              "page": 1,
-              "bbox": [
-                0.459,
-                0.4489,
-                0.5256,
-                0.4618
-              ],
-              "value": "MSNT18082"
-            },
             "description": {
               "page": 1,
               "bbox": [
@@ -2048,7 +1948,7 @@
                 0.3696,
                 0.4582
               ],
-              "value": "Mesa Norte White Corn Tortillas, 80 ct"
+              "value": "Mesa Norte Corn Tortillas White, 80 ct"
             },
             "qty": {
               "page": 1,
@@ -2100,7 +2000,7 @@
             0.9122,
             0.5065
           ],
-          "value": "10412.56"
+          "value": "10588.36"
         },
         "tax": {
           "page": 1,
@@ -2110,7 +2010,7 @@
             0.9114,
             0.5292
           ],
-          "value": "728.88"
+          "value": "741.19"
         },
         "shipping": {
           "page": 1,
@@ -2130,7 +2030,7 @@
             0.9097,
             0.5747
           ],
-          "value": "11166.44"
+          "value": "11354.55"
         }
       }
     }
@@ -2234,7 +2134,7 @@
       "documentRoles": [
         "inv-1"
       ],
-      "amount": "86.30",
+      "amount": "262.10",
       "informational": false
     }
   ],
@@ -2285,7 +2185,9 @@
         "inv-1:2"
       ],
       "details": {
-        "sku": "MSNT18867"
+        "sku": "MSNT18867",
+        "linesWithoutSku": 11,
+        "reworded": 5
       }
     },
     {
@@ -2294,8 +2196,8 @@
         "inv-1:9"
       ],
       "details": {
-        "sku": "MSNT18227",
-        "qty": 5
+        "sku": "MSNT18608",
+        "qty": 10
       }
     }
   ]
