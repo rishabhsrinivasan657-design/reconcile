@@ -15,6 +15,12 @@ export class DailyBudgetExceeded extends Error {
   override name = 'DailyBudgetExceeded';
 }
 
+/** What the LLM client needs from a rate limiter; in-process or shared via Redis (M4 AC-7). */
+export interface Limiter {
+  acquire(estimatedTokens?: number): Promise<void>;
+  settle(estimatedTokens: number, actualTokens: number): void | Promise<void>;
+}
+
 export interface Limits {
   rpm: number;
   rpd: number;
@@ -35,7 +41,7 @@ interface DayState {
  * plus per-day request and token counters persisted to disk so a restart doesn't reset them.
  * Waits for capacity; throws DailyBudgetExceeded when today's budget is spent.
  */
-export class RateLimiter {
+export class RateLimiter implements Limiter {
   private reqTokens: number;
   private tpmTokens: number;
   private last: number;

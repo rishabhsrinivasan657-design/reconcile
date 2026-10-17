@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { BudgetExceeded, SpendLedger } from './budget.ts';
 import { cacheKey, FileCacheStore, type CacheStore } from './cache.ts';
 import { FREE_TIER_PROVIDERS, PROVIDER_LIMITS, type LlmEnv, type Provider } from './env.ts';
-import { realClock, RateLimiter, type Clock } from './limiter.ts';
+import { realClock, RateLimiter, type Clock, type Limiter } from './limiter.ts';
 import { estimateCost, type Usage } from './prices.ts';
 import {
   createChatModel,
@@ -66,6 +66,8 @@ export interface LlmClientOptions {
   baseUrl?: string;
   /** Folder for the day counter and spend ledger; defaults to LLM_CACHE_DIR. */
   stateDir?: string;
+  /** Share one rate limit across processes (the worker passes a Redis limiter). */
+  limiter?: Limiter;
 }
 
 const DEFAULT_MAX_OUTPUT = 8000;
@@ -83,7 +85,7 @@ export class LlmClient {
   private readonly sink: CallSink;
   private readonly mode: 'live' | 'replay';
   private readonly clock: Clock;
-  private readonly limiter: RateLimiter;
+  private readonly limiter: Limiter;
   private readonly ledger: SpendLedger;
   private invoker: Invoker | undefined;
 
@@ -99,16 +101,18 @@ export class LlmClient {
     const caps = PROVIDER_LIMITS[this.provider];
     const tpm = env.LLM_TPM ?? caps.tpm;
     const tpd = env.LLM_TPD ?? caps.tpd;
-    this.limiter = new RateLimiter(
-      {
-        rpm: env.LLM_RPM ?? caps.rpm,
-        rpd: env.LLM_RPD ?? caps.rpd,
-        ...(tpm ? { tpm } : {}),
-        ...(tpd ? { tpd } : {}),
-      },
-      path.join(stateDir, `_limits-${this.provider}.json`),
-      this.clock,
-    );
+    this.limiter =
+      opts.limiter ??
+      new RateLimiter(
+        {
+          rpm: env.LLM_RPM ?? caps.rpm,
+          rpd: env.LLM_RPD ?? caps.rpd,
+          ...(tpm ? { tpm } : {}),
+          ...(tpd ? { tpd } : {}),
+        },
+        path.join(stateDir, `_limits-${this.provider}.json`),
+        this.clock,
+      );
     this.ledger = new SpendLedger(env.LLM_BUDGET_USD, path.join(stateDir, '_spend.json'));
     this.invoker = opts.invoker;
   }
@@ -204,12 +208,12 @@ export class LlmClient {
     // Failed attempts are logged before the error propagates, so a caller that closes its
     // database right after a failure doesn't lose the log rows.
     const result = await run
-      .catch((e: unknown) => {
-        this.limiter.settle(estTokens, estTokens);
+      .catch(async (e: unknown) => {
+        await this.limiter.settle(estTokens, estTokens);
         throw e;
       })
       .finally(() => Promise.allSettled(pendingLogs));
-    this.limiter.settle(estTokens, result.usage.inputTokens + result.usage.outputTokens);
+    await this.limiter.settle(estTokens, result.usage.inputTokens + result.usage.outputTokens);
     const latencyMs = this.clock.now() - t0;
     // Free tiers never bill; list prices (when known) are still reported for comparison.
     const costUsd = estimateCost(this.model, result.usage);
