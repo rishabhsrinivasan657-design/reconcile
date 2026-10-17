@@ -6,6 +6,26 @@ All notable changes are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-17
+
+M2: matching engine and eval harness ([PR #2](https://github.com/rishabhsrinivasan657-design/reconcile/pull/2)).
+
+### Added
+- Matching engine in `packages/core`: groups documents by PO, detects duplicate invoices
+  (same number, or same total within 45 days), pairs lines by SKU and then by description
+  with a non-AI text-similarity matcher (ADR-0009), and raises all 7 FR-09 exceptions with
+  tolerances, count-once dollar amounts, and plain-English explanations.
+- `ExtractedDocument` schema: the input shape M3's LLM extraction will produce.
+- `pnpm eval`: scores grouping, line links, exceptions (per type), amounts, and latency
+  against the answer keys; writes `evals/results/*.json` with every mistake.
+- Baseline gate: `evals/baseline.json` plus `--check-baseline` fails on any drop over 2 points.
+  A new CI job, "Evals (CI subset)", runs it on every PR.
+- Generator 0.3.0: `price_noise` near-miss planted type (inside tolerance, no exception).
+
+### Changed
+- `main` is protected: merging needs lint/typecheck/docs, tests, and evals to pass.
+- `pnpm generate:ci` draws its 20 sets from a 200-set pool; the CI subset was regenerated.
+
 ## [0.2.0] - 2026-10-16
 
 M1: foundation and synthetic data ([PR #1](https://github.com/rishabhsrinivasan657-design/reconcile/pull/1)).
@@ -38,6 +58,7 @@ M0: requirements and design. Documentation only, no code.
 - `QTY_BILLED_NOT_RECEIVED` exception type; informational short-ships (PRD decisions Q1, Q2).
 - M0 design: architecture doc, ADRs 0001–0006, doc and PR templates.
 
-[Unreleased]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/rishabhsrinivasan657-design/reconcile/releases/tag/v0.1.0
