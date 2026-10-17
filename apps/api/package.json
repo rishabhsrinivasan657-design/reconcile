@@ -22,5 +22,8 @@
   },
   "devDependencies": {
     "@reconcile/llm": "workspace:*"
+  },
+  "exports": {
+    "./src/app.ts": "./src/app.ts"
   }
 }

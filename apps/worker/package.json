@@ -1,0 +1,23 @@
+{
+  "name": "@reconcile/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "start": "tsx src/main.ts",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@reconcile/core": "workspace:*",
+    "@reconcile/db": "workspace:*",
+    "@reconcile/extraction": "workspace:*",
+    "@reconcile/llm": "workspace:*",
+    "@reconcile/pipeline": "workspace:*",
+    "bullmq": "^6.3.16",
+    "ioredis": "^6.0.0"
+  },
+  "devDependencies": {
+    "@reconcile/api": "workspace:*"
+  }
+}

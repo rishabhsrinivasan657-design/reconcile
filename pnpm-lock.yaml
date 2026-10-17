@@ -76,6 +76,34 @@ importers:
         specifier: workspace:*
         version: link:../../packages/llm
 
+  apps/worker:
+    dependencies:
+      '@reconcile/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@reconcile/db':
+        specifier: workspace:*
+        version: link:../../packages/db
+      '@reconcile/extraction':
+        specifier: workspace:*
+        version: link:../../packages/extraction
+      '@reconcile/llm':
+        specifier: workspace:*
+        version: link:../../packages/llm
+      '@reconcile/pipeline':
+        specifier: workspace:*
+        version: link:../../packages/pipeline
+      bullmq:
+        specifier: ^6.3.16
+        version: 6.3.16(ioredis@6.0.0)(pg@8.23.1)
+      ioredis:
+        specifier: ^6.0.0
+        version: 6.0.0
+    devDependencies:
+      '@reconcile/api':
+        specifier: workspace:*
+        version: link:../api
+
   evals:
     dependencies:
       '@reconcile/core':
