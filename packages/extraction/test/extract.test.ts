@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import type { ExtractionAnswer } from '../src/answer.ts';
+import { ExtractionAnswer } from '../src/answer.ts';
 import { buildResult } from '../src/extract.ts';
 import { convertBox, parseIsoDate, parseMoney, toUnitPriceString } from '../src/normalize.ts';
 import { EXTRACT_PROMPT } from '../src/prompt.ts';
@@ -130,5 +130,51 @@ describe('prompt lock (AC-3)', () => {
       lock[EXTRACT_PROMPT.version],
       `Prompt ${EXTRACT_PROMPT.version} changed. Bump its version (cached answers must not be reused), then record the new hash in prompts.lock.json.`,
     ).toBe(hash);
+  });
+});
+
+describe('lenient answer parsing (found on the first live run)', () => {
+  it('coerces number/string mix-ups and treats missing or junk fields as not read', () => {
+    const raw = {
+      docType: { v: 'INVOICE', c: 1, p: 1, b: null },
+      vendorName: { v: 'Sunpeak', c: '0.9', p: '1', b: ['10', 20, 30, 40] },
+      docNumber: 'INV-1',
+      date: { v: '2026-03-28', c: 1, p: 1, b: null },
+      lines: [
+        {
+          description: { v: 'Almond Butter', c: 1, p: 1, b: null },
+          qty: { v: '28', c: 1, p: 1, b: null },
+          uom: { v: 'CS', c: 1, p: 1, b: null },
+          unitPrice: { v: 5, c: 1, p: 1, b: null },
+        },
+      ],
+      total: { v: { weird: true }, c: 1, p: 1, b: null },
+    };
+    const a = ExtractionAnswer.parse(raw);
+    expect(a.vendorName).toEqual({ v: 'Sunpeak', c: 0.9, p: 1, b: [10, 20, 30, 40] });
+    expect(a.docNumber.v).toBe('INV-1');
+    expect(a.lines[0]!.qty.v).toBe(28);
+    expect(a.lines[0]!.unitPrice.v).toBe('5');
+    expect(a.lines[0]!.sku).toEqual({ v: null, c: 0, p: 1, b: null });
+    expect(a.total.v).toBeNull();
+    expect(a.tax.v).toBeNull();
+  });
+
+  it('on a purchase order, a PO number given only as poNumber becomes the document number', () => {
+    const r = buildResult(
+      answer({
+        docType: 'PO',
+        docNumber: f(null),
+        poNumber: f('HP-PO-104012'),
+        dueDate: f(null),
+        tax: f(null),
+        shipping: f(null),
+        total: f('$2,519.00'),
+      }),
+      'S0001/po',
+    );
+    expect(r.document?.docNumber).toBe('HP-PO-104012');
+    expect(r.document?.poNumber).toBeUndefined();
+    expect(r.confidence.docNumber).toBe(0.95);
   });
 });

@@ -121,8 +121,18 @@ export function buildResult(
   };
 
   const vendorName = text('vendorName', a.vendorName);
-  const docNumber = text('docNumber', a.docNumber);
-  const poNumber = text('poNumber', a.poNumber);
+  let docNumber = text('docNumber', a.docNumber);
+  let poNumber = text('poNumber', a.poNumber);
+  // On a purchase order the PO number *is* the document number; models often put it under
+  // poNumber. Move it, and say so, rather than lose the whole document.
+  if (a.docType === 'PO' && !docNumber && poNumber) {
+    docNumber = poNumber;
+    poNumber = undefined;
+    if ('poNumber' in confidence) confidence.docNumber = confidence.poNumber!;
+    if ('poNumber' in locations) locations.docNumber = locations.poNumber!;
+    delete confidence.poNumber;
+    delete locations.poNumber;
+  }
   const docDate = date('date', a.date);
   const dueDate = date('dueDate', a.dueDate);
 

@@ -261,7 +261,19 @@ if (stages.includes('extract') || stages.includes('e2e')) {
           `   - ${e.docId} ${e.field}: expected ${JSON.stringify(e.expected)}, got ${JSON.stringify(e.got)}${e.flagged ? ' (flagged)' : ''}`,
         );
     }
+    const failures = jobs.flatMap((j) => {
+      const r = extracted.get(j.docId);
+      if (r && 'error' in r) return [{ docId: j.docId, reason: r.error }];
+      if (r && !r.document) return [{ docId: j.docId, reason: r.reviewReasons.join('; ') }];
+      return [];
+    });
+    if (failures.length) {
+      console.log(`\n  ${failures.length} document(s) not extracted, first 5:`);
+      for (const f of failures.slice(0, 5))
+        console.log(`   - ${f.docId}: ${f.reason.slice(0, 200)}`);
+    }
     (results.stages as Record<string, unknown>).extract = {
+      failures,
       provider,
       model,
       promptVersion: EXTRACT_PROMPT.version,
