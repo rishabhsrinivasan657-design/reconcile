@@ -131,21 +131,21 @@ function gate(
 }
 
 // ---- match (perfect inputs) ----------------------------------------------------------
-function runMatch(docsBySet: LoadedSet[], label: string) {
+async function runMatch(docsBySet: LoadedSet[], label: string) {
   const pile = docsBySet.flatMap((s) => s.docs).sort((a, b) => a.id.localeCompare(b.id));
-  const result = matchDocuments(pile);
+  const result = await matchDocuments(pile);
   return { result, report: score(docsBySet, result), label };
 }
 
 if (stages.includes('match')) {
-  const { result, report } = runMatch(sets, 'match');
-  const timings = sets
-    .map((s) => {
-      const t0 = performance.now();
-      matchDocuments(s.docs);
-      return performance.now() - t0;
-    })
-    .sort((a, b) => a - b);
+  const { result, report } = await runMatch(sets, 'match');
+  const timings: number[] = [];
+  for (const s of sets) {
+    const t0 = performance.now();
+    await matchDocuments(s.docs);
+    timings.push(performance.now() - t0);
+  }
+  timings.sort((a, b) => a - b);
   const rows = gate('match', report.scores as unknown as Record<string, number>);
   printScores(
     `Reconcile eval · stage: match · inputs: answer keys · subset: ${subsetName} (${report.counts.sets} sets, ${report.counts.documents} docs)`,
@@ -295,7 +295,7 @@ if (stages.includes('extract') || stages.includes('e2e')) {
           r && 'document' in r && r.document ? [r.document as ExtractedDocument] : [],
         ),
     }));
-    const { report } = runMatch(aiSets, 'e2e');
+    const { report } = await runMatch(aiSets, 'e2e');
     const rows = gate('e2e', report.scores as unknown as Record<string, number>, {
       provider,
       model,
