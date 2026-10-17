@@ -23,7 +23,8 @@
     "db:reset": "pnpm --filter @reconcile/db exec prisma migrate reset --force",
     "generate": "tsx packages/generator/src/cli.ts",
     "generate:ci": "tsx packages/generator/src/cli.ts --ci",
-    "generate:samples": "tsx packages/generator/src/samples.ts"
+    "generate:samples": "tsx packages/generator/src/samples.ts",
+    "eval": "tsx evals/src/cli.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

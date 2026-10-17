@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "setId": "S0015",
   "seed": 42,
-  "generatorVersion": "0.2.0",
+  "generatorVersion": "0.3.0",
   "poNumber": "HP-PO-104254",
   "vendorCode": "ORCH",
   "documents": [

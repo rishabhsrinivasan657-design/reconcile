@@ -1,6 +1,6 @@
 /**
  * pnpm generate [--seed 42] [--sets 100] [--out evals/golden] [--config rates.json] [--scan-rate 0.2]
- * pnpm generate:ci   (seed 42, 100 sets -> pick the 20-set CI subset -> evals/golden-ci)
+ * pnpm generate:ci   (seed 42, pool of 200 sets -> pick the 20-set CI subset -> evals/golden-ci)
  */
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -15,7 +15,7 @@ import { generateSet, GENERATOR_VERSION, writeSet, type GeneratedSet } from './g
 const { values } = parseArgs({
   options: {
     seed: { type: 'string', default: '42' },
-    sets: { type: 'string', default: '100' },
+    sets: { type: 'string' },
     out: { type: 'string' },
     config: { type: 'string' },
     'scan-rate': { type: 'string' },
@@ -25,7 +25,8 @@ const { values } = parseArgs({
 });
 
 const seed = Number(values.seed);
-const count = Number(values.sets);
+// --ci draws its 20 sets from a larger pool so rare error types are covered at least twice.
+const count = Number(values.sets ?? (values.ci ? 200 : 100));
 if (!Number.isInteger(seed) || !Number.isInteger(count) || count < 1) {
   console.error('--seed and --sets must be integers (sets >= 1)');
   process.exit(1);

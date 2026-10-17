@@ -153,8 +153,8 @@ strings or numbers into the decimal type.
   - matching: line-match accuracy
   - exceptions: precision/recall per type
   - ops: p50/p95 latency, tokens, and est. cost per document
-- `pnpm eval --stage match --from-ground-truth` evaluates matching on perfect
-  extractions, separating matching errors from extraction errors.
+- In M2, `pnpm eval` scores matching on perfect extractions (answer-key values),
+  separating matching errors from extraction errors. `--subset ci|full`, `--dir`.
 - `evals/baseline.json` is committed. GitHub Actions runs the 20-set subset on
   every PR and **fails if any metric drops more than 2 percentage points**
   versus the baseline. Updating the baseline is a deliberate commit with a
@@ -182,7 +182,8 @@ pnpm generate --seed 42 --sets 100 --out evals/golden
 pnpm generate:ci                   # rebuild committed evals/golden-ci (20 sets)
 pnpm lint | typecheck | test | format
 pnpm docs:diagrams | docs:check
-# later: pnpm dev, pnpm test:e2e, pnpm eval
+pnpm eval [--check-baseline | --update-baseline]
+# later: pnpm dev, pnpm test:e2e
 ```
 
 Toolchain pins: TypeScript 6.0 (typescript-eslint doesn't support 7), Prisma 7.10 (npm

@@ -42,6 +42,28 @@ export default tseslint.config(
               ],
               message: 'packages/core must stay pure (ADR-0001). Inject this dependency instead.',
             },
+            {
+              group: ['@reconcile/generator', '@reconcile/generator/*'],
+              message:
+                'The matcher must not see how answer keys are built (ADR-0008). Implement from the PRD.',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    // ADR-0008: the eval harness scores against answer-key files, never generator code.
+    files: ['evals/**/*.ts'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['@reconcile/generator', '@reconcile/generator/*'],
+              message: 'Evals read answer keys from disk; they must not import the generator.',
+            },
           ],
         },
       ],

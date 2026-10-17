@@ -21,9 +21,10 @@ Priority: **P1** next after the current plan · **P2** valuable later · **P3** 
 | B-10 | CI docs check: relative links and Mermaid syntax | P1 | M0 retro |
 | ~~B-11~~ | ~~Move the repo out of the temporary session folder~~ ✅ done 2026-10-17: now at `~/Desktop/Projects/Reconcile` | P1 | M0 retro |
 | ~~B-12~~ | ~~Enable GitHub email privacy; decide on rewriting the M1 merge commit~~ ✅ decided 2026-10-17: owner is fine with the email showing; `main` is left as is | P1 | M1 retro |
-| B-13 | Branch protection on `main` requiring CI (proves the red path; closes M1 AC-4) | P1 | M1 retro |
+| ~~B-13~~ | ~~Branch protection on `main` requiring CI~~ ✅ enabled 2026-10-17 (M2 Q2) | P1 | M1 retro |
 | B-14 | More SKUs per vendor so sets reach 25 lines and more multi-page documents | P2 | M1 retro |
-| B-15 | Benign within-tolerance noise for precision evals | P2 | M1 retro |
+| ~~B-15~~ | ~~Benign within-tolerance noise for precision evals~~ ✅ M2 (`price_noise`) | P2 | M1 retro |
+| B-16 | Harder fuzzy cases: let `sku_omitted` lines also get a reworded/abbreviated description, so the text matcher (and the M4 LLM) face real ambiguity. M2 scores 100 partly because these never combine. | P1 | M2 implementation |
 
 ## Tech debt
 

@@ -225,3 +225,88 @@ GitHub Release, and wrote the M1 retrospective.
   correct: force-pushing a shared branch is a decision for the owner, not the assistant.
 
 **Remember:** every milestone ends with "what will we do differently next time?", and that goes in the backlog.
+
+---
+
+## M2 · Requirements (2026-10-17)
+
+**In one line:** define what "good matching" means, as numbers, before writing the matcher.
+
+**What we did:** wrote 15 acceptance criteria for the matching engine and the
+eval harness (the scoreboard), plus three open questions.
+
+**Key ideas**
+- **Measure one thing at a time.** M2 feeds the matcher *perfect* data (the
+  answer key) instead of what the AI reads from documents. If a score is bad, we
+  know matching is to blame, not reading. Engineers call this *isolating the
+  variable*.
+- **Precision vs. recall, in plain words.**
+  - *Precision:* of the problems we flagged, how many were real? Low precision
+    means lots of false alarms that waste the clerk's time.
+  - *Recall:* of the real problems, how many did we catch? Low recall means
+    money leaks through unnoticed.
+  - *F1* blends the two into one number.
+- **A metric needs an exact definition.** "Line-match accuracy" is vague.
+  "Precision/recall over PO–RR, PO–invoice, and RR–invoice links" isn't. Two
+  people computing it get the same answer.
+- **Baseline and regression gate.** Record today's scores (the *baseline*). CI
+  then fails any change that drops a score by more than 2 points. Quality can go
+  up freely but never quietly down.
+- **Baseline first, then AI.** A simple non-AI matcher sets the bar (Q1). When
+  the AI arrives in M4, we can say exactly how much it improves things, or
+  whether it does at all.
+
+**Remember:** if you can't measure it, you can't tell if a change helped.
+
+---
+
+## M2 · Design (2026-10-17)
+
+**In one line:** plan the matcher as a pipeline of small steps, and plan the scoreboard so nobody can argue about the numbers.
+
+**What we did:** wrote the M2 design (pipeline, fuzzy matcher, metric formulas,
+CI gate), ADR-0009, and a test plan. We also turned on a GitHub rule: nothing
+merges into `main` unless CI passes.
+
+**Key ideas**
+- **Pipeline design.** Group, then find duplicates, then pair lines, then raise
+  exceptions, then explain. Each step is small, testable alone, and easy to reason about.
+- **Plug-in parts (dependency injection).** The fuzzy matcher is passed in, not
+  hard-wired. Today it's a simple text matcher; in M4 the AI version plugs into
+  the same slot, with no other changes.
+- **Classic NLP before AI.** Jaro–Winkler catches typos, prefix matching catches
+  abbreviations, and token alignment compares whole descriptions. It's cheap,
+  explainable, and often good enough. The AI must beat it to earn its place.
+- **Branch protection.** A guard rail on `main`: code merges only if the automatic
+  checks pass. Discipline that doesn't depend on remembering.
+- **Prove the alarm rings (red-path test).** A smoke detector you've never tested
+  might not work. We'll deliberately break something in a throwaway PR to see CI
+  turn red.
+
+**Remember:** design how you'll *judge* the work at the same time as the work itself.
+
+---
+
+## M2 · Implementation and testing (2026-10-17)
+
+**In one line:** build the matcher and the scoreboard, and let the scoreboard find bugs.
+
+**What we did:** 13 commits. The matching engine, the eval harness, near-miss
+test data, a saved baseline, a CI eval job, and a deliberately broken pull
+request to prove the gate fails.
+
+**Key ideas**
+- **The scoreboard found a bug on its first run.** Link recall was 95.5, not 100:
+  sets missing a document weren't getting their lines paired. Fixed in one commit.
+  Evals turn "I think it works" into a number that tells you where to look.
+- **A perfect score is a question, not a celebration.** 100 everywhere sounds great,
+  but the reason matters: perfect inputs, plus test data that never makes the
+  fuzzy step work hard. We wrote that down (B-16) instead of bragging about it.
+- **Stress testing.** We also ran 600 extra sets from new seeds to check the
+  result wasn't luck on 20 sets.
+- **Mutation testing (the red-path PR).** Breaking the code on purpose and watching
+  the tests fail proves the tests can actually catch problems.
+- **Don't absorb scope.** Harder fuzzy test data is a good idea, but it wasn't in
+  M2's requirements, so it went to the backlog for you to decide.
+
+**Remember:** a test that never fails might not be testing anything. Make it fail once on purpose.

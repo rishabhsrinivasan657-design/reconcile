@@ -5,10 +5,10 @@ An AI **3-way match** agent for distributors and CPG brands. It reconciles
 invoices**, then flags short-ships, price mismatches, and other exceptions for
 a human to approve, dispute, or write off.
 
-> **Status: M1, foundation and synthetic data.** The repo, database, and a
-> generator for realistic labeled test documents are in place. Extraction,
-> matching, the UI, and the MCP server come in later milestones (see
-> [the milestone list](docs/milestones/README.md)).
+> **Status: M2, matching engine and evals.** The repo, database, a generator
+> for realistic labeled test documents, the matching engine, and the eval
+> scoreboard are in place. Reading documents with an LLM, the UI, and the MCP
+> server come in later milestones (see [the milestone list](docs/milestones/README.md)).
 
 Everything runs locally for **$0**: Docker Compose (Postgres, Redis),
 TypeScript end to end, and the Gemini free tier later on.
@@ -122,13 +122,48 @@ validated by the Zod schema in `packages/core`. Excerpt from
 - **Honest caveat:** synthetic documents are cleaner than real ones. Varied
   layouts, scans, typos, and abbreviations narrow that gap but don't close it.
 
+## Evals: how good is the matching?
+
+`pnpm eval` runs the matcher on the answer keys' documents (all sets mixed into
+one pile), compares its decisions with the answer keys, and prints a scoreboard:
+
+```
+Reconcile eval · stage: match · inputs: answer keys · subset: ci (20 sets, 60 docs)
+
+  metric                  score  baseline   change
+  grouping accuracy       100.0      100.0     +0.0
+  link precision          100.0      100.0     +0.0
+  link recall             100.0      100.0     +0.0
+  exception precision     100.0      100.0     +0.0
+  exception recall        100.0      100.0     +0.0
+  amount accuracy         100.0      100.0     +0.0
+  ...
+  ✓ within 2 points of baseline
+```
+
+| Command | What it does |
+|---|---|
+| `pnpm eval` | Score the committed 20-set CI subset |
+| `pnpm eval --subset full` | Score `evals/golden` (run `pnpm generate` first) |
+| `pnpm eval --dir <folder>` | Score any generated folder |
+| `pnpm eval --check-baseline` | Fail if any score drops more than 2 points (runs in CI on every PR) |
+| `pnpm eval --update-baseline` | Save the current scores as the new baseline (commit it with a reason) |
+
+Each run writes `evals/results/*.json` with every mistake and every
+description-based pairing and its reason.
+
+**Why 100?** In M2 the matcher receives *perfect* inputs (the answer keys'
+values), so this measures the matching rules alone. Scores will drop once M3
+reads real PDFs with an LLM, and that drop is exactly what the next milestone measures.
+
 ## Repository layout
 
 ```
 packages/core        Zod schemas (answer key, money, enums), env loader
 packages/db          Prisma schema + migrations, append-only audit log, seed
 packages/generator   Synthetic PO / RR / invoice generator
-evals/golden-ci      Committed 20-set CI subset (the eval harness arrives in M2)
+packages/core        + matching engine: grouping, line pairing, FR-09 exceptions
+evals/               Eval harness (pnpm eval), baseline.json, committed 20-set CI subset
 docs/                PRD, architecture, ADRs, milestone docs, learning log
 ```
 
@@ -141,6 +176,7 @@ docs/                PRD, architecture, ADRs, milestone docs, learning log
 | `pnpm db:migrate` / `db:seed` / `db:reset` | Database |
 | `pnpm docs:diagrams` | Re-render Mermaid diagrams to PNG after editing them |
 | `pnpm docs:check` | Check links and diagram freshness (runs in CI) |
+| `pnpm eval` | Score matching against the answer keys (see above) |
 
 ## How this project is built
 
