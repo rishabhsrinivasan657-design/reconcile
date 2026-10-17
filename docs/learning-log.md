@@ -225,3 +225,35 @@ GitHub Release, and wrote the M1 retrospective.
   correct: force-pushing a shared branch is a decision for the owner, not the assistant.
 
 **Remember:** every milestone ends with "what will we do differently next time?", and that goes in the backlog.
+
+---
+
+## M2 · Requirements (2026-10-17)
+
+**In one line:** define what "good matching" means, as numbers, before writing the matcher.
+
+**What we did:** wrote 15 acceptance criteria for the matching engine and the
+eval harness (the scoreboard), plus three open questions.
+
+**Key ideas**
+- **Measure one thing at a time.** M2 feeds the matcher *perfect* data (the
+  answer key) instead of what the AI reads from documents. If a score is bad, we
+  know matching is to blame, not reading. Engineers call this *isolating the
+  variable*.
+- **Precision vs. recall, in plain words.**
+  - *Precision:* of the problems we flagged, how many were real? Low precision
+    means lots of false alarms that waste the clerk's time.
+  - *Recall:* of the real problems, how many did we catch? Low recall means
+    money leaks through unnoticed.
+  - *F1* blends the two into one number.
+- **A metric needs an exact definition.** "Line-match accuracy" is vague.
+  "Precision/recall over PO–RR, PO–invoice, and RR–invoice links" isn't. Two
+  people computing it get the same answer.
+- **Baseline and regression gate.** Record today's scores (the *baseline*). CI
+  then fails any change that drops a score by more than 2 points. Quality can go
+  up freely but never quietly down.
+- **Baseline first, then AI.** A simple non-AI matcher sets the bar (Q1). When
+  the AI arrives in M4, we can say exactly how much it improves things, or
+  whether it does at all.
+
+**Remember:** if you can't measure it, you can't tell if a change helped.
