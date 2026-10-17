@@ -4,7 +4,7 @@ import { findDuplicates } from './duplicates.ts';
 import { duplicateInvoice, lineExceptions, missingDocument } from './exceptions.ts';
 import { textSimilarityMatcher } from './fuzzy.ts';
 import { groupByPo } from './group.ts';
-import { pairLines } from './pair.ts';
+import { pairLines, pairWithoutPo } from './pair.ts';
 import type { FuzzyMatcher, LineMatch, MatchException, MatchGroup, MatchResult } from './types.ts';
 
 export * from './config.ts';
@@ -45,11 +45,14 @@ export function matchDocuments(
     const missing = [!po && 'po', !rr && 'rr', !inv && 'invoice'].filter(Boolean) as (
       'po' | 'rr' | 'invoice'
     )[];
-    if (missing.length > 0) {
-      const present = [po, rr, inv].filter((d) => d !== undefined);
-      for (const m of missing) exceptions.unshift(missingDocument(g.poNumber, m, present, inv));
-    } else {
-      const links = pairLines(po!, rr, inv, fuzzy, cfg.fuzzyThreshold);
+    // Lines are linked whenever two documents exist, so a clerk can see them side by side.
+    const links = po
+      ? pairLines(po, rr, inv, fuzzy, cfg.fuzzyThreshold)
+      : rr && inv
+        ? pairWithoutPo(rr, inv, fuzzy, cfg.fuzzyThreshold)
+        : [];
+    const present = [po, rr, inv].filter((d) => d !== undefined);
+    if (present.length >= 2) {
       lineMatches = links.map((l) => ({
         ...(l.po ? { po: { docId: po!.id, lineNo: l.po.lineNo } } : {}),
         ...(l.rr ? { rr: { docId: rr!.id, lineNo: l.rr.lineNo } } : {}),
@@ -58,6 +61,12 @@ export function matchDocuments(
         ...(l.confidence !== undefined ? { confidence: l.confidence } : {}),
         ...(l.reason !== undefined ? { reason: l.reason } : {}),
       }));
+    }
+
+    if (missing.length > 0) {
+      // An incomplete set can't be 3-way matched: only the missing document is reported.
+      for (const m of missing) exceptions.unshift(missingDocument(g.poNumber, m, present, inv));
+    } else {
       for (const link of links) {
         exceptions.push(...lineExceptions(link, { po: po!, rr: rr!, inv: inv!, cfg }));
       }

@@ -60,6 +60,34 @@ function pairWith(
   return result;
 }
 
+/**
+ * Link the lines of an incomplete set that has no PO: the RR against the invoice. Used so line
+ * matches are still shown; exceptions for incomplete sets are only MISSING_DOCUMENT.
+ */
+export function pairWithoutPo(
+  rr: ExtractedDocument,
+  inv: ExtractedDocument,
+  fuzzy: FuzzyMatcher,
+  threshold: number,
+): PairLink[] {
+  const pairs = pairWith(rr.lines, inv.lines, fuzzy, threshold);
+  const usedInv = new Set([...pairs.values()].map((s) => s.other.lineNo));
+  return [
+    ...rr.lines.map((l): PairLink => {
+      const p = pairs.get(l.lineNo);
+      return {
+        rr: l,
+        ...(p ? { inv: p.other } : {}),
+        method: p?.fuzzy ? 'FUZZY' : 'SKU',
+        ...(p?.fuzzy ? { confidence: p.fuzzy.score, reason: p.fuzzy.reason } : {}),
+      };
+    }),
+    ...inv.lines
+      .filter((l) => !usedInv.has(l.lineNo))
+      .map((l): PairLink => ({ inv: l, method: 'SKU' })),
+  ];
+}
+
 /** Link the lines of a PO, its RR, and its primary invoice. Unpaired lines become one-sided links. */
 export function pairLines(
   po: ExtractedDocument,
