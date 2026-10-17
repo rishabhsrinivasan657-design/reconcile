@@ -65,19 +65,61 @@ export async function extractDocument(
     maxOutputTokens: 16_000,
     documentRef: opts.id,
   });
-  const built = buildResult(res.data, opts.id, threshold);
+  let built = buildResult(res.data, opts.id, threshold);
+  let usage = res.usage;
+  let costUsd = res.costUsd;
+  let latencyMs = res.latencyMs;
+  let cacheHit = res.cacheHit;
+
+  // Self-check: lines that don't add up to the printed subtotal usually means skipped lines.
+  // Ask once more with the evidence; keep the retry only if it actually fixes the totals.
+  const gap = missingLinesGap(built);
+  if (gap) {
+    const retry = await opts.llm.generateStructured({
+      purpose: 'EXTRACT',
+      promptVersion: `${EXTRACT_PROMPT.version}+${EXTRACT_PROMPT.retryVersion}`,
+      system: EXTRACT_PROMPT.system,
+      userText: `${EXTRACT_PROMPT.user(images.length)}\n\n${EXTRACT_PROMPT.retry(gap.listed, gap.sum, gap.subtotal)}`,
+      images,
+      schema: ExtractionAnswer,
+      jsonShape: EXTRACT_PROMPT.jsonShape,
+      cacheKeyParts: [fileHash, `retry:${gap.listed}:${gap.sum}:${gap.subtotal}`],
+      maxOutputTokens: 16_000,
+      documentRef: `${opts.id} (self-check)`,
+    });
+    const second = buildResult(retry.data, opts.id, threshold);
+    usage = {
+      inputTokens: usage.inputTokens + retry.usage.inputTokens,
+      outputTokens: usage.outputTokens + retry.usage.outputTokens,
+    };
+    costUsd = costUsd === null || retry.costUsd === null ? null : costUsd + retry.costUsd;
+    latencyMs += retry.latencyMs;
+    cacheHit = cacheHit && retry.cacheHit;
+    if (!missingLinesGap(second) && second.document) {
+      built = { ...second, reviewReasons: [...second.reviewReasons] };
+    } else {
+      built.reviewReasons.push('self-check retry did not fix the line totals');
+    }
+  }
+
   return {
     ...built,
     pages: images.length,
-    llm: {
-      usage: res.usage,
-      costUsd: res.costUsd,
-      latencyMs: res.latencyMs,
-      cacheHit: res.cacheHit,
-      model: res.model,
-      provider: res.provider,
-    },
+    llm: { usage, costUsd, latencyMs, cacheHit, model: res.model, provider: res.provider },
   };
+}
+
+/** Listed lines sum well below the printed subtotal (lines skipped), with evidence for a retry. */
+export function missingLinesGap(
+  r: Omit<ExtractionResult, 'pages' | 'llm'>,
+): { listed: number; sum: string; subtotal: string } | undefined {
+  const d = r.document;
+  if (!d?.subtotal || d.lines.length === 0 || d.lines.some((l) => !l.lineTotal)) return undefined;
+  const sum = d.lines.reduce((s, l) => s.plus(l.lineTotal!), new Decimal(0));
+  const subtotal = new Decimal(d.subtotal);
+  // Only clear shortfalls (>2%): small differences are reading errors, not skipped lines.
+  if (subtotal.minus(sum).lessThanOrEqualTo(subtotal.times('0.02'))) return undefined;
+  return { listed: d.lines.length, sum: toCentsString(sum), subtotal: d.subtotal };
 }
 
 /** Pure part of extraction: answer -> document + confidence + checks + review flag. */

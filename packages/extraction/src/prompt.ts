@@ -20,6 +20,13 @@ Rules:
   /** Answer shape for JSON-mode providers (Groq). Field wrapper: v value, c confidence, p page, b box. */
   jsonShape: `{"docType":"PO|RR|INVOICE","vendorName":F,"docNumber":F,"poNumber":F,"date":F,"dueDate":F,"lines":[{"sku":F,"description":F,"qty":F,"uom":F,"unitPrice":F,"lineTotal":F}],"subtotal":F,"tax":F,"shipping":F,"total":F}
 where every F is {"v": value or null, "c": 0.0-1.0, "p": page number, "b": [ymin,xmin,ymax,xmax] 0-1000 or null}; qty.v is a number, all other v are strings.`,
+  /**
+   * Self-check follow-up (its own version): sent once when the listed lines don't add up to the
+   * printed subtotal, which in practice means lines were skipped (seen on dense ERP printouts).
+   */
+  retryVersion: 'extract.retry.v1',
+  retry: (listed: number, sum: string, subtotal: string) =>
+    `Check your work: you listed ${listed} line item${listed === 1 ? '' : 's'} adding up to ${sum}, but the printed subtotal is ${subtotal}. Line items were probably skipped. Re-read every page and return the complete answer with EVERY printed line item, in printed order.`,
   user: (pages: number) =>
     `Extract this document. It has ${pages} page${pages === 1 ? '' : 's'}; the page images follow in order.`,
 } as const;

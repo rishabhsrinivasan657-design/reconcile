@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { ExtractionAnswer } from '../src/answer.ts';
-import { buildResult } from '../src/extract.ts';
+import { buildResult, missingLinesGap } from '../src/extract.ts';
 import { convertBox, parseIsoDate, parseMoney, toUnitPriceString } from '../src/normalize.ts';
 import { EXTRACT_PROMPT } from '../src/prompt.ts';
 
@@ -123,6 +123,19 @@ describe('buildResult (AC-6..AC-8)', () => {
   });
 });
 
+describe('self-check for skipped lines', () => {
+  it('detects lines that add up well below the printed subtotal', () => {
+    const a = answer();
+    a.lines = [a.lines[0]!];
+    const r = buildResult(a, 'x');
+    expect(missingLinesGap(r)).toEqual({ listed: 1, sum: '50.00', subtotal: '2519.00' });
+  });
+  it('ignores small differences and complete answers', () => {
+    expect(missingLinesGap(buildResult(answer(), 'x'))).toBeUndefined();
+    expect(missingLinesGap(buildResult(answer({ subtotal: f('$2,530.00') }), 'x'))).toBeUndefined();
+  });
+});
+
 describe('prompt lock (AC-3)', () => {
   it('a prompt text change requires a version bump', () => {
     const lock = JSON.parse(
@@ -135,6 +148,18 @@ describe('prompt lock (AC-3)', () => {
       lock[EXTRACT_PROMPT.version],
       `Prompt ${EXTRACT_PROMPT.version} changed. Bump its version (cached answers must not be reused), then record the new hash in prompts.lock.json.`,
     ).toBe(hash);
+  });
+
+  it('the self-check prompt is locked too', () => {
+    const lock = JSON.parse(
+      fs.readFileSync(path.join(import.meta.dirname, '../prompts.lock.json'), 'utf8'),
+    ) as Record<string, string>;
+    const hash = createHash('sha256')
+      .update(EXTRACT_PROMPT.retry(2, '1.00', '9.00'))
+      .digest('hex');
+    expect(lock[EXTRACT_PROMPT.retryVersion], 'Self-check prompt changed: bump retryVersion').toBe(
+      hash,
+    );
   });
 });
 
