@@ -386,3 +386,31 @@ metrics, and wrote ADR-0010.
 over Gemini's free tier. That breaks the original "$0" rule, so we didn't just switch.
 We updated the rule itself (CLAUDE.md, PRD NFR-01) and added a **hard spending cap**
 in code. A good change is written down and guarded, not slipped in.
+
+---
+
+## M3 · Implementation and testing (2026-10-17)
+
+**In one line:** connect a real AI, let the scoreboard show what breaks, and fix it one measured step at a time.
+
+**What we did:** built the AI client and extraction, switched providers twice when
+reality got in the way, recorded 60 real answers, and raised reading accuracy from
+55.8 to 99.9.
+
+**Key ideas**
+- **Real systems fail in boring ways.** It wasn't "the AI is dumb". It was a number sent
+  as text, a date copied as printed, an answer cut off, a field put in the neighboring box.
+  *Be lenient about format, strict about meaning.*
+- **Measure, fix, re-measure.** Each fix was chosen by the scoreboard and confirmed by it
+  (55.8 → 93.7 → 95.5 → 97.9 → 99.9). No guessing.
+- **Self-check loops.** When the AI's lines didn't add up to the printed subtotal, we showed
+  it the evidence and asked again. Grounding a retry in a *fact* works better than "try harder".
+- **Vendor reality.** Credits run out and free tiers have hidden limits (Groq's output cap).
+  Because providers sit behind one interface, each switch was a setting plus a small adapter
+  fix, not a rewrite.
+- **Confident and wrong is the hardest error.** Three remaining mistakes had high confidence
+  and passed every check. Knowing that, and writing it down, is part of being trustworthy.
+- **Secrets hygiene, for real.** Keys pasted in chat were treated as exposed. A global key in
+  `~/.zshrc` silently overrode `.env`, so now the tools say which source they used.
+
+**Remember:** your first live run is a measurement, not a verdict.
