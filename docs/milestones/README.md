@@ -7,7 +7,7 @@ Each milestone gets a folder `Mx/` with `requirements.md`, `design.md`,
 |---|---|
 | M0 Requirements and design | ✅ Released v0.1.0 (2026-10-16) |
 | M1 Foundation and synthetic data | ✅ Released v0.2.0 (2026-10-16) |
-| M2 Matching engine and eval harness | Requirements gate |
+| M2 Matching engine and eval harness | Design gate |
 | M3 LLM client and extraction | Not started |
 | M4 API, worker, fuzzy fallback | Not started |
 | M5 Web UI and human-in-the-loop | Not started |

@@ -1,6 +1,6 @@
 # M2: Matching engine and eval harness. Requirements
 
-- **Status:** Draft, awaiting approval at the M2 Requirements gate
+- **Status:** Approved (2026-10-17)
 - **PRD links:** US-02, US-06 · FR-06, FR-07, FR-09, FR-10, FR-16, FR-17 · NFR-05, NFR-09, NFR-10
 - **Target release:** v0.3.0
 
@@ -83,7 +83,14 @@ extraction of M3 adds its own errors. **No LLM, no API key, no quota.**
   line-match F1 ≥ 0.98, exception precision ≥ 0.90, exception recall ≥ 0.95.
   Any metric that misses is reported honestly, with the reason, not tuned away.
 
-### C. Docs
+### C. Generator: near-miss noise (decision Q3)
+
+- [ ] **AC-16** A new planted type, `price_noise`, changes an invoice price by a
+  few cents but stays inside the default price tolerance. It expects **no**
+  exception. It has a configurable rate and appears at least twice in the
+  regenerated CI subset.
+
+### D. Docs
 
 - [ ] **AC-15** The README covers `pnpm eval` with a sample scoreboard. The
   glossary covers the new terms (precision/recall over links, baseline gate).
@@ -101,21 +108,10 @@ extraction of M3 adds its own errors. **No LLM, no API key, no quota.**
 - Exceptions are compared one per type per line. Document-level exceptions
   (missing, duplicate) are compared by the documents involved.
 
-## Open questions (need your answer at this gate)
+## Decisions (2026-10-17)
 
-- **Q1. Fuzzy matching before the LLM.** Lines with no SKU (`sku_omitted`) can
-  only be paired by description. Until the LLM matcher arrives in M4, should M2
-  include a simple **non-AI text-similarity matcher**?
-  - *Recommended: yes.* It's free and deterministic, and it gives a baseline
-    score. In M4, the LLM gets measured against it, which shows exactly what
-    the AI adds.
-  - *Alternative:* leave those lines unmatched until M4. Scores will be lower in
-    M2, and the matching false alarms show up as `UNMATCHED_LINE`.
-- **Q2. Protect `main` (backlog B-13).** Turn on a GitHub rule that blocks
-  merging into `main` unless CI passes? *Recommended: yes.* It's a repo
-  setting, so I'll only change it with your OK at this gate.
-- **Q3. Near-miss noise (backlog B-15).** Add a new planted "noise" type to the
-  generator: price differences *inside* tolerance (e.g. 5¢ on a $30 item) that
-  must **not** raise an exception. This tests precision and tolerances properly.
-  - *Recommended: yes.* It needs a generator change and a regenerated CI subset,
-    released as part of v0.3.0.
+| # | Question | Decision |
+|---|---|---|
+| Q1 | Fuzzy matching before the LLM | **Yes:** a non-AI text-similarity (NLP) matcher is the M2 baseline. The M4 LLM matcher is measured against it. |
+| Q2 | Protect `main` (B-13) | **Yes:** merging into `main` requires CI to pass. The eval job joins the required checks once it exists. |
+| Q3 | Near-miss noise (B-15) | **Yes:** a new planted type, price differences inside tolerance that must raise nothing. The CI subset is regenerated and the generator goes to 0.3.0. |

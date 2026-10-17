@@ -257,3 +257,30 @@ eval harness (the scoreboard), plus three open questions.
   whether it does at all.
 
 **Remember:** if you can't measure it, you can't tell if a change helped.
+
+---
+
+## M2 · Design (2026-10-17)
+
+**In one line:** plan the matcher as a pipeline of small steps, and plan the scoreboard so nobody can argue about the numbers.
+
+**What we did:** wrote the M2 design (pipeline, fuzzy matcher, metric formulas,
+CI gate), ADR-0009, and a test plan. We also turned on a GitHub rule: nothing
+merges into `main` unless CI passes.
+
+**Key ideas**
+- **Pipeline design.** Group, then find duplicates, then pair lines, then raise
+  exceptions, then explain. Each step is small, testable alone, and easy to reason about.
+- **Plug-in parts (dependency injection).** The fuzzy matcher is passed in, not
+  hard-wired. Today it's a simple text matcher; in M4 the AI version plugs into
+  the same slot, with no other changes.
+- **Classic NLP before AI.** Jaro–Winkler catches typos, prefix matching catches
+  abbreviations, and token alignment compares whole descriptions. It's cheap,
+  explainable, and often good enough. The AI must beat it to earn its place.
+- **Branch protection.** A guard rail on `main`: code merges only if the automatic
+  checks pass. Discipline that doesn't depend on remembering.
+- **Prove the alarm rings (red-path test).** A smoke detector you've never tested
+  might not work. We'll deliberately break something in a throwaway PR to see CI
+  turn red.
+
+**Remember:** design how you'll *judge* the work at the same time as the work itself.

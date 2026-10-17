@@ -7,5 +7,6 @@
   "docs/diagrams/architecture-6-data-model-overview.png": "7a1843a323cfca1b102df21c3163ab1cd9f40394aecb2151dcad5f403bde7486",
   "docs/diagrams/architecture-7-llm-client-inside-core.png": "3d42c5306cf2342d3a5e464c6fb7698fca2d4322efa9aabae232f345ea1b6d61",
   "docs/diagrams/architecture-8-evals-pipeline.png": "d841ef03cd9c14fdcb8ebfeb736da7a3adcf9765cbd41ab7d0d4eb945ad0a101",
-  "docs/diagrams/milestones-m1-design-1-overview.png": "489081baf21f694591c0ef269608244c744b4a6409dc5666dab0e24cd04de2cf"
+  "docs/diagrams/milestones-m1-design-1-overview.png": "489081baf21f694591c0ef269608244c744b4a6409dc5666dab0e24cd04de2cf",
+  "docs/diagrams/milestones-m2-design-1-overview.png": "ef06fdfaa69214a47bc8b3c75719bbace0f1402f14e1dadcfeda8be832c3585f"
 }
