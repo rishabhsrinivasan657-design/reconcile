@@ -457,3 +457,27 @@ worker, the AI fuzzy matcher, and an end-to-end test of the real pipeline.
   cases (Q2) before the AI can show value, or show that it adds none.
 
 **Remember:** a feature isn't done when the function works. It's done when the system using it works.
+
+---
+
+## M4 · Design (2026-10-17)
+
+**In one line:** plan how the pieces talk to each other, so nothing gets lost, done twice, or done halfway.
+
+**What we did:** designed the upload service (API), the background helper (worker), the
+to-do list between them (queue), the AI matcher, and how we'll prove it all works.
+
+**Key ideas**
+- **A restaurant analogy.** The API is the waiter: takes your order instantly. The queue is
+  the order slip on the rail. The worker is the cook: works at their own pace. If the cook
+  steps away, the slips wait.
+- **Safe to do twice.** Every job has a unique name (the file's fingerprint, or the PO), so
+  a repeated job is ignored instead of creating duplicates.
+- **All or nothing.** Each save and its history entry happen together (a *transaction*), so a
+  crash never leaves half a result.
+- **One definition, three uses.** Each API address's format is written once and used to
+  check requests, check answers, and build the manual.
+- **Fair test for the AI.** We're adding invoices that use the vendor's own product names, so
+  the scoreboard can show whether the AI matcher earns its place.
+
+**Remember:** good systems assume things will fail (crashes, retries, bursts) and stay correct anyway.

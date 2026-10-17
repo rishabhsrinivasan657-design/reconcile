@@ -1,6 +1,6 @@
 # M4: Upload, background processing, and AI matching. Requirements
 
-- **Status:** Draft, waiting for your approval
+- **Status:** Approved (2026-10-17)
 - **Links to the PRD:** US-03, US-06 · FR-01, FR-02, FR-05, FR-06, FR-08, FR-12, FR-13
 - **Release when done:** v0.5.0
 
@@ -77,6 +77,21 @@ background. That's why there's a separate worker: nobody waits on the AI.
   today's text matcher on the same documents, including cost and speed. We use
   whichever actually scores better.
 
+### E. Added by your answers
+
+- [ ] **AC-14 Misread PO numbers (B-17).** If a receiving report or invoice points
+  to a PO number that doesn't exist, and a real PO from the **same vendor** is one
+  character different, Reconcile groups them anyway and labels the PO
+  "needs review", with a note saying what it assumed.
+- [ ] **AC-15 Vendor's own product names (harder test cases).** The test-data
+  generator can make invoices that describe products in the vendor's own words
+  ("Nut Spread, Chunky" for "Almond Butter, Crunchy"), with no SKU. A human could
+  still tell they're the same product. These go into the test sets, so the
+  scoreboard shows whether the AI matcher really beats the text matcher.
+- [ ] **AC-16 Provisional results.** If any document in a PO was flagged for review,
+  the PO is still matched, but it's labeled **provisional, needs review** in every
+  answer the API gives.
+
 ### D. Proving the whole thing works
 
 - [ ] **AC-11 Full test.** An automatic test uploads a set of documents, lets the
@@ -101,20 +116,11 @@ background. That's why there's a separate worker: nobody waits on the AI.
 - Matching happens one PO at a time. Duplicate invoices are still caught across
   POs, because the worker also looks at that vendor's other invoices.
 
-## Questions for you
+## Your decisions (2026-10-17)
 
-- **Q1. Fix misread PO numbers now (backlog B-17)?** If a document's PO number is
-  one character off from a real PO of the same vendor, group them anyway and
-  flag it for a human. This was the biggest error in M3's full-pipeline score.
-  *I recommend: yes.* It's small and makes a big difference.
-- **Q2. Harder test cases for the AI matcher?** The simple text matcher already gets
-  100%, so the AI has no room to show it's useful. We'd add invoices that use the
-  **vendor's own product names** ("Sunpeak Nut Spread, Crunchy Almond" instead of
-  "Sunpeak Crunchy Almond Butter"). *I recommend: yes.* Otherwise the comparison
-  tells us nothing.
-- **Q3. Documents the AI was unsure about: match them now, or wait for a human?**
-  Waiting is safest, but the review screen only arrives in M5. *I recommend:
-  match them now and label the PO "provisional, needs review",* so nothing is
-  hidden and nothing is treated as final.
-- **Q4. Date checks (backlog B-18): now or later?** *I recommend: later (M5),* to keep
-  M4 focused.
+| # | Question | Answer |
+|---|---|---|
+| Q1 | Fix misread PO numbers now (B-17)? | **Yes**, see AC-14 |
+| Q2 | Harder test cases for the AI matcher? | **Yes, try it out**, see AC-15 |
+| Q3 | Match unsure documents now? | **Yes, labeled provisional**, see AC-16 |
+| Q4 | Date checks (B-18)? | **Later** (M5 or after) |
