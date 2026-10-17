@@ -26,6 +26,23 @@ export type LlmEnv = z.infer<typeof LlmEnv>;
 export const loadLlmEnv = (source: Record<string, string | undefined> = process.env) =>
   loadEnv(LlmEnv, source);
 
+/** Which API-key variables were already set by the shell, before any .env file is loaded. */
+export const snapshotShellKeys = (): Set<string> =>
+  new Set(['OPENAI_API_KEY', 'GEMINI_API_KEY', 'ANTHROPIC_API_KEY'].filter((k) => process.env[k]));
+
+/**
+ * Where the provider's key comes from. A shell variable silently overrides .env, which once
+ * made the same command use different keys depending on who ran it, so we always say which.
+ */
+export function describeKeySource(provider: Provider, shellKeys: Set<string>): string {
+  const name = KEY_ENV[provider];
+  if (!name) return 'no key needed';
+  if (!process.env[name]) return `${name} not set`;
+  return shellKeys.has(name)
+    ? `${name} from the shell environment (overrides .env)`
+    : `${name} from .env`;
+}
+
 export const KEY_ENV: Record<Provider, keyof LlmEnv | undefined> = {
   openai: 'OPENAI_API_KEY',
   gemini: 'GEMINI_API_KEY',

@@ -14,12 +14,15 @@ import {
   MemoryCacheStore,
   MemorySink,
   PROVIDERS,
+  describeKeySource,
+  snapshotShellKeys,
   type CallSink,
   type Provider,
 } from '@reconcile/llm';
 import { DEFAULT_REVIEW_THRESHOLD, extractDocument } from './extract.ts';
 import { mimeFor } from './pages.ts';
 
+const shellKeys = snapshotShellKeys();
 const rootEnv = path.resolve(import.meta.dirname, '../../../.env');
 if (fs.existsSync(rootEnv)) process.loadEnvFile(rootEnv);
 
@@ -87,6 +90,7 @@ const llm = new LlmClient({
   sink,
 });
 
+console.log(`key: ${describeKeySource(llm.provider, shellKeys)}`);
 try {
   const bytes = new Uint8Array(fs.readFileSync(file));
   const r = await extractDocument(bytes, {
