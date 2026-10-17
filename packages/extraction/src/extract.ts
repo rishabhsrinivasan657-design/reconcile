@@ -59,6 +59,7 @@ export async function extractDocument(
     userText: EXTRACT_PROMPT.user(images.length),
     images,
     schema: ExtractionAnswer,
+    jsonShape: EXTRACT_PROMPT.jsonShape,
     cacheKeyParts: [fileHash],
     documentRef: opts.id,
   });

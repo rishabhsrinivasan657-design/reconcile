@@ -121,6 +121,7 @@ beforeAll(async () => {
 afterAll(() => new Promise<void>((r) => server.close(() => r())));
 
 const cases: [Provider, string, string][] = [
+  ['groq', 'qwen/qwen3.8-27b', ''],
   ['openai', 'gpt-6-luna', '/v1'],
   ['anthropic', 'claude-test', ''],
   ['gemini', 'gemini-3.5-flash-lite', ''],
@@ -135,6 +136,7 @@ describe('providers through LangChain, against a local mock API (AC-1)', () => {
       const env = testEnv({
         GEMINI_API_KEY: 'g-test',
         ANTHROPIC_API_KEY: 'a-test',
+        GROQ_API_KEY: 'gsk-test',
         LLM_BUDGET_USD: '100',
       });
       const client = new LlmClient({

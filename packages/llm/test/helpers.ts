@@ -20,4 +20,10 @@ export function fakeClock(start = Date.parse('2026-10-17T12:00:00Z')): Clock & {
 export const tmpDir = () => fs.mkdtempSync(path.join(os.tmpdir(), 'reconcile-llm-'));
 
 export const testEnv = (over: Record<string, string> = {}) =>
-  LlmEnv.parse({ OPENAI_API_KEY: 'sk-test-not-real', LLM_CACHE_DIR: tmpDir(), ...over });
+  LlmEnv.parse({
+    LLM_PROVIDER: 'openai',
+    LLM_MODEL_EXTRACT: 'gpt-6-luna',
+    OPENAI_API_KEY: 'sk-test-not-real',
+    LLM_CACHE_DIR: tmpDir(),
+    ...over,
+  });

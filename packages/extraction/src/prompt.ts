@@ -16,6 +16,9 @@ Rules:
 - Line items: one entry per printed line, in printed order, including lines continued on later pages. Do not merge or skip lines. A receiving report has no prices: unitPrice and lineTotal are null.
 - docNumber is the document's own number. poNumber is the purchase order it refers to (null on a purchase order itself).
 - For every field give c = your honest confidence (0 to 1) that v exactly matches the print, p = the page number, and b = the bounding box [ymin, xmin, ymax, xmax] on a 0-1000 scale, or null if unsure.`,
+  /** Answer shape for JSON-mode providers (Groq). Field wrapper: v value, c confidence, p page, b box. */
+  jsonShape: `{"docType":"PO|RR|INVOICE","vendorName":F,"docNumber":F,"poNumber":F,"date":F,"dueDate":F,"lines":[{"sku":F,"description":F,"qty":F,"uom":F,"unitPrice":F,"lineTotal":F}],"subtotal":F,"tax":F,"shipping":F,"total":F}
+where every F is {"v": value or null, "c": 0.0-1.0, "p": page number, "b": [ymin,xmin,ymax,xmax] 0-1000 or null}; qty.v is a number, all other v are strings.`,
   user: (pages: number) =>
     `Extract this document. It has ${pages} page${pages === 1 ? '' : 's'}; the page images follow in order.`,
 } as const;

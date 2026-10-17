@@ -284,3 +284,14 @@ document) per model, costing roughly $0.10 with Luna.
 | Flash-Lite accuracy is below target | The two-model comparison decides the default with data |
 | Recorded responses go stale when Google updates a model | Replay CI can't see that. Re-record before each release (noted in the release checklist). |
 | A key leaks into git | `.env` is gitignored, keys are only read from env, and logs never print headers. A test asserts the results JSON contains no key-like strings. |
+
+## 9. Implementation notes (changes during the build)
+
+| Planned | Actual | Why |
+|---|---|---|
+| OpenAI `gpt-6-luna` live | **Groq free tier, `qwen/qwen3.8-27b`** (requirements Q6) | The OpenAI account reported "no credits remaining" on two keys. Groq's free plan keeps the project at $0. |
+| Provider-agnostic structured output | Groq uses **JSON mode**, plus a compact answer shape in the prompt (`jsonShape`) and our Zod validation with one repair | Groq's vision model documents JSON mode with images; strict JSON-schema output isn't confirmed for images |
+| Request-based limiter | Adds **tokens/minute and tokens/day** budgets (Groq free: 8K/min, 200K/day), corrected by actual usage after each call | Groq's binding limit is tokens, not requests |
+| Budget guard for every provider | Skipped for **free-tier providers** (Groq, Ollama); cost is reported at list price when known, otherwise "free tier" | A free plan can't bill; guessing a price would be worse than saying unknown |
+| `extract.v1` prompt text | Gained `jsonShape` before any answers were recorded, and its lock hash was regenerated | No cached answers existed for v1, so no stale reuse was possible |
+| Retry 429s | 429s meaning **no credits / quota** fail immediately | Found on the first live call: waiting can't fix billing |

@@ -12,15 +12,14 @@ well-tested, measurable, and honest about what the AI does and doesn't do.
 
 ## Hard constraints (do not violate without asking)
 
-1. **$0 to build and run, except one owner-approved LLM budget.** Everything
-   runs locally via Docker Compose (Postgres, Redis). No paid SaaS, no hosted
-   vector DBs. The one exception (decided 2026-10-17): the owner's prepaid
-   **OpenAI credit ($5)**, guarded by a hard spending cap (`LLM_BUDGET_USD`,
-   default 4.00) that refuses live calls past it. CI never spends: it replays
-   recorded responses.
-2. **LLM = OpenAI `gpt-6-luna` by default** (Gemini free tier stays a supported,
-   $0 alternative), behind a provider interface. Switch providers with an env var:
-   `LLM_PROVIDER=gemini|anthropic|openai|ollama`. Model IDs come from env too
+1. **$0 to build and run.** Everything runs locally via Docker Compose
+   (Postgres, Redis). No paid SaaS, no hosted vector DBs. Paid LLM providers
+   (e.g. the owner's OpenAI credit) are optional and guarded by a hard spending
+   cap (`LLM_BUDGET_USD`, default 4.00). CI never spends: it replays recorded responses.
+2. **LLM = Groq free tier, `qwen/qwen3.8-27b` (vision) by default** (decided
+   2026-10-17), behind a provider interface. OpenAI, Gemini, Anthropic, and
+   Ollama are supported alternatives. Switch providers with an env var:
+   `LLM_PROVIDER=groq|openai|gemini|anthropic|ollama`. Model IDs come from env too
    (`LLM_MODEL_EXTRACT`, `LLM_MODEL_MATCH`). Never hardcode them in logic.
 3. **Assume tight rate limits.** Every LLM call goes through the shared
    client, which provides:

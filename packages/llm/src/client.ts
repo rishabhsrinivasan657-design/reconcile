@@ -2,7 +2,7 @@ import path from 'node:path';
 import { z } from 'zod';
 import { BudgetExceeded, SpendLedger } from './budget.ts';
 import { cacheKey, FileCacheStore, type CacheStore } from './cache.ts';
-import type { LlmEnv, Provider } from './env.ts';
+import { FREE_TIER_PROVIDERS, PROVIDER_LIMITS, type LlmEnv, type Provider } from './env.ts';
 import { realClock, RateLimiter, type Clock } from './limiter.ts';
 import { estimateCost, type Usage } from './prices.ts';
 import {
@@ -27,6 +27,8 @@ export interface StructuredRequest<T> {
   schema: z.ZodType<T>;
   /** Identifies the input, e.g. [sha256(file bytes)]. Prompt version, provider, model are added. */
   cacheKeyParts: readonly string[];
+  /** Compact example of the answer's JSON shape, appended to the prompt for JSON-mode providers. */
+  jsonShape?: string;
   documentRef?: string;
   maxOutputTokens?: number;
 }
@@ -67,7 +69,8 @@ export interface LlmClientOptions {
 }
 
 const DEFAULT_MAX_OUTPUT = 8000;
-const IMAGE_TOKENS_ESTIMATE = 1600;
+/** Typical answer size, used to reserve tokens-per-minute before a call. */
+const EXPECTED_OUTPUT_TOKENS = 3000;
 
 /**
  * Structured LLM calls with cache, budget guard, rate limit, retry, one repair, and call log
@@ -93,10 +96,12 @@ export class LlmClient {
     this.mode = opts.mode ?? 'live';
     this.clock = opts.clock ?? realClock;
     const stateDir = opts.stateDir ?? env.LLM_CACHE_DIR;
+    const caps = PROVIDER_LIMITS[this.provider];
+    const tpm = env.LLM_TPM ?? caps.tpm;
+    const tpd = env.LLM_TPD ?? caps.tpd;
     this.limiter = new RateLimiter(
-      env.LLM_RPM,
-      env.LLM_RPD,
-      path.join(stateDir, '_requests-today.json'),
+      { rpm: env.LLM_RPM, rpd: env.LLM_RPD, ...(tpm ? { tpm } : {}), ...(tpd ? { tpd } : {}) },
+      path.join(stateDir, `_limits-${this.provider}.json`),
       this.clock,
     );
     this.ledger = new SpendLedger(env.LLM_BUDGET_USD, path.join(stateDir, '_spend.json'));
@@ -116,16 +121,33 @@ export class LlmClient {
       maxOutputTokens,
       ...(this.opts.baseUrl ? { baseUrl: this.opts.baseUrl } : {}),
     });
+    const jsonMode = PROVIDER_LIMITS[this.provider].jsonMode;
     this.invoker = (schema, system, userText, images) =>
-      invokeStructured(chat, schema, system, userText, images);
+      invokeStructured(chat, schema, system, userText, images, jsonMode);
     return this.invoker;
   }
 
-  private worstCaseUsd(req: StructuredRequest<unknown>, maxOutput: number): number {
-    if (this.provider === 'ollama') return 0;
-    const inputTokens =
-      Math.ceil((req.system.length + req.userText.length) / 3) +
-      (req.images?.length ?? 0) * IMAGE_TOKENS_ESTIMATE;
+  private estimateInputTokens(req: StructuredRequest<unknown>, userText: string): number {
+    return (
+      Math.ceil((this.systemPrompt(req).length + userText.length) / 3) +
+      (req.images?.length ?? 0) * PROVIDER_LIMITS[this.provider].imageTokens
+    );
+  }
+
+  /** JSON-mode providers (Groq) need the expected shape spelled out in the prompt. */
+  private systemPrompt(req: StructuredRequest<unknown>): string {
+    return PROVIDER_LIMITS[this.provider].jsonMode && req.jsonShape
+      ? `${req.system}\n\nRespond with ONE JSON object only, shaped exactly like this (types shown as values):\n${req.jsonShape}`
+      : req.system;
+  }
+
+  private worstCaseUsd(
+    req: StructuredRequest<unknown>,
+    userText: string,
+    maxOutput: number,
+  ): number {
+    if (FREE_TIER_PROVIDERS.has(this.provider)) return 0;
+    const inputTokens = this.estimateInputTokens(req, userText);
     const cost = estimateCost(this.model, { inputTokens, outputTokens: maxOutput });
     if (cost === null) {
       throw new BudgetExceeded(
@@ -137,12 +159,22 @@ export class LlmClient {
 
   /** One live call through budget check, rate limit, and retry. */
   private async live(req: StructuredRequest<unknown>, userText: string, maxOutput: number) {
-    this.ledger.check(this.worstCaseUsd({ ...req, userText }, maxOutput));
-    await this.limiter.acquire();
+    const images = req.images ?? [];
+    const maxImages = PROVIDER_LIMITS[this.provider].maxImages;
+    if (images.length > maxImages) {
+      throw new Error(
+        `${this.provider} accepts at most ${maxImages} images per request; this document has ${images.length} pages.`,
+      );
+    }
+    this.ledger.check(this.worstCaseUsd(req, userText, maxOutput));
+    const estTokens =
+      this.estimateInputTokens(req, userText) + Math.min(maxOutput, EXPECTED_OUTPUT_TOKENS);
+    await this.limiter.acquire(estTokens);
     const invoke = this.getInvoker(maxOutput);
+    const system = this.systemPrompt(req);
     const t0 = this.clock.now();
     const pendingLogs: Promise<void>[] = [];
-    const run = withRetry(() => invoke(req.schema, req.system, userText, req.images ?? []), {
+    const run = withRetry(() => invoke(req.schema, system, userText, images), {
       clock: this.clock,
       onAttempt: ({ error, status }) => {
         if (!error) return;
@@ -166,10 +198,17 @@ export class LlmClient {
     });
     // Failed attempts are logged before the error propagates, so a caller that closes its
     // database right after a failure doesn't lose the log rows.
-    const result = await run.finally(() => Promise.allSettled(pendingLogs));
+    const result = await run
+      .catch((e: unknown) => {
+        this.limiter.settle(estTokens, estTokens);
+        throw e;
+      })
+      .finally(() => Promise.allSettled(pendingLogs));
+    this.limiter.settle(estTokens, result.usage.inputTokens + result.usage.outputTokens);
     const latencyMs = this.clock.now() - t0;
+    // Free tiers never bill; list prices (when known) are still reported for comparison.
     const costUsd = estimateCost(this.model, result.usage);
-    this.ledger.add(costUsd ?? 0);
+    if (!FREE_TIER_PROVIDERS.has(this.provider)) this.ledger.add(costUsd ?? 0);
     return { ...result, latencyMs, costUsd };
   }
 

@@ -7,6 +7,7 @@ import { ChatAnthropic } from '@langchain/anthropic';
 import type { BaseChatModel } from '@langchain/core/language_models/chat_models';
 import { HumanMessage, SystemMessage } from '@langchain/core/messages';
 import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
+import { ChatGroq } from '@langchain/groq';
 import { ChatOllama } from '@langchain/ollama';
 import { ChatOpenAI } from '@langchain/openai';
 import type { z } from 'zod';
@@ -32,6 +33,14 @@ export function createChatModel(o: ModelOptions): BaseChatModel {
   // LangChain's own retries are off: our retry layer owns them so every attempt is logged.
   const common = { model: o.model, maxRetries: 0 };
   switch (o.provider) {
+    case 'groq':
+      return new ChatGroq({
+        ...common,
+        apiKey: requireKey(o.env.GROQ_API_KEY, 'GROQ_API_KEY'),
+        maxTokens: o.maxOutputTokens,
+        temperature: 0,
+        ...(o.baseUrl ? { baseUrl: o.baseUrl } : {}),
+      });
     case 'openai':
       return new ChatOpenAI({
         ...common,
@@ -81,8 +90,15 @@ export async function invokeStructured(
   system: string,
   userText: string,
   images: readonly ImagePart[],
+  jsonMode = false,
 ): Promise<InvokeResult> {
-  const runnable = chat.withStructuredOutput(schema as never, { name: 'answer', includeRaw: true });
+  // JSON mode: the provider guarantees valid JSON; the shape comes from the prompt and our Zod
+  // validation (with one repair) enforces it.
+  const runnable = chat.withStructuredOutput(schema as never, {
+    name: 'answer',
+    includeRaw: true,
+    ...(jsonMode ? { method: 'jsonMode' } : {}),
+  });
   const content = [
     { type: 'text' as const, text: userText },
     ...images.map((img) => ({

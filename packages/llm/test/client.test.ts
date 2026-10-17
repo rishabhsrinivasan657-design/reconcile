@@ -33,7 +33,7 @@ const okInvoker = (): Invoker & { calls: number } => {
 describe('rate limiter (AC-2)', () => {
   it('waits when the per-minute bucket is empty', async () => {
     const clock = fakeClock();
-    const rl = new RateLimiter(10, 1000, undefined, clock);
+    const rl = new RateLimiter({ rpm: 10, rpd: 1000 }, undefined, clock);
     for (let i = 0; i < 10; i++) await rl.acquire();
     expect(clock.slept).toEqual([]);
     await rl.acquire();
@@ -43,11 +43,30 @@ describe('rate limiter (AC-2)', () => {
   it('refuses once the daily budget is used, and the count survives a restart', async () => {
     const clock = fakeClock();
     const file = `${tmpDir()}/day.json`;
-    const a = new RateLimiter(100, 3, file, clock);
+    const a = new RateLimiter({ rpm: 100, rpd: 3 }, file, clock);
     for (let i = 0; i < 3; i++) await a.acquire();
-    const b = new RateLimiter(100, 3, file, clock);
+    const b = new RateLimiter({ rpm: 100, rpd: 3 }, file, clock);
     await expect(b.acquire()).rejects.toThrow(DailyBudgetExceeded);
     await expect(b.acquire()).rejects.toThrow(/resume tomorrow/);
+  });
+});
+
+describe('token limits (Groq free tier: 8K/min, 200K/day)', () => {
+  it('waits for tokens-per-minute capacity, corrected by actual usage', async () => {
+    const clock = fakeClock();
+    const rl = new RateLimiter({ rpm: 30, rpd: 1000, tpm: 8000 }, undefined, clock);
+    await rl.acquire(6000);
+    rl.settle(6000, 7000); // the call actually used 7,000 tokens
+    await rl.acquire(6000); // only 1,000 left: wait for 5,000 more at 8,000/min
+    expect(clock.slept[0]).toBe(37500);
+  });
+
+  it('refuses a call that would exceed the daily token budget', async () => {
+    const clock = fakeClock();
+    const rl = new RateLimiter({ rpm: 30, rpd: 1000, tpd: 10_000 }, `${tmpDir()}/day.json`, clock);
+    await rl.acquire(6000);
+    rl.settle(6000, 6000);
+    await expect(rl.acquire(6000)).rejects.toThrow(/Daily token budget/);
   });
 });
 

@@ -124,7 +124,7 @@ describe('prompt lock (AC-3)', () => {
       fs.readFileSync(path.join(import.meta.dirname, '../prompts.lock.json'), 'utf8'),
     ) as Record<string, string>;
     const hash = createHash('sha256')
-      .update(EXTRACT_PROMPT.system + EXTRACT_PROMPT.user(1))
+      .update(EXTRACT_PROMPT.system + EXTRACT_PROMPT.jsonShape + EXTRACT_PROMPT.user(1))
       .digest('hex');
     expect(
       lock[EXTRACT_PROMPT.version],
