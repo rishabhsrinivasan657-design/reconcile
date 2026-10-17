@@ -8,6 +8,8 @@ export interface AuditEntry {
   entityId: string;
   before?: unknown;
   after?: unknown;
+  /** The person who did it; omitted for system steps. */
+  userId?: string;
 }
 
 /**
@@ -17,7 +19,8 @@ export interface AuditEntry {
 export async function audit(tx: Tx, e: AuditEntry): Promise<void> {
   await tx.auditEvent.create({
     data: {
-      actorType: 'SYSTEM',
+      actorType: e.userId ? 'USER' : 'SYSTEM',
+      ...(e.userId ? { actorId: e.userId } : {}),
       action: e.action,
       entityType: e.entityType,
       entityId: e.entityId,

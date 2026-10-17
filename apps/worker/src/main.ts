@@ -7,6 +7,7 @@ import {
   createQueues,
   loadPipelineEnv,
   LocalStorage,
+  redisEventBus,
   RedisLimiter,
 } from '@reconcile/pipeline';
 import { fuzzyFor } from '@reconcile/extraction';
@@ -46,6 +47,7 @@ const workers = startWorkers({
   connection,
   graceDays: env.MISSING_DOC_GRACE_DAYS,
   ...(fuzzy ? { fuzzy } : {}),
+  events: redisEventBus(connection),
   onEvent: (e) => console.log(`[${e.job}] ${e.ok ? '✓' : '✗'} ${e.detail}`),
 });
 console.log(

@@ -11,6 +11,7 @@ import {
   matchPurchaseOrder,
   QUEUE,
   readDocument,
+  type EventBus,
   type MatchJob,
   type Queues,
   type ReadJob,
@@ -27,6 +28,8 @@ export interface WorkerDeps {
   connection: Redis;
   graceDays: number;
   fuzzy?: FuzzyMatcher;
+  /** Live announcements for the website (ADR-0013); omitted in tests that don't need them. */
+  events?: EventBus;
   /** Called after each job, for logs and tests. */
   onEvent?: (e: { job: 'read' | 'match'; ok: boolean; detail: string }) => void;
 }
@@ -42,8 +45,16 @@ export function startWorkers(deps: WorkerDeps) {
   const read = new Worker<ReadJob>(
     QUEUE.read,
     async (job: Job<ReadJob>) => {
+      const id = job.data.documentId;
       try {
-        const r = await readDocument(db, deps, job.data.documentId);
+        await deps.events?.publish({ kind: 'document', id, status: 'EXTRACTING' });
+        const r = await readDocument(db, deps, id);
+        await deps.events?.publish({
+          kind: 'document',
+          id,
+          status: r.status,
+          ...(r.poNumber ? { poNumber: r.poNumber } : {}),
+        });
         if (r.poNumber) await deps.queues.enqueueMatch(r.poNumber);
         deps.onEvent?.({
           job: 'read',
@@ -61,7 +72,10 @@ export function startWorkers(deps: WorkerDeps) {
   read.on('failed', async (job, err) => {
     if (!job) return;
     const final = err instanceof UnrecoverableError || job.attemptsMade >= (job.opts.attempts ?? 1);
-    if (final) await markFailed(db, job.data.documentId, err.message);
+    if (final) {
+      await markFailed(db, job.data.documentId, err.message);
+      await deps.events?.publish({ kind: 'document', id: job.data.documentId, status: 'FAILED' });
+    }
     deps.onEvent?.({
       job: 'read',
       ok: false,
@@ -77,6 +91,7 @@ export function startWorkers(deps: WorkerDeps) {
         ...(deps.fuzzy ? { fuzzy: deps.fuzzy } : {}),
       });
       for (const o of outcomes) {
+        await deps.events?.publish({ kind: 'set', poNumber: o.poNumber, status: o.status });
         // Grace period: re-check when it ends (M4 AC-6).
         if (o.waitingUntil) {
           await deps.queues.match.add(
