@@ -87,6 +87,8 @@ export interface ImagePart {
 export interface InvokeResult {
   /** The provider's structured answer, not yet validated by our schema. */
   parsed: unknown;
+  /** Start and end of the raw text (JSON mode), kept so a failure can explain itself. */
+  rawPreview?: string;
   usage: Usage;
 }
 
@@ -113,8 +115,10 @@ export async function invokeStructured(
     // validation (with one repair) enforces it, so providers' schema quirks don't matter.
     const msg = await chat.invoke(messages);
     const meta = msg.usage_metadata;
+    const text = textOf(msg.content);
     return {
-      parsed: parseJsonText(textOf(msg.content)),
+      parsed: parseJsonText(text),
+      rawPreview: text.length > 240 ? `${text.slice(0, 120)} … ${text.slice(-120)}` : text,
       usage: { inputTokens: meta?.input_tokens ?? 0, outputTokens: meta?.output_tokens ?? 0 },
     };
   }
@@ -140,15 +144,25 @@ function textOf(content: unknown): string {
     : String(content ?? '');
 }
 
-/** Parse a JSON answer, tolerating ```json fences; returns null when it isn't JSON. */
+/**
+ * Parse a JSON answer: tolerates ```json fences, text around the object, and trailing commas.
+ * Returns null when no JSON object can be recovered.
+ */
 export function parseJsonText(text: string): unknown {
   const stripped = text
     .trim()
     .replace(/^```(?:json)?\s*/i, '')
     .replace(/\s*```$/, '');
-  try {
-    return JSON.parse(stripped);
-  } catch {
-    return null;
+  const attempts = [stripped];
+  const start = stripped.indexOf('{');
+  const end = stripped.lastIndexOf('}');
+  if (start >= 0 && end > start) attempts.push(stripped.slice(start, end + 1));
+  for (const candidate of [...attempts, ...attempts.map((a) => a.replace(/,\s*([}\]])/g, '$1'))]) {
+    try {
+      return JSON.parse(candidate);
+    } catch {
+      // try the next repair
+    }
   }
+  return null;
 }

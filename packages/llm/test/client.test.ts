@@ -263,5 +263,8 @@ describe('JSON-mode parsing (Gemini, Groq)', () => {
     expect(parseJsonText('{"total":"1.00"}')).toEqual({ total: '1.00' });
     expect(parseJsonText('```json\n{"total":"1.00"}\n```')).toEqual({ total: '1.00' });
     expect(parseJsonText('Sure! Here is the data.')).toBeNull();
+    expect(parseJsonText('Here you go: {"total":"1.00",} Hope that helps')).toEqual({
+      total: '1.00',
+    });
   });
 });

@@ -292,7 +292,8 @@ export class LlmClient {
     });
     if (!parsed.success) {
       throw new Error(
-        `LLM answer failed validation after one repair: ${z.prettifyError(parsed.error).slice(0, 500)}`,
+        `LLM answer failed validation after one repair: ${z.prettifyError(parsed.error).slice(0, 300)}` +
+          (first.rawPreview ? ` | raw answer: ${first.rawPreview}` : ''),
       );
     }
     this.cache.set(key, {
