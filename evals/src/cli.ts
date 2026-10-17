@@ -28,6 +28,7 @@ import {
   ReplayMiss,
   BudgetExceeded,
   describeKeySource,
+  isPermanentQuotaError,
   snapshotShellKeys,
   DailyBudgetExceeded,
   type Provider,
@@ -210,9 +211,11 @@ if (stages.includes('extract') || stages.includes('e2e')) {
         if (
           e instanceof ReplayMiss ||
           e instanceof BudgetExceeded ||
-          e instanceof DailyBudgetExceeded
+          e instanceof DailyBudgetExceeded ||
+          isPermanentQuotaError(e)
         )
-          fatal = e;
+          // Stop the whole run: the remaining documents would fail the same way.
+          fatal = e as Error;
         else extracted.set(job.docId, { error: (e as Error).message.slice(0, 300) });
       }
     }
