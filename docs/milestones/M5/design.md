@@ -155,7 +155,7 @@ The "Ledger" look is written down in [`docs/style-guide.md`](../../style-guide.m
 | Risk | What we'll do |
 |---|---|
 | "Polished" eats the whole schedule | The style guide and mockup are approved *first*; pages reuse a small set of components |
-| AI boxes are sometimes missing or a bit off | Fields without a box still show in the list; boxes get a little padding; the test sets let us measure how often boxes are missing |
+| AI boxes are sometimes missing or a bit off | Fields without a box still show in the list; boxes get a little padding. Measured on the 20 test sets: PDFs 97–100% of boxes on the right text, scans 96% (header) and 80% (line items), with no consistent drift. Tracked as B-24. |
 | The live connection drops (laptop sleeps, server restarts) | The browser reconnects by itself and refreshes everything once when it does |
 | The browser test is slow or flaky in CI | One test only, replayed AI, grace period 0, and it waits for real signals (status text), never fixed sleeps |
 | A human correction makes the PO worse (typo) | The math checks re-run and warn; the AI's version is kept, so the history shows both |

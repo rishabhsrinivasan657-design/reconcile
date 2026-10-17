@@ -32,6 +32,7 @@ Priority: **P1** next after the current plan · **P2** valuable later · **P3** 
 | B-21 | Automated test for the worker's retry and quota-stop paths (closes M4 AC-4) | P2 | M4 testing |
 | B-22 | Let the AI double-check the word matcher's mid-confidence pairs (0.75–0.9): it gives ~0.8 to same-size different products, which hybrid then never sends to the AI | P1 | M4 testing |
 | B-23 | Run the AI-only pairing strategy on the stress sets when quota allows | P3 | M4 testing |
+| B-24 | Add box accuracy to the scoreboard (how well the AI's highlight boxes overlap the answer key's). Measured once in M5: PDFs 97–100% of boxes on target, scans 96% for header fields but 80% for line items | P2 | M5 design feedback |
 
 ## Tech debt
 

@@ -362,23 +362,23 @@ tbody tr.click:hover td{background:var(--paper)}
         <div class="viewer">
           <div class="page" id="page">
             <div class="in">
-              <div class="pg-head"><div><b>SUNPEAK FOODS CO.</b><div>1180 Orchard Row, Fresno CA 93721</div></div><div class="pg-title">INVOICE</div></div>
+              <div class="pg-head"><div><b data-f="0">SUNPEAK FOODS CO.</b><div>1180 Orchard Row, Fresno CA 93721</div></div><div class="pg-title">INVOICE</div></div>
               <div class="pg-meta">
-                <div>Invoice no.</div><div>SP-INV-40211</div>
-                <div>Invoice date</div><div>03/I2/2026</div>
-                <div>Customer PO</div><div>HP-PO-107093</div>
+                <div>Invoice no.</div><div><span data-f="1">SP-INV-40211</span></div>
+                <div>Invoice date</div><div><span data-f="2">03/I2/2026</span></div>
+                <div>Customer PO</div><div><span data-f="3">HP-PO-107093</span></div>
                 <div>Terms</div><div>Net 30</div>
               </div>
               <table class="pg-lines">
                 <thead><tr><th>Item</th><th>Description</th><th>Qty</th><th>Unit</th><th>Amount</th></tr></thead>
                 <tbody>
                   <tr><td>SP-PB-16</td><td>Creamy Peanut Butter 16oz</td><td>80</td><td>41.60</td><td>3,328.00</td></tr>
-                  <tr><td></td><td>Chunky Nut Spread, Almond, 12 oz</td><td>120</td><td>52.10</td><td>6,252.00</td></tr>
+                  <tr><td></td><td><span data-f="4">Chunky Nut Spread, Almond, 12 oz</span></td><td><span data-f="5">120</span></td><td><span data-f="6">52.10</span></td><td>6,252.00</td></tr>
                   <tr><td>SP-HNY-12</td><td>Wildflower Honey 12oz</td><td>40</td><td>58.80</td><td>2,352.00</td></tr>
                   <tr><td>SP-STR-18</td><td>Strawbery Presrv 18oz</td><td>60</td><td>37.20</td><td>2,232.00</td></tr>
                 </tbody>
               </table>
-              <div class="pg-tot"><span>Subtotal</span><span>14,164.00</span><span>Tax</span><span>0.00</span><span>Shipping</span><span>120.00</span><b>Total</b><b>14,284.00</b></div>
+              <div class="pg-tot"><span>Subtotal</span><span data-f="7">14,164.00</span><span>Tax</span><span>0.00</span><span>Shipping</span><span>120.00</span><b>Total</b><b data-f="8">14,284.00</b></div>
               <div class="pg-foot">Remit to: Sunpeak Foods Co. · Thank you for your business</div>
             </div>
             <div id="boxes"></div>
@@ -534,7 +534,7 @@ function toast(msg){const t=$('#toast');$('#toast-msg').textContent=msg;t.classL
 $('#toast-undo').onclick=()=>{if(!lastRemoved)return;problems.splice(lastRemoved.i,0,lastRemoved.p);sel=lastRemoved.p.id;lastRemoved=null;$('#toast').classList.remove('show');render()};
 function render(){renderList();renderDetail()}
 
-/* document viewer: boxes use the same 0–1 page coordinates the API stores */
+/* document viewer: the real app gets 0–1 page coordinates from the API; here they're measured from the sample page */
 const fields=[
  ['Vendor','Sunpeak Foods Co.',.98,[.065,.07,.095,.42]],
  ['Invoice no.','SP-INV-40211',.99,[.155,.53,.175,.75]],
@@ -547,7 +547,10 @@ const fields=[
  ['Total','14,284.00',.98,[.81,.78,.832,.94]]
 ];
 function renderDoc(){
-  $('#boxes').innerHTML=fields.map((f,i)=>{const [y0,x0,y1,x1]=f[3];return `<div class="box ${f[4]?'unsure':''}" data-i="${i}" style="top:${y0*100}%;left:${x0*100-0.8}%;width:${(x1-x0)*100+1.6}%;height:${(y1-y0)*100}%"></div>`}).join('');
+  const page=$('#page').getBoundingClientRect();
+  $('#boxes').innerHTML=fields.map((f,i)=>{const el=document.querySelector(`[data-f="${i}"]`);const r=el.getBoundingClientRect();
+    const pad=3,x0=(r.left-page.left-pad)/page.width,x1=(r.right-page.left+pad)/page.width,y0=(r.top-page.top-pad/2)/page.height,y1=(r.bottom-page.top+pad/2)/page.height;
+    return `<div class="box ${f[4]?'unsure':''}" data-i="${i}" style="top:${y0*100}%;left:${x0*100}%;width:${(x1-x0)*100}%;height:${(y1-y0)*100}%"></div>`}).join('');
   const list=$('#fields');list.querySelectorAll('.frow').forEach(r=>r.remove());
   fields.forEach((f,i)=>{
     const r=document.createElement('div');r.className='frow'+(f[4]?' unsure':'');r.dataset.i=i;r.tabIndex=0;
@@ -591,6 +594,7 @@ function go(name){
   document.querySelectorAll('#nav button').forEach(b=>b.toggleAttribute('aria-current',false));
   const nb=document.querySelector(`#nav button[data-go="${v==='doc'?'review':v}"]`);if(nb)nb.setAttribute('aria-current','page');
   window.scrollTo(0,0);
+  if(v==='doc')renderDoc();
 }
 document.addEventListener('click',e=>{const t=e.target.closest('[data-go]');if(t){e.preventDefault();go(t.dataset.go)}});
 $('#theme').onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=dark?'light':'dark'};
@@ -612,5 +616,7 @@ document.addEventListener('keydown',e=>{
   if(k==='a')pick('Approved');if(k==='d')pick('Disputed');if(k==='w')pick('Written off');
   if(['a','d','w'].includes(k))e.preventDefault();
 });
-render();renderTimeline();renderDoc();renderUploads();go('overview');
+render();renderTimeline();renderUploads();go('overview');
+addEventListener('resize',()=>{if(!$('#v-doc').hidden)renderDoc()});
+document.fonts&&document.fonts.ready.then(()=>{if(!$('#v-doc').hidden)renderDoc()});
 </script>
