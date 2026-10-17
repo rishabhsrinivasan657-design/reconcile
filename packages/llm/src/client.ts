@@ -141,30 +141,32 @@ export class LlmClient {
     await this.limiter.acquire();
     const invoke = this.getInvoker(maxOutput);
     const t0 = this.clock.now();
-    const result = await withRetry(
-      () => invoke(req.schema, req.system, userText, req.images ?? []),
-      {
-        clock: this.clock,
-        onAttempt: ({ error, status }) => {
-          if (!error) return;
-          void this.sink.record({
-            provider: this.provider,
-            model: this.model,
-            promptVersion: req.promptVersion,
-            purpose: req.purpose,
-            ...(req.documentRef ? { documentRef: req.documentRef } : {}),
-            latencyMs: this.clock.now() - t0,
-            inputTokens: 0,
-            outputTokens: 0,
-            cacheHit: false,
-            costUsd: null,
-            error: `${status ?? ''} ${String((error as Error).message ?? error)}`
-              .trim()
-              .slice(0, 300),
-          });
-        },
+    const pendingLogs: Promise<void>[] = [];
+    const run = withRetry(() => invoke(req.schema, req.system, userText, req.images ?? []), {
+      clock: this.clock,
+      onAttempt: ({ error, status }) => {
+        if (!error) return;
+        const logged = this.sink.record({
+          provider: this.provider,
+          model: this.model,
+          promptVersion: req.promptVersion,
+          purpose: req.purpose,
+          ...(req.documentRef ? { documentRef: req.documentRef } : {}),
+          latencyMs: this.clock.now() - t0,
+          inputTokens: 0,
+          outputTokens: 0,
+          cacheHit: false,
+          costUsd: null,
+          error: `${status ?? ''} ${String((error as Error).message ?? error)}`
+            .trim()
+            .slice(0, 300),
+        });
+        pendingLogs.push(Promise.resolve(logged));
       },
-    );
+    });
+    // Failed attempts are logged before the error propagates, so a caller that closes its
+    // database right after a failure doesn't lose the log rows.
+    const result = await run.finally(() => Promise.allSettled(pendingLogs));
     const latencyMs = this.clock.now() - t0;
     const costUsd = estimateCost(this.model, result.usage);
     this.ledger.add(costUsd ?? 0);
