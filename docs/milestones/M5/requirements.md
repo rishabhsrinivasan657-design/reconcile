@@ -1,6 +1,6 @@
 # M5: The website. Requirements
 
-- **Status:** Draft, waiting for your approval
+- **Status:** Approved 2026-10-17 (look A "Ledger", real-time updates, automatic re-match)
 - **Links to the PRD:** US-03, US-04, US-05, US-07, US-08, US-09, US-10 · FR-05, FR-11, FR-12
 - **Release when done:** v0.6.0
 
@@ -105,7 +105,7 @@ software they use.
 - It's designed for laptop and desktop screens first, and works on a tablet. Phones get a
   readable but simplified view.
 
-## Questions for you
+## Questions (answered 2026-10-17)
 
 - **Q1. Which look should Reconcile have?** I'll turn your pick into a clickable mockup
   for approval at the Design gate, before building:
@@ -118,7 +118,9 @@ software they use.
     indigo accent, soft depth, generous spacing.
   - *I recommend A*: it stands out from the many dark "dev tool" designs, and it suits
     a finance audience.
+  - **Answer: A, "Ledger".**
 - **Q2. Live updates: real-time or refresh every few seconds?** *I recommend real-time*
   (the server pushes status changes). It's a small addition and makes the upload page feel alive.
+  **Answer: real-time.**
 - **Q3. Correcting a field re-matches the PO automatically?** *I recommend yes*, with a
-  short "re-matching…" indicator, so the problem list is never out of date.
+  short "re-matching…" indicator, so the problem list is never out of date. **Answer: yes.**

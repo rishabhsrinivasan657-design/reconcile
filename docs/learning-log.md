@@ -549,3 +549,26 @@ including which visual direction to take.
   cheaper than restyling a finished site.
 
 **Remember:** if you can't say how you'll check "polished", you'll never know when you're done.
+
+---
+
+## M5 · Design (2026-10-17)
+
+**In one line:** decide how it looks and how the pieces talk before writing any page.
+
+**What we did:** wrote the design, two decision records (the website's building blocks,
+and live updates), a style guide, and a clickable mockup.
+
+**Key ideas**
+- **A style guide is a design decision written down.** Colors, fonts, and spacing become
+  named *tokens* (like `--accent`). Pages use the names, never raw values, so the whole
+  site stays consistent and a theme change is one file.
+- **Mockups are cheap, code is expensive.** Clicking through a fake version finds "that
+  feels wrong" problems in minutes instead of after a week of building.
+- **Push, don't poll.** Instead of the browser asking "anything new?" every few seconds,
+  the server tells it when something changes (server-sent events). The message only says
+  *what* changed; the page then fetches the fresh data itself.
+- **Generated types keep two programs honest.** The website's view of the API is generated
+  from the API's own manual, so a change on one side shows up as an error on the other.
+
+**Remember:** agree on the look and the contracts first; then building is mostly filling in.

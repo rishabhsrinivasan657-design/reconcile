@@ -1,0 +1,616 @@
+<title>Reconcile Ledger Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: fixed ledger side bar + one working pane; the problems page splits into list | detail. Tokens mirror docs/style-guide.md. */
+:root{
+  --paper:#F6F2E9;--sheet:#FBF9F4;--raised:#FFFFFF;--ink:#1C2321;--ink-2:#535B57;--ink-3:#6E746F;
+  --rule:#E3DBCB;--rule-strong:#CDC2AC;--accent:#0E5C58;--accent-ink:#FFFFFF;--accent-tint:#E0ECE8;
+  --risk:#A13A28;--risk-tint:#F5E2DC;--caution:#8A5A00;--caution-tint:#F4E8CC;--settled:#3E6A2D;--settled-tint:#E4EDDA;
+  --doc-paper:#FFFFFF;--doc-ink:#22272A;--shadow:0 10px 30px rgba(40,32,16,.12),0 2px 6px rgba(40,32,16,.08);
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;--sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#121618;--sheet:#191E20;--raised:#20262A;--ink:#ECE7DC;--ink-2:#AEB3AD;--ink-3:#868C87;
+  --rule:#2A3134;--rule-strong:#3A4246;--accent:#63B9AF;--accent-ink:#0B1F1D;--accent-tint:#16302D;
+  --risk:#E58B76;--risk-tint:#3A1F19;--caution:#DDB061;--caution-tint:#33280F;--settled:#9AC285;--settled-tint:#1E2E17;
+  --doc-paper:#E9E4D8;--doc-ink:#22272A;--shadow:0 10px 30px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.3);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#121618;--sheet:#191E20;--raised:#20262A;--ink:#ECE7DC;--ink-2:#AEB3AD;--ink-3:#868C87;
+  --rule:#2A3134;--rule-strong:#3A4246;--accent:#63B9AF;--accent-ink:#0B1F1D;--accent-tint:#16302D;
+  --risk:#E58B76;--risk-tint:#3A1F19;--caution:#DDB061;--caution-tint:#33280F;--settled:#9AC285;--settled-tint:#1E2E17;
+  --doc-paper:#E9E4D8;--doc-ink:#22272A;--shadow:0 10px 30px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.3);color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--paper);color:var(--ink);font:400 14px/21px var(--sans);font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.mono{font-family:var(--mono);font-size:13px}
+.muted{color:var(--ink-2)}.faint{color:var(--ink-3)}
+.app{display:grid;grid-template-columns:232px minmax(0,1fr);min-height:100%}
+/* side bar */
+.side{border-right:1px solid var(--rule);padding:20px 14px;display:flex;flex-direction:column;gap:24px;position:sticky;top:0;height:100vh;background:var(--paper)}
+.brand{display:flex;align-items:center;gap:10px;padding:0 8px;color:var(--ink);text-decoration:none}
+.brand svg{color:var(--accent)}
+.brand b{font:500 21px/1 var(--serif);letter-spacing:-.01em}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav button{display:flex;align-items:center;gap:10px;border:0;background:none;padding:8px 10px;border-radius:6px;cursor:pointer;text-align:left;color:var(--ink-2);transition:background .12s,color .12s}
+.nav button:hover{background:var(--sheet);color:var(--ink)}
+.nav button[aria-current="page"]{background:var(--accent-tint);color:var(--ink)}
+.nav button[aria-current="page"] svg{color:var(--accent)}
+.nav .count{margin-left:auto;font-size:12px;color:var(--ink-3)}
+.nav .count.hot{color:var(--risk)}
+.side-foot{margin-top:auto;display:flex;flex-direction:column;gap:12px;padding:0 8px}
+.user{display:flex;align-items:center;gap:10px}
+.avatar{width:30px;height:30px;border-radius:50%;background:var(--accent-tint);color:var(--accent);display:grid;place-items:center;font-weight:500;font-size:12px}
+.kbd{font:500 11px/1 var(--mono);border:1px solid var(--rule-strong);border-bottom-width:2px;border-radius:4px;padding:2px 5px;color:var(--ink-2);background:var(--raised)}
+.link-btn{border:0;background:none;padding:0;color:var(--ink-2);cursor:pointer;display:flex;align-items:center;gap:8px;font-size:13px}
+.link-btn:hover{color:var(--ink)}
+/* main */
+main{min-width:0;padding:28px 36px 48px}
+.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.eyebrow{font:500 12px/16px var(--sans);letter-spacing:.02em;color:var(--ink-3);margin:0 0 4px}
+h1{font:500 28px/34px var(--serif);margin:0;letter-spacing:-.01em;text-wrap:balance}
+h2{font:500 20px/26px var(--serif);margin:0;text-wrap:balance}
+h3{font:500 12px/16px var(--sans);letter-spacing:.02em;color:var(--ink-3);margin:0}
+.search{display:flex;align-items:center;gap:8px;border:1px solid var(--rule-strong);background:var(--raised);border-radius:6px;padding:6px 10px;min-width:240px;color:var(--ink-3)}
+.search span{flex:1}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--rule-strong);background:var(--raised);padding:7px 12px;border-radius:6px;cursor:pointer;font-weight:500;transition:background .12s,border-color .12s}
+.btn:hover{border-color:var(--ink-3)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.ghost{border-color:transparent;background:none}
+.btn .kbd{margin-left:4px}
+.btn.primary .kbd{background:transparent;color:inherit;border-color:currentColor;opacity:.8}
+.tag{display:inline-flex;align-items:center;gap:5px;font:500 12px/16px var(--sans);padding:2px 8px 2px 6px;border-radius:999px;white-space:nowrap}
+.tag svg{width:12px;height:12px}
+.t-risk{background:var(--risk-tint);color:var(--risk)}.t-caution{background:var(--caution-tint);color:var(--caution)}
+.t-settled{background:var(--settled-tint);color:var(--settled)}.t-neutral{background:var(--sheet);color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--rule)}
+.t-accent{background:var(--accent-tint);color:var(--accent)}
+.panel{background:var(--sheet);border:1px solid var(--rule);border-radius:10px}
+.view[hidden]{display:none}
+/* overview */
+.ov-top{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;margin-bottom:16px}
+.risk-card{padding:24px 28px;display:flex;flex-direction:column;gap:18px}
+.figure{font:500 56px/1 var(--serif);letter-spacing:-.02em}
+.figure small{font-size:28px;color:var(--ink-2)}
+.risk-meta{display:flex;gap:28px;flex-wrap:wrap}
+.risk-meta div{display:flex;flex-direction:column;gap:2px}
+.risk-meta b{font:500 20px/26px var(--serif)}
+.bars{display:flex;flex-direction:column;gap:12px;padding:22px 24px}
+.bar-row{display:grid;grid-template-columns:150px minmax(0,1fr) 84px;align-items:center;gap:12px;font-size:13px}
+.bar-track{height:8px;background:var(--paper);border-radius:4px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--rule)}
+.bar-fill{height:100%;background:var(--risk);border-radius:4px}
+.amt{text-align:right;white-space:nowrap}
+.ov-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:16px}
+.stat{padding:18px 20px;display:flex;flex-direction:column;gap:6px}
+.stat b{font:500 28px/34px var(--serif)}
+.stat .split{display:flex;gap:16px;font-size:13px;flex-wrap:wrap}
+.activity{padding:8px 0}
+.act{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:12px;padding:10px 20px;border-top:1px solid var(--rule);align-items:start}
+.act:first-child{border-top:0}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--rule-strong);margin:7px 0 0 6px}
+.dot.human{background:var(--accent)}
+/* problems */
+.split-view{display:grid;grid-template-columns:minmax(300px,400px) minmax(0,1fr);gap:20px;align-items:start}
+.qlist{overflow:hidden}
+.qhead{display:flex;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--rule-strong)}
+.qrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:12px 16px;border-top:1px solid var(--rule);cursor:pointer;width:100%;text-align:left;background:none;border-left:0;border-right:0;border-bottom:0}
+.qrow:first-of-type{border-top:0}
+.qrow:hover{background:var(--paper)}
+.qrow[aria-selected="true"]{background:var(--accent-tint);box-shadow:inset 3px 0 0 var(--accent)}
+.qrow .line1{display:flex;gap:8px;align-items:center;min-width:0}
+.qrow .vendor{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qrow .sub{grid-column:1/-1;font-size:13px;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qrow .impact{font-weight:500}
+.qrow.info .impact{color:var(--ink-3);font-weight:400}
+.detail{padding:24px 28px;display:flex;flex-direction:column;gap:22px}
+.d-head{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.d-amt{text-align:right}
+.d-amt b{display:block;font:500 34px/38px var(--serif);color:var(--risk)}
+.explain{font:400 17px/27px var(--serif);margin:0;max-width:62ch}
+.compare-wrap{overflow-x:auto}
+.compare{display:grid;grid-template-columns:repeat(3,minmax(170px,1fr));border:1px solid var(--rule);border-radius:8px;min-width:540px;background:var(--raised)}
+.col{padding:14px 16px;border-left:1px solid var(--rule);display:flex;flex-direction:column;gap:10px}
+.col:first-child{border-left:0}
+.col h3{display:flex;justify-content:space-between}
+.kv{display:flex;justify-content:space-between;gap:8px;font-size:13px}
+.kv span:first-child{color:var(--ink-3)}
+.kv.diff span:last-child{color:var(--risk);font-weight:500}
+.diffnote{font-size:12px;color:var(--risk)}
+.ai-note{display:flex;gap:10px;padding:10px 12px;border-radius:6px;background:var(--accent-tint);font-size:13px;color:var(--ink)}
+.ai-note svg{color:var(--accent);flex:none;margin-top:2px}
+.decide{border-top:1px solid var(--rule);padding-top:20px;display:flex;flex-direction:column;gap:12px}
+.choices{display:flex;gap:8px;flex-wrap:wrap}
+.choice[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--accent-tint)}
+textarea{width:100%;min-height:76px;resize:vertical;border:1px solid var(--rule-strong);border-radius:6px;background:var(--raised);padding:10px 12px;line-height:20px}
+textarea:focus{outline:2px solid var(--accent);outline-offset:0;border-color:transparent}
+.err{color:var(--risk);font-size:13px;min-height:18px}
+.decide-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.empty{padding:56px 28px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+.empty svg{color:var(--settled)}
+/* tables */
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th{font:500 12px/16px var(--sans);letter-spacing:.02em;color:var(--ink-3);text-align:left;padding:10px 16px;border-bottom:1px solid var(--rule-strong);white-space:nowrap}
+td{padding:11px 16px;border-top:1px solid var(--rule);vertical-align:top}
+tr:first-child td{border-top:0}
+th.r,td.r{text-align:right}
+tbody tr.click{cursor:pointer}
+tbody tr.click:hover td{background:var(--paper)}
+.po-layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;align-items:start}
+.stack{display:flex;flex-direction:column;gap:16px}
+.sec-head{display:flex;justify-content:space-between;align-items:center;padding:16px 16px 8px}
+.docs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:8px 16px 16px}
+.docchip{border:1px solid var(--rule);border-radius:8px;padding:12px;background:var(--raised);cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:6px}
+.docchip:hover{border-color:var(--rule-strong)}
+.note{margin:0 16px 16px;padding:10px 12px;border-radius:6px;background:var(--caution-tint);color:var(--caution);font-size:13px;display:flex;gap:8px}
+.timeline{padding:16px 20px 20px;display:flex;flex-direction:column}
+.tl{display:grid;grid-template-columns:16px minmax(0,1fr);gap:12px;position:relative;padding-bottom:16px}
+.tl:before{content:"";position:absolute;left:7px;top:14px;bottom:0;width:1px;background:var(--rule-strong)}
+.tl:last-child:before{display:none}
+.tl .dot{margin:6px 0 0 4px}
+.tl q{display:block;margin-top:4px;font:400 14px/21px var(--serif);color:var(--ink);quotes:none;padding-left:10px;border-left:2px solid var(--accent)}
+.method{display:inline-flex;gap:6px;align-items:center}
+/* document */
+.doc-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,1fr);gap:20px;align-items:start}
+.viewer{padding:20px;background:var(--paper);border:1px solid var(--rule);border-radius:10px;overflow:auto}
+.page{position:relative;background:var(--doc-paper);color:var(--doc-ink);aspect-ratio:8.5/11;width:100%;max-width:560px;margin:0 auto;box-shadow:var(--shadow);font-family:Georgia,serif;font-size:11px;line-height:1.35;container-type:inline-size}
+.page .in{position:absolute;inset:0;padding:6.5% 7%}
+.pg-head{display:flex;justify-content:space-between}
+.pg-head b{font-size:clamp(14px,3.6cqi,20px);letter-spacing:.04em}
+.pg-title{font-size:clamp(16px,4.6cqi,26px);text-align:right;letter-spacing:.08em}
+.pg-meta{margin-top:7%;display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;font-size:clamp(8px,1.9cqi,11px)}
+.pg-lines{margin-top:7%;width:100%;font-size:clamp(7px,1.8cqi,10.5px);border-collapse:collapse}
+.pg-lines th,.pg-lines td{padding:4px 3px;border:0;border-bottom:.5px solid #c9c2b4;color:#22272A;font:inherit;letter-spacing:0;text-align:left}
+.pg-lines th{font-weight:bold}
+.pg-tot{position:absolute;right:7%;bottom:15%;width:38%;font-size:clamp(8px,1.9cqi,11px);display:grid;grid-template-columns:1fr auto;gap:3px 12px}
+.pg-foot{position:absolute;left:7%;bottom:5%;font-size:clamp(7px,1.6cqi,9px);color:#6b6f70}
+.box{position:absolute;border:1.5px solid var(--accent);border-radius:2px;transition:background .12s,box-shadow .12s;pointer-events:none}
+.box.unsure{border-color:#B07A12;background:rgba(244,214,140,.28)}
+.box.on{background:rgba(14,92,88,.16);box-shadow:0 0 0 3px rgba(14,92,88,.25)}
+.box.unsure.on{background:rgba(244,200,100,.45);box-shadow:0 0 0 3px rgba(176,122,18,.3)}
+.fields{overflow:hidden}
+.frow{display:grid;grid-template-columns:120px minmax(0,1fr) 64px 40px;gap:10px;align-items:center;padding:9px 16px;border-top:1px solid var(--rule);cursor:default}
+.frow:hover,.frow.on{background:var(--paper)}
+.frow.unsure{background:var(--caution-tint)}
+.frow .lbl{color:var(--ink-3);font-size:13px}
+.conf{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-2);justify-content:flex-end}
+.conf i{display:block;width:28px;height:4px;border-radius:2px;background:var(--rule);overflow:hidden}
+.conf i b{display:block;height:100%;background:var(--settled)}
+.frow.unsure .conf i b{background:var(--caution)}
+.icon-btn{border:0;background:none;padding:4px;border-radius:4px;cursor:pointer;color:var(--ink-2);display:grid;place-items:center}
+.icon-btn:hover{background:var(--raised);color:var(--ink)}
+.frow input{width:100%;border:1px solid var(--accent);border-radius:4px;padding:3px 6px;background:var(--raised)}
+.banner{display:flex;gap:10px;align-items:center;padding:10px 14px;border-radius:8px;font-size:13px}
+.banner.caution{background:var(--caution-tint);color:var(--caution)}
+.banner.accent{background:var(--accent-tint);color:var(--ink)}
+/* upload */
+.drop{border:1.5px dashed var(--rule-strong);border-radius:10px;padding:40px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;background:var(--sheet);transition:border-color .12s,background .12s}
+.drop.over{border-color:var(--accent);background:var(--accent-tint)}
+.drop svg{color:var(--accent)}
+.steps{display:flex;gap:6px;align-items:center}
+.step{width:56px;height:4px;border-radius:2px;background:var(--rule);transition:background .3s}
+.step.done{background:var(--accent)}
+.step.now{background:var(--accent);animation:pulse 1.1s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+.skel{display:block;height:10px;border-radius:4px;background:var(--rule);animation:pulse 1.4s ease-in-out infinite}
+/* overlay + toast */
+.overlay{position:fixed;inset:0;background:rgba(20,22,20,.42);display:grid;place-items:center;padding:16px;z-index:20}
+.overlay[hidden]{display:none}
+.sheet-dlg{background:var(--raised);border-radius:12px;box-shadow:var(--shadow);width:min(520px,100%);padding:24px;display:flex;flex-direction:column;gap:16px;border:1px solid var(--rule)}
+.keys{display:grid;grid-template-columns:auto 1fr;gap:10px 18px;font-size:13px;align-items:center}
+.keys span:nth-child(odd){display:flex;gap:4px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:8px;font-size:13px;box-shadow:var(--shadow);transition:opacity .2s,transform .2s;z-index:30;display:flex;gap:14px;align-items:center;max-width:calc(100% - 32px)}
+.toast.show{opacity:1;transform:translateX(-50%)}
+.toast button{border:0;background:none;color:inherit;text-decoration:underline;cursor:pointer;padding:0}
+.mock-flag{font-size:12px;color:var(--ink-3);padding:0 8px;line-height:16px}
+@media (max-width:1100px){.split-view,.po-layout,.doc-layout,.ov-top{grid-template-columns:minmax(0,1fr)}.ov-grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:760px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .side{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:12px 16px;border-right:0;border-bottom:1px solid var(--rule)}
+  .nav{flex-direction:row;flex-wrap:wrap;width:100%}
+  .nav .count,.side-foot .user,.mock-flag{display:none}
+  .side-foot{margin:0 0 0 auto;flex-direction:row;padding:0}
+  main{padding:20px 16px 40px}
+  .search{min-width:0;width:100%}
+  .docs{grid-template-columns:minmax(0,1fr)}
+  .figure{font-size:44px}
+  .bar-row{grid-template-columns:110px minmax(0,1fr) 72px}
+  .frow{grid-template-columns:96px minmax(0,1fr) 52px 32px;padding:9px 12px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-logo" viewBox="0 0 24 24"><path d="M3 6h13M3 12h10M3 18h6l3 3 9-10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4l9 16H3zM12 10v4M12 17v.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3zM5 17a3 3 0 013-3h11M9 8h6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 16v4h16v-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M20 20l-4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-dot" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="currentColor"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4h11l-2 4 2 4H5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="app">
+  <aside class="side" aria-label="Main">
+    <a class="brand" href="#overview" data-go="overview"><svg width="24" height="24" aria-hidden="true"><use href="#i-logo"/></svg><b>Reconcile</b></a>
+    <nav class="nav" id="nav">
+      <button data-go="overview"><svg width="18" height="18" aria-hidden="true"><use href="#i-home"/></svg>Overview</button>
+      <button data-go="problems"><svg width="18" height="18" aria-hidden="true"><use href="#i-alert"/></svg>Problems<span class="count hot" id="nav-open">5</span></button>
+      <button data-go="po"><svg width="18" height="18" aria-hidden="true"><use href="#i-book"/></svg>POs<span class="count">19</span></button>
+      <button data-go="review"><svg width="18" height="18" aria-hidden="true"><use href="#i-eye"/></svg>Review<span class="count">2</span></button>
+      <button data-go="upload"><svg width="18" height="18" aria-hidden="true"><use href="#i-upload"/></svg>Upload</button>
+    </nav>
+    <div class="side-foot">
+      <button class="link-btn" id="theme"><svg width="16" height="16" aria-hidden="true"><use href="#i-moon"/></svg>Switch theme</button>
+      <button class="link-btn" id="help"><span class="kbd">?</span>Shortcuts</button>
+      <div class="user"><span class="avatar" aria-hidden="true">AC</span><div><div>Alex Chen</div><div class="faint" style="font-size:12px">Accounts payable</div></div></div>
+      <p class="mock-flag">Clickable mockup with sample data. Nothing here is saved.</p>
+    </div>
+  </aside>
+
+  <main id="main">
+    <!-- OVERVIEW -->
+    <section class="view" id="v-overview" aria-labelledby="h-ov">
+      <div class="page-head">
+        <div><p class="eyebrow">Friday, October 16</p><h1 id="h-ov">Good morning, Alex</h1></div>
+        <div class="search"><svg width="16" height="16" aria-hidden="true"><use href="#i-search"/></svg><span>Find a PO or invoice</span><span class="kbd">/</span></div>
+      </div>
+      <div class="ov-top">
+        <div class="panel risk-card">
+          <h3>Money at risk</h3>
+          <div class="figure" id="ov-risk">$2,811<small>.90</small></div>
+          <div class="risk-meta">
+            <div><span class="faint" style="font-size:12px">Open problems</span><b id="ov-open">5</b></div>
+            <div><span class="faint" style="font-size:12px">Informational</span><b>1</b></div>
+            <div><span class="faint" style="font-size:12px">Decided this week</span><b id="ov-decided">12</b></div>
+          </div>
+          <div><button class="btn primary" data-go="problems">Work the queue <span class="kbd">G P</span></button></div>
+        </div>
+        <div class="panel bars">
+          <h3>Where the money is</h3>
+          <div class="bar-row"><span>Duplicate invoice</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="amt">$1,236.00</span></div>
+          <div class="bar-row"><span>Missing receipt</span><div class="bar-track"><div class="bar-fill" style="width:68%"></div></div><span class="amt">$842.40</span></div>
+          <div class="bar-row"><span>Price over PO</span><div class="bar-track"><div class="bar-fill" style="width:38%"></div></div><span class="amt">$468.00</span></div>
+          <div class="bar-row"><span>Billed, not received</span><div class="bar-track"><div class="bar-fill" style="width:15%"></div></div><span class="amt">$190.50</span></div>
+          <div class="bar-row"><span>Line not on PO</span><div class="bar-track"><div class="bar-fill" style="width:6%"></div></div><span class="amt">$75.00</span></div>
+        </div>
+      </div>
+      <div class="ov-grid">
+        <div class="panel stat"><h3>Purchase orders</h3><b>19</b><div class="split"><span class="tag t-settled"><svg aria-hidden="true"><use href="#i-check"/></svg>14 matched</span><span class="tag t-neutral">3 waiting</span><span class="tag t-caution"><svg aria-hidden="true"><use href="#i-flag"/></svg>2 need review</span></div></div>
+        <div class="panel stat"><h3>AI cost per document</h3><b>$0.0011</b><span class="muted" style="font-size:13px">57 documents read · 31 from saved answers</span></div>
+        <div class="panel stat"><h3>Reading time per document</h3><b>7.8 s</b><span class="muted" style="font-size:13px">Slowest 11.2 s · fields read correctly 99.8% in tests</span></div>
+      </div>
+      <div class="panel">
+        <div class="sec-head"><h2>Recent activity</h2><button class="btn ghost" data-go="po">Open PO history</button></div>
+        <div class="activity">
+          <div class="act"><span class="dot human"></span><div><b>Alex Chen</b> disputed a price variance on <span class="mono">BC-PO-20391</span><div class="muted" style="font-size:13px">"Vendor confirmed the old price applies until April."</div></div><span class="faint" style="font-size:12px">9:41 AM</span></div>
+          <div class="act"><span class="dot"></span><div>Matched <span class="mono">HP-PO-107093</span>: 3 documents, 1 problem raised</div><span class="faint" style="font-size:12px">9:38 AM</span></div>
+          <div class="act"><span class="dot"></span><div>Read invoice <span class="mono">SP-INV-40211</span>, 1 field unsure</div><span class="faint" style="font-size:12px">9:38 AM</span></div>
+          <div class="act"><span class="dot"></span><div>Grouped a receipt that says <span class="mono">HP-PO-10793</span> with <span class="mono">HP-PO-107093</span> (1 character apart)</div><span class="faint" style="font-size:12px">9:37 AM</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEMS -->
+    <section class="view" id="v-problems" aria-labelledby="h-pr" hidden>
+      <div class="page-head">
+        <div><p class="eyebrow">Sorted by money at risk</p><h1 id="h-pr">Problems</h1></div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="faint" style="font-size:13px"><span class="kbd">J</span> <span class="kbd">K</span> to move</span><button class="btn">Show decided</button></div>
+      </div>
+      <div class="split-view">
+        <div class="panel qlist" role="listbox" aria-label="Open problems" id="qlist"></div>
+        <div class="panel detail" id="detail" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- PO DETAIL -->
+    <section class="view" id="v-po" aria-labelledby="h-po" hidden>
+      <div class="page-head">
+        <div><p class="eyebrow">Sunpeak Foods Co. · ordered Mar 2, 2026</p><h1 id="h-po"><span class="mono" style="font-size:26px;font-family:var(--mono)">HP-PO-107093</span></h1></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="tag t-caution"><svg aria-hidden="true"><use href="#i-flag"/></svg>Matched, needs review</span><span class="tag t-neutral">Match version 2</span></div>
+      </div>
+      <div class="po-layout">
+        <div class="stack">
+          <div class="panel">
+            <div class="sec-head"><h2>Documents</h2></div>
+            <div class="docs">
+              <button class="docchip" data-go="doc-po"><span class="muted" style="font-size:12px">Purchase order</span><span class="mono">HP-PO-107093</span><span class="tag t-settled" style="align-self:flex-start"><svg aria-hidden="true"><use href="#i-check"/></svg>Read</span></button>
+              <button class="docchip" data-go="doc-po"><span class="muted" style="font-size:12px">Receiving report</span><span class="mono">RR-58812</span><span class="tag t-settled" style="align-self:flex-start"><svg aria-hidden="true"><use href="#i-check"/></svg>Read</span></button>
+              <button class="docchip" data-go="doc"><span class="muted" style="font-size:12px">Invoice</span><span class="mono">SP-INV-40211</span><span class="tag t-caution" style="align-self:flex-start"><svg aria-hidden="true"><use href="#i-flag"/></svg>1 field unsure</span></button>
+            </div>
+            <div class="note"><svg width="16" height="16" aria-hidden="true" style="flex:none;margin-top:2px"><use href="#i-flag"/></svg>The receiving report says HP-PO-10793. It was grouped with HP-PO-107093 because they're 1 character apart and from the same vendor.</div>
+          </div>
+          <div class="panel">
+            <div class="sec-head"><h2>How the lines were matched</h2><span class="faint" style="font-size:13px">4 lines</span></div>
+            <div class="tbl-wrap"><table>
+              <thead><tr><th>PO line</th><th>Invoice line</th><th>Matched by</th><th class="r">Qty</th><th class="r">PO price</th></tr></thead>
+              <tbody>
+                <tr><td>Sunpeak Creamy Peanut Butter, 16 oz<div class="mono faint">SP-PB-16</div></td><td>Same SKU</td><td><span class="method"><span class="tag t-neutral">SKU</span></span></td><td class="r">80</td><td class="r">$41.60</td></tr>
+                <tr><td>Sunpeak Wildflower Honey, 12 oz<div class="mono faint">SP-HNY-12</div></td><td>Same SKU</td><td><span class="tag t-neutral">SKU</span></td><td class="r">40</td><td class="r">$58.80</td></tr>
+                <tr><td>Sunpeak Crunchy Almond Butter, 12 oz<div class="mono faint">SP-ALB-12</div></td><td>Chunky Nut Spread, Almond, 12 oz</td><td><span class="tag t-accent"><svg aria-hidden="true"><use href="#i-spark"/></svg>AI</span><div class="faint" style="font-size:12px;margin-top:4px;max-width:28ch">"Nut Spread, Chunky" is the vendor's name for Crunchy Almond Butter; same 12 oz size.</div></td><td class="r">120</td><td class="r">$48.20</td></tr>
+                <tr><td>Sunpeak Strawberry Preserves, 18 oz<div class="mono faint">SP-STR-18</div></td><td>Sunpeak Strawbery Presrv 18oz</td><td><span class="tag t-neutral">Wording</span><div class="faint" style="font-size:12px;margin-top:4px">94% similar</div></td><td class="r">60</td><td class="r">$37.20</td></tr>
+              </tbody>
+            </table></div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="sec-head"><h2>History</h2></div>
+          <div class="timeline" id="timeline"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOCUMENT -->
+    <section class="view" id="v-doc" aria-labelledby="h-doc" hidden>
+      <div class="page-head">
+        <div><p class="eyebrow"><button class="link-btn" data-go="po" style="display:inline-flex"><svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg>HP-PO-107093</button></p><h1 id="h-doc">Invoice <span class="mono" style="font-size:24px">SP-INV-40211</span></h1></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span class="faint" style="font-size:13px">Read by Gemini 3.5 Flash-Lite · 8.1 s · $0.0012</span></div>
+      </div>
+      <div class="doc-layout">
+        <div class="viewer">
+          <div class="page" id="page">
+            <div class="in">
+              <div class="pg-head"><div><b>SUNPEAK FOODS CO.</b><div>1180 Orchard Row, Fresno CA 93721</div></div><div class="pg-title">INVOICE</div></div>
+              <div class="pg-meta">
+                <div>Invoice no.</div><div>SP-INV-40211</div>
+                <div>Invoice date</div><div>03/I2/2026</div>
+                <div>Customer PO</div><div>HP-PO-107093</div>
+                <div>Terms</div><div>Net 30</div>
+              </div>
+              <table class="pg-lines">
+                <thead><tr><th>Item</th><th>Description</th><th>Qty</th><th>Unit</th><th>Amount</th></tr></thead>
+                <tbody>
+                  <tr><td>SP-PB-16</td><td>Creamy Peanut Butter 16oz</td><td>80</td><td>41.60</td><td>3,328.00</td></tr>
+                  <tr><td></td><td>Chunky Nut Spread, Almond, 12 oz</td><td>120</td><td>52.10</td><td>6,252.00</td></tr>
+                  <tr><td>SP-HNY-12</td><td>Wildflower Honey 12oz</td><td>40</td><td>58.80</td><td>2,352.00</td></tr>
+                  <tr><td>SP-STR-18</td><td>Strawbery Presrv 18oz</td><td>60</td><td>37.20</td><td>2,232.00</td></tr>
+                </tbody>
+              </table>
+              <div class="pg-tot"><span>Subtotal</span><span>14,164.00</span><span>Tax</span><span>0.00</span><span>Shipping</span><span>120.00</span><b>Total</b><b>14,284.00</b></div>
+              <div class="pg-foot">Remit to: Sunpeak Foods Co. · Thank you for your business</div>
+            </div>
+            <div id="boxes"></div>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="banner caution" id="doc-banner"><svg width="16" height="16" aria-hidden="true" style="flex:none"><use href="#i-flag"/></svg><span>1 field needs a look: the invoice date may be misread.</span></div>
+          <div class="panel fields" id="fields">
+            <div class="sec-head" style="padding-bottom:12px;border-bottom:1px solid var(--rule-strong)"><h2>What the AI read</h2><span class="faint" style="font-size:12px">Hover a field to find it</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEW -->
+    <section class="view" id="v-review" aria-labelledby="h-rv" hidden>
+      <div class="page-head"><div><p class="eyebrow">Only the fields the AI wasn't sure about</p><h1 id="h-rv">Review</h1></div></div>
+      <div class="panel tbl-wrap"><table>
+        <thead><tr><th>Document</th><th>Vendor</th><th>Why it needs a look</th><th class="r">Unsure fields</th><th>Read</th></tr></thead>
+        <tbody>
+          <tr class="click" data-go="doc"><td><span class="muted" style="font-size:12px">Invoice</span><div class="mono">SP-INV-40211</div></td><td>Sunpeak Foods Co.</td><td>Invoice date may be misread</td><td class="r">1</td><td class="faint">9:38 AM</td></tr>
+          <tr class="click" data-go="doc"><td><span class="muted" style="font-size:12px">Receiving report</span><div class="mono">RR-58907</div></td><td>Tidewater Rice Mills</td><td>Scanned page, line 4 quantity hard to read</td><td class="r">2</td><td class="faint">Yesterday</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- UPLOAD -->
+    <section class="view" id="v-upload" aria-labelledby="h-up" hidden>
+      <div class="page-head"><div><p class="eyebrow">PDF, PNG, or JPEG · up to 10 MB each</p><h1 id="h-up">Upload documents</h1></div></div>
+      <div class="stack">
+        <div class="drop" id="drop">
+          <svg width="28" height="28" aria-hidden="true"><use href="#i-upload"/></svg>
+          <h2>Drop purchase orders, receipts, and invoices</h2>
+          <p class="muted" style="margin:0">Reconcile works out which is which and which PO they belong to.</p>
+          <button class="btn primary" id="sample">Upload a sample set</button>
+        </div>
+        <div class="panel tbl-wrap"><table>
+          <thead><tr><th>File</th><th>Status</th><th>Progress</th><th>Belongs to</th></tr></thead>
+          <tbody id="uploads"></tbody>
+        </table></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="overlay" id="keys" hidden role="dialog" aria-modal="true" aria-labelledby="h-keys">
+  <div class="sheet-dlg">
+    <div style="display:flex;justify-content:space-between;align-items:center"><h2 id="h-keys">Keyboard shortcuts</h2><button class="btn ghost" id="keys-close">Close <span class="kbd">Esc</span></button></div>
+    <div class="keys">
+      <span><span class="kbd">J</span><span class="kbd">K</span></span><span>Next or previous problem</span>
+      <span><span class="kbd">A</span></span><span>Approve</span>
+      <span><span class="kbd">D</span></span><span>Dispute</span>
+      <span><span class="kbd">W</span></span><span>Write off</span>
+      <span><span class="kbd">E</span></span><span>Edit the selected field</span>
+      <span><span class="kbd">/</span></span><span>Find a PO or document</span>
+      <span><span class="kbd">G</span><span class="kbd">O</span></span><span>Go to overview</span>
+      <span><span class="kbd">G</span><span class="kbd">P</span></span><span>Go to problems</span>
+      <span><span class="kbd">G</span><span class="kbd">U</span></span><span>Go to upload</span>
+      <span><span class="kbd">?</span></span><span>Show this list</span>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"><span id="toast-msg"></span><button id="toast-undo">Undo</button></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const ico=(id,w=12)=>`<svg width="${w}" height="${w}" aria-hidden="true"><use href="#i-${id}"/></svg>`;
+const TYPES={DUP:['Duplicate invoice','risk','alert'],MISS:['Missing receipt','caution','flag'],PRICE:['Price over PO','risk','alert'],QTY:['Billed, not received','risk','alert'],LINE:['Line not on PO','caution','flag'],SHORT:['Short-ship, billed right','neutral','dot']};
+let problems=[
+ {id:'p1',t:'DUP',po:'GV-PO-55012',vendor:'Greenvale Snacks',amt:'1,236.00',sub:'Same invoice number as one paid on Mar 2',
+  explain:'Invoice GV-INV-88031 arrived twice: the copy received Mar 9 has the same number, vendor, and total as the one received Mar 2. Paying both would pay $1,236.00 twice.',
+  cols:[['Purchase order','GV-PO-55012',[['Total','$1,236.00']]],['First invoice','GV-INV-88031',[['Received','Mar 2, 2026'],['Total','$1,236.00']]],['Second copy','GV-INV-88031',[['Received','Mar 9, 2026'],['Total','$1,236.00',1]]]],note:'Same vendor, number, and total within 30 days.'},
+ {id:'p2',t:'MISS',po:'AP-PO-30988',vendor:'Ashpoint Paper Goods',amt:'842.40',sub:'No receiving report 7 days after the invoice',
+  explain:'Ashpoint billed $842.40, but the warehouse hasn\'t sent a receiving report. We waited the 7-day grace period; without proof of delivery, the whole invoice is at risk.',
+  cols:[['Purchase order','AP-PO-30988',[['Total','$842.40']]],['Receiving report','Not received',[['Waited','7 days',1]]],['Invoice','AP-INV-7716',[['Total','$842.40']]]]},
+ {id:'p3',t:'PRICE',po:'HP-PO-107093',vendor:'Sunpeak Foods Co.',amt:'468.00',sub:'Almond butter billed at $52.10, PO says $48.20',
+  explain:'The invoice bills 120 cases of Crunchy Almond Butter at $52.10 a case. The PO agreed $48.20. That\'s $3.90 a case over, or $468.00 in total.',
+  cols:[['Purchase order · line 3','SP-ALB-12',[['Item','Crunchy Almond Butter, 12 oz'],['Qty','120 CS'],['Unit price','$48.20']]],['Receiving report · line 3','SP-ALB-12',[['Item','Crunchy Almond Butter, 12 oz'],['Received','120 CS']]],['Invoice · line 2','No SKU',[['Item','Chunky Nut Spread, Almond, 12 oz'],['Qty','120 CS'],['Unit price','$52.10',1]]]],
+  diff:'+$3.90 / case', ai:'Paired by AI: "Nut Spread, Chunky" is the vendor\'s name for Crunchy Almond Butter; same 12 oz size. Confidence 0.95.'},
+ {id:'p4',t:'QTY',po:'BC-PO-20417',vendor:'Brookcrest Dairy Alternatives',amt:'190.50',sub:'Billed 40 cases of oat milk, 34 received',
+  explain:'The invoice bills 40 cases of Unsweetened Oat Milk, but the warehouse received 34. The 6 missing cases at $31.75 come to $190.50.',
+  cols:[['Purchase order · line 1','BC-OAT-32',[['Qty','40 CS'],['Unit price','$31.75']]],['Receiving report · line 1','BC-OAT-32',[['Received','34 CS',1]]],['Invoice · line 1','BC-OAT-32',[['Billed','40 CS',1],['Unit price','$31.75']]]],diff:'−6 cases received'},
+ {id:'p5',t:'LINE',po:'TR-PO-61120',vendor:'Tidewater Rice Mills',amt:'75.00',sub:'"Fuel surcharge" isn\'t on the PO',
+  explain:'The invoice adds a line, "Fuel surcharge, $75.00", that doesn\'t match anything on the PO or the receiving report.',
+  cols:[['Purchase order','TR-PO-61120',[['Line','Not on PO',1]]],['Receiving report','RR-58907',[['Line','Not on receipt',1]]],['Invoice · line 5','No SKU',[['Item','Fuel surcharge'],['Amount','$75.00',1]]]]},
+ {id:'p6',t:'SHORT',po:'SP-PO-10402',vendor:'Sunpeak Foods Co.',amt:'0.00',info:1,sub:'2 cases short, invoice billed only what arrived',
+  explain:'The warehouse received 2 fewer cases of honey than ordered, and the invoice bills only what arrived. No money is at risk; this is for your records.',
+  cols:[['Purchase order','SP-HNY-12',[['Qty','24 CS']]],['Receiving report','SP-HNY-12',[['Received','22 CS',1]]],['Invoice','SP-HNY-12',[['Billed','22 CS']]]]}
+];
+let sel='p3',choice=null,decided=0,lastRemoved=null;
+const history=[
+ ['Uploaded purchase order HP-PO-107093','Mar 2, 2026, 10:04 AM'],
+ ['Uploaded receiving report RR-58812','Mar 6, 2026, 2:15 PM'],
+ ['Waiting for the invoice (grace period until Mar 13)','Mar 6, 2026, 2:16 PM'],
+ ['Uploaded invoice SP-INV-40211','Mar 9, 2026, 9:37 AM'],
+ ['Read invoice: 1 field unsure (invoice date)','Mar 9, 2026, 9:38 AM'],
+ ['Grouped receipt "HP-PO-10793" with this PO (1 character apart)','Mar 9, 2026, 9:38 AM'],
+ ['Matched (version 2): 1 problem, price over PO, $468.00','Mar 9, 2026, 9:38 AM']
+];
+function renderTimeline(){
+  $('#timeline').innerHTML=history.map(h=>`<div class="tl"><span class="dot ${h[2]?'human':''}"></span><div><div>${h[0]}</div><div class="faint" style="font-size:12px">${h[1]}</div>${h[2]?`<q>${h[2]}</q>`:''}</div></div>`).join('');
+}
+const money=a=>'$'+a;
+function renderList(){
+  const q=$('#qlist');
+  if(!problems.length){q.innerHTML='<div class="empty">'+ico('check',28)+'<h2>No open problems</h2><p class="muted" style="margin:0">Everything\'s matched or decided.</p></div>';return}
+  q.innerHTML=`<div class="qhead"><h3>${problems.filter(p=>!p.info).length} open · ${problems.filter(p=>p.info).length} informational</h3><h3>Impact</h3></div>`+problems.map(p=>{
+    const [label,tone,ic]=TYPES[p.t];
+    return `<button class="qrow ${p.info?'info':''}" role="option" aria-selected="${p.id===sel}" data-id="${p.id}"><span class="line1"><span class="tag t-${tone}">${ico(ic)}${label}</span><span class="vendor">${p.vendor}</span></span><span class="impact">${money(p.amt)}</span><span class="sub"><span class="mono">${p.po}</span> · ${p.sub}</span></button>`}).join('');
+  q.querySelectorAll('.qrow').forEach(b=>b.onclick=()=>{sel=b.dataset.id;choice=null;render()});
+  $('#nav-open').textContent=problems.filter(p=>!p.info).length;
+}
+function renderDetail(){
+  const d=$('#detail'),p=problems.find(x=>x.id===sel);
+  if(!p){d.innerHTML='<div class="empty">'+ico('check',28)+'<h2>Queue cleared</h2><p class="muted" style="margin:0">Nice work. New problems will show up here as documents arrive.</p></div>';return}
+  const [label,tone,ic]=TYPES[p.t];
+  d.innerHTML=`
+   <div class="d-head"><div style="display:flex;flex-direction:column;gap:8px"><span class="tag t-${tone}" style="align-self:flex-start">${ico(ic)}${label}</span><h2>${p.vendor}</h2><button class="link-btn mono" data-go="po">${p.po}</button></div>
+   <div class="d-amt"><h3>${p.info?'No money at risk':'At risk'}</h3><b style="${p.info?'color:var(--ink-3)':''}">${money(p.amt)}</b></div></div>
+   <p class="explain">${p.explain}</p>
+   <div class="compare-wrap"><div class="compare">${p.cols.map(c=>`<div class="col"><h3><span>${c[0]}</span></h3><span class="mono">${c[1]}</span>${c[2].map(kv=>`<div class="kv ${kv[2]?'diff':''}"><span>${kv[0]}</span><span>${kv[1]}</span></div>`).join('')}${c[2].some(kv=>kv[2])&&p.diff?`<span class="diffnote">${p.diff}</span>`:''}</div>`).join('')}</div></div>
+   ${p.ai?`<div class="ai-note">${ico('spark',16)}<span>${p.ai}</span></div>`:''}
+   ${p.note?`<div class="faint" style="font-size:13px">${p.note}</div>`:''}
+   <div class="decide">
+     <h3>Your decision</h3>
+     <div class="choices">
+       <button class="btn choice" data-c="Approved" aria-pressed="${choice==='Approved'}">Approve <span class="kbd">A</span></button>
+       <button class="btn choice" data-c="Disputed" aria-pressed="${choice==='Disputed'}">Dispute <span class="kbd">D</span></button>
+       <button class="btn choice" data-c="Written off" aria-pressed="${choice==='Written off'}">Write off <span class="kbd">W</span></button>
+     </div>
+     <label for="note" class="faint" style="font-size:13px">Note (required, saved to the PO's history)</label>
+     <textarea id="note" placeholder="Called Sunpeak: the new price starts April 1, they'll credit the difference."></textarea>
+     <div class="decide-foot"><span class="err" id="err"></span><button class="btn primary" id="save">Save decision</button></div>
+   </div>`;
+  d.querySelectorAll('.choice').forEach(b=>b.onclick=()=>pick(b.dataset.c));
+  $('#note').oninput=()=>{$('#err').textContent=''};
+  $('#save').onclick=save;
+}
+function pick(c){choice=c;document.querySelectorAll('.choice').forEach(b=>b.setAttribute('aria-pressed',b.dataset.c===c));$('#err').textContent='';$('#note').focus()}
+function save(){
+  const note=$('#note').value.trim();
+  if(!choice){$('#err').textContent='Pick approve, dispute, or write off first.';return}
+  if(!note){$('#err').textContent='Add a note first. It goes in the PO\'s history.';$('#note').focus();return}
+  const i=problems.findIndex(p=>p.id===sel),p=problems[i],c=choice;
+  lastRemoved={p,i};problems.splice(i,1);
+  if(p.po==='HP-PO-107093')history.push([`Alex Chen: ${c.toLowerCase()}, price over PO ($${p.amt})`,'Just now',note]);
+  renderTimeline();
+  decided++;$('#ov-decided').textContent=12+decided;
+  sel=(problems[i]||problems[i-1]||{}).id;choice=null;render();
+  toast(`${c}: ${p.vendor}, $${p.amt}. Saved to the ${p.po} history.`);
+}
+function toast(msg){const t=$('#toast');$('#toast-msg').textContent=msg;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),4200)}
+$('#toast-undo').onclick=()=>{if(!lastRemoved)return;problems.splice(lastRemoved.i,0,lastRemoved.p);sel=lastRemoved.p.id;lastRemoved=null;$('#toast').classList.remove('show');render()};
+function render(){renderList();renderDetail()}
+
+/* document viewer: boxes use the same 0–1 page coordinates the API stores */
+const fields=[
+ ['Vendor','Sunpeak Foods Co.',.98,[.065,.07,.095,.42]],
+ ['Invoice no.','SP-INV-40211',.99,[.155,.53,.175,.75]],
+ ['Invoice date','2026-03-12',.62,[.177,.53,.197,.70],1],
+ ['Customer PO','HP-PO-107093',.97,[.199,.53,.219,.76]],
+ ['Line 2 · item','Chunky Nut Spread, Almond, 12 oz',.91,[.287,.2,.31,.6]],
+ ['Line 2 · qty','120',.96,[.287,.6,.31,.68]],
+ ['Line 2 · price','52.10',.95,[.287,.68,.31,.79]],
+ ['Subtotal','14,164.00',.97,[.735,.78,.755,.94]],
+ ['Total','14,284.00',.98,[.81,.78,.832,.94]]
+];
+function renderDoc(){
+  $('#boxes').innerHTML=fields.map((f,i)=>{const [y0,x0,y1,x1]=f[3];return `<div class="box ${f[4]?'unsure':''}" data-i="${i}" style="top:${y0*100}%;left:${x0*100-0.8}%;width:${(x1-x0)*100+1.6}%;height:${(y1-y0)*100}%"></div>`}).join('');
+  const list=$('#fields');list.querySelectorAll('.frow').forEach(r=>r.remove());
+  fields.forEach((f,i)=>{
+    const r=document.createElement('div');r.className='frow'+(f[4]?' unsure':'');r.dataset.i=i;r.tabIndex=0;
+    r.innerHTML=`<span class="lbl">${f[0]}</span><span class="val ${/no\.|PO/.test(f[0])?'mono':''}">${f[1]}</span><span class="conf"><i><b style="width:${f[2]*100}%"></b></i>${Math.round(f[2]*100)}%</span><button class="icon-btn" aria-label="Edit ${f[0]}">${ico('edit',16)}</button>`;
+    const on=v=>{r.classList.toggle('on',v);$(`.box[data-i="${i}"]`).classList.toggle('on',v)};
+    r.onmouseenter=()=>on(true);r.onmouseleave=()=>on(false);r.onfocus=()=>on(true);r.onblur=()=>on(false);
+    r.querySelector('button').onclick=e=>{e.stopPropagation();edit(r,i)};
+    list.appendChild(r);
+  });
+}
+function edit(r,i){
+  const v=r.querySelector('.val');const old=fields[i][1];
+  v.innerHTML=`<input id="edit-${i}" value="${old}" aria-label="${fields[i][0]}">`;const inp=v.querySelector('input');inp.focus();inp.select();
+  inp.onkeydown=e=>{if(e.key==='Enter'){fields[i][1]=inp.value.trim()||old;fields[i][2]=1;fields[i][4]=0;
+      $('#doc-banner').className='banner accent';$('#doc-banner').innerHTML=ico('spark',16)+'<span>Saved your correction as a new version (the AI\'s is kept). Re-matching HP-PO-107093…</span>';
+      history.push([`Alex Chen corrected ${fields[i][0].toLowerCase()}: ${old} → ${fields[i][1]}`,'Just now']);renderTimeline();renderDoc();
+      setTimeout(()=>{$('#doc-banner').innerHTML=ico('check',16)+'<span>Re-matched. No change to the problems.</span>';history.push(['Matched (version 3): 1 problem, price over PO, $468.00','Just now']);renderTimeline()},1600)}
+    if(e.key==='Escape'){renderDoc()}};
+}
+
+/* upload: statuses arrive like the live feed would send them */
+const STAGES=['Uploaded','Reading','Ready','Matched'];
+let ups=[['hp-po-107093.pdf',4,'HP-PO-107093'],['rr-58812.png',4,'HP-PO-107093'],['sp-inv-40211.pdf',2,'HP-PO-107093']];
+function renderUploads(){
+  $('#uploads').innerHTML=ups.map(u=>{const s=u[1];const tone=s>=4?'t-settled':s===3?'t-accent':'t-neutral';
+    return `<tr><td>${ico('file',14)} <span class="mono">${u[0]}</span></td><td><span class="tag ${tone}">${s>=4?ico('check'):''}${STAGES[Math.min(s,4)-1]||'Uploaded'}${s===2?'…':''}</span></td><td><div class="steps">${STAGES.map((_,k)=>`<span class="step ${k<s-1||s>=4?'done':k===s-1?'now':''}"></span>`).join('')}</div></td><td>${s>=3?`<span class="mono">${u[2]}</span>`:'<span class="skel" style="width:90px"></span>'}</td></tr>`}).join('');
+}
+function runSample(){
+  ups=[['gv-po-55012.pdf',1,'GV-PO-55012'],['gv-rr-30551.png',1,'GV-PO-55012'],['gv-inv-88031.pdf',1,'GV-PO-55012'],...ups];renderUploads();
+  [0,1,2].forEach(k=>[1,2,3].forEach(step=>setTimeout(()=>{ups[k][1]=step+1;renderUploads()},700*step+380*k+(step===2?900:0))));
+}
+$('#sample').onclick=runSample;
+const drop=$('#drop');['dragenter','dragover'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.add('over')}));
+['dragleave','drop'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.remove('over');if(e==='drop')runSample()}));
+
+/* navigation */
+const VIEWS={overview:'overview',problems:'problems',po:'po',review:'review',upload:'upload',doc:'doc','doc-po':'doc'};
+function go(name){
+  const v=VIEWS[name]||'overview';
+  document.querySelectorAll('.view').forEach(s=>s.hidden=s.id!=='v-'+v);
+  document.querySelectorAll('#nav button').forEach(b=>b.toggleAttribute('aria-current',false));
+  const nb=document.querySelector(`#nav button[data-go="${v==='doc'?'review':v}"]`);if(nb)nb.setAttribute('aria-current','page');
+  window.scrollTo(0,0);
+}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-go]');if(t){e.preventDefault();go(t.dataset.go)}});
+$('#theme').onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=dark?'light':'dark'};
+const keys=$('#keys');$('#help').onclick=()=>{keys.hidden=false;$('#keys-close').focus()};$('#keys-close').onclick=()=>keys.hidden=true;
+keys.onclick=e=>{if(e.target===keys)keys.hidden=true};
+let gPending=false;
+document.addEventListener('keydown',e=>{
+  if(e.target.matches('input,textarea')){if(e.key==='Escape')e.target.blur();return}
+  if(e.metaKey||e.ctrlKey||e.altKey)return;
+  const k=e.key.toLowerCase();
+  if(k==='escape'){keys.hidden=true;return}
+  if(e.key==='?'){keys.hidden=false;return}
+  if(gPending){gPending=false;({o:'overview',p:'problems',u:'upload',r:'review',l:'po'})[k]&&go(({o:'overview',p:'problems',u:'upload',r:'review',l:'po'})[k]);return}
+  if(k==='g'){gPending=true;setTimeout(()=>gPending=false,900);return}
+  if($('#v-problems').hidden)return;
+  const i=problems.findIndex(p=>p.id===sel);
+  if(k==='j'&&i<problems.length-1){sel=problems[i+1].id;choice=null;render()}
+  if(k==='k'&&i>0){sel=problems[i-1].id;choice=null;render()}
+  if(k==='a')pick('Approved');if(k==='d')pick('Disputed');if(k==='w')pick('Written off');
+  if(['a','d','w'].includes(k))e.preventDefault();
+});
+render();renderTimeline();renderDoc();renderUploads();go('overview');
+</script>

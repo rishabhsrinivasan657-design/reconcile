@@ -18,3 +18,5 @@ one and update the old one's status line.
 | [0009](0009-baseline-fuzzy-matcher.md) | Non-AI text-similarity matcher as the fuzzy baseline | Accepted |
 | [0010](0010-langchain-provider-switching.md) | LangChain.js for provider switching, under our own client | Accepted |
 | [0011](0011-api-worker-queue.md) | An API for quick answers, a worker for slow work, a queue between them | Accepted |
+| [0012](0012-website-stack.md) | Website: Next.js, design tokens, Radix primitives, generated API client | Proposed |
+| [0013](0013-live-updates.md) | Live updates through Redis announcements and server-sent events | Proposed |
