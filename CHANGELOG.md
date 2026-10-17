@@ -6,6 +6,34 @@ All notable changes are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-10-17
+
+M4: Reconcile runs as a backend service ([PR #5](https://github.com/rishabhsrinivasan657-design/reconcile/pull/5)).
+
+### Added
+- **Upload API** (`apps/api`, Fastify): upload PDF/PNG/JPEG (duplicates recognized by fingerprint),
+  read documents, PO sets, and problems; standard error replies; live manual at `/docs`.
+- **Background worker** (`apps/worker`, BullMQ on Redis): "read this document" and "match this PO"
+  jobs; one AI speed limit shared by all workers; a 7-day wait before reporting a missing document;
+  re-matching creates a new version and carries human decisions over.
+- **Shared toolbox** (`packages/pipeline`): storage, upload, read, match, history log.
+- **Misread PO numbers** (B-17): a PO number one character off is grouped with the same vendor's PO
+  and labeled for review.
+- **AI line pairing** (`fuzzy.v1`) with `text`, `llm`, and `hybrid` strategies; `pnpm eval --fuzzy`
+  compares them. Hybrid is the default (chosen by the eval).
+- Generator 0.5.0: invoices that use the vendor's own product names (no SKU, no brand).
+- `pnpm dev` starts the API and the worker together.
+
+### Changed
+- `matchDocuments` is asynchronous (so the AI can plug in).
+- Database: PO set status, provisional flag, notes, and grace-period end; extraction review fields;
+  carried-over exceptions.
+- AI answers that stop early keep their complete part.
+
+### Results (CI subset)
+- e2e exception precision / recall 100 / 100 (was 84.2 / 94.1); extract field F1 99.8.
+- All 20 CI sets through the real API and worker give exactly the eval's answers.
+
 ## [0.4.0] - 2026-10-17
 
 M3: LLM client and extraction ([PR #4](https://github.com/rishabhsrinivasan657-design/reconcile/pull/4)).
@@ -83,7 +111,8 @@ M0: requirements and design. Documentation only, no code.
 - `QTY_BILLED_NOT_RECEIVED` exception type; informational short-ships (PRD decisions Q1, Q2).
 - M0 design: architecture doc, ADRs 0001–0006, doc and PR templates.
 
-[Unreleased]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.1.0...v0.2.0
