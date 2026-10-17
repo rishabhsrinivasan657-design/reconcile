@@ -35,6 +35,8 @@ const limiter = new RedisLimiter(
   `reconcile:llm:${llmEnv.LLM_PROVIDER}`,
 );
 const llm = createPipelineLlm(env, db, limiter);
+// How tricky lines are paired; hybrid won the M4 comparison (text first, AI for the rest).
+const fuzzy = fuzzyFor(env.FUZZY_STRATEGY, llm);
 
 const workers = startWorkers({
   db,
@@ -43,12 +45,11 @@ const workers = startWorkers({
   queues,
   connection,
   graceDays: env.MISSING_DOC_GRACE_DAYS,
-  // How tricky lines are paired; hybrid won the M4 comparison (text first, AI for the rest).
-  ...(fuzzyFor(env.FUZZY_STRATEGY, llm) ? { fuzzy: fuzzyFor(env.FUZZY_STRATEGY, llm)! } : {}),
+  ...(fuzzy ? { fuzzy } : {}),
   onEvent: (e) => console.log(`[${e.job}] ${e.ok ? '✓' : '✗'} ${e.detail}`),
 });
 console.log(
-  `Reconcile worker running · ${llmEnv.LLM_PROVIDER}/${llmEnv.LLM_MODEL_EXTRACT} · AI mode ${env.LLM_MODE} · grace ${env.MISSING_DOC_GRACE_DAYS} day(s)`,
+  `Reconcile worker running · ${llmEnv.LLM_PROVIDER}/${llmEnv.LLM_MODEL_EXTRACT} · AI mode ${env.LLM_MODE} · line pairing ${env.FUZZY_STRATEGY} · grace ${env.MISSING_DOC_GRACE_DAYS} day(s)`,
 );
 
 const shutdown = async () => {

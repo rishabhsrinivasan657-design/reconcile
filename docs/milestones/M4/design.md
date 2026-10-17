@@ -218,3 +218,14 @@ open http://localhost:3001/docs
 | Two workers grab the same job | The queue's job names are unique (the file fingerprint, or `match:<PO>`) |
 | A crash halfway through a job | Each save happens in one transaction, and jobs are safe to run again |
 | Tests that need Redis and Postgres are slow or flaky | One full-pipeline test plus a replay check. Everything else stays fast unit tests. |
+
+## 11. What changed while building (implementation notes)
+
+| Planned | What we did | Why |
+|---|---|---|
+| Vendor names keep the brand ("Sunpeak Nut Spread…") | The vendor names drop the brand and lead with the variant ("Chunky Nut Spread, Almond, 12 oz") | With the brand kept, the word matcher still scored 100, so the test showed nothing. Real vendor invoices rarely repeat their own brand. |
+| Pick the AI matcher's role by data | **Hybrid** won: 100 on the CI subset (text: 89.5) and 98.3 on 200 stress sets (text: 96.8), with 1–2 AI calls | The AI only sees what the word matcher isn't sure about: cheap, explainable, deterministic where possible |
+| A matcher that answers synchronously | `matchDocuments` became asynchronous | So the AI matcher can plug in without the rest of the code changing |
+| The misread-PO fix inside one batch | The worker also looks at the same vendor's PO sets one character away | In the running system, a misread number creates a separate PO set |
+| (not planned) | An AI answer that stops early now keeps its complete part | Seen live: a reply ended at `"total":{`. The checks flag the missing part for review. |
+| (not planned) | The scorer's own tests build their "perfect" answer from the answer keys | They used the word matcher as "perfect", which stopped being true with vendor names. A commit briefly went out with 4 failing tests and was fixed right after. |

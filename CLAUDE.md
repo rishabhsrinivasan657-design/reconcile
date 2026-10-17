@@ -189,7 +189,8 @@ pnpm docs:diagrams | docs:check
 pnpm eval [--stage match|extract|e2e|all] [--check-baseline | --update-baseline]
 pnpm eval:record                   # live LLM run on the CI subset (writes evals/cache)
 pnpm extract <file.pdf|png>        # read one document with the LLM
-# later: pnpm dev, pnpm test:e2e
+pnpm dev                           # API (port 3001) + worker; manual at /docs
+# later: pnpm test:e2e
 ```
 
 Toolchain pins: TypeScript 6.0 (typescript-eslint doesn't support 7), Prisma 7.10 (npm
