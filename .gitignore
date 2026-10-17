@@ -12,3 +12,5 @@ evals/golden/
 packages/db/src/generated/
 *.tsbuildinfo
 .cache/
+playwright-report/
+test-results/

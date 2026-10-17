@@ -27,9 +27,10 @@
     "eval": "tsx evals/src/cli.ts",
     "extract": "tsx packages/extraction/src/cli.ts",
     "eval:record": "tsx evals/src/cli.ts --stage all --live",
-    "dev": "concurrently -k -n api,worker -c blue,magenta \"pnpm --filter @reconcile/api dev\" \"pnpm --filter @reconcile/worker dev\"",
+    "dev": "concurrently -k -n api,worker,web -c blue,magenta,green \"pnpm --filter @reconcile/api dev\" \"pnpm --filter @reconcile/worker dev\" \"pnpm --filter @reconcile/web dev\"",
     "dev:api": "pnpm --filter @reconcile/api dev",
-    "dev:worker": "pnpm --filter @reconcile/worker dev"
+    "dev:worker": "pnpm --filter @reconcile/worker dev",
+    "dev:web": "pnpm --filter @reconcile/web dev"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

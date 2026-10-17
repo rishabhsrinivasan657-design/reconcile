@@ -1,0 +1,98 @@
+/*
+ * Design tokens: the only place raw colors live (docs/style-guide.md, M5 AC-8).
+ * Light on :root; dark for "system" viewers via the media query, and for an explicit choice via
+ * [data-theme]. Components use the names, never the values.
+ */
+:root {
+  --paper: #f6f2e9;
+  --sheet: #fbf9f4;
+  --raised: #ffffff;
+  --ink: #1c2321;
+  --ink-2: #535b57;
+  --ink-3: #6e746f;
+  --rule: #e3dbcb;
+  --rule-strong: #cdc2ac;
+  --accent: #0e5c58;
+  --accent-ink: #ffffff;
+  --accent-tint: #e0ece8;
+  --risk: #a13a28;
+  --risk-tint: #f5e2dc;
+  --caution: #8a5a00;
+  --caution-tint: #f4e8cc;
+  --settled: #3e6a2d;
+  --settled-tint: #e4edda;
+  --box: rgba(14, 92, 88, 0.9);
+  --box-fill: rgba(14, 92, 88, 0.14);
+  --box-unsure: rgba(176, 122, 18, 0.95);
+  --box-unsure-fill: rgba(244, 200, 100, 0.32);
+  --scrim: rgba(20, 22, 20, 0.42);
+  --shadow: 0 10px 30px rgba(40, 32, 16, 0.12), 0 2px 6px rgba(40, 32, 16, 0.08);
+
+  --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --radius-control: 6px;
+  --radius-card: 10px;
+  --fast: 120ms;
+  --panel: 200ms;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #121618;
+    --sheet: #191e20;
+    --raised: #20262a;
+    --ink: #ece7dc;
+    --ink-2: #aeb3ad;
+    --ink-3: #868c87;
+    --rule: #2a3134;
+    --rule-strong: #3a4246;
+    --accent: #63b9af;
+    --accent-ink: #0b1f1d;
+    --accent-tint: #16302d;
+    --risk: #e58b76;
+    --risk-tint: #3a1f19;
+    --caution: #ddb061;
+    --caution-tint: #33280f;
+    --settled: #9ac285;
+    --settled-tint: #1e2e17;
+    --box: rgba(99, 185, 175, 0.95);
+    --box-fill: rgba(99, 185, 175, 0.18);
+    --scrim: rgba(0, 0, 0, 0.55);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.3);
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --paper: #121618;
+  --sheet: #191e20;
+  --raised: #20262a;
+  --ink: #ece7dc;
+  --ink-2: #aeb3ad;
+  --ink-3: #868c87;
+  --rule: #2a3134;
+  --rule-strong: #3a4246;
+  --accent: #63b9af;
+  --accent-ink: #0b1f1d;
+  --accent-tint: #16302d;
+  --risk: #e58b76;
+  --risk-tint: #3a1f19;
+  --caution: #ddb061;
+  --caution-tint: #33280f;
+  --settled: #9ac285;
+  --settled-tint: #1e2e17;
+  --box: rgba(99, 185, 175, 0.95);
+  --box-fill: rgba(99, 185, 175, 0.18);
+  --scrim: rgba(0, 0, 0, 0.55);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.3);
+  color-scheme: dark;
+}
