@@ -1,0 +1,20 @@
+{
+  "name": "@reconcile/extraction",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^1.0.11",
+    "@reconcile/core": "workspace:*",
+    "@reconcile/db": "workspace:*",
+    "@reconcile/llm": "workspace:*",
+    "pdfjs-dist": "^6.4.299",
+    "zod": "^4.6.7"
+  }
+}
