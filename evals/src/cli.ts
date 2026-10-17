@@ -27,6 +27,8 @@ import {
   PROVIDERS,
   ReplayMiss,
   BudgetExceeded,
+  describeKeySource,
+  snapshotShellKeys,
   DailyBudgetExceeded,
   type Provider,
 } from '@reconcile/llm';
@@ -43,6 +45,7 @@ import { scoreExtraction, type ExtractInput } from './extract-score.ts';
 import { evalsDir, loadSubset, SUBSETS, type LoadedSet, type Subset } from './load.ts';
 import { score } from './score.ts';
 
+const shellKeys = snapshotShellKeys();
 const rootEnv = path.resolve(evalsDir, '../.env');
 if (fs.existsSync(rootEnv)) process.loadEnvFile(rootEnv);
 
@@ -172,6 +175,7 @@ if (stages.includes('extract') || stages.includes('e2e')) {
   const provider = (values.provider as Provider | undefined) ?? env.LLM_PROVIDER;
   const model = values.model ?? env.LLM_MODEL_EXTRACT;
   const sink = new MemorySink();
+  if (values.live) console.log(`key: ${describeKeySource(provider, shellKeys)}`);
   const llm = new LlmClient({
     env,
     provider,
