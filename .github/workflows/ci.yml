@@ -45,9 +45,17 @@ jobs:
         options: >-
           --health-cmd "pg_isready -U reconcile" --health-interval 2s
           --health-timeout 3s --health-retries 30
+      redis:
+        image: redis:8-alpine
+        ports: ['6379:6379']
+        options: >-
+          --health-cmd "redis-cli ping" --health-interval 2s
+          --health-timeout 3s --health-retries 30
     env:
       DATABASE_URL: postgresql://reconcile:reconcile@localhost:5432/reconcile_test
       DATABASE_URL_TEST: postgresql://reconcile:reconcile@localhost:5432/reconcile_test
+      REDIS_URL: redis://localhost:6379
+      REDIS_URL_TEST: redis://localhost:6379/1
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
