@@ -284,3 +284,29 @@ merges into `main` unless CI passes.
   turn red.
 
 **Remember:** design how you'll *judge* the work at the same time as the work itself.
+
+---
+
+## M2 · Implementation and testing (2026-10-17)
+
+**In one line:** build the matcher and the scoreboard, and let the scoreboard find bugs.
+
+**What we did:** 13 commits. The matching engine, the eval harness, near-miss
+test data, a saved baseline, a CI eval job, and a deliberately broken pull
+request to prove the gate fails.
+
+**Key ideas**
+- **The scoreboard found a bug on its first run.** Link recall was 95.5, not 100:
+  sets missing a document weren't getting their lines paired. Fixed in one commit.
+  Evals turn "I think it works" into a number that tells you where to look.
+- **A perfect score is a question, not a celebration.** 100 everywhere sounds great,
+  but the reason matters: perfect inputs, plus test data that never makes the
+  fuzzy step work hard. We wrote that down (B-16) instead of bragging about it.
+- **Stress testing.** We also ran 600 extra sets from new seeds to check the
+  result wasn't luck on 20 sets.
+- **Mutation testing (the red-path PR).** Breaking the code on purpose and watching
+  the tests fail proves the tests can actually catch problems.
+- **Don't absorb scope.** Harder fuzzy test data is a good idea, but it wasn't in
+  M2's requirements, so it went to the backlog for you to decide.
+
+**Remember:** a test that never fails might not be testing anything. Make it fail once on purpose.
