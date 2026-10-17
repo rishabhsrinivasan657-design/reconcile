@@ -1,11 +1,56 @@
-import { matchDocuments, type MatchResult } from '@reconcile/core';
+import type { LineRef, MatchResult } from '@reconcile/core';
 import { describe, expect, it } from 'vitest';
 import { compare } from './baseline.ts';
 import { loadSubset, SUBSETS } from './load.ts';
 import { score, type Scores } from './score.ts';
 
 const sets = loadSubset(SUBSETS.ci);
-const fresh = (): Promise<MatchResult> => matchDocuments(sets.flatMap((s) => s.docs));
+
+/**
+ * A perfect prediction built straight from the answer keys (not from the matcher, whose own
+ * accuracy varies), so these tests check the scorer and nothing else.
+ */
+async function fresh(): Promise<MatchResult> {
+  const ref = (setId: string, key?: string): LineRef | undefined => {
+    if (!key) return undefined;
+    const [role, n] = key.split(':');
+    return { docId: `${setId}/${role}`, lineNo: Number(n) };
+  };
+  const roleOf = { po: 'po', rr: 'rr', 'inv-1': 'invoice', 'inv-2': 'duplicate' } as const;
+  return {
+    unassigned: [],
+    groups: sets.map(({ truth }) => ({
+      poNumber: truth.poNumber,
+      notes: [],
+      documents: truth.documents.map((d) => ({
+        id: `${truth.setId}/${d.role}`,
+        role: roleOf[d.role as keyof typeof roleOf],
+      })),
+      lineMatches: truth.lineMatches.map((m) => ({
+        ...(m.po ? { po: ref(truth.setId, m.po)! } : {}),
+        ...(m.rr ? { rr: ref(truth.setId, m.rr)! } : {}),
+        ...(m.inv ? { inv: ref(truth.setId, m.inv)! } : {}),
+        method: 'SKU' as const,
+      })),
+      exceptions: truth.exceptions.map((e) => ({
+        type: e.type,
+        lines: e.lineKeys.map((k) => ref(truth.setId, k)!),
+        documentIds: e.documentRoles.map((r) => `${truth.setId}/${r}`),
+        ...(e.type === 'MISSING_DOCUMENT'
+          ? {
+              missing:
+                e.documentRoles[0] === 'inv-1'
+                  ? ('invoice' as const)
+                  : (e.documentRoles[0] as 'po' | 'rr'),
+            }
+          : {}),
+        amount: e.amount,
+        informational: e.informational,
+        explanation: 'from the answer key',
+      })),
+    })),
+  };
+}
 
 describe('scorer (M2 AC-11)', () => {
   it('a perfect prediction scores 100 everywhere', async () => {
