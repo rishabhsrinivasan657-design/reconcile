@@ -71,6 +71,17 @@ describe('retry (AC-2)', () => {
     expect(clock.slept).toEqual([3000, 3000, 3000, 3000]);
   });
 
+  it('does not retry a 429 that means no credits or quota left', async () => {
+    const fn = vi.fn(async () => {
+      throw Object.assign(
+        new Error('429 You have no credits remaining. Add credits to continue.'),
+        { status: 429 },
+      );
+    });
+    await expect(withRetry(fn, { clock: fakeClock() })).rejects.toThrow(/no credits/);
+    expect(fn).toHaveBeenCalledTimes(1);
+  });
+
   it('does not retry a 400', async () => {
     const fn = vi.fn(async () => {
       throw Object.assign(new Error('bad request'), { status: 400 });

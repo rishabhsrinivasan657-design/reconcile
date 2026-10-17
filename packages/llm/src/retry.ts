@@ -27,7 +27,15 @@ function retryAfterMs(err: unknown): number | undefined {
   return Number.isFinite(secs) ? secs * 1000 : undefined;
 }
 
+/** 429s that waiting won't fix: no credits, billing, or exhausted quota. */
+export function isPermanentQuotaError(err: unknown): boolean {
+  const e = err as { code?: unknown; error?: { code?: unknown }; message?: unknown };
+  const text = `${String(e?.code ?? '')} ${String(e?.error?.code ?? '')} ${String(e?.message ?? err)}`;
+  return /insufficient_quota|no credits|billing|exceeded your current quota/i.test(text);
+}
+
 export function isRetryable(err: unknown): boolean {
+  if (isPermanentQuotaError(err)) return false;
   const status = statusOf(err);
   if (status !== undefined) return status === 429 || status >= 500;
   const msg = String((err as Error)?.message ?? err);
