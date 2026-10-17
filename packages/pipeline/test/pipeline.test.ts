@@ -80,6 +80,20 @@ describe.skipIf(!hasInfra)('pipeline (M4)', () => {
     expect(await client.exception.count({ where: { type: 'MISSING_DOCUMENT' } })).toBe(1);
   });
 
+  it('a set with a document flagged for review is matched but provisional (AC-16)', async () => {
+    const { truth } = await ingest('S0010');
+    const doc = await client.document.findFirstOrThrow({ where: { type: 'INVOICE' } });
+    await client.extraction.updateMany({
+      where: { documentId: doc.id },
+      data: { needsReview: true },
+    });
+    const [outcome] = await matchPurchaseOrder(client, truth.poNumber, { graceDays: 7 });
+    expect(outcome).toMatchObject({ status: 'NEEDS_REVIEW', provisional: true });
+    const set = await client.documentSet.findUniqueOrThrow({ where: { poNumber: truth.poNumber } });
+    expect(set.provisional).toBe(true);
+    expect(await client.exception.count()).toBe(truth.exceptions.length);
+  });
+
   it('a human decision carries over to the next match run (AC-5)', async () => {
     const { truth } = await ingest('S0010');
     await matchPurchaseOrder(client, truth.poNumber, { graceDays: 7 });

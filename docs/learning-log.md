@@ -481,3 +481,30 @@ to-do list between them (queue), the AI matcher, and how we'll prove it all work
   the scoreboard can show whether the AI matcher earns its place.
 
 **Remember:** good systems assume things will fail (crashes, retries, bursts) and stay correct anyway.
+
+---
+
+## M4 · Building and testing (2026-10-17)
+
+**In one line:** turn the scripts into a service, and prove the service gives the same answers as the scoreboard.
+
+**What we did:** built the upload API, the background worker, a shared toolbox, the
+misread-PO fix, harder vendor-name test cases, and an AI line matcher. Then we tested the
+whole thing end to end.
+
+**Key ideas**
+- **Test the real path, not just the parts.** The strongest test uploads all 20 test sets
+  through the actual API, queue, and worker, and checks the answers match the scoreboard
+  exactly. If they didn't, the scoreboard would be measuring a toy.
+- **Make the test hard enough to mean something.** The first vendor names kept the brand, and
+  the simple word matcher still scored 100. A test that can't fail teaches nothing, so we made
+  it realistic (no brand), and the word matcher dropped to 89.5.
+- **Use AI only where it helps.** "Hybrid" lets the cheap word matcher handle the easy lines
+  and asks the AI only about the rest: 1 AI call instead of 3, same 100 score, every pair
+  explained.
+- **One fix, big effect.** Tolerating a one-character-off PO number (same vendor, flagged for
+  review) lifted the AI-read accuracy from 84/94 to 100/100.
+- **Guard your commits.** One commit went out with failing tests because a command didn't stop
+  on failure. Now commits only happen after the test run says "passed".
+
+**Remember:** a green test that can't turn red isn't evidence. Make sure your tests can fail.
