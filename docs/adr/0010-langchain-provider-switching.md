@@ -1,6 +1,6 @@
 # ADR-0010: LangChain.js for provider switching, under our own client
 
-- **Status:** Proposed
+- **Status:** Accepted (2026-10-17)
 - **Date:** 2026-10-17
 - **Supersedes:** the "own adapters per provider" part of [ADR-0002](0002-llm-provider-interface.md). Its cache, limiter, retry, validation, and logging decisions still stand.
 - **Requirements:** NFR-04, FR-18 · M3 AC-1, decision Q4

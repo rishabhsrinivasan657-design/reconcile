@@ -16,4 +16,4 @@ one and update the old one's status line.
 | [0007](0007-pdf-rendering-and-scans.md) | Render PDFs with pdfkit; scans via pdfjs + @napi-rs/canvas | Accepted |
 | [0008](0008-generator-truth-from-planted-errors.md) | Answer key from planted errors; curated data instead of Faker | Accepted |
 | [0009](0009-baseline-fuzzy-matcher.md) | Non-AI text-similarity matcher as the fuzzy baseline | Accepted |
-| [0010](0010-langchain-provider-switching.md) | LangChain.js for provider switching, under our own client | Proposed |
+| [0010](0010-langchain-provider-switching.md) | LangChain.js for provider switching, under our own client | Accepted |

@@ -1,6 +1,6 @@
 # M3: LLM client and extraction. Design
 
-- **Status:** Draft, awaiting approval at the M3 Design gate
+- **Status:** Approved (2026-10-17)
 - **Implements:** AC-1 … AC-17 from [`requirements.md`](requirements.md)
 - **New ADR:** [0010](../../adr/0010-langchain-provider-switching.md) (LangChain.js for provider switching)
 
