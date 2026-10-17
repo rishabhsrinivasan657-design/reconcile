@@ -19,6 +19,14 @@ describe('lint guardrails', () => {
     expect(rules).toContain('no-restricted-imports');
   });
 
+  it('blocks the generator in core and evals: the matcher is graded independently (ADR-0008)', async () => {
+    const code = "import { buildSet } from '@reconcile/generator';\nexport const b = buildSet;\n";
+    expect(await lint(code, 'packages/core/src/matching/bad.ts')).toContain(
+      'no-restricted-imports',
+    );
+    expect(await lint(code, 'evals/src/bad.ts')).toContain('no-restricted-imports');
+  });
+
   it('blocks wall clock and Math.random in the generator (ADR-0006)', async () => {
     const rules = await lint(
       'export const a = Math.random();\nexport const b = Date.now();\nexport const c = new Date();\n',
