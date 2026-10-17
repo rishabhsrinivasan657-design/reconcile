@@ -1,16 +1,54 @@
 {
-  "stage": "match",
-  "subset": "ci",
-  "sets": 20,
-  "generatorVersion": "0.3.0",
-  "metrics": {
-    "groupingAccuracy": 100,
-    "linkPrecision": 100,
-    "linkRecall": 100,
-    "linkF1": 100,
-    "exceptionPrecision": 100,
-    "exceptionRecall": 100,
-    "exceptionF1": 100,
-    "amountAccuracy": 100
+  "match": {
+    "stage": "match",
+    "subset": "ci",
+    "sets": 20,
+    "generatorVersion": "0.4.0",
+    "metrics": {
+      "groupingAccuracy": 100,
+      "linkPrecision": 100,
+      "linkRecall": 100,
+      "linkF1": 100,
+      "exceptionPrecision": 100,
+      "exceptionRecall": 100,
+      "exceptionF1": 100,
+      "amountAccuracy": 100
+    }
+  },
+  "extract": {
+    "stage": "extract",
+    "subset": "ci",
+    "sets": 20,
+    "generatorVersion": "0.4.0",
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "promptVersion": "extract.v2",
+    "metrics": {
+      "fieldPrecision": 99.87,
+      "fieldRecall": 99.87,
+      "fieldF1": 99.87,
+      "fieldF1Pdf": 99.95,
+      "fieldF1Scan": 99.69,
+      "docTypeAccuracy": 100
+    }
+  },
+  "e2e": {
+    "stage": "e2e",
+    "subset": "ci",
+    "sets": 20,
+    "generatorVersion": "0.4.0",
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "promptVersion": "extract.v2",
+    "metrics": {
+      "groupingAccuracy": 95,
+      "linkPrecision": 100,
+      "linkRecall": 94.89,
+      "linkF1": 97.38,
+      "exceptionPrecision": 84.21,
+      "exceptionRecall": 94.12,
+      "exceptionF1": 88.89,
+      "amountAccuracy": 100
+    }
   }
 }

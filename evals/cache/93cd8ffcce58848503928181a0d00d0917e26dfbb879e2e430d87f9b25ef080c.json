@@ -1,0 +1,565 @@
+{
+  "keyParts": ["d37c02493d15f5c79f72e74387e55d76a7ecc6f6df188bb5de58998850b6305f"],
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "promptVersion": "extract.v2",
+  "data": {
+    "docType": "RR",
+    "vendorName": {
+      "v": "Brookcrest Dairy Alternatives",
+      "c": 1,
+      "p": 1,
+      "b": [223, 88, 235, 247]
+    },
+    "docNumber": {
+      "v": "RCV-503536",
+      "c": 1,
+      "p": 1,
+      "b": [135, 88, 146, 161]
+    },
+    "poNumber": {
+      "v": "HP-PO-105945",
+      "c": 1,
+      "p": 1,
+      "b": [135, 367, 146, 456]
+    },
+    "date": {
+      "v": "2026-04-27",
+      "c": 1,
+      "p": 1,
+      "b": [135, 646, 146, 715]
+    },
+    "dueDate": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "lines": [
+      {
+        "sku": {
+          "v": "11077-06",
+          "c": 1,
+          "p": 1,
+          "b": [303, 88, 312, 139]
+        },
+        "description": {
+          "v": "Brookcrest Original Oat Milk, 32 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [303, 202, 314, 402]
+        },
+        "qty": {
+          "v": 4,
+          "c": 1,
+          "p": 1,
+          "b": [303, 904, 312, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [303, 791, 312, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "11081-06",
+          "c": 1,
+          "p": 1,
+          "b": [328, 88, 337, 139]
+        },
+        "description": {
+          "v": "Brookcrest Unsweetened Vanilla Almond Milk, 32 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [328, 202, 339, 497]
+        },
+        "qty": {
+          "v": 54,
+          "c": 1,
+          "p": 1,
+          "b": [328, 898, 337, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [328, 791, 337, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "11109-06",
+          "c": 1,
+          "p": 1,
+          "b": [353, 88, 362, 139]
+        },
+        "description": {
+          "v": "Brookcrest Barista Oat Milk, 32 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [353, 202, 364, 398]
+        },
+        "qty": {
+          "v": 20,
+          "c": 1,
+          "p": 1,
+          "b": [353, 898, 362, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [353, 791, 362, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "11266-06",
+          "c": 1,
+          "p": 1,
+          "b": [378, 88, 387, 139]
+        },
+        "description": {
+          "v": "Brookcrest Unsweetened Oat Milk, 64 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [378, 202, 389, 434]
+        },
+        "qty": {
+          "v": 60,
+          "c": 1,
+          "p": 1,
+          "b": [378, 898, 387, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [378, 791, 387, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "11284-06",
+          "c": 1,
+          "p": 1,
+          "b": [403, 88, 412, 139]
+        },
+        "description": {
+          "v": "Brookcrest Barista Oat Milk, 64 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [403, 202, 414, 398]
+        },
+        "qty": {
+          "v": 40,
+          "c": 1,
+          "p": 1,
+          "b": [403, 898, 412, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [403, 791, 412, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "11310-06",
+          "c": 1,
+          "p": 1,
+          "b": [428, 88, 437, 139]
+        },
+        "description": {
+          "v": "Brookcrest Original Oat Milk, 64 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [428, 202, 439, 402]
+        },
+        "qty": {
+          "v": 27,
+          "c": 1,
+          "p": 1,
+          "b": [428, 898, 437, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [428, 791, 437, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "11500-06",
+          "c": 1,
+          "p": 1,
+          "b": [453, 88, 462, 139]
+        },
+        "description": {
+          "v": "Brookcrest Unsweetened Oat Milk, 32 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [453, 202, 464, 434]
+        },
+        "qty": {
+          "v": 14,
+          "c": 1,
+          "p": 1,
+          "b": [453, 898, 462, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [453, 791, 462, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "11609-06",
+          "c": 1,
+          "p": 1,
+          "b": [478, 88, 487, 139]
+        },
+        "description": {
+          "v": "Brookcrest Chocolate Oat Milk, 32 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [478, 202, 489, 414]
+        },
+        "qty": {
+          "v": 50,
+          "c": 1,
+          "p": 1,
+          "b": [478, 898, 487, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [478, 791, 487, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "11625-06",
+          "c": 1,
+          "p": 1,
+          "b": [503, 88, 512, 139]
+        },
+        "description": {
+          "v": "Brookcrest Original Almond Milk, 32 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [503, 202, 514, 425]
+        },
+        "qty": {
+          "v": 51,
+          "c": 1,
+          "p": 1,
+          "b": [503, 898, 512, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [503, 791, 512, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "11731-06",
+          "c": 1,
+          "p": 1,
+          "b": [528, 88, 537, 139]
+        },
+        "description": {
+          "v": "Brookcrest Unsweetened Vanilla Almond Milk, 64 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [528, 202, 539, 497]
+        },
+        "qty": {
+          "v": 30,
+          "c": 1,
+          "p": 1,
+          "b": [528, 898, 537, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [528, 791, 537, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "11751-06",
+          "c": 1,
+          "p": 1,
+          "b": [553, 88, 562, 139]
+        },
+        "description": {
+          "v": "Brookcrest Vanilla Almond Milk, 64 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [553, 202, 564, 419]
+        },
+        "qty": {
+          "v": 9,
+          "c": 1,
+          "p": 1,
+          "b": [553, 904, 562, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [553, 791, 562, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "11808-06",
+          "c": 1,
+          "p": 1,
+          "b": [578, 88, 587, 139]
+        },
+        "description": {
+          "v": "Brookcrest Chocolate Oat Milk, 64 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [578, 202, 589, 414]
+        },
+        "qty": {
+          "v": 46,
+          "c": 1,
+          "p": 1,
+          "b": [578, 898, 587, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [578, 791, 587, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "11836-06",
+          "c": 1,
+          "p": 1,
+          "b": [603, 88, 612, 139]
+        },
+        "description": {
+          "v": "Brookcrest Vanilla Almond Milk, 32 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [603, 202, 614, 419]
+        },
+        "qty": {
+          "v": 54,
+          "c": 1,
+          "p": 1,
+          "b": [603, 898, 612, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [603, 791, 612, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      }
+    ],
+    "subtotal": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "tax": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "shipping": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "total": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    }
+  },
+  "usage": {
+    "inputTokens": 1575,
+    "outputTokens": 2394
+  },
+  "latencyMs": 8436,
+  "costUsd": 0.0064575
+}

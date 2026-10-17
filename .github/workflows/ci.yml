@@ -71,5 +71,5 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - name: Score matching against the committed answer keys (fails on a > 2 point drop)
-        run: pnpm eval --check-baseline
+      - name: Score match, extract, and e2e from recorded LLM answers (no key; fails on a > 2 point drop)
+        run: pnpm eval --stage all --check-baseline

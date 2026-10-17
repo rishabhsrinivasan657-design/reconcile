@@ -1,0 +1,109 @@
+{
+  "keyParts": ["bc4b6240d2d791769992eebb2f5977142e83883a750436d1f09201aba77b573d"],
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "promptVersion": "extract.v2",
+  "data": {
+    "docType": "RR",
+    "vendorName": {
+      "v": "TIDELINE BEVERAGE COMPANY",
+      "c": 1,
+      "p": 1,
+      "b": [197, 76, 206, 274]
+    },
+    "docNumber": {
+      "v": "RCV-500663",
+      "c": 1,
+      "p": 1,
+      "b": [127, 239, 135, 317]
+    },
+    "poNumber": {
+      "v": "HP-PO-104372",
+      "c": 1,
+      "p": 1,
+      "b": [124, 667, 132, 763]
+    },
+    "date": {
+      "v": "2026-07-12",
+      "c": 1,
+      "p": 1,
+      "b": [143, 239, 151, 324]
+    },
+    "dueDate": {
+      "v": null,
+      "c": 1,
+      "p": 1,
+      "b": null
+    },
+    "lines": [
+      {
+        "sku": {
+          "v": "TDLB12621",
+          "c": 1,
+          "p": 1,
+          "b": [283, 219, 292, 284]
+        },
+        "description": {
+          "v": "Tideline Orange Cold-Pressed Juice, 52 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [282, 333, 291, 657]
+        },
+        "qty": {
+          "v": 26,
+          "c": 1,
+          "p": 1,
+          "b": [283, 131, 291, 146]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [283, 159, 291, 175]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 1,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 1,
+          "p": 1,
+          "b": null
+        }
+      }
+    ],
+    "subtotal": {
+      "v": null,
+      "c": 1,
+      "p": 1,
+      "b": null
+    },
+    "tax": {
+      "v": null,
+      "c": 1,
+      "p": 1,
+      "b": null
+    },
+    "shipping": {
+      "v": null,
+      "c": 1,
+      "p": 1,
+      "b": null
+    },
+    "total": {
+      "v": null,
+      "c": 1,
+      "p": 1,
+      "b": null
+    }
+  },
+  "usage": {
+    "inputTokens": 3427,
+    "outputTokens": 1000
+  },
+  "latencyMs": 5683,
+  "costUsd": 0.0035281
+}

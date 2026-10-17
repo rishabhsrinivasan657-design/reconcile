@@ -329,3 +329,88 @@ request to prove the gate fails.
   (B-16), not about celebrating 100.
 
 **Remember:** a retro without a follow-up action is just a diary entry.
+
+---
+
+## M3 · Requirements (2026-10-17)
+
+**In one line:** let the AI read the documents, and plan how to trust (or distrust) what it reads.
+
+**What we did:** wrote 17 acceptance criteria covering a swappable AI client,
+document extraction with confidence and review flags, two new eval stages, and
+harder test data (B-16).
+
+**Key ideas**
+- **Never trust the AI blindly.** Every field gets a confidence score, and math checks
+  (qty × price = total) catch mistakes the AI won't admit. Doubtful documents go to a human.
+- **Measure the AI's effect in steps.** *Extract* scores reading alone. *E2E* scores
+  reading plus matching. Comparing E2E with the perfect-input *match* stage shows
+  exactly how much the AI's reading errors cost.
+- **Catch rate.** Of the fields the AI got wrong, how many did we flag for review?
+  A high catch rate means humans can trust the fields that *weren't* flagged.
+- **Free-tier engineering.** A cache, a rate limiter, and replay mode mean evals cost
+  nothing to re-run, and CI needs no secret key.
+- **Vendor independence.** One interface, four AI providers. Switching is a setting,
+  not a rewrite.
+
+**Remember:** an AI system is only as good as your ability to tell when it's wrong.
+
+---
+
+## M3 · Design (2026-10-17)
+
+**In one line:** wrap the AI in our own safety layers, and let a framework handle only the provider details.
+
+**What we did:** designed the LLM client (LangChain.js underneath; our cache,
+rate limiter, retries, and cost log on top), the extraction steps, the new eval
+metrics, and wrote ADR-0010.
+
+**Key ideas**
+- **Superseding a decision.** We changed ADR-0002's "write our own adapters" to
+  "use LangChain" (ADR-0010). The old ADR isn't erased; its status line points to
+  the new one, so the history of *why* stays readable.
+- **Thin framework, thick guarantees.** LangChain only talks to providers. What
+  makes the project free, reproducible, and measurable is our code around it, so
+  swapping frameworks later touches one file.
+- **Check facts that change.** Model names, prices, and free-tier limits change
+  often. We checked Google's pricing page today and made limits settings instead
+  of hard-coding guesses.
+- **Decide with data.** Flash-Lite (cheaper) vs. Flash (smarter): we'll run both on
+  the same 20 sets and let the scoreboard choose.
+- **Secrets hygiene.** API keys live only in your local `.env`, never in chat, git,
+  or logs, and a test checks that no key-like text leaks into results.
+
+**Remember:** the AI is a component. Your guarantees come from the system around it.
+
+**Update (same day): changing course at a gate.** You chose OpenAI (your $5 credit)
+over Gemini's free tier. That breaks the original "$0" rule, so we didn't just switch.
+We updated the rule itself (CLAUDE.md, PRD NFR-01) and added a **hard spending cap**
+in code. A good change is written down and guarded, not slipped in.
+
+---
+
+## M3 · Implementation and testing (2026-10-17)
+
+**In one line:** connect a real AI, let the scoreboard show what breaks, and fix it one measured step at a time.
+
+**What we did:** built the AI client and extraction, switched providers twice when
+reality got in the way, recorded 60 real answers, and raised reading accuracy from
+55.8 to 99.9.
+
+**Key ideas**
+- **Real systems fail in boring ways.** It wasn't "the AI is dumb". It was a number sent
+  as text, a date copied as printed, an answer cut off, a field put in the neighboring box.
+  *Be lenient about format, strict about meaning.*
+- **Measure, fix, re-measure.** Each fix was chosen by the scoreboard and confirmed by it
+  (55.8 → 93.7 → 95.5 → 97.9 → 99.9). No guessing.
+- **Self-check loops.** When the AI's lines didn't add up to the printed subtotal, we showed
+  it the evidence and asked again. Grounding a retry in a *fact* works better than "try harder".
+- **Vendor reality.** Credits run out and free tiers have hidden limits (Groq's output cap).
+  Because providers sit behind one interface, each switch was a setting plus a small adapter
+  fix, not a rewrite.
+- **Confident and wrong is the hardest error.** Three remaining mistakes had high confidence
+  and passed every check. Knowing that, and writing it down, is part of being trustworthy.
+- **Secrets hygiene, for real.** Keys pasted in chat were treated as exposed. A global key in
+  `~/.zshrc` silently overrode `.env`, so now the tools say which source they used.
+
+**Remember:** your first live run is a measurement, not a verdict.

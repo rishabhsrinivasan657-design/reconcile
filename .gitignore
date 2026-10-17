@@ -11,3 +11,4 @@ evals/results/
 evals/golden/
 packages/db/src/generated/
 *.tsbuildinfo
+.cache/

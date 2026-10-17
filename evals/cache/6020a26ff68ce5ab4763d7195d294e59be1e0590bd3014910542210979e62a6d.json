@@ -1,0 +1,527 @@
+{
+  "keyParts": ["0f5b34fd13322826f411226a0367bbded4ffdc6dbabde5773a10ea4c105fccc1"],
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "promptVersion": "extract.v2",
+  "data": {
+    "docType": "RR",
+    "vendorName": {
+      "v": "NORTHFIELD FROZEN FOODS",
+      "c": 1,
+      "p": 1,
+      "b": [196, 81, 202, 263]
+    },
+    "docNumber": {
+      "v": "RCV-500288",
+      "c": 1,
+      "p": 1,
+      "b": [127, 245, 133, 323]
+    },
+    "poNumber": {
+      "v": "HP-PO-104157",
+      "c": 1,
+      "p": 1,
+      "b": [127, 674, 133, 767]
+    },
+    "date": {
+      "v": "2026-03-27",
+      "c": 1,
+      "p": 1,
+      "b": [141, 246, 148, 331]
+    },
+    "dueDate": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "lines": [
+      {
+        "sku": {
+          "v": "NR-19005",
+          "c": 1,
+          "p": 1,
+          "b": [282, 221, 289, 280]
+        },
+        "description": {
+          "v": "Northfield Breakfast Frozen Burrito, 6 oz",
+          "c": 1,
+          "p": 1,
+          "b": [282, 336, 290, 639]
+        },
+        "qty": {
+          "v": 18,
+          "c": 1,
+          "p": 1,
+          "b": [282, 136, 289, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [282, 163, 289, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "NR-19067",
+          "c": 1,
+          "p": 1,
+          "b": [297, 221, 303, 280]
+        },
+        "description": {
+          "v": "Northfield Teriyaki Veggie Fried Rice, 16 oz",
+          "c": 1,
+          "p": 1,
+          "b": [296, 336, 304, 660]
+        },
+        "qty": {
+          "v": 23,
+          "c": 1,
+          "p": 1,
+          "b": [297, 136, 303, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [297, 163, 303, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "NR-19079",
+          "c": 1,
+          "p": 1,
+          "b": [311, 222, 318, 280]
+        },
+        "description": {
+          "v": "Northfield Steak Fajita Frozen Burrito, 6 oz",
+          "c": 1,
+          "p": 1,
+          "b": [311, 336, 319, 660]
+        },
+        "qty": {
+          "v": 28,
+          "c": 1,
+          "p": 1,
+          "b": [311, 136, 318, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [311, 163, 318, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "NR-19125",
+          "c": 1,
+          "p": 1,
+          "b": [326, 222, 333, 280]
+        },
+        "description": {
+          "v": "Northfield Spicy Kimchi Veggie Fried Rice, 32 oz",
+          "c": 1,
+          "p": 1,
+          "b": [326, 336, 334, 689]
+        },
+        "qty": {
+          "v": 32,
+          "c": 1,
+          "p": 1,
+          "b": [326, 136, 333, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [326, 163, 333, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "NR-19152",
+          "c": 1,
+          "p": 1,
+          "b": [341, 221, 348, 280]
+        },
+        "description": {
+          "v": "Northfield Original Veggie Fried Rice, 32 oz",
+          "c": 1,
+          "p": 1,
+          "b": [341, 336, 348, 660]
+        },
+        "qty": {
+          "v": 31,
+          "c": 1,
+          "p": 1,
+          "b": [341, 136, 348, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [341, 163, 348, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "NR-19263",
+          "c": 1,
+          "p": 1,
+          "b": [355, 221, 362, 280]
+        },
+        "description": {
+          "v": "Northfield Steak Fajita Frozen Burrito, 6 oz 8-pk",
+          "c": 1,
+          "p": 1,
+          "b": [355, 336, 363, 696]
+        },
+        "qty": {
+          "v": 45,
+          "c": 1,
+          "p": 1,
+          "b": [355, 136, 362, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [355, 163, 362, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "NR-19325",
+          "c": 1,
+          "p": 1,
+          "b": [370, 221, 377, 280]
+        },
+        "description": {
+          "v": "Northfield Chicken Verde Frozen Burrito, 6 oz 8-pk",
+          "c": 1,
+          "p": 1,
+          "b": [370, 336, 378, 704]
+        },
+        "qty": {
+          "v": 34,
+          "c": 1,
+          "p": 1,
+          "b": [370, 136, 377, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [370, 163, 377, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "NR-19475",
+          "c": 1,
+          "p": 1,
+          "b": [384, 221, 391, 280]
+        },
+        "description": {
+          "v": "Northfield Breakfast Frozen Burrito, 6 oz 8-pk",
+          "c": 1,
+          "p": 1,
+          "b": [384, 336, 392, 676]
+        },
+        "qty": {
+          "v": 38,
+          "c": 1,
+          "p": 1,
+          "b": [384, 136, 391, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [384, 163, 391, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "NR-19498",
+          "c": 1,
+          "p": 1,
+          "b": [399, 222, 406, 280]
+        },
+        "description": {
+          "v": "Northfield Chicken Verde Frozen Burrito, 6 oz",
+          "c": 1,
+          "p": 1,
+          "b": [399, 336, 406, 666]
+        },
+        "qty": {
+          "v": 31,
+          "c": 1,
+          "p": 1,
+          "b": [399, 136, 406, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [399, 163, 406, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "NR-19699",
+          "c": 1,
+          "p": 1,
+          "b": [414, 222, 420, 280]
+        },
+        "description": {
+          "v": "Northfield Spicy Kimchi Veggie Fried Rice, 16 oz",
+          "c": 1,
+          "p": 1,
+          "b": [414, 336, 421, 689]
+        },
+        "qty": {
+          "v": 44,
+          "c": 1,
+          "p": 1,
+          "b": [414, 136, 420, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [414, 163, 420, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "NR-19830",
+          "c": 1,
+          "p": 1,
+          "b": [428, 221, 435, 280]
+        },
+        "description": {
+          "v": "Northfield Bean & Cheese Frozen Burrito, 6 oz",
+          "c": 1,
+          "p": 1,
+          "b": [428, 336, 435, 666]
+        },
+        "qty": {
+          "v": 36,
+          "c": 1,
+          "p": 1,
+          "b": [428, 136, 435, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [428, 163, 435, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "NR-19863",
+          "c": 1,
+          "p": 1,
+          "b": [443, 222, 449, 280]
+        },
+        "description": {
+          "v": "Northfield Bean & Cheese Frozen Burrito, 6 oz 8-pk",
+          "c": 1,
+          "p": 1,
+          "b": [443, 336, 450, 704]
+        },
+        "qty": {
+          "v": 7,
+          "c": 1,
+          "p": 1,
+          "b": [443, 143, 449, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [443, 163, 449, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      }
+    ],
+    "subtotal": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "tax": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "shipping": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "total": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    }
+  },
+  "usage": {
+    "inputTokens": 1575,
+    "outputTokens": 2168
+  },
+  "latencyMs": 5909,
+  "costUsd": 0.0058925
+}

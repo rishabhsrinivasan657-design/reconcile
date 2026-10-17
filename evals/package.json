@@ -8,6 +8,8 @@
     "typecheck": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@reconcile/core": "workspace:*"
+    "@reconcile/core": "workspace:*",
+    "@reconcile/extraction": "workspace:*",
+    "@reconcile/llm": "workspace:*"
   }
 }

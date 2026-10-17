@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "setId": "S0064",
   "seed": 42,
-  "generatorVersion": "0.3.0",
+  "generatorVersion": "0.4.0",
   "poNumber": "HP-PO-105081",
   "vendorCode": "BRKC",
   "documents": [

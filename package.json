@@ -24,7 +24,9 @@
     "generate": "tsx packages/generator/src/cli.ts",
     "generate:ci": "tsx packages/generator/src/cli.ts --ci",
     "generate:samples": "tsx packages/generator/src/samples.ts",
-    "eval": "tsx evals/src/cli.ts"
+    "eval": "tsx evals/src/cli.ts",
+    "extract": "tsx packages/extraction/src/cli.ts",
+    "eval:record": "tsx evals/src/cli.ts --stage all --live"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

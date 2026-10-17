@@ -1,0 +1,299 @@
+{
+  "keyParts": ["67a26ea6374ceef3bbcbf6485a73a3e68ab71430c0dbe0d584aaae0783b8ddb8"],
+  "provider": "gemini",
+  "model": "gemini-3.8-flash",
+  "promptVersion": "extract.v2",
+  "data": {
+    "docType": "RR",
+    "vendorName": {
+      "v": "Tideline Beverage Company",
+      "c": 1,
+      "p": 1,
+      "b": [222, 88, 235, 240]
+    },
+    "docNumber": {
+      "v": "RCV-500041",
+      "c": 1,
+      "p": 1,
+      "b": [135, 88, 145, 162]
+    },
+    "poNumber": {
+      "v": "HP-PO-104024",
+      "c": 1,
+      "p": 1,
+      "b": [135, 366, 145, 456]
+    },
+    "date": {
+      "v": "2026-03-24",
+      "c": 1,
+      "p": 1,
+      "b": [135, 646, 145, 716]
+    },
+    "dueDate": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "lines": [
+      {
+        "sku": {
+          "v": "TDLB12028",
+          "c": 1,
+          "p": 1,
+          "b": [302, 89, 311, 152]
+        },
+        "description": {
+          "v": "Tideline Green Apple Cold-Pressed Juice, 12 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [302, 202, 314, 470]
+        },
+        "qty": {
+          "v": 38,
+          "c": 1,
+          "p": 1,
+          "b": [302, 899, 311, 912]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [302, 790, 311, 805]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "TDLB12092",
+          "c": 1,
+          "p": 1,
+          "b": [328, 89, 337, 151]
+        },
+        "description": {
+          "v": "Tideline Grapefruit Sparkling Water, 12 fl oz 12-pk",
+          "c": 1,
+          "p": 1,
+          "b": [327, 202, 339, 472]
+        },
+        "qty": {
+          "v": 17,
+          "c": 1,
+          "p": 1,
+          "b": [328, 899, 337, 911]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [328, 790, 337, 805]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "TDLB12286",
+          "c": 1,
+          "p": 1,
+          "b": [353, 89, 362, 152]
+        },
+        "description": {
+          "v": "Tideline Carrot Ginger Cold-Pressed Juice, 52 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [353, 202, 364, 476]
+        },
+        "qty": {
+          "v": 32,
+          "c": 1,
+          "p": 1,
+          "b": [353, 899, 362, 912]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [353, 790, 362, 805]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "TDLB12394",
+          "c": 1,
+          "p": 1,
+          "b": [379, 89, 387, 151]
+        },
+        "description": {
+          "v": "Tideline Lime Sparkling Water, 12 fl oz 12-pk",
+          "c": 1,
+          "p": 1,
+          "b": [378, 202, 390, 443]
+        },
+        "qty": {
+          "v": 27,
+          "c": 1,
+          "p": 1,
+          "b": [379, 899, 387, 912]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [378, 790, 388, 806]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "TDLB12541",
+          "c": 1,
+          "p": 1,
+          "b": [404, 89, 413, 151]
+        },
+        "description": {
+          "v": "Tideline Black Cherry Sparkling Water, 12 fl oz 8-pk",
+          "c": 1,
+          "p": 1,
+          "b": [404, 202, 415, 480]
+        },
+        "qty": {
+          "v": 4,
+          "c": 1,
+          "p": 1,
+          "b": [404, 905, 413, 912]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [404, 790, 413, 805]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "TDLB12621",
+          "c": 1,
+          "p": 1,
+          "b": [429, 89, 438, 150]
+        },
+        "description": {
+          "v": "Tideline Orange Cold-Pressed Juice, 52 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [429, 202, 440, 443]
+        },
+        "qty": {
+          "v": 56,
+          "c": 1,
+          "p": 1,
+          "b": [429, 899, 438, 912]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [429, 790, 438, 805]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      }
+    ],
+    "subtotal": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "tax": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "shipping": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "total": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    }
+  },
+  "usage": {
+    "inputTokens": 1575,
+    "outputTokens": 1509
+  },
+  "latencyMs": 116495,
+  "costUsd": 0.00684
+}

@@ -1,6 +1,6 @@
 import { matchDocuments, type MatchResult } from '@reconcile/core';
 import { describe, expect, it } from 'vitest';
-import { compare, type Baseline } from './baseline.ts';
+import { compare } from './baseline.ts';
 import { loadSubset, SUBSETS } from './load.ts';
 import { score, type Scores } from './score.ts';
 
@@ -62,7 +62,7 @@ describe('scorer (M2 AC-11)', () => {
 });
 
 describe('baseline gate (M2 AC-12)', () => {
-  const metrics: Scores = {
+  const metrics: Scores & Record<string, number> = {
     groupingAccuracy: 100,
     linkPrecision: 99,
     linkRecall: 98,
@@ -72,25 +72,19 @@ describe('baseline gate (M2 AC-12)', () => {
     exceptionF1: 96,
     amountAccuracy: 100,
   };
-  const baseline: Baseline = {
-    stage: 'match',
-    subset: 'ci',
-    sets: 20,
-    generatorVersion: 't',
-    metrics,
-  };
 
   it('a drop of exactly 2.0 points passes; 2.1 fails; a rise passes', () => {
     const at = (delta: number) =>
-      compare({ ...metrics, exceptionRecall: metrics.exceptionRecall + delta }, baseline).find(
-        (c) => c.metric === 'exceptionRecall',
-      )!.failed;
+      compare(
+        { ...metrics, exceptionRecall: metrics.exceptionRecall + delta },
+        { ...metrics },
+      ).find((c) => c.metric === 'exceptionRecall')!.failed;
     expect(at(-2.0)).toBe(false);
     expect(at(-2.1)).toBe(true);
     expect(at(+3)).toBe(false);
   });
 
   it('with no baseline nothing fails', () => {
-    expect(compare(metrics, undefined).some((c) => c.failed)).toBe(false);
+    expect(compare({ ...metrics }, undefined).some((c) => c.failed)).toBe(false);
   });
 });

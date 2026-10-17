@@ -13,10 +13,14 @@ well-tested, measurable, and honest about what the AI does and doesn't do.
 ## Hard constraints (do not violate without asking)
 
 1. **$0 to build and run.** Everything runs locally via Docker Compose
-   (Postgres, Redis). No paid SaaS, no paid APIs, no hosted vector DBs.
-2. **LLM = Google Gemini API free tier** (Flash / Flash-Lite) by default,
-   behind a provider interface. Switch providers with an env var:
-   `LLM_PROVIDER=gemini|anthropic|openai|ollama`. Model IDs come from env too
+   (Postgres, Redis). No paid SaaS, no hosted vector DBs. Paid LLM providers
+   (e.g. the owner's OpenAI credit) are optional and guarded by a hard spending
+   cap (`LLM_BUDGET_USD`, default 4.00). CI never spends: it replays recorded responses.
+2. **LLM = Gemini free tier, `gemini-3.5-flash-lite` by default** (decided
+   2026-10-17, after OpenAI had no credit and Groq's free vision model capped
+   output at 1K tokens/min), behind a provider interface. Groq, OpenAI,
+   Anthropic, and Ollama are supported alternatives. Switch providers with an env var:
+   `LLM_PROVIDER=groq|openai|gemini|anthropic|ollama`. Model IDs come from env too
    (`LLM_MODEL_EXTRACT`, `LLM_MODEL_MATCH`). Never hardcode them in logic.
 3. **Assume tight rate limits.** Every LLM call goes through the shared
    client, which provides:
@@ -182,7 +186,9 @@ pnpm generate --seed 42 --sets 100 --out evals/golden
 pnpm generate:ci                   # rebuild committed evals/golden-ci (20 sets)
 pnpm lint | typecheck | test | format
 pnpm docs:diagrams | docs:check
-pnpm eval [--check-baseline | --update-baseline]
+pnpm eval [--stage match|extract|e2e|all] [--check-baseline | --update-baseline]
+pnpm eval:record                   # live LLM run on the CI subset (writes evals/cache)
+pnpm extract <file.pdf|png>        # read one document with the LLM
 # later: pnpm dev, pnpm test:e2e
 ```
 

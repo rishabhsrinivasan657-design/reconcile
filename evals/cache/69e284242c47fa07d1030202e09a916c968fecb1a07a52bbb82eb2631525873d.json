@@ -1,0 +1,147 @@
+{
+  "keyParts": ["5785e79ebd4ace5e3c06f737bb43909e5eee2a4dd8ce2f8f3d6a877de2260e53"],
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "promptVersion": "extract.v2",
+  "data": {
+    "docType": "RR",
+    "vendorName": {
+      "v": "BROOKCREST DAIRY ALTERNATIVES",
+      "c": 1,
+      "p": 1,
+      "b": [197, 76, 206, 306]
+    },
+    "docNumber": {
+      "v": "RCV-501966",
+      "c": 1,
+      "p": 1,
+      "b": [127, 239, 135, 317]
+    },
+    "poNumber": {
+      "v": "HP-PO-105081",
+      "c": 1,
+      "p": 1,
+      "b": [124, 667, 131, 760]
+    },
+    "date": {
+      "v": "2026-09-11",
+      "c": 1,
+      "p": 1,
+      "b": [143, 239, 150, 325]
+    },
+    "dueDate": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "lines": [
+      {
+        "sku": {
+          "v": "11081-06",
+          "c": 1,
+          "p": 1,
+          "b": [283, 219, 290, 277]
+        },
+        "description": {
+          "v": "Brookcrest Unsweetened Vanilla Almond Milk, 32 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [281, 332, 291, 722]
+        },
+        "qty": {
+          "v": 9,
+          "c": 1,
+          "p": 1,
+          "b": [283, 141, 290, 148]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [283, 161, 290, 175]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "11266-06",
+          "c": 1,
+          "p": 1,
+          "b": [299, 218, 306, 277]
+        },
+        "description": {
+          "v": "Brookcrest Unsweetened Oat Milk, 64 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [297, 333, 306, 635]
+        },
+        "qty": {
+          "v": 25,
+          "c": 1,
+          "p": 1,
+          "b": [299, 134, 306, 146]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [299, 160, 306, 174]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      }
+    ],
+    "subtotal": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "tax": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "shipping": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "total": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    }
+  },
+  "usage": {
+    "inputTokens": 1575,
+    "outputTokens": 724
+  },
+  "latencyMs": 4016,
+  "costUsd": 0.0022825
+}

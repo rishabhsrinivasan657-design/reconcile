@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "setId": "S0083",
   "seed": 42,
-  "generatorVersion": "0.3.0",
+  "generatorVersion": "0.4.0",
   "poNumber": "HP-PO-105400",
   "vendorCode": "ASHP",
   "documents": [
@@ -1922,7 +1922,7 @@
                 0.4118,
                 0.4309
               ],
-              "value": "Ashpoint Recycled 2-Ply Bath Tissue, 24 roll"
+              "value": "Ashpoint Rceycled 2-Ply Bath Tissue, 24 roll"
             },
             "qty": {
               "page": 1,
@@ -2707,7 +2707,7 @@
                 0.4118,
                 0.4309
               ],
-              "value": "Ashpoint Recycled 2-Ply Bath Tissue, 24 roll"
+              "value": "Ashpoint Rceycled 2-Ply Bath Tissue, 24 roll"
             },
             "qty": {
               "page": 1,
@@ -2991,7 +2991,10 @@
         "inv-1:10"
       ],
       "details": {
-        "sku": "ASHP24713"
+        "sku": "ASHP24713",
+        "linesWithoutSku": 1,
+        "reworded": 1,
+        "primaryReworded": "Ashpoint Rceycled 2-Ply Bath Tissue, 24 roll"
       }
     },
     {

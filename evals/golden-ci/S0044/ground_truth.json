@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "setId": "S0044",
   "seed": 42,
-  "generatorVersion": "0.3.0",
+  "generatorVersion": "0.4.0",
   "poNumber": "HP-PO-104737",
   "vendorCode": "BLWT",
   "documents": [
@@ -1372,7 +1372,7 @@
                 0.7941,
                 0.3901
               ],
-              "value": "46.37"
+              "value": "46.14"
             },
             "lineTotal": {
               "page": 1,
@@ -1382,7 +1382,7 @@
                 0.9118,
                 0.3901
               ],
-              "value": "1762.06"
+              "value": "1753.32"
             }
           },
           {
@@ -1584,7 +1584,7 @@
                 0.5682,
                 0.4911
               ],
-              "value": "Bluewater Smoked Pink Salmon, 6 oz"
+              "value": "Bluewater Pink Salmon Smoked, 6 oz"
             },
             "qty": {
               "page": 1,
@@ -1699,7 +1699,7 @@
             0.9118,
             0.5515
           ],
-          "value": "15707.39"
+          "value": "15698.65"
         },
         "tax": {
           "page": 1,
@@ -1709,7 +1709,7 @@
             0.9118,
             0.5742
           ],
-          "value": "785.37"
+          "value": "784.93"
         },
         "shipping": {
           "page": 1,
@@ -1729,7 +1729,7 @@
             0.9118,
             0.6197
           ],
-          "value": "16517.76"
+          "value": "16508.58"
         }
       }
     }
@@ -1833,7 +1833,10 @@
         "inv-1:8"
       ],
       "details": {
-        "sku": "20241-12"
+        "sku": "20241-12",
+        "linesWithoutSku": 1,
+        "reworded": 1,
+        "primaryReworded": "Bluewater Pink Salmon Smoked, 6 oz"
       }
     },
     {
@@ -1845,7 +1848,7 @@
       ],
       "details": {
         "poPrice": "46.21",
-        "invoicePrice": "46.37"
+        "invoicePrice": "46.14"
       }
     }
   ]

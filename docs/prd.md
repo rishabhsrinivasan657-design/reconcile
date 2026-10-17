@@ -134,7 +134,7 @@ IDs are stable. Design docs, tests, and PRs reference them.
 
 | ID | Requirement |
 |---|---|
-| NFR-01 Cost | $0 to build and run locally. No paid services. |
+| NFR-01 Cost | $0 to build and run locally (default LLM: Gemini free tier). Paid providers are optional and capped by a hard budget guard ($4 default). CI never spends. |
 | NFR-02 Portability | `docker compose up` plus documented `pnpm` commands work on a clean macOS/Linux machine. |
 | NFR-03 Rate limits | The system works within Gemini free-tier limits: queueing, backoff, and a response cache keyed by doc hash + prompt version + model. |
 | NFR-04 Swappable LLM | A provider is chosen by env var (Gemini, Ollama, Anthropic, OpenAI) with no code changes. |

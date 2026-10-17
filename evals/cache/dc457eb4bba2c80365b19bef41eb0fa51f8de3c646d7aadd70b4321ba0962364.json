@@ -1,0 +1,527 @@
+{
+  "keyParts": ["48e18e21aca5f792e90abbc7cecebf81c359f6dd083a98238c2dde2795dd6bed"],
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "promptVersion": "extract.v2",
+  "data": {
+    "docType": "RR",
+    "vendorName": {
+      "v": "LUMEN HOME CARE",
+      "c": 1,
+      "p": 1,
+      "b": [196, 81, 204, 200]
+    },
+    "docNumber": {
+      "v": "RCV-500185",
+      "c": 1,
+      "p": 1,
+      "b": [127, 244, 133, 322]
+    },
+    "poNumber": {
+      "v": "HP-PO-104099",
+      "c": 1,
+      "p": 1,
+      "b": [126, 672, 133, 766]
+    },
+    "date": {
+      "v": "2026-03-25",
+      "c": 1,
+      "p": 1,
+      "b": [141, 245, 149, 331]
+    },
+    "dueDate": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "lines": [
+      {
+        "sku": {
+          "v": "LM-16067",
+          "c": 1,
+          "p": 1,
+          "b": [283, 222, 291, 280]
+        },
+        "description": {
+          "v": "Lumen Lemon Dish Soap, 44 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [283, 336, 291, 564]
+        },
+        "qty": {
+          "v": 24,
+          "c": 1,
+          "p": 1,
+          "b": [283, 136, 290, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [283, 163, 290, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "LM-16092",
+          "c": 1,
+          "p": 1,
+          "b": [298, 222, 305, 280]
+        },
+        "description": {
+          "v": "Lumen Grapefruit Dish Soap, 22 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [297, 336, 306, 602]
+        },
+        "qty": {
+          "v": 19,
+          "c": 1,
+          "p": 1,
+          "b": [298, 136, 305, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [298, 163, 305, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "LM-16115",
+          "c": 1,
+          "p": 1,
+          "b": [313, 222, 320, 280]
+        },
+        "description": {
+          "v": "Lumen Grapefruit Dish Soap, 44 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [312, 336, 321, 602]
+        },
+        "qty": {
+          "v": 42,
+          "c": 1,
+          "p": 1,
+          "b": [313, 136, 320, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [313, 163, 320, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "LM-16171",
+          "c": 1,
+          "p": 1,
+          "b": [328, 222, 335, 280]
+        },
+        "description": {
+          "v": "Lumen Free & Clear Laundry Detergent, 64 loads",
+          "c": 1,
+          "p": 1,
+          "b": [327, 336, 336, 675]
+        },
+        "qty": {
+          "v": 56,
+          "c": 1,
+          "p": 1,
+          "b": [328, 136, 335, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [328, 163, 335, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "LM-16197",
+          "c": 1,
+          "p": 1,
+          "b": [342, 222, 349, 280]
+        },
+        "description": {
+          "v": "Lumen Citrus All-Purpose Cleaner, 32 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [342, 336, 350, 645]
+        },
+        "qty": {
+          "v": 36,
+          "c": 1,
+          "p": 1,
+          "b": [342, 136, 349, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [342, 163, 349, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "LM-16309",
+          "c": 1,
+          "p": 1,
+          "b": [357, 222, 364, 280]
+        },
+        "description": {
+          "v": "Lumen Free & Clear Dish Soap, 22 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [357, 336, 365, 617]
+        },
+        "qty": {
+          "v": 50,
+          "c": 1,
+          "p": 1,
+          "b": [357, 136, 364, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [357, 163, 364, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "LM-16321",
+          "c": 1,
+          "p": 1,
+          "b": [372, 222, 379, 280]
+        },
+        "description": {
+          "v": "Lumen Fresh Linen Laundry Detergent, 64 loads",
+          "c": 1,
+          "p": 1,
+          "b": [372, 336, 380, 666]
+        },
+        "qty": {
+          "v": 53,
+          "c": 1,
+          "p": 1,
+          "b": [372, 136, 379, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [372, 163, 379, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "LM-16397",
+          "c": 1,
+          "p": 1,
+          "b": [387, 222, 394, 280]
+        },
+        "description": {
+          "v": "Lumen Lavender All-Purpose Cleaner, 32 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [387, 336, 394, 660]
+        },
+        "qty": {
+          "v": 54,
+          "c": 1,
+          "p": 1,
+          "b": [387, 136, 394, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [387, 163, 394, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "LM-16424",
+          "c": 1,
+          "p": 1,
+          "b": [402, 222, 409, 280]
+        },
+        "description": {
+          "v": "Lumen Free & Clear Dish Soap, 44 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [402, 336, 410, 617]
+        },
+        "qty": {
+          "v": 51,
+          "c": 1,
+          "p": 1,
+          "b": [402, 136, 409, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [402, 163, 409, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "LM-16684",
+          "c": 1,
+          "p": 1,
+          "b": [417, 222, 424, 280]
+        },
+        "description": {
+          "v": "Lumen Lavender All-Purpose Cleaner, 128 fl oz refill",
+          "c": 1,
+          "p": 1,
+          "b": [416, 336, 425, 718]
+        },
+        "qty": {
+          "v": 5,
+          "c": 1,
+          "p": 1,
+          "b": [417, 143, 424, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [417, 163, 424, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "LM-16861",
+          "c": 1,
+          "p": 1,
+          "b": [431, 222, 438, 280]
+        },
+        "description": {
+          "v": "Lumen Unscented All-Purpose Cleaner, 32 fl oz",
+          "c": 1,
+          "p": 1,
+          "b": [431, 336, 439, 666]
+        },
+        "qty": {
+          "v": 33,
+          "c": 1,
+          "p": 1,
+          "b": [431, 136, 438, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [431, 163, 438, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "LM-16885",
+          "c": 1,
+          "p": 1,
+          "b": [446, 222, 453, 280]
+        },
+        "description": {
+          "v": "Lumen Unscented All-Purpose Cleaner, 128 fl oz refill",
+          "c": 1,
+          "p": 1,
+          "b": [446, 336, 454, 726]
+        },
+        "qty": {
+          "v": 57,
+          "c": 1,
+          "p": 1,
+          "b": [446, 136, 453, 150]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [446, 163, 453, 178]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      }
+    ],
+    "subtotal": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "tax": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "shipping": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "total": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    }
+  },
+  "usage": {
+    "inputTokens": 1575,
+    "outputTokens": 2273
+  },
+  "latencyMs": 7027,
+  "costUsd": 0.006155
+}

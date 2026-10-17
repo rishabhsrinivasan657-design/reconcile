@@ -1,0 +1,147 @@
+{
+  "keyParts": ["ba36345ffb519a9b20a30c483f97104dc755d1c8597b658becb74049b9b89ea7"],
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "promptVersion": "extract.v2",
+  "data": {
+    "docType": "RR",
+    "vendorName": {
+      "v": "SUNPEAK FOODS CO.",
+      "c": 0.9,
+      "p": 1,
+      "b": [183, 98, 193, 234]
+    },
+    "docNumber": {
+      "v": "RCV-500567",
+      "c": 1,
+      "p": 1,
+      "b": [120, 264, 126, 345]
+    },
+    "poNumber": {
+      "v": "HP-PO-104306",
+      "c": 1,
+      "p": 1,
+      "b": [133, 691, 142, 785]
+    },
+    "date": {
+      "v": "2026-04-08",
+      "c": 1,
+      "p": 1,
+      "b": [134, 264, 142, 348]
+    },
+    "dueDate": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "lines": [
+      {
+        "sku": {
+          "v": "SN-10026",
+          "c": 1,
+          "p": 1,
+          "b": [274, 233, 283, 293]
+        },
+        "description": {
+          "v": "Sunpeak Crunchy Peanut Butter, 28 oz",
+          "c": 0.9,
+          "p": 1,
+          "b": [277, 346, 293, 612]
+        },
+        "qty": {
+          "v": 21,
+          "c": 1,
+          "p": 1,
+          "b": [273, 146, 281, 162]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [273, 174, 281, 189]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      },
+      {
+        "sku": {
+          "v": "SN-10401",
+          "c": 1,
+          "p": 1,
+          "b": [289, 232, 298, 290]
+        },
+        "description": {
+          "v": "Sunpeak Crunchy Peanut Butter, 16 oz",
+          "c": 0.9,
+          "p": 1,
+          "b": [293, 346, 311, 612]
+        },
+        "qty": {
+          "v": 22,
+          "c": 1,
+          "p": 1,
+          "b": [287, 146, 295, 160]
+        },
+        "uom": {
+          "v": "CS",
+          "c": 1,
+          "p": 1,
+          "b": [288, 175, 296, 189]
+        },
+        "unitPrice": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        },
+        "lineTotal": {
+          "v": null,
+          "c": 0,
+          "p": 1,
+          "b": null
+        }
+      }
+    ],
+    "subtotal": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "tax": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "shipping": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    },
+    "total": {
+      "v": null,
+      "c": 0,
+      "p": 1,
+      "b": null
+    }
+  },
+  "usage": {
+    "inputTokens": 1575,
+    "outputTokens": 567
+  },
+  "latencyMs": 2021,
+  "costUsd": 0.00189
+}
