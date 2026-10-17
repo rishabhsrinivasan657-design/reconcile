@@ -1,0 +1,16 @@
+{
+  "stage": "match",
+  "subset": "ci",
+  "sets": 20,
+  "generatorVersion": "0.3.0",
+  "metrics": {
+    "groupingAccuracy": 100,
+    "linkPrecision": 100,
+    "linkRecall": 100,
+    "linkF1": 100,
+    "exceptionPrecision": 100,
+    "exceptionRecall": 100,
+    "exceptionF1": 100,
+    "amountAccuracy": 100
+  }
+}
