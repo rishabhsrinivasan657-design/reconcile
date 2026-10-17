@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "setId": "S0001",
   "seed": 42,
-  "generatorVersion": "0.2.0",
+  "generatorVersion": "0.3.0",
   "poNumber": "HP-PO-104012",
   "vendorCode": "HRVM",
   "documents": [
@@ -573,52 +573,72 @@
       }
     },
     {
-      "file": "rr.pdf",
-      "role": "rr",
-      "type": "RR",
+      "file": "inv-1.pdf",
+      "role": "inv-1",
+      "type": "INVOICE",
       "format": "pdf",
-      "template": "boxed",
+      "template": "twocol",
       "pages": 1,
       "fields": {
         "vendorName": {
           "page": 1,
           "bbox": [
-            0.0882,
-            0.2222,
-            0.2176,
-            0.2351
+            0.3747,
+            0.0505,
+            0.6253,
+            0.0747
           ],
           "value": "Harvest Mill Bakery Inc."
         },
         "docNumber": {
           "page": 1,
           "bbox": [
-            0.0882,
-            0.1338,
-            0.162,
-            0.1475
+            0.8284,
+            0.1212,
+            0.9101,
+            0.1341
           ],
-          "value": "RCV-500022"
+          "value": "HRVM-807836"
         },
         "poNumber": {
           "page": 1,
           "bbox": [
-            0.3671,
-            0.1338,
-            0.4569,
-            0.1475
+            0.8253,
+            0.1414,
+            0.9101,
+            0.1543
           ],
           "value": "HP-PO-104012"
         },
         "date": {
           "page": 1,
           "bbox": [
-            0.646,
-            0.1338,
-            0.716,
-            0.1475
+            0.8049,
+            0.1616,
+            0.9101,
+            0.1745
           ],
-          "value": "2026-09-06"
+          "value": "2026-09-04"
+        },
+        "dueDate": {
+          "page": 1,
+          "bbox": [
+            0.8087,
+            0.1818,
+            0.9101,
+            0.1947
+          ],
+          "value": "2026-11-03"
+        },
+        "currency": {
+          "page": 1,
+          "bbox": [
+            0.8869,
+            0.2222,
+            0.9101,
+            0.2351
+          ],
+          "value": "USD"
         },
         "lines": [
           {
@@ -627,41 +647,61 @@
               "page": 1,
               "bbox": [
                 0.0882,
-                0.3015,
+                0.3103,
                 0.1419,
-                0.3143
+                0.3232
               ],
-              "value": "HR-13183"
+              "value": "HR-13874"
             },
             "description": {
               "page": 1,
               "bbox": [
                 0.2026,
-                0.3015,
-                0.4449,
-                0.3143
+                0.3103,
+                0.4364,
+                0.3232
               ],
-              "value": "Harvest Mill Coconut Cashew Granola, 24 oz"
+              "value": "Harvest Mill Rosemary Seed Crackers, 9 oz"
             },
             "qty": {
               "page": 1,
               "bbox": [
-                0.8981,
-                0.3015,
-                0.9118,
-                0.3143
+                0.6203,
+                0.3103,
+                0.634,
+                0.3232
               ],
-              "value": 54
+              "value": 28
             },
             "uom": {
               "page": 1,
               "bbox": [
-                0.7908,
-                0.3015,
-                0.8059,
-                0.3143
+                0.6471,
+                0.3103,
+                0.6621,
+                0.3232
               ],
               "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7562,
+                0.3103,
+                0.7941,
+                0.3232
+              ],
+              "value": "50.37"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8574,
+                0.3103,
+                0.9118,
+                0.3232
+              ],
+              "value": "1410.36"
             }
           },
           {
@@ -670,41 +710,61 @@
               "page": 1,
               "bbox": [
                 0.0882,
-                0.3267,
+                0.333,
                 0.1419,
-                0.3396
+                0.3459
               ],
-              "value": "HR-13263"
+              "value": "HR-13272"
             },
             "description": {
               "page": 1,
               "bbox": [
                 0.2026,
-                0.3267,
-                0.4365,
-                0.3396
+                0.333,
+                0.4388,
+                0.3459
               ],
-              "value": "Harvest Mill Dark Chocolate Granola, 24 oz"
+              "value": "Harvest Mill Everything Seed Crackers, 5 oz"
             },
             "qty": {
               "page": 1,
               "bbox": [
-                0.8981,
-                0.3267,
-                0.9118,
-                0.3396
+                0.6203,
+                0.333,
+                0.634,
+                0.3459
               ],
-              "value": 33
+              "value": 34
             },
             "uom": {
               "page": 1,
               "bbox": [
-                0.7908,
-                0.3267,
-                0.8059,
-                0.3396
+                0.6471,
+                0.333,
+                0.6621,
+                0.3459
               ],
               "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7562,
+                0.333,
+                0.7941,
+                0.3459
+              ],
+              "value": "32.09"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8574,
+                0.333,
+                0.9118,
+                0.3459
+              ],
+              "value": "1091.06"
             }
           },
           {
@@ -713,41 +773,61 @@
               "page": 1,
               "bbox": [
                 0.0882,
-                0.352,
+                0.3557,
                 0.1419,
-                0.3648
+                0.3686
               ],
-              "value": "HR-13272"
+              "value": "HR-13595"
             },
             "description": {
               "page": 1,
               "bbox": [
                 0.2026,
-                0.352,
-                0.4388,
-                0.3648
+                0.3557,
+                0.4365,
+                0.3686
               ],
-              "value": "Harvest Mill Everything Seed Crackers, 5 oz"
+              "value": "Harvest Mill Dark Chocolate Granola, 12 oz"
             },
             "qty": {
               "page": 1,
               "bbox": [
-                0.8981,
-                0.352,
-                0.9118,
-                0.3648
+                0.6203,
+                0.3557,
+                0.634,
+                0.3686
               ],
-              "value": 34
+              "value": 37
             },
             "uom": {
               "page": 1,
               "bbox": [
-                0.7908,
-                0.352,
-                0.8059,
-                0.3648
+                0.6471,
+                0.3557,
+                0.6621,
+                0.3686
               ],
               "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7562,
+                0.3557,
+                0.7941,
+                0.3686
+              ],
+              "value": "42.48"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8574,
+                0.3557,
+                0.9118,
+                0.3686
+              ],
+              "value": "1571.76"
             }
           },
           {
@@ -756,41 +836,61 @@
               "page": 1,
               "bbox": [
                 0.0882,
-                0.3772,
+                0.3785,
                 0.1419,
-                0.3901
+                0.3914
               ],
-              "value": "HR-13418"
+              "value": "HR-13263"
             },
             "description": {
               "page": 1,
               "bbox": [
                 0.2026,
-                0.3772,
-                0.4267,
-                0.3901
+                0.3785,
+                0.4365,
+                0.3914
               ],
-              "value": "Harvest Mill Sea Salt Seed Crackers, 9 oz"
+              "value": "Harvest Mill Dark Chocolate Granola, 24 oz"
             },
             "qty": {
               "page": 1,
               "bbox": [
-                0.8981,
-                0.3772,
-                0.9118,
-                0.3901
+                0.6203,
+                0.3785,
+                0.634,
+                0.3914
               ],
-              "value": 16
+              "value": 33
             },
             "uom": {
               "page": 1,
               "bbox": [
-                0.7908,
-                0.3772,
-                0.8059,
-                0.3901
+                0.6471,
+                0.3785,
+                0.6621,
+                0.3914
               ],
               "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7562,
+                0.3785,
+                0.7941,
+                0.3914
+              ],
+              "value": "77.32"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8574,
+                0.3785,
+                0.9118,
+                0.3914
+              ],
+              "value": "2551.56"
             }
           },
           {
@@ -799,9 +899,9 @@
               "page": 1,
               "bbox": [
                 0.0882,
-                0.4025,
+                0.4012,
                 0.1419,
-                0.4153
+                0.4141
               ],
               "value": "HR-13521"
             },
@@ -809,31 +909,51 @@
               "page": 1,
               "bbox": [
                 0.2026,
-                0.4025,
+                0.4012,
                 0.4388,
-                0.4153
+                0.4141
               ],
               "value": "Harvest Mill Everything Seed Crackers, 9 oz"
             },
             "qty": {
               "page": 1,
               "bbox": [
-                0.8981,
-                0.4025,
-                0.9118,
-                0.4153
+                0.6203,
+                0.4012,
+                0.634,
+                0.4141
               ],
               "value": 23
             },
             "uom": {
               "page": 1,
               "bbox": [
-                0.7908,
-                0.4025,
-                0.8059,
-                0.4153
+                0.6471,
+                0.4012,
+                0.6621,
+                0.4141
               ],
               "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7562,
+                0.4012,
+                0.7941,
+                0.4141
+              ],
+              "value": "52.40"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8574,
+                0.4012,
+                0.9118,
+                0.4141
+              ],
+              "value": "1205.20"
             }
           },
           {
@@ -842,41 +962,61 @@
               "page": 1,
               "bbox": [
                 0.0882,
-                0.4277,
+                0.4239,
                 0.1419,
-                0.4406
+                0.4368
               ],
-              "value": "HR-13595"
+              "value": "HR-13418"
             },
             "description": {
               "page": 1,
               "bbox": [
                 0.2026,
-                0.4277,
-                0.4365,
-                0.4406
+                0.4239,
+                0.4267,
+                0.4368
               ],
-              "value": "Harvest Mill Dark Chocolate Granola, 12 oz"
+              "value": "Harvest Mill Sea Salt Seed Crackers, 9 oz"
             },
             "qty": {
               "page": 1,
               "bbox": [
-                0.8981,
-                0.4277,
-                0.9118,
-                0.4406
+                0.6203,
+                0.4239,
+                0.634,
+                0.4368
               ],
-              "value": 37
+              "value": 16
             },
             "uom": {
               "page": 1,
               "bbox": [
-                0.7908,
-                0.4277,
-                0.8059,
-                0.4406
+                0.6471,
+                0.4239,
+                0.6621,
+                0.4368
               ],
               "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7562,
+                0.4239,
+                0.7941,
+                0.4368
+              ],
+              "value": "52.74"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.867,
+                0.4239,
+                0.9118,
+                0.4368
+              ],
+              "value": "843.84"
             }
           },
           {
@@ -885,41 +1025,61 @@
               "page": 1,
               "bbox": [
                 0.0882,
-                0.453,
+                0.4467,
                 0.1419,
-                0.4658
+                0.4595
               ],
-              "value": "HR-13655"
+              "value": "HR-13183"
             },
             "description": {
               "page": 1,
               "bbox": [
                 0.2026,
-                0.453,
+                0.4467,
                 0.4449,
-                0.4658
+                0.4595
               ],
-              "value": "Harvest Mill Coconut Cashew Granola, 12 oz"
+              "value": "Harvest Mill Coconut Cashew Granola, 24 oz"
             },
             "qty": {
               "page": 1,
               "bbox": [
-                0.8981,
-                0.453,
-                0.9118,
-                0.4658
+                0.6203,
+                0.4467,
+                0.634,
+                0.4595
               ],
-              "value": 22
+              "value": 54
             },
             "uom": {
               "page": 1,
               "bbox": [
-                0.7908,
-                0.453,
-                0.8059,
-                0.4658
+                0.6471,
+                0.4467,
+                0.6621,
+                0.4595
               ],
               "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7562,
+                0.4467,
+                0.7941,
+                0.4595
+              ],
+              "value": "72.35"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.8574,
+                0.4467,
+                0.9118,
+                0.4595
+              ],
+              "value": "3906.90"
             }
           },
           {
@@ -928,79 +1088,139 @@
               "page": 1,
               "bbox": [
                 0.0882,
-                0.4782,
+                0.4694,
                 0.1419,
-                0.4911
+                0.4823
               ],
-              "value": "HR-13874"
+              "value": "HR-13655"
             },
             "description": {
               "page": 1,
               "bbox": [
                 0.2026,
-                0.4782,
-                0.4364,
-                0.4911
+                0.4694,
+                0.4449,
+                0.4823
               ],
-              "value": "Harvest Mill Rosemary Seed Crackers, 9 oz"
+              "value": "Harvest Mill Coconut Cashew Granola, 12 oz"
             },
             "qty": {
               "page": 1,
               "bbox": [
-                0.8981,
-                0.4782,
-                0.9118,
-                0.4911
+                0.6203,
+                0.4694,
+                0.634,
+                0.4823
               ],
-              "value": 28
+              "value": 22
             },
             "uom": {
               "page": 1,
               "bbox": [
-                0.7908,
-                0.4782,
-                0.8059,
-                0.4911
+                0.6471,
+                0.4694,
+                0.6621,
+                0.4823
               ],
               "value": "CS"
+            },
+            "unitPrice": {
+              "page": 1,
+              "bbox": [
+                0.7562,
+                0.4694,
+                0.7941,
+                0.4823
+              ],
+              "value": "40.28"
+            },
+            "lineTotal": {
+              "page": 1,
+              "bbox": [
+                0.867,
+                0.4694,
+                0.9118,
+                0.4823
+              ],
+              "value": "886.16"
             }
           }
-        ]
+        ],
+        "subtotal": {
+          "page": 1,
+          "bbox": [
+            0.8469,
+            0.5025,
+            0.9118,
+            0.5162
+          ],
+          "value": "13466.84"
+        },
+        "tax": {
+          "page": 1,
+          "bbox": [
+            0.8643,
+            0.5253,
+            0.9118,
+            0.5389
+          ],
+          "value": "841.68"
+        },
+        "shipping": {
+          "page": 1,
+          "bbox": [
+            0.8643,
+            0.548,
+            0.9118,
+            0.5616
+          ],
+          "value": "120.00"
+        },
+        "total": {
+          "page": 1,
+          "bbox": [
+            0.8444,
+            0.5707,
+            0.9118,
+            0.5843
+          ],
+          "value": "14428.52"
+        }
       }
     }
   ],
   "lineMatches": [
     {
       "po": "po:1",
-      "rr": "rr:8"
+      "inv": "inv-1:1"
     },
     {
       "po": "po:2",
-      "rr": "rr:3"
+      "inv": "inv-1:2"
     },
     {
       "po": "po:3",
-      "rr": "rr:6"
+      "inv": "inv-1:3"
     },
     {
       "po": "po:4",
-      "rr": "rr:2"
+      "inv": "inv-1:4"
     },
     {
       "po": "po:5",
-      "rr": "rr:5"
+      "inv": "inv-1:5"
     },
     {
       "po": "po:6",
-      "rr": "rr:4"
+      "inv": "inv-1:6"
     },
     {
       "po": "po:7",
-      "rr": "rr:1"
+      "inv": "inv-1:7"
     },
     {
       "po": "po:8",
-      "rr": "rr:7"
+      "inv": "inv-1:8"
     }
   ],
   "exceptions": [
@@ -1008,18 +1228,29 @@
       "type": "MISSING_DOCUMENT",
       "lineKeys": [],
       "documentRoles": [
-        "inv-1"
+        "rr"
       ],
-      "amount": "0.00",
-      "informational": true
+      "amount": "14428.52",
+      "informational": false
     }
   ],
   "planted": [
     {
+      "type": "price_noise",
+      "lineKeys": [
+        "po:4",
+        "inv-1:4"
+      ],
+      "details": {
+        "poPrice": "77.23",
+        "invoicePrice": "77.32"
+      }
+    },
+    {
       "type": "missing_document",
       "lineKeys": [],
       "details": {
-        "missing": "inv-1"
+        "missing": "rr"
       }
     }
   ]
