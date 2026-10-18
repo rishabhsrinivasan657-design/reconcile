@@ -652,3 +652,23 @@ decision record for reading through the API.
   would break the conversation. Logs go to standard error.
 
 **Remember:** design so that the mistake you fear can't be written.
+
+---
+
+## M6 · Testing (2026-10-18)
+
+**In one line:** test a connector from where its users will start it, not from where you built it.
+
+**What we did:** checked CI, ran the README's connect commands with a throwaway Claude Code setup,
+and filled in the test plan.
+
+**Key ideas**
+- **The starting folder matters.** Assistants start local connectors from wherever they happen to be
+  (Claude Desktop isn't in your project folder). Starting through `pnpm` broke there, so the connector
+  now starts with plain Node, which works from anywhere.
+- **Test in a sandbox.** Running Claude Code with a temporary settings folder let us check the real
+  connect command without touching your own settings.
+- **Two setup paths can collide.** Offering both a project file and a one-line command made Claude Code
+  see two servers with one name. Clear docs: pick one.
+
+**Remember:** "it connects on my machine" means little until it connects from somewhere else.
