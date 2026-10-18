@@ -192,6 +192,13 @@ function Rows({
                 <td>
                   {sent?.error ? (
                     <span className="field-error">{sent.error}</span>
+                  ) : doc?.status === 'FAILED' && doc.problem ? (
+                    <span className="stack" style={{ gap: 4 }}>
+                      <Tag tone="risk">{DOC_STATUS.FAILED!.label}</Tag>
+                      <span className="muted small" style={{ maxWidth: '40ch' }}>
+                        {doc.problem}
+                      </span>
+                    </span>
                   ) : ds ? (
                     <span className="row">
                       <Tag tone={ds.tone}>

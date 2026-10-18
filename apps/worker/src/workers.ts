@@ -4,6 +4,7 @@ import {
   BudgetExceeded,
   DailyBudgetExceeded,
   isPermanentQuotaError,
+  ReplayMiss,
   type LlmClient,
 } from '@reconcile/llm';
 import {
@@ -32,6 +33,19 @@ export interface WorkerDeps {
   events?: EventBus;
   /** Called after each job, for logs and tests. */
   onEvent?: (e: { job: 'read' | 'match'; ok: boolean; detail: string }) => void;
+}
+
+/** What a visitor sees when the live demo can't read their file (M7 AC-6). */
+export const DEMO_MODE_MESSAGE =
+  'Demo mode: this site only reads the sample documents. Run Reconcile locally to read your own.';
+
+/**
+ * Errors that retrying can't fix stop at once (M4 AC-4), with a message for people. A replay miss
+ * means the AI answer was never recorded: on the live demo, that's any file but the samples.
+ */
+export function readFailure(e: unknown): { permanent: boolean; message: string } {
+  if (e instanceof ReplayMiss) return { permanent: true, message: DEMO_MODE_MESSAGE };
+  return { permanent: permanent(e), message: (e as Error).message };
 }
 
 /** Errors that retrying can't fix: stop at once (M4 AC-4). */
@@ -63,7 +77,8 @@ export function startWorkers(deps: WorkerDeps) {
         });
         return r;
       } catch (e) {
-        if (permanent(e)) throw new UnrecoverableError((e as Error).message);
+        const f = readFailure(e);
+        if (f.permanent) throw new UnrecoverableError(f.message);
         throw e;
       }
     },

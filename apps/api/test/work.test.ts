@@ -6,6 +6,7 @@ import { seed } from '@reconcile/db/seed';
 import { FileCacheStore, LlmClient, LlmEnv } from '@reconcile/llm';
 import {
   LocalStorage,
+  markFailed,
   matchPurchaseOrder,
   memoryEventBus,
   prismaSink,
@@ -318,5 +319,16 @@ describe.skipIf(!testDbUrl)('API for the website (M5 AC-1, AC-2, AC-4–AC-7)', 
       url: '/short-shipments?from=2026-03-31&to=2026-03-01',
     });
     expect(bad.statusCode).toBe(400);
+  });
+  it('a document that could not be read says why (M7 AC-6)', async () => {
+    const inv = await db.document.findFirstOrThrow({ where: { type: 'INVOICE' } });
+    await markFailed(db, inv.id, 'Demo mode: this site only reads the sample documents.');
+    const doc = await get(`/documents/${inv.id}`);
+    expect(doc).toMatchObject({
+      status: 'FAILED',
+      problem: 'Demo mode: this site only reads the sample documents.',
+    });
+    const other = (await get('/documents')).find((d: { id: string }) => d.id !== inv.id);
+    expect(other.problem).toBeNull();
   });
 });

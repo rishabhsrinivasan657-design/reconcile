@@ -194,6 +194,8 @@ export interface paths {
                             mimeType: string;
                             pages: number | null;
                             uploadedAt: string;
+                            /** @description Why it could not be read, when status is FAILED */
+                            problem: string | null;
                         }[];
                     };
                 };
@@ -298,6 +300,8 @@ export interface paths {
                                 mimeType: string;
                                 pages: number | null;
                                 uploadedAt: string;
+                                /** @description Why it could not be read, when status is FAILED */
+                                problem: string | null;
                             };
                             duplicate: boolean;
                         };
@@ -321,6 +325,8 @@ export interface paths {
                                 mimeType: string;
                                 pages: number | null;
                                 uploadedAt: string;
+                                /** @description Why it could not be read, when status is FAILED */
+                                problem: string | null;
                             };
                             duplicate: boolean;
                         };
@@ -440,6 +446,8 @@ export interface paths {
                             mimeType: string;
                             pages: number | null;
                             uploadedAt: string;
+                            /** @description Why it could not be read, when status is FAILED */
+                            problem: string | null;
                             extraction: {
                                 version: number;
                                 /**
@@ -753,6 +761,8 @@ export interface paths {
                                 mimeType: string;
                                 pages: number | null;
                                 uploadedAt: string;
+                                /** @description Why it could not be read, when status is FAILED */
+                                problem: string | null;
                             }[];
                             match: {
                                 version: number;
@@ -1474,6 +1484,8 @@ export interface paths {
                                 mimeType: string;
                                 pages: number | null;
                                 uploadedAt: string;
+                                /** @description Why it could not be read, when status is FAILED */
+                                problem: string | null;
                             };
                             vendorName: string | null;
                             reasons: string[];

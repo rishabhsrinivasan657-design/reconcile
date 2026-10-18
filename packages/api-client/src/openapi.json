@@ -237,6 +237,11 @@
                         },
                         "uploadedAt": {
                           "type": "string"
+                        },
+                        "problem": {
+                          "nullable": true,
+                          "description": "Why it could not be read, when status is FAILED",
+                          "type": "string"
                         }
                       },
                       "required": [
@@ -247,7 +252,8 @@
                         "poNumber",
                         "mimeType",
                         "pages",
-                        "uploadedAt"
+                        "uploadedAt",
+                        "problem"
                       ],
                       "additionalProperties": false
                     },
@@ -315,6 +321,11 @@
                         },
                         "uploadedAt": {
                           "type": "string"
+                        },
+                        "problem": {
+                          "nullable": true,
+                          "description": "Why it could not be read, when status is FAILED",
+                          "type": "string"
                         }
                       },
                       "required": [
@@ -325,7 +336,8 @@
                         "poNumber",
                         "mimeType",
                         "pages",
-                        "uploadedAt"
+                        "uploadedAt",
+                        "problem"
                       ],
                       "additionalProperties": false
                     },
@@ -594,6 +606,11 @@
                       },
                       "uploadedAt": {
                         "type": "string"
+                      },
+                      "problem": {
+                        "nullable": true,
+                        "description": "Why it could not be read, when status is FAILED",
+                        "type": "string"
                       }
                     },
                     "required": [
@@ -604,7 +621,8 @@
                       "poNumber",
                       "mimeType",
                       "pages",
-                      "uploadedAt"
+                      "uploadedAt",
+                      "problem"
                     ],
                     "additionalProperties": false
                   }
@@ -832,6 +850,11 @@
                     "uploadedAt": {
                       "type": "string"
                     },
+                    "problem": {
+                      "nullable": true,
+                      "description": "Why it could not be read, when status is FAILED",
+                      "type": "string"
+                    },
                     "extraction": {
                       "nullable": true,
                       "type": "object",
@@ -922,6 +945,7 @@
                     "mimeType",
                     "pages",
                     "uploadedAt",
+                    "problem",
                     "extraction",
                     "llm"
                   ],
@@ -1462,6 +1486,11 @@
                           },
                           "uploadedAt": {
                             "type": "string"
+                          },
+                          "problem": {
+                            "nullable": true,
+                            "description": "Why it could not be read, when status is FAILED",
+                            "type": "string"
                           }
                         },
                         "required": [
@@ -1472,7 +1501,8 @@
                           "poNumber",
                           "mimeType",
                           "pages",
-                          "uploadedAt"
+                          "uploadedAt",
+                          "problem"
                         ],
                         "additionalProperties": false
                       }
@@ -3301,6 +3331,11 @@
                           },
                           "uploadedAt": {
                             "type": "string"
+                          },
+                          "problem": {
+                            "nullable": true,
+                            "description": "Why it could not be read, when status is FAILED",
+                            "type": "string"
                           }
                         },
                         "required": [
@@ -3311,7 +3346,8 @@
                           "poNumber",
                           "mimeType",
                           "pages",
-                          "uploadedAt"
+                          "uploadedAt",
+                          "problem"
                         ],
                         "additionalProperties": false
                       },

@@ -112,6 +112,14 @@ export async function buildApp(deps: AppDeps) {
       ? ((await db.documentSet.findUnique({ where: { id: setId }, select: { poNumber: true } }))
           ?.poNumber ?? null)
       : null;
+  /** Why a document couldn't be read, from its history (e.g. the live demo's demo-mode note). */
+  const failureReason = async (documentId: string) => {
+    const e = await db.auditEvent.findFirst({
+      where: { entityType: 'Document', entityId: documentId, action: 'document.failed' },
+      orderBy: { id: 'desc' },
+    });
+    return ((e?.after as { reason?: string } | null)?.reason ?? null) || null;
+  };
   const summary = async (d: Document): Promise<z.infer<typeof DocumentSummary>> => ({
     id: d.id,
     status: d.status,
@@ -121,6 +129,7 @@ export async function buildApp(deps: AppDeps) {
     mimeType: d.mimeType,
     pages: d.pageCount,
     uploadedAt: d.createdAt.toISOString(),
+    problem: d.status === 'FAILED' ? await failureReason(d.id) : null,
   });
   const errors = { 400: Problem, 404: Problem, 413: Problem, 415: Problem, 500: Problem };
 

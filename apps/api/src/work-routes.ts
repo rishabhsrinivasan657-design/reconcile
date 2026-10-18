@@ -185,6 +185,7 @@ export function registerWorkRoutes(app: App, deps: WorkDeps) {
             mimeType: d.mimeType,
             pages: d.pageCount,
             uploadedAt: d.createdAt.toISOString(),
+            problem: null,
           },
           vendorName: d.vendor?.name ?? null,
           reasons: (ex?.reviewReasons ?? []) as string[],
