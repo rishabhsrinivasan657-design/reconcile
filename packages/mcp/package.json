@@ -1,0 +1,18 @@
+{
+  "name": "@reconcile/mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/server.ts"
+  },
+  "scripts": {
+    "start": "tsx src/main.ts",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "@reconcile/api-client": "workspace:*",
+    "zod": "^4.6.7"
+  }
+}
