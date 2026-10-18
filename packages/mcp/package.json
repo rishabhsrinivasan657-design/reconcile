@@ -14,5 +14,11 @@
     "@modelcontextprotocol/sdk": "1.32.1",
     "@reconcile/api-client": "workspace:*",
     "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@reconcile/api": "workspace:*",
+    "@reconcile/db": "workspace:*",
+    "@reconcile/llm": "workspace:*",
+    "@reconcile/pipeline": "workspace:*"
   }
 }
