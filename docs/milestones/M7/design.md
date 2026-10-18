@@ -120,7 +120,7 @@ tool: no instances, disks, public addresses, CloudFront distributions, or parame
 - Migrations run as the database **owner**. The app (API and worker) connects as a separate
   **app user** that may read and write the normal tables but may only `SELECT` and `INSERT` on
   `AuditEvent`: no `UPDATE`, no `DELETE`. The existing trigger stays as a second lock.
-- The permissions live in a SQL script (`packages/db/sql/app-role.sql`) that `update.sh` applies
+- The permissions live in a script (`packages/db/src/app-role.ts`, run by `pnpm --filter @reconcile/db app-role`) that `update.sh` applies
   after each migration, and a database test proves an update is refused by **permissions**, not just
   by the trigger.
 
@@ -137,7 +137,7 @@ tool: no instances, disks, public addresses, CloudFront distributions, or parame
 | `infra/` | Terraform: `main.tf` (server, security group, role), `cdn.tf` (CloudFront), `secrets.tf`, `budget.tf`, `variables.tf`, `outputs.tf`, `versions.tf` (Terraform 1.16, AWS provider 6.x, random 3.x, pinned) |
 | `deploy/` | `cloud-init.yaml`, `update.sh`, `docker-compose.prod.yml`, `Caddyfile`, `Dockerfile` (one image for API, worker, and website) |
 | `scripts/deploy.ts` | `deploy:up`, `deploy:down`, and the leftovers check |
-| `packages/db/sql/app-role.sql` | The app user's permissions (+ test) |
+| `packages/db/src/app-role.ts` | The app user's permissions (+ test) |
 | `apps/api` | The demo-password gate and `POST /demo/unlock` |
 | `apps/web` | The Unlock changes button and dialog; locked-change handling |
 | `apps/worker` | The demo-mode message for unrecorded documents |
