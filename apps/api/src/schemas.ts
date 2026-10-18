@@ -177,6 +177,12 @@ export const Me = z.object({ id: z.string(), name: z.string(), email: z.string()
 export const SetSummary = z.object({
   poNumber: z.string(),
   vendorName: z.string().nullable(),
+  groupedInto: z
+    .string()
+    .nullable()
+    .describe(
+      'Set when this PO number looked misread and its documents were grouped into another PO',
+    ),
   status: SetStatus,
   provisional: z.boolean(),
   notes: z.array(z.string()),

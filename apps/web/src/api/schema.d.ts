@@ -499,6 +499,8 @@ export interface paths {
                         "application/json": {
                             poNumber: string;
                             vendorName: string | null;
+                            /** @description Set when this PO number looked misread and its documents were grouped into another PO */
+                            groupedInto: string | null;
                             /** @enum {string} */
                             status: "WAITING" | "MATCHED" | "NEEDS_REVIEW";
                             provisional: boolean;
@@ -620,6 +622,8 @@ export interface paths {
                         "application/json": {
                             poNumber: string;
                             vendorName: string | null;
+                            /** @description Set when this PO number looked misread and its documents were grouped into another PO */
+                            groupedInto: string | null;
                             /** @enum {string} */
                             status: "WAITING" | "MATCHED" | "NEEDS_REVIEW";
                             provisional: boolean;

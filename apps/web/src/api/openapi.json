@@ -1003,6 +1003,11 @@
                         "nullable": true,
                         "type": "string"
                       },
+                      "groupedInto": {
+                        "nullable": true,
+                        "description": "Set when this PO number looked misread and its documents were grouped into another PO",
+                        "type": "string"
+                      },
                       "status": {
                         "type": "string",
                         "enum": [
@@ -1041,6 +1046,7 @@
                     "required": [
                       "poNumber",
                       "vendorName",
+                      "groupedInto",
                       "status",
                       "provisional",
                       "notes",
@@ -1240,6 +1246,11 @@
                     },
                     "vendorName": {
                       "nullable": true,
+                      "type": "string"
+                    },
+                    "groupedInto": {
+                      "nullable": true,
+                      "description": "Set when this PO number looked misread and its documents were grouped into another PO",
                       "type": "string"
                     },
                     "status": {
@@ -1663,6 +1674,7 @@
                   "required": [
                     "poNumber",
                     "vendorName",
+                    "groupedInto",
                     "status",
                     "provisional",
                     "notes",

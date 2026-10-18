@@ -112,7 +112,13 @@ export default function PosPage() {
                       <td>{s.vendorName ?? <span className="faint">Unknown</span>}</td>
                       <td>
                         <span className="row">
-                          <Tag tone={st.tone}>{st.label}</Tag>
+                          {s.groupedInto ? (
+                            <Tag tone="neutral" icon={null}>
+                              Grouped into {s.groupedInto}
+                            </Tag>
+                          ) : (
+                            <Tag tone={st.tone}>{st.label}</Tag>
+                          )}
                           {s.provisional && s.status !== 'NEEDS_REVIEW' && (
                             <Tag tone="caution">Provisional</Tag>
                           )}

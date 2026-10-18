@@ -205,6 +205,8 @@
   }
   .list {
     position: static;
-    max-height: none;
+    /* Narrow screens stack the list above the details: keep the list short so the selected
+       problem is in view without scrolling past every row. */
+    max-height: 42vh;
   }
 }

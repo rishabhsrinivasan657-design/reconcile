@@ -90,6 +90,18 @@ export default function PoPage() {
                 );
               })}
             </div>
+            {d.groupedInto && (
+              <div className={s.note}>
+                <Icon name="flag" />
+                <span>
+                  This PO number looked misread, so its documents were matched with{' '}
+                  <Link className="mono" href={`/pos/${d.groupedInto}`}>
+                    {d.groupedInto}
+                  </Link>
+                  .
+                </span>
+              </div>
+            )}
             {d.notes.map((n) => (
               <div className={s.note} key={n}>
                 <Icon name="flag" /> {n}
@@ -194,7 +206,9 @@ function Lines({ d }: { d: SetDetail }) {
               const method = reason?.ai
                 ? { label: 'AI', tone: 'accent' as const }
                 : (METHOD[m.method] ?? METHOD.SKU!);
-              const sameText = po && invoice && po.description === invoice.description;
+              const plain = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, '');
+              const sameText =
+                po && invoice && plain(po.description) === plain(invoice.description);
               return (
                 <tr key={i}>
                   <td>

@@ -98,3 +98,17 @@ export async function linesOf(
   }
   return lines;
 }
+
+/** PO sets grouped into another PO because their number looked misread (set.merged_into). */
+export async function groupedInto(
+  db: PrismaClient,
+  setIds: string[],
+): Promise<Map<string, string>> {
+  const events = await db.auditEvent.findMany({
+    where: { action: 'set.merged_into', entityType: 'DocumentSet', entityId: { in: setIds } },
+    orderBy: { id: 'asc' },
+  });
+  return new Map(
+    events.map((e) => [e.entityId, String((e.after as { into?: string } | null)?.into ?? '')]),
+  );
+}

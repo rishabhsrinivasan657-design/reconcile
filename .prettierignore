@@ -5,8 +5,7 @@ evals/golden*/
 packages/db/prisma/migrations/
 packages/db/src/generated/
 apps/web/src/api/
-apps/web/.next/
+apps/web/.next*/
 apps/web/next-env.d.ts
 apps/web/playwright-report/
 apps/web/test-results/
-apps/web/.next-e2e/

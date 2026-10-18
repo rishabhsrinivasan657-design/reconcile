@@ -39,6 +39,7 @@ import {
   byImpact,
   exceptionInclude,
   exceptionView,
+  groupedInto,
   linesOf,
   NotFound,
   problem,
@@ -269,8 +270,13 @@ export async function buildApp(deps: AppDeps) {
         db,
         req.query.status ? { status: req.query.status } : {},
       );
+      const merged = await groupedInto(
+        db,
+        sets.map((s) => s.id),
+      );
       return sets.map((s) => ({
         poNumber: s.poNumber,
+        groupedInto: merged.get(s.id) || null,
         vendorName: s.vendor?.name ?? null,
         updatedAt: s.updatedAt.toISOString(),
         moneyAtRisk: (
@@ -318,8 +324,10 @@ export async function buildApp(deps: AppDeps) {
       });
       const docs = [...s.documents, ...extra];
       const lines = await linesOf(db, docs);
+      const merged = await groupedInto(db, [s.id]);
       return {
         poNumber: s.poNumber,
+        groupedInto: merged.get(s.id) || null,
         vendorName: s.vendor?.name ?? null,
         status: s.status,
         provisional: s.provisional,

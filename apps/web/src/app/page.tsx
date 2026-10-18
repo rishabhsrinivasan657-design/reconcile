@@ -78,7 +78,9 @@ function Dashboard({ o }: { o: Overview }) {
     <>
       <div className={s.top}>
         <section className={`panel ${s.risk}`} aria-labelledby="risk-h">
-          <h3 id="risk-h">Money at risk</h3>
+          <h2 id="risk-h" className="label">
+            Money at risk
+          </h2>
           <BigMoney amount={o.moneyAtRisk} />
           <div className={s.meta}>
             <div>
@@ -102,7 +104,9 @@ function Dashboard({ o }: { o: Overview }) {
           </div>
         </section>
         <section className={`panel ${s.bars}`} aria-labelledby="bars-h">
-          <h3 id="bars-h">Where the money is</h3>
+          <h2 id="bars-h" className="label">
+            Where the money is
+          </h2>
           {o.byType.length === 0 ? (
             <p className="muted small" style={{ margin: 0 }}>
               Nothing at risk right now.
@@ -131,7 +135,7 @@ function Dashboard({ o }: { o: Overview }) {
       </div>
       <div className={s.grid}>
         <section className={`panel ${s.stat}`}>
-          <h3>Purchase orders</h3>
+          <h2 className="label">Purchase orders</h2>
           <b>{o.sets.total}</b>
           <div className="row">
             <Tag tone="settled">{o.sets.matched} matched</Tag>
@@ -140,7 +144,7 @@ function Dashboard({ o }: { o: Overview }) {
           </div>
         </section>
         <section className={`panel ${s.stat}`}>
-          <h3>AI cost per document</h3>
+          <h2 className="label">AI cost per document</h2>
           <b>
             {o.ai.costPerDocumentUsd === null
               ? '—'
@@ -152,7 +156,7 @@ function Dashboard({ o }: { o: Overview }) {
           </span>
         </section>
         <section className={`panel ${s.stat}`}>
-          <h3>Reading time per document</h3>
+          <h2 className="label">Reading time per document</h2>
           <b>
             {o.ai.medianSecondsPerDocument === null
               ? '—'

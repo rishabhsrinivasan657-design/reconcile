@@ -140,12 +140,12 @@ function Problems() {
             aria-label={show === 'open' ? 'Open problems' : 'Decided problems'}
           >
             <div className={s.listHead}>
-              <h3>
+              <span className="label">
                 {show === 'open'
                   ? `${open} open${items.length > open ? ` · ${items.length - open} for your records` : ''}`
                   : `${items.length} decided`}
-              </h3>
-              <h3>Impact</h3>
+              </span>
+              <span className="label">Impact</span>
             </div>
             {items.map((e) => (
               <ListItem

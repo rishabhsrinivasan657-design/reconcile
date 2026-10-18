@@ -261,6 +261,12 @@ describe.skipIf(!testDbUrl)('API for the website (M5 AC-1, AC-2, AC-4–AC-7)', 
     ]);
     expect(set.match.lineMatches.every((m: { lines: { po: unknown } }) => m.lines.po)).toBe(true);
     expect(set.notes.join(' ')).toMatch(/1 character apart/);
+    const list = await get('/sets');
+    const nearMiss = list.find(
+      (x: { poNumber: string; groupedInto: string | null }) =>
+        x.poNumber !== other.poNumber && x.groupedInto,
+    );
+    expect(nearMiss?.groupedInto).toBe(other.poNumber);
   });
   it('AC-2: the review list shows flagged documents with their reasons', async () => {
     expect(await get('/review')).toEqual([]);
