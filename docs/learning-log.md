@@ -572,3 +572,24 @@ and live updates), a style guide, and a clickable mockup.
   from the API's own manual, so a change on one side shows up as an error on the other.
 
 **Remember:** agree on the look and the contracts first; then building is mostly filling in.
+
+---
+
+## M5 · Testing (2026-10-18)
+
+**In one line:** automated checks catch what you test for; a fresh pair of eyes catches the rest.
+
+**What we did:** ran Lighthouse on every page, reviewed each page against the style guide in both
+themes and at tablet and phone width, and followed the README from a fresh copy of the project.
+
+**Key ideas**
+- **Measure the real thing.** Speed scores come from the production build, not the development
+  server, which is slower on purpose so it can rebuild quickly.
+- **Accessibility tools find real problems.** axe and Lighthouse caught faint hint text and headings
+  that skipped a level, two things that are easy to miss by eye.
+- **Look with a user's eyes.** The review found things no test asked about: a grouped PO shown as
+  its own PO, and a long list pushing the details off the screen on a tablet.
+- **"Works on my machine" is not done.** A fresh clone failed straight away, because of an empty
+  line in the example settings file that my own settings file didn't have.
+
+**Remember:** after the tests pass, try it the way a newcomer would.
