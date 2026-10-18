@@ -160,3 +160,15 @@ The "Ledger" look is written down in [`docs/style-guide.md`](../../style-guide.m
 | The browser test is slow or flaky in CI | One test only, replayed AI, grace period 0, and it waits for real signals (status text), never fixed sleeps |
 | A human correction makes the PO worse (typo) | The math checks re-run and warn; the AI's version is kept, so the history shows both |
 | Two tabs decide the same problem | The API refuses a decision on an already-decided problem, and the second tab shows who decided it |
+
+## 9. What changed while building (implementation notes)
+
+| Planned | What we did | Why |
+|---|---|---|
+| "Undo" after a decision (in the mockup) | No undo: the toast confirms what was saved | Decisions go into the history log, which can't be edited (ADR-0005). Undoing would need its own "reversed" decision; not in scope. |
+| API: decision, correction, history, overview, pages, events, me | Also `GET /review`, vendor names and money at risk on `GET /sets`, line text in PO detail, and whether a reading was corrected by hand | The pages needed them; each is small and tested |
+| PO detail lists its own documents | It also includes documents from a **grouped near-miss PO** (misread PO number) | Found on the real data: the PO page said "Not on the PO" for every line, because the purchase order lived in the other set |
+| Hint color `#6E746F` | `#626863` (light) and `#8F9590` (dark) | The browser test's accessibility check measured 4.3:1 contrast; the rule is 4.5:1. The style guide is updated. |
+| (not planned) | `pnpm dev:demo` runs everything on the recorded AI answers | The worker's default answer folder isn't where the test answers are, so a "replay" run read nothing |
+| (not planned) | The history timeline hides "Started reading" steps | It always comes right before "Read …" and doubled the length of every history |
+| The browser test runs next to the API and worker | It runs on its own ports, database, Redis database, storage folder, and build folder | So it can run while `pnpm dev` is up, and never touches demo data |

@@ -10,7 +10,7 @@ Each milestone gets a folder `Mx/` with `requirements.md`, `design.md`,
 | M2 Matching engine and eval harness | ✅ Released v0.3.0 (2026-10-17) |
 | M3 LLM client and extraction | ✅ Released v0.4.0 (2026-10-17) |
 | M4 API, worker, fuzzy fallback | ✅ Released v0.5.0 (2026-10-17) |
-| M5 Web UI and human-in-the-loop | Implementation |
+| M5 Web UI and human-in-the-loop | Implementation (draft PR) |
 | M6 MCP server | Not started |
 | M7 Deploy | Not started |
 

@@ -9,6 +9,7 @@ const config: NextConfig = {
   distDir: process.env.NEXT_DIST_DIR ?? '.next',
   poweredByHeader: false,
   agentRules: false,
+  devIndicators: false,
   // Server-sent events must stream through the forwarder, not be buffered and compressed.
   compress: false,
   async rewrites() {

@@ -9,7 +9,8 @@
     "start": "next start --port 3000",
     "typecheck": "tsc -p tsconfig.json",
     "api:types": "tsx ../api/src/openapi.ts > src/api/openapi.json && openapi-typescript src/api/openapi.json -o src/api/schema.d.ts",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "screenshots": "tsx scripts/screenshots.ts"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.3.0",
