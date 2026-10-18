@@ -5,10 +5,13 @@ An AI **3-way match** agent for distributors and CPG brands. It reconciles
 invoices**, then flags short-ships, price mismatches, and other exceptions for
 a human to approve, dispute, or write off.
 
-> **Status: M4, a running backend.** Upload a document and Reconcile reads it with
-> AI, files it under its PO, matches the set, and serves the results through an API,
-> all in the background. The website (M5) and the AI-assistant connector (M6)
-> come next (see [the milestone list](docs/milestones/README.md)).
+> **Status: M5, a working website.** Drop in documents and watch Reconcile read them
+> with AI, file them under their PO, and match them, live. Work through the problems,
+> costliest first, with the evidence side by side, and approve, dispute, or write off
+> each one. The AI-assistant connector (M6) and deployment (M7) come next (see
+> [the milestone list](docs/milestones/README.md)).
+
+![The problems queue: costliest first, the PO, receipt, and invoice lines side by side, and the decision panel](docs/screenshots/problems.png)
 
 Everything runs locally for **$0**: Docker Compose (Postgres, Redis),
 TypeScript end to end, and the Gemini free tier later on.
@@ -156,6 +159,45 @@ description-based pairing and its reason.
 values), so this measures the matching rules alone. Scores will drop once M3
 reads real PDFs with an LLM, and that drop is exactly what the next milestone measures.
 
+## The website
+
+```bash
+docker compose up -d && pnpm db:migrate && pnpm db:seed
+pnpm dev:demo        # API, worker, and website, using the recorded AI answers (no key, no cost)
+open http://localhost:3000
+```
+
+Then drag the files of a few test sets (folders in `evals/golden-ci/`) onto the **Upload**
+page. `pnpm dev` does the same with the real AI (it needs `GEMINI_API_KEY` in `.env`).
+
+| Page | What you do there |
+|---|---|
+| **Overview** | See the money at risk, where it is, PO counts, and what the AI costs per document |
+| **Problems** | Work the queue, costliest first: the explanation, the lines from all three documents side by side, and a decision with a required note |
+| **POs** | Each PO's documents, how every line was paired (by SKU, by similar wording, or by the AI with its reason), and its full history |
+| **Document** | The original page with a box over every field the AI read, its confidence, and a pencil to correct a field (the PO re-matches by itself) |
+| **Review** | Only the documents the AI wasn't sure about |
+| **Upload** | Drop files and watch each one go *uploaded → reading → ready → matched*, live |
+
+**Keyboard:** `J`/`K` next and previous, `A`/`D`/`W` approve, dispute, write off, `Enter` to
+save, `E` to edit a field, `/` to find a PO, `G` then `O`/`P`/`L`/`R`/`U` to change pages,
+`?` for all of them. There's a light and a dark theme.
+
+| | |
+|---|---|
+| ![Overview](docs/screenshots/overview.png) | ![PO detail with history](docs/screenshots/po.png) |
+| ![Document with the AI's highlight boxes](docs/screenshots/document.png) | ![Problems in the dark theme](docs/screenshots/problems-dark.png) |
+
+The look ("Ledger": warm paper, ink, one teal accent) is written down in the
+[style guide](docs/style-guide.md). The website talks only to the API, using types generated
+from the API's own manual ([ADR-0012](docs/adr/0012-website-stack.md)), and live updates come
+over server-sent events ([ADR-0013](docs/adr/0013-live-updates.md)).
+
+**The one browser test** (`pnpm test:e2e`) starts the whole stack on its own ports and
+database, uploads a test set, waits until it's matched, writes off the costliest problem by
+keyboard, finds the decision in the PO's history, and checks every page for accessibility
+problems in both themes. It runs in CI.
+
 ## Running Reconcile as a service
 
 ```bash
@@ -185,7 +227,12 @@ under its PO, and matches the PO once it has its documents. Some details:
 | `POST /documents` | Upload a PDF, PNG, or JPEG (form field `file`, max 10 MB) |
 | `GET /documents`, `/documents/:id`, `/documents/:id/file` | Documents, what the AI read and how sure it was, the original file |
 | `GET /sets`, `/sets/:poNumber` | Each PO's status, line matches (with the AI's reasons), problems, notes |
-| `GET /exceptions`, `/exceptions/:id` | Current problems, filterable by type, status, PO |
+| `GET /exceptions`, `/exceptions/:id` | Current problems (sortable by impact); one problem with its lines side by side |
+| `POST /exceptions/:id/decision` | Approve, dispute, or write off, with a required note |
+| `POST /documents/:id/corrections` | Fix fields the AI misread; saves a human version and re-matches the PO |
+| `GET /documents/:id/pages/:n` | A page as an image, for the highlight viewer |
+| `GET /sets/:poNumber/history`, `/overview`, `/review` | A PO's history in plain sentences, the overview numbers, documents to review |
+| `GET /events` | Live feed of changes (server-sent events) |
 | `GET /health`, `/docs` | Health check, live manual |
 
 ## Reading documents with an LLM
@@ -256,6 +303,7 @@ packages/llm         LLM client: LangChain providers + cache, limits, budget, ca
 packages/pipeline    Shared by API + worker: storage, upload, read a document, match a PO, history log
 apps/api             The upload/results service (Fastify) with a live manual at /docs
 apps/worker          The background helper: read and match jobs (BullMQ on Redis)
+apps/web             The website (Next.js): overview, problems, POs, documents, review, upload
 packages/extraction  PDF/scan → typed document with confidence, checks, review flag
 evals/               Eval harness (pnpm eval), baseline.json, committed 20-set CI subset
 docs/                PRD, architecture, ADRs, milestone docs, learning log
@@ -272,7 +320,9 @@ docs/                PRD, architecture, ADRs, milestone docs, learning log
 | `pnpm docs:check` | Check links and diagram freshness (runs in CI) |
 | `pnpm eval` | Score match / extract / e2e against the answer keys (see above) |
 | `pnpm extract <file>` | Read one document with the LLM |
-| `pnpm dev` | Start the API and the worker together |
+| `pnpm dev` | Start the API, the worker, and the website together |
+| `pnpm dev:demo` | The same, on the recorded AI answers (no key, no cost) |
+| `pnpm test:e2e` | The browser test (Playwright, with accessibility checks) |
 
 ## How this project is built
 

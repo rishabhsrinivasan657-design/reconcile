@@ -1,0 +1,212 @@
+.split {
+  display: grid;
+  grid-template-columns: minmax(300px, 400px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.list {
+  overflow: hidden;
+  position: sticky;
+  top: 16px;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+}
+.listHead {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--rule-strong);
+  position: sticky;
+  top: 0;
+  background: var(--sheet);
+  z-index: 1;
+}
+.item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 12px;
+  padding: 12px 16px;
+  border: 0;
+  border-top: 1px solid var(--rule);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  background: none;
+  text-decoration: none;
+}
+.item:first-of-type {
+  border-top: 0;
+}
+.item:hover {
+  background: var(--paper);
+}
+.item[aria-current='true'] {
+  background: var(--accent-tint);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+.line1 {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+}
+.vendor {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sub {
+  grid-column: 1 / -1;
+  font-size: 13px;
+  color: var(--ink-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.impact {
+  font-weight: 500;
+}
+.info .impact {
+  color: var(--ink-3);
+  font-weight: 400;
+}
+.detail {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.amount {
+  text-align: right;
+}
+.amount b {
+  display: block;
+  font: 500 34px/38px var(--serif);
+  color: var(--risk);
+}
+.amount.quiet b {
+  color: var(--ink-3);
+}
+.explain {
+  font: 400 17px/27px var(--serif);
+  margin: 0;
+  max-width: 62ch;
+}
+.compareWrap {
+  overflow-x: auto;
+}
+.compare {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(170px, 1fr));
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  min-width: 540px;
+  background: var(--raised);
+}
+.compare + .compare {
+  margin-top: 10px;
+}
+.col {
+  padding: 14px 16px;
+  border-left: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.col:first-child {
+  border-left: 0;
+}
+.kv {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+}
+.kv > span:first-child {
+  color: var(--ink-3);
+}
+.kv > span:last-child {
+  text-align: right;
+}
+.diff > span:last-child {
+  color: var(--risk);
+  font-weight: 500;
+}
+.diffNote {
+  font-size: 12px;
+  color: var(--risk);
+}
+.none {
+  color: var(--ink-3);
+  font-size: 13px;
+  font-style: italic;
+}
+.ai {
+  display: flex;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: var(--accent-tint);
+  font-size: 13px;
+}
+.ai svg {
+  color: var(--accent);
+  flex: none;
+  margin-top: 2px;
+}
+.docs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.decide {
+  border-top: 1px solid var(--rule);
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.decideFoot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.decided {
+  border-top: 1px solid var(--rule);
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.decided q {
+  font: 400 15px/23px var(--serif);
+  quotes: none;
+  padding-left: 10px;
+  border-left: 2px solid var(--accent);
+}
+.filters {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+@media (max-width: 1100px) {
+  .split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .list {
+    position: static;
+    /* Narrow screens stack the list above the details: keep the list short so the selected
+       problem is in view without scrolling past every row. */
+    max-height: 42vh;
+  }
+}

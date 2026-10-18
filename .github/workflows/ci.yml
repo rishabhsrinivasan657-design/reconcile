@@ -81,3 +81,48 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Score match, extract, and e2e from recorded LLM answers (no key; fails on a > 2 point drop)
         run: pnpm eval --stage all --check-baseline
+
+  e2e:
+    name: Browser test (Playwright)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: reconcile
+          POSTGRES_PASSWORD: reconcile
+          POSTGRES_DB: reconcile_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U reconcile" --health-interval 2s
+          --health-timeout 3s --health-retries 30
+      redis:
+        image: redis:8-alpine
+        ports: ['6379:6379']
+        options: >-
+          --health-cmd "redis-cli ping" --health-interval 2s
+          --health-timeout 3s --health-retries 30
+    env:
+      DATABASE_URL_E2E: postgresql://reconcile:reconcile@localhost:5432/reconcile_test
+      REDIS_URL_E2E: redis://localhost:6379/2
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @reconcile/db exec prisma generate
+      - run: pnpm --filter @reconcile/web exec playwright install --with-deps chromium
+      - name: Upload → match → decide → history, with accessibility checks (recorded AI answers, no key)
+        run: pnpm test:e2e
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            apps/web/playwright-report
+            apps/web/test-results
+          retention-days: 7

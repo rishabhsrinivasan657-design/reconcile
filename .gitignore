@@ -3,7 +3,7 @@ node_modules/
 .env.*
 !.env.example
 dist/
-.next/
+.next*/
 coverage/
 storage/
 evals/results/
@@ -12,3 +12,6 @@ evals/golden/
 packages/db/src/generated/
 *.tsbuildinfo
 .cache/
+playwright-report/
+test-results/
+apps/web/next-env.d.ts

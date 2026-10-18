@@ -11,6 +11,11 @@ export default tseslint.config(
       'evals/golden*/**',
       'packages/db/src/generated/**',
       'packages/db/prisma/migrations/**',
+      'apps/web/.next*/**',
+      'apps/web/next-env.d.ts',
+      'apps/web/src/api/**',
+      'apps/web/playwright-report/**',
+      'apps/web/test-results/**',
     ],
   },
   js.configs.recommended,
@@ -21,6 +26,10 @@ export default tseslint.config(
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/consistent-type-imports': 'error',
     },
+  },
+  {
+    files: ['apps/web/**/*.{ts,tsx}'],
+    languageOptions: { globals: { ...globals.browser } },
   },
   {
     // ADR-0001: core stays pure. No DB, HTTP, UI, or queue frameworks.

@@ -1,5 +1,6 @@
 import { seed } from '@reconcile/db/seed';
 import { afterAll, beforeEach, describe, expect, it } from 'vitest';
+import { redisEventBus, type LiveEvent } from '../src/events.ts';
 import { matchPurchaseOrder } from '../src/match.ts';
 import { readDocument } from '../src/read.ts';
 import { RedisLimiter } from '../src/redis-limiter.ts';
@@ -137,5 +138,21 @@ describe.skipIf(!hasInfra)('shared rate limit in Redis (AC-7)', () => {
     await a.acquire(); // 5th request in the same minute across both: must wait 15 s at 4/min
     expect(slept[0]).toBe(15_000);
     await r.quit();
+  });
+});
+
+describe.skipIf(!hasInfra)('live announcements through Redis (M5 AC-3)', () => {
+  it('a subscriber receives what is published, until it unsubscribes', async () => {
+    const conn = redis();
+    const bus = redisEventBus(conn);
+    const got: LiveEvent[] = [];
+    const stop = await bus.subscribe((e) => got.push(e));
+    await bus.publish({ kind: 'document', id: 'doc-1', status: 'READY' });
+    await new Promise((r) => setTimeout(r, 100));
+    await stop();
+    await bus.publish({ kind: 'document', id: 'doc-2', status: 'READY' });
+    await new Promise((r) => setTimeout(r, 100));
+    expect(got).toEqual([{ kind: 'document', id: 'doc-1', status: 'READY' }]);
+    conn.disconnect();
   });
 });

@@ -5,16 +5,22 @@ export const PROVIDERS = ['gemini', 'groq', 'openai', 'anthropic', 'ollama'] as 
 export type Provider = (typeof PROVIDERS)[number];
 
 const num = (fallback: number) => z.coerce.number().positive().default(fallback);
+/** An empty line like `GEMINI_API_KEY=` (as in .env.example) means "not set", not "invalid". */
+const key = () =>
+  z.preprocess(
+    (v) => (typeof v === 'string' && v.trim() === '' ? undefined : v),
+    z.string().min(1).optional(),
+  );
 
 /** Every LLM setting comes from env (CLAUDE.md constraint 2). Keys are optional until used. */
 export const LlmEnv = z.object({
   LLM_PROVIDER: z.enum(PROVIDERS).default('gemini'),
   LLM_MODEL_EXTRACT: z.string().min(1).default('gemini-3.5-flash-lite'),
   LLM_REASONING_EFFORT: z.enum(['minimal', 'low', 'medium', 'high']).default('low'),
-  GROQ_API_KEY: z.string().min(1).optional(),
-  OPENAI_API_KEY: z.string().min(1).optional(),
-  GEMINI_API_KEY: z.string().min(1).optional(),
-  ANTHROPIC_API_KEY: z.string().min(1).optional(),
+  GROQ_API_KEY: key(),
+  OPENAI_API_KEY: key(),
+  GEMINI_API_KEY: key(),
+  ANTHROPIC_API_KEY: key(),
   OLLAMA_BASE_URL: z.string().url().default('http://localhost:11434'),
   /** Requests per minute / per day. Default per provider (see PROVIDER_LIMITS). */
   LLM_RPM: z.coerce.number().positive().optional(),

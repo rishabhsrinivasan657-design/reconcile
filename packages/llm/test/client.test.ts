@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { BudgetExceeded, SpendLedger } from '../src/budget.ts';
 import { MemoryCacheStore } from '../src/cache.ts';
 import { LlmClient, ReplayMiss, type Invoker } from '../src/client.ts';
+import { LlmEnv } from '../src/env.ts';
 import { DailyBudgetExceeded, RateLimiter } from '../src/limiter.ts';
 import { estimateCost } from '../src/prices.ts';
 import { parseJsonText } from '../src/providers.ts';
@@ -279,5 +280,10 @@ describe('JSON-mode parsing (Gemini, Groq)', () => {
       s: 'a, b {not real',
       n: 1,
     });
+  });
+  it('an empty key line in .env means "not set", so replay mode still starts (M5 testing)', () => {
+    const env = LlmEnv.parse({ GEMINI_API_KEY: '', GROQ_API_KEY: '  ' });
+    expect(env.GEMINI_API_KEY).toBeUndefined();
+    expect(env.GROQ_API_KEY).toBeUndefined();
   });
 });

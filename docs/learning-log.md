@@ -528,3 +528,68 @@ real database and Redis), tagged **v0.5.0**, published the release, and wrote th
   item B-22. Nobody would have planned for it.
 
 **Remember:** a good retro changes a habit, not just a document.
+
+---
+
+## M5 · Requirements (2026-10-17)
+
+**In one line:** describe a polished product in testable terms, not adjectives.
+
+**What we did:** wrote 13 acceptance criteria for the website, plus three questions,
+including which visual direction to take.
+
+**Key ideas**
+- **"Polished" has to be testable.** Words like "professional" can't be checked, but these can:
+  a written style guide followed on every page, both themes finished, keyboard shortcuts,
+  designed loading/empty/error states, and accessibility scores.
+- **Design for the job, not the demo.** An AP clerk scans tables of money all day: numbers
+  aligned on the decimal, evidence side by side, the explanation first, and the next problem one
+  key away.
+- **Pick a direction before building.** Choosing the look first (and approving a mockup) is far
+  cheaper than restyling a finished site.
+
+**Remember:** if you can't say how you'll check "polished", you'll never know when you're done.
+
+---
+
+## M5 · Design (2026-10-17)
+
+**In one line:** decide how it looks and how the pieces talk before writing any page.
+
+**What we did:** wrote the design, two decision records (the website's building blocks,
+and live updates), a style guide, and a clickable mockup.
+
+**Key ideas**
+- **A style guide is a design decision written down.** Colors, fonts, and spacing become
+  named *tokens* (like `--accent`). Pages use the names, never raw values, so the whole
+  site stays consistent and a theme change is one file.
+- **Mockups are cheap, code is expensive.** Clicking through a fake version finds "that
+  feels wrong" problems in minutes instead of after a week of building.
+- **Push, don't poll.** Instead of the browser asking "anything new?" every few seconds,
+  the server tells it when something changes (server-sent events). The message only says
+  *what* changed; the page then fetches the fresh data itself.
+- **Generated types keep two programs honest.** The website's view of the API is generated
+  from the API's own manual, so a change on one side shows up as an error on the other.
+
+**Remember:** agree on the look and the contracts first; then building is mostly filling in.
+
+---
+
+## M5 · Testing (2026-10-18)
+
+**In one line:** automated checks catch what you test for; a fresh pair of eyes catches the rest.
+
+**What we did:** ran Lighthouse on every page, reviewed each page against the style guide in both
+themes and at tablet and phone width, and followed the README from a fresh copy of the project.
+
+**Key ideas**
+- **Measure the real thing.** Speed scores come from the production build, not the development
+  server, which is slower on purpose so it can rebuild quickly.
+- **Accessibility tools find real problems.** axe and Lighthouse caught faint hint text and headings
+  that skipped a level, two things that are easy to miss by eye.
+- **Look with a user's eyes.** The review found things no test asked about: a grouped PO shown as
+  its own PO, and a long list pushing the details off the screen on a tablet.
+- **"Works on my machine" is not done.** A fresh clone failed straight away, because of an empty
+  line in the example settings file that my own settings file didn't have.
+
+**Remember:** after the tests pass, try it the way a newcomer would.

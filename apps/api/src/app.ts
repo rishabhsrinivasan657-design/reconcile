@@ -3,7 +3,10 @@ import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
 import type { Document, PrismaClient } from '@reconcile/db';
 import {
+  ActionRefused,
   MAX_UPLOAD_BYTES,
+  memoryEventBus,
+  type EventBus,
   uploadDocument,
   UploadRejected,
   type Queues,
@@ -22,32 +25,37 @@ import {
   DocumentDetail,
   DocumentSummary,
   DocStatus,
+  ExceptionDetail,
   ExceptionStatus,
   ExceptionType,
   ExceptionView,
   Problem,
   SetDetail,
   SetStatus,
-  SetSummary,
+  SetListItem,
   UploadResult,
 } from './schemas.ts';
+import {
+  byImpact,
+  exceptionInclude,
+  exceptionView,
+  groupedInto,
+  linesOf,
+  NotFound,
+  problem,
+  setsWithLatestRun,
+} from './views.ts';
+import { registerWorkRoutes } from './work-routes.ts';
 
 export interface AppDeps {
   db: PrismaClient;
   storage: Storage;
-  queues: Pick<Queues, 'enqueueRead'>;
+  queues: Pick<Queues, 'enqueueRead' | 'enqueueMatch'>;
+  /** Live announcements (ADR-0013). Defaults to an in-process bus (tests, no Redis). */
+  events?: EventBus;
   /** Health check for Redis; omitted in tests that don't use it. */
   pingRedis?: () => Promise<unknown>;
 }
-
-class NotFound extends Error {}
-
-const problem = (status: number, title: string, detail?: string) => ({
-  type: `https://httpstatuses.io/${status}`,
-  title,
-  status,
-  ...(detail ? { detail } : {}),
-});
 
 /** The upload service (ADR-0011). Built as a function so tests can call it without a network. */
 export async function buildApp(deps: AppDeps) {
@@ -62,7 +70,7 @@ export async function buildApp(deps: AppDeps) {
     openapi: {
       info: {
         title: 'Reconcile API',
-        version: '0.5.0',
+        version: '0.6.0',
         description:
           'Upload purchase orders, receiving reports, and invoices; read the matches and problems Reconcile finds.',
       },
@@ -81,6 +89,8 @@ export async function buildApp(deps: AppDeps) {
     if (hasZodFastifySchemaValidationErrors(err)) return send(400, 'Invalid request', err.message);
     if (err instanceof UploadRejected) return send(err.status, 'Upload rejected', err.message);
     if (err instanceof NotFound) return send(404, 'Not found', err.message);
+    if (err instanceof ActionRefused)
+      return send(err.status, err.status === 409 ? 'Conflict' : 'Not allowed', err.message);
     if (err.statusCode && err.statusCode < 500) return send(err.statusCode, err.name, err.message);
     return send(500, 'Something went wrong', 'The error was logged.');
   });
@@ -92,6 +102,7 @@ export async function buildApp(deps: AppDeps) {
   );
 
   const { db } = deps;
+  const events = deps.events ?? memoryEventBus();
   const setPo = async (setId: string | null) =>
     setId
       ? ((await db.documentSet.findUnique({ where: { id: setId }, select: { poNumber: true } }))
@@ -151,7 +162,10 @@ export async function buildApp(deps: AppDeps) {
       const bytes = new Uint8Array(await file.toBuffer());
       if (file.file.truncated) throw new UploadRejected('The file is over the 10 MB limit.', 413);
       const { document, duplicate } = await uploadDocument(db, deps.storage, bytes);
-      if (!duplicate) await deps.queues.enqueueRead(document.id);
+      if (!duplicate) {
+        await deps.queues.enqueueRead(document.id);
+        await events.publish({ kind: 'document', id: document.id, status: document.status });
+      }
       return reply
         .status(duplicate ? 200 : 202)
         .send({ document: await summary(document), duplicate });
@@ -209,6 +223,7 @@ export async function buildApp(deps: AppDeps) {
         extraction: ex
           ? {
               version: ex.version,
+              source: ex.source,
               model: ex.model,
               fields: ex.data,
               confidence: ex.fieldConfidence as Record<string, number>,
@@ -241,62 +256,34 @@ export async function buildApp(deps: AppDeps) {
     },
   );
 
-  const exceptionView = (
-    e: {
-      id: string;
-      type: string;
-      status: string;
-      informational: boolean;
-      amount: { toFixed: (n: number) => string };
-      explanation: string;
-      lineKeys: unknown;
-      documentIds: unknown;
-      carriedOverFromId: string | null;
-    },
-    poNumber: string,
-    version: number,
-  ): z.infer<typeof ExceptionView> => ({
-    id: e.id,
-    poNumber,
-    type: e.type as z.infer<typeof ExceptionType>,
-    status: e.status as z.infer<typeof ExceptionStatus>,
-    informational: e.informational,
-    amount: e.amount.toFixed(2),
-    explanation: e.explanation,
-    lines: e.lineKeys as string[],
-    documentIds: e.documentIds as string[],
-    carriedOverFromId: e.carriedOverFromId,
-    matchRunVersion: version,
-  });
-
-  /** Each set with its latest match run (older runs are history, not current problems). */
-  const setsWithLatestRun = (where: object = {}) =>
-    db.documentSet.findMany({
-      where,
-      orderBy: { poNumber: 'asc' },
-      include: {
-        documents: true,
-        matchRuns: {
-          orderBy: { version: 'desc' },
-          take: 1,
-          include: { exceptions: true, lineMatch: true },
-        },
-      },
-    });
-
   app.get(
     '/sets',
     {
       schema: {
         summary: 'Every PO set and its status',
         querystring: z.object({ status: SetStatus.optional() }),
-        response: { 200: z.array(SetSummary), ...errors },
+        response: { 200: z.array(SetListItem), ...errors },
       },
     },
     async (req) => {
-      const sets = await setsWithLatestRun(req.query.status ? { status: req.query.status } : {});
+      const sets = await setsWithLatestRun(
+        db,
+        req.query.status ? { status: req.query.status } : {},
+      );
+      const merged = await groupedInto(
+        db,
+        sets.map((s) => s.id),
+      );
       return sets.map((s) => ({
         poNumber: s.poNumber,
+        groupedInto: merged.get(s.id) || null,
+        vendorName: s.vendor?.name ?? null,
+        updatedAt: s.updatedAt.toISOString(),
+        moneyAtRisk: (
+          (s.matchRuns[0]?.exceptions ?? [])
+            .filter((e) => e.status === 'OPEN' && !e.informational)
+            .reduce((c, e) => c + Math.round(Number(e.amount.toFixed(2)) * 100), 0) / 100
+        ).toFixed(2),
         status: s.status,
         provisional: s.provisional,
         notes: s.notes as string[],
@@ -319,20 +306,36 @@ export async function buildApp(deps: AppDeps) {
       },
     },
     async (req) => {
-      const [s] = await setsWithLatestRun({
+      const [s] = await setsWithLatestRun(db, {
         poNumber: req.params.poNumber.toUpperCase().replace(/\s+/g, ''),
       });
       if (!s) throw new NotFound(`No PO ${req.params.poNumber}`);
       const run = s.matchRuns[0];
+      // A grouped near-miss PO (misread number) keeps its document in its own set: include
+      // every document the latest match actually used.
+      const used = new Set(
+        (run?.lineMatch ?? []).flatMap((m) =>
+          [m.poLineKey, m.rrLineKey, m.invLineKey].filter(Boolean).map((k) => k!.split(':')[0]!),
+        ),
+      );
+      const own = new Set(s.documents.map((d) => d.id));
+      const extra = await db.document.findMany({
+        where: { id: { in: [...used].filter((id) => !own.has(id)) } },
+      });
+      const docs = [...s.documents, ...extra];
+      const lines = await linesOf(db, docs);
+      const merged = await groupedInto(db, [s.id]);
       return {
         poNumber: s.poNumber,
+        groupedInto: merged.get(s.id) || null,
+        vendorName: s.vendor?.name ?? null,
         status: s.status,
         provisional: s.provisional,
         notes: s.notes as string[],
         waitingUntil: s.waitingUntil?.toISOString() ?? null,
         openExceptions:
           run?.exceptions.filter((e) => e.status === 'OPEN' && !e.informational).length ?? 0,
-        documents: await Promise.all(s.documents.map(summary)),
+        documents: await Promise.all(docs.map(summary)),
         match: run
           ? {
               version: run.version,
@@ -341,11 +344,24 @@ export async function buildApp(deps: AppDeps) {
                 po: m.poLineKey,
                 rr: m.rrLineKey,
                 invoice: m.invLineKey,
+                lines: {
+                  po: m.poLineKey ? (lines.get(m.poLineKey) ?? null) : null,
+                  rr: m.rrLineKey ? (lines.get(m.rrLineKey) ?? null) : null,
+                  invoice: m.invLineKey ? (lines.get(m.invLineKey) ?? null) : null,
+                },
                 method: m.method,
                 confidence: m.confidence?.toFixed(4) ?? null,
                 reason: m.reasoning,
               })),
-              exceptions: run.exceptions.map((e) => exceptionView(e, s.poNumber, run.version)),
+              exceptions: run.exceptions
+                .map((e) =>
+                  exceptionView(e, {
+                    poNumber: s.poNumber,
+                    version: run.version,
+                    vendorName: s.vendor?.name ?? null,
+                  }),
+                )
+                .sort(byImpact),
             }
           : null,
       };
@@ -362,15 +378,20 @@ export async function buildApp(deps: AppDeps) {
           type: ExceptionType.optional(),
           poNumber: z.string().optional(),
           includeInformational: z.coerce.boolean().default(true),
+          sort: z
+            .enum(['po', 'impact'])
+            .default('po')
+            .describe('impact: largest money at risk first'),
         }),
         response: { 200: z.array(ExceptionView), ...errors },
       },
     },
     async (req) => {
       const sets = await setsWithLatestRun(
+        db,
         req.query.poNumber ? { poNumber: req.query.poNumber } : {},
       );
-      return sets.flatMap((s) => {
+      const list = sets.flatMap((s) => {
         const run = s.matchRuns[0];
         if (!run) return [];
         return run.exceptions
@@ -380,8 +401,15 @@ export async function buildApp(deps: AppDeps) {
               (!req.query.type || e.type === req.query.type) &&
               (req.query.includeInformational || !e.informational),
           )
-          .map((e) => exceptionView(e, s.poNumber, run.version));
+          .map((e) =>
+            exceptionView(e, {
+              poNumber: s.poNumber,
+              version: run.version,
+              vendorName: s.vendor?.name ?? null,
+            }),
+          );
       });
+      return req.query.sort === 'impact' ? list.sort(byImpact) : list;
     },
   );
 
@@ -389,20 +417,68 @@ export async function buildApp(deps: AppDeps) {
     '/exceptions/:id',
     {
       schema: {
-        summary: 'One problem with its explanation and the lines involved',
+        summary: 'One problem: its explanation, and each involved line next to its partners',
         params: z.object({ id: z.string() }),
-        response: { 200: ExceptionView, ...errors },
+        response: { 200: ExceptionDetail, ...errors },
       },
     },
     async (req) => {
       const e = await db.exception.findUnique({
         where: { id: req.params.id },
-        include: { matchRun: { include: { set: true } } },
+        include: {
+          ...exceptionInclude,
+          matchRun: { include: { set: { include: { vendor: true } }, lineMatch: true } },
+        },
       });
       if (!e) throw new NotFound(`No exception ${req.params.id}`);
-      return exceptionView(e, e.matchRun.set.poNumber, e.matchRun.version);
+      const docIds = new Set(e.documentIds as string[]);
+      const keys = new Set(e.lineKeys as string[]);
+      const matches = e.matchRun.lineMatch.filter((m) =>
+        [m.poLineKey, m.rrLineKey, m.invLineKey].some((k) => k && keys.has(k)),
+      );
+      for (const m of matches)
+        for (const k of [m.poLineKey, m.rrLineKey, m.invLineKey])
+          if (k) docIds.add(k.split(':')[0]!);
+      const docs = await db.document.findMany({ where: { id: { in: [...docIds] } } });
+      const lines = await linesOf(db, docs);
+      const at = (k: string | null) => (k ? (lines.get(k) ?? null) : null);
+      const paired = new Set(matches.flatMap((m) => [m.poLineKey, m.rrLineKey, m.invLineKey]));
+      const typeOf = new Map(docs.map((d) => [d.id, d.type]));
+      // Involved lines no line match covers (e.g. an extra invoice line) still get a row.
+      const loose = [...keys]
+        .filter((k) => !paired.has(k))
+        .map((k) => {
+          const t = typeOf.get(k.split(':')[0]!);
+          return {
+            po: t === 'PO' ? at(k) : null,
+            rr: t === 'RR' ? at(k) : null,
+            invoice: t === 'INVOICE' ? at(k) : null,
+            method: null,
+            reason: null,
+          };
+        });
+      return {
+        ...exceptionView(e, {
+          poNumber: e.matchRun.set.poNumber,
+          version: e.matchRun.version,
+          vendorName: e.matchRun.set.vendor?.name ?? null,
+        }),
+        comparison: [
+          ...matches.map((m) => ({
+            po: at(m.poLineKey),
+            rr: at(m.rrLineKey),
+            invoice: at(m.invLineKey),
+            method: m.method,
+            reason: m.reasoning,
+          })),
+          ...loose,
+        ],
+        documents: docs.map((d) => ({ id: d.id, type: d.type, docNumber: d.docNumber })),
+      };
     },
   );
+
+  registerWorkRoutes(app, { db, storage: deps.storage, queues: deps.queues, events });
 
   return app;
 }
