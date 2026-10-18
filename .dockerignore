@@ -1,0 +1,18 @@
+# Keep the build context small and free of secrets.
+**/node_modules
+**/.next*
+**/dist
+.git
+.env
+.env.*
+!.env.example
+storage
+coverage
+evals/golden
+evals/results
+apps/web/test-results
+apps/web/playwright-report
+infra/.terraform
+infra/*.tfstate*
+docs/screenshots
+docs/diagrams
