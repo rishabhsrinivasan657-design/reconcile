@@ -1,6 +1,6 @@
 # ADR-0014: The AI-assistant connector reads through the API
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-10-18
 - **Requirements:** FR-14, US-11, M6 AC-2, AC-6 (answer to M6 Q1)
 

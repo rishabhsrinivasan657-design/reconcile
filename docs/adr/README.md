@@ -20,4 +20,4 @@ one and update the old one's status line.
 | [0011](0011-api-worker-queue.md) | An API for quick answers, a worker for slow work, a queue between them | Accepted |
 | [0012](0012-website-stack.md) | Website: Next.js, design tokens, Radix primitives, generated API client | Accepted |
 | [0013](0013-live-updates.md) | Live updates through Redis announcements and server-sent events | Accepted |
-| [0014](0014-mcp-through-the-api.md) | The AI-assistant connector reads through the API, using a shared typed client | Proposed |
+| [0014](0014-mcp-through-the-api.md) | The AI-assistant connector reads through the API, using a shared typed client | Accepted |

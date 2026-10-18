@@ -1,6 +1,6 @@
 # M6: The AI-assistant connector (MCP server). Design
 
-- **Status:** Draft, waiting for your approval
+- **Status:** Approved (2026-10-18)
 - **Builds:** AC-1 … AC-11 from [`requirements.md`](requirements.md)
 - **New decision record:** [ADR-0014](../../adr/0014-mcp-through-the-api.md) (the connector reads through the API, using a shared typed client)
 
