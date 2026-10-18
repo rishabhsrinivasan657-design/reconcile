@@ -213,26 +213,33 @@ assistant does through them can change Reconcile's data.
 | `get_overview` | "How are we doing this week?" |
 | `find_purchase_orders` | "Which Greenvale POs need review?" |
 
-**Claude Code:** start the stack (`pnpm dev:demo`) and open Claude Code in this folder. The repo's
-`.mcp.json` offers the `reconcile` server; approve it when asked. Or add it yourself:
+**Claude Code, in this folder:** start the stack (`pnpm dev:demo`) and open Claude Code here. The
+repo's `.mcp.json` offers the `reconcile` server; approve it when asked. Nothing else to set up.
+
+**Claude Code, from any other folder:** add it once for your user (pick this *or* the `.mcp.json`
+approval above, not both, or Claude Code warns about two servers with the same name):
 
 ```bash
-claude mcp add reconcile -- pnpm --silent --dir "$PWD" mcp
+claude mcp add --scope user reconcile -- node /path/to/reconcile/packages/mcp/bin/reconcile-mcp.mjs
 ```
 
-**Claude Desktop:** add this to `claude_desktop_config.json` (Settings → Developer → Edit config),
-with your own path:
+**Claude Desktop:** add this to `claude_desktop_config.json` (Settings → Developer → Edit config).
+Use full paths: Claude Desktop doesn't see your shell's `PATH`, so if you use nvm, put the output of
+`which node` as the command.
 
 ```json
 {
   "mcpServers": {
     "reconcile": {
-      "command": "pnpm",
-      "args": ["--silent", "--dir", "/path/to/reconcile", "mcp"]
+      "command": "/full/path/to/node",
+      "args": ["/path/to/reconcile/packages/mcp/bin/reconcile-mcp.mjs"]
     }
   }
 }
 ```
+
+The connector starts with plain Node (no pnpm), so it works from whatever folder the assistant
+starts it in. The API must be running.
 
 The connector reads through the API, the same way the website does, so the assistant and the website
 always agree ([ADR-0014](docs/adr/0014-mcp-through-the-api.md)). Text that came from documents is

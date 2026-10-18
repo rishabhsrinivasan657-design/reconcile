@@ -72,18 +72,19 @@ describe.skipIf(!testDbUrl)('MCP server end to end (M6)', () => {
     await app.listen({ port: 0, host: '127.0.0.1' });
     apiUrl = `http://127.0.0.1:${(app.server.address() as { port: number }).port}`;
 
-    // Start the connector as its own program, like `claude mcp add reconcile -- pnpm mcp` does.
+    // Start the connector as its own program, with the same command the README gives assistants.
     client = new Client({ name: 'e2e', version: '1' });
     await client.connect(
       new StdioClientTransport({
         command: process.execPath,
-        args: ['--import', 'tsx', path.join(root, 'packages/mcp/src/main.ts')],
+        args: [path.join(root, 'packages/mcp/bin/reconcile-mcp.mjs')],
         env: {
           ...(process.env as Record<string, string>),
           RECONCILE_API_URL: apiUrl,
           RECONCILE_WEB_URL: 'http://web.test',
         },
-        cwd: root,
+        // A folder other than the repo, like Claude Desktop: the launcher must not depend on it.
+        cwd: os.tmpdir(),
         stderr: 'pipe',
       }),
     );

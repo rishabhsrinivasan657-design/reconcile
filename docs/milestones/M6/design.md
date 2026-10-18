@@ -154,6 +154,6 @@ Claude Desktop gets the equivalent JSON snippet in the README.
 | Planned | What we did | Why |
 |---|---|---|
 | Separate commits for the server and for each group of tools | One commit for the server and all six tools, with their tests | The server registers every tool, so the pieces only build together |
-| `pnpm mcp` runs the package's own start script | `pnpm mcp` runs `tsx packages/mcp/src/main.ts` directly | A nested `pnpm` call prints a header line to standard output, which would corrupt the MCP conversation. Checked: standard output now carries only MCP messages. |
+| Assistants start the connector with `pnpm mcp` | A launcher run by plain Node: `node packages/mcp/bin/reconcile-mcp.mjs` (`pnpm mcp` runs it too) | A nested `pnpm` call prints a header line to standard output, which corrupts the MCP conversation. And in testing, `pnpm` started from another folder picked a different pnpm version and needed files from the home folder. The launcher avoids both. |
 | (not planned) | A project-level `.mcp.json`, so Claude Code offers the connector when opened in this folder | One less command for anyone who clones the repo; Claude Code still asks before starting it |
 | (not planned) | `list_exceptions` filters `includeInformational` itself instead of passing it to the API | The API reads that option with a loose "anything is true" conversion, so `false` would have meant true. Logged as backlog B-26. |

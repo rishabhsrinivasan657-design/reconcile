@@ -7,12 +7,13 @@
     ".": "./src/server.ts"
   },
   "scripts": {
-    "start": "tsx src/main.ts",
+    "start": "node bin/reconcile-mcp.mjs",
     "typecheck": "tsc -p tsconfig.json"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.32.1",
     "@reconcile/api-client": "workspace:*",
+    "tsx": "^4.23.15",
     "zod": "^4.6.7"
   },
   "devDependencies": {
@@ -20,5 +21,8 @@
     "@reconcile/db": "workspace:*",
     "@reconcile/llm": "workspace:*",
     "@reconcile/pipeline": "workspace:*"
+  },
+  "bin": {
+    "reconcile-mcp": "./bin/reconcile-mcp.mjs"
   }
 }
