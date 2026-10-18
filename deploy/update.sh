@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
+# The single-quoted $OWNER_DATABASE_URL below is expanded inside the container, on purpose.
+# shellcheck disable=SC2016
 # Deploy a commit on the server (run by `pnpm deploy:up` through Session Manager, as root).
 # Usage: update.sh <commit-sha>
 set -euo pipefail
-# The single-quoted $OWNER_DATABASE_URL below is expanded inside the container, on purpose.
-# shellcheck disable=SC2016
 
 COMMIT="${1:?usage: update.sh <commit-sha>}"
 APP_DIR=/opt/reconcile
