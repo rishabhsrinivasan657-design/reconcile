@@ -1,6 +1,6 @@
 # M6: The AI-assistant connector (MCP server). Requirements
 
-- **Status:** Draft, waiting for your approval
+- **Status:** Approved 2026-10-18 (data through the API, both extra tools, Claude Code for the demo)
 - **Links to the PRD:** US-09, US-11 · FR-14 · NFR-10
 - **Release when done:** v0.7.0
 
@@ -90,7 +90,7 @@ The four tools the PRD names (FR-14), plus two that make the others easier to us
 - Short-shipment dates use the receiving report's date, because that's when the shortage became
   known.
 
-## Questions for you
+## Questions (answered 2026-10-18)
 
 - **Q1. Where should the connector get its data?**
   - **A: Through the API** (like the website). It reuses the API's explanations and rules, it is
@@ -99,9 +99,9 @@ The four tools the PRD names (FR-14), plus two that make the others easier to us
   - **B: Straight from the database**, with a read-only database login. It works without the API,
     but repeats query logic the API already has.
   - *I recommend A.* It's what we promised in ADR-0012, and "the website and the assistant can't
-    disagree" is a strong guarantee.
+    disagree" is a strong guarantee. **Answer: A, through the API.**
 - **Q2. Keep the two extra tools** (`get_overview`, `find_purchase_orders`)? *I recommend yes*:
-  without a way to find a PO first, the assistant has to guess PO numbers.
+  without a way to find a PO first, the assistant has to guess PO numbers. **Answer: yes.**
 - **Q3. For the demo conversation (AC-10), which assistant?** *I recommend Claude Code*, because
   it's already on your computer and is set up with one command. Claude Desktop will also be
-  documented.
+  documented. **Answer: Claude Code.**

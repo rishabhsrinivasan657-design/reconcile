@@ -631,3 +631,24 @@ assistants call Reconcile's tools, plus three questions.
 - **One source of truth.** If the connector asks the same API as the website, the two can never disagree.
 
 **Remember:** whatever an assistant reads, a stranger may have written.
+
+---
+
+## M6 · Design (2026-10-18)
+
+**In one line:** make the safe behavior the only possible behavior.
+
+**What we did:** designed six tools, one new API address, and a shared API client, with a
+decision record for reading through the API.
+
+**Key ideas**
+- **Safe by construction beats safe by promise.** The connector's API client simply has no way to
+  send a write request, so "read-only" isn't a rule to remember; it's the only thing the code can do.
+- **Share code instead of copying it.** The typed client moves into its own package so the website
+  and the connector use the same one.
+- **Label untrusted text.** Text from documents is wrapped in `«…»` and the assistant is told what
+  that means, a simple, consistent defense against hidden instructions.
+- **Keep the output channel clean.** Local MCP servers talk over standard output, so a stray log line
+  would break the conversation. Logs go to standard error.
+
+**Remember:** design so that the mistake you fear can't be written.

@@ -1,6 +1,6 @@
 {
   "docs/diagrams/architecture-1-system-context-who-talks-to-reconcile.png": "63f2cd34db6f42892bc813bf91b2ec81651bf3fea3009926da9990ff6bb0dbfb",
-  "docs/diagrams/architecture-2-containers-the-moving-parts.png": "b88db638e0486d09b4514d14ec9d353499d035dacce4aa64a5c64ee09d4afda6",
+  "docs/diagrams/architecture-2-containers-the-moving-parts.png": "c706226de7d97e46245b4cb1064c34410c0b84119339ab0d49584594faeec0f4",
   "docs/diagrams/architecture-3-main-flow-upload-exception.png": "3ddc56358f71b0ae0bb4de9656256b88a3ba2fc6d0d47aeb31de849e42ca5a57",
   "docs/diagrams/architecture-4-document.png": "ce0d524101623c6856b80068fb9c3cf972f3ecd11abec7a063c71d665729a415",
   "docs/diagrams/architecture-5-exception.png": "7c6a75683e0e566a9ccf803dc4df87ac9cb5f886526ac6cac70ec55081e5b990",
@@ -11,5 +11,6 @@
   "docs/diagrams/milestones-m2-design-1-overview.png": "ef06fdfaa69214a47bc8b3c75719bbace0f1402f14e1dadcfeda8be832c3585f",
   "docs/diagrams/milestones-m3-design-1-overview.png": "f14f1ddc87eddc837d080a624a51890470b2788bbd123fdd9d26582360c42f3b",
   "docs/diagrams/milestones-m4-design-1-the-big-picture.png": "bbfae2c1ab4c62e4f641bbd63d7c5fb7a78829fe1d649c5f7fc8b61d3f518b6c",
-  "docs/diagrams/milestones-m5-design-1-the-big-picture.png": "a57addfe4620cd8a96c4b5f79d2df6919b23aebeb547737aba7b81180bd7c25d"
+  "docs/diagrams/milestones-m5-design-1-the-big-picture.png": "a57addfe4620cd8a96c4b5f79d2df6919b23aebeb547737aba7b81180bd7c25d",
+  "docs/diagrams/milestones-m6-design-1-the-big-picture.png": "b342d49dab63fac5a341f86b1b5833bcb75c8f67514a8153f53ada39a1fa9c3a"
 }
