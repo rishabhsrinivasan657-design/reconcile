@@ -1,0 +1,37 @@
+#cloud-config
+# First boot of the Reconcile server (M7 design §3). Deploys themselves run deploy/update.sh.
+# Terraform fills in $${region} and $${repo_url}; shell variables are written with a double dollar.
+package_update: true
+packages: [ca-certificates, curl, git, jq, unzip]
+
+write_files:
+  - path: /usr/local/bin/reconcile-write-env
+    permissions: '0750'
+    content: |
+      #!/usr/bin/env bash
+      # Copy the generated secrets from the parameter store into a file only root can read.
+      set -euo pipefail
+      install -d -m 0700 /etc/reconcile
+      umask 077
+      aws ssm get-parameters-by-path --region ${region} --path /reconcile/ --with-decryption \
+        --query 'Parameters[].[Name,Value]' --output text \
+        | while read -r name value; do echo "$${name#/reconcile/}=$${value}"; done > /etc/reconcile/.env.new
+      mv /etc/reconcile/.env.new /etc/reconcile/.env
+
+runcmd:
+  # Swap: the website build needs more than 2 GB of memory for a moment.
+  - fallocate -l 2G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile
+  - echo '/swapfile none swap sw 0 0' >> /etc/fstab
+  # Docker from Docker's own package repository (with the compose and buildx plugins).
+  - install -m 0755 -d /etc/apt/keyrings
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  - echo "deb [arch=arm64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) stable" > /etc/apt/sources.list.d/docker.list
+  - apt-get update -q
+  - apt-get install -y -q docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  - systemctl enable --now docker
+  # The AWS command-line tool, to read the secrets.
+  - snap install aws-cli --classic
+  - /usr/local/bin/reconcile-write-env
+  # The code; `pnpm deploy:up` then runs deploy/update.sh at the commit being deployed.
+  - git clone --depth 1 ${repo_url} /opt/reconcile
+  - touch /var/lib/cloud/reconcile-ready
