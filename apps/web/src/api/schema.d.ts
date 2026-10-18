@@ -330,6 +330,11 @@ export interface paths {
                             uploadedAt: string;
                             extraction: {
                                 version: number;
+                                /**
+                                 * @description HUMAN after a correction
+                                 * @enum {string}
+                                 */
+                                source: "LLM" | "HUMAN";
                                 model: string | null;
                                 /** @description What the AI read (values only) */
                                 fields: unknown;

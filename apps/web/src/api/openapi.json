@@ -699,6 +699,14 @@
                         "version": {
                           "type": "number"
                         },
+                        "source": {
+                          "type": "string",
+                          "enum": [
+                            "LLM",
+                            "HUMAN"
+                          ],
+                          "description": "HUMAN after a correction"
+                        },
                         "model": {
                           "nullable": true,
                           "type": "string"
@@ -725,6 +733,7 @@
                       },
                       "required": [
                         "version",
+                        "source",
                         "model",
                         "fields",
                         "confidence",

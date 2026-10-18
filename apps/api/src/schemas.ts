@@ -45,6 +45,7 @@ export const DocumentDetail = DocumentSummary.extend({
   extraction: z
     .object({
       version: z.number(),
+      source: z.enum(['LLM', 'HUMAN']).describe('HUMAN after a correction'),
       model: z.string().nullable(),
       fields: z.unknown().describe('What the AI read (values only)'),
       confidence: z.record(z.string(), z.number()),

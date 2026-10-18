@@ -222,6 +222,7 @@ export async function buildApp(deps: AppDeps) {
         extraction: ex
           ? {
               version: ex.version,
+              source: ex.source,
               model: ex.model,
               fields: ex.data,
               confidence: ex.fieldConfidence as Record<string, number>,
