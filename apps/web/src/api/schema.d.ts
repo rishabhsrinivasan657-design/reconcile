@@ -1202,6 +1202,115 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/review": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Documents waiting for a human check, with the reasons, oldest first */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Default Response */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            document: {
+                                id: string;
+                                /** @enum {string} */
+                                status: "UPLOADED" | "EXTRACTING" | "NEEDS_REVIEW" | "READY" | "MATCHED" | "FAILED";
+                                /** @enum {string|null} */
+                                type: "PO" | "RR" | "INVOICE" | null;
+                                docNumber: string | null;
+                                poNumber: string | null;
+                                mimeType: string;
+                                pages: number | null;
+                                uploadedAt: string;
+                            };
+                            vendorName: string | null;
+                            reasons: string[];
+                            /** @description Fields read with confidence below 0.8 */
+                            unsureFields: number;
+                        }[];
+                    };
+                };
+                /** @description An error, in the standard "problem JSON" shape (RFC 7807). */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            type: string;
+                            title: string;
+                            status: number;
+                            detail?: string;
+                        };
+                    };
+                };
+                /** @description An error, in the standard "problem JSON" shape (RFC 7807). */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            type: string;
+                            title: string;
+                            status: number;
+                            detail?: string;
+                        };
+                    };
+                };
+                /** @description An error, in the standard "problem JSON" shape (RFC 7807). */
+                409: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            type: string;
+                            title: string;
+                            status: number;
+                            detail?: string;
+                        };
+                    };
+                };
+                /** @description An error, in the standard "problem JSON" shape (RFC 7807). */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            type: string;
+                            title: string;
+                            status: number;
+                            detail?: string;
+                        };
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/exceptions/{id}/decision": {
         parameters: {
             query?: never;

@@ -2835,6 +2835,230 @@
         }
       }
     },
+    "/review": {
+      "get": {
+        "summary": "Documents waiting for a human check, with the reasons, oldest first",
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "document": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string",
+                            "enum": [
+                              "UPLOADED",
+                              "EXTRACTING",
+                              "NEEDS_REVIEW",
+                              "READY",
+                              "MATCHED",
+                              "FAILED"
+                            ]
+                          },
+                          "type": {
+                            "nullable": true,
+                            "type": "string",
+                            "enum": [
+                              "PO",
+                              "RR",
+                              "INVOICE"
+                            ]
+                          },
+                          "docNumber": {
+                            "nullable": true,
+                            "type": "string"
+                          },
+                          "poNumber": {
+                            "nullable": true,
+                            "type": "string"
+                          },
+                          "mimeType": {
+                            "type": "string"
+                          },
+                          "pages": {
+                            "nullable": true,
+                            "type": "number"
+                          },
+                          "uploadedAt": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "status",
+                          "type",
+                          "docNumber",
+                          "poNumber",
+                          "mimeType",
+                          "pages",
+                          "uploadedAt"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "vendorName": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "reasons": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "unsureFields": {
+                        "type": "number",
+                        "description": "Fields read with confidence below 0.8"
+                      }
+                    },
+                    "required": [
+                      "document",
+                      "vendorName",
+                      "reasons",
+                      "unsureFields"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "An error, in the standard \"problem JSON\" shape (RFC 7807).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "number"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "title",
+                    "status"
+                  ],
+                  "additionalProperties": false,
+                  "description": "An error, in the standard \"problem JSON\" shape (RFC 7807)."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "An error, in the standard \"problem JSON\" shape (RFC 7807).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "number"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "title",
+                    "status"
+                  ],
+                  "additionalProperties": false,
+                  "description": "An error, in the standard \"problem JSON\" shape (RFC 7807)."
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "An error, in the standard \"problem JSON\" shape (RFC 7807).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "number"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "title",
+                    "status"
+                  ],
+                  "additionalProperties": false,
+                  "description": "An error, in the standard \"problem JSON\" shape (RFC 7807)."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error, in the standard \"problem JSON\" shape (RFC 7807).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "number"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "title",
+                    "status"
+                  ],
+                  "additionalProperties": false,
+                  "description": "An error, in the standard \"problem JSON\" shape (RFC 7807)."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/exceptions/{id}/decision": {
       "post": {
         "summary": "Approve, dispute, or write off a problem, with a required note",

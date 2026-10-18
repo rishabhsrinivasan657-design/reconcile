@@ -27,6 +27,7 @@ import {
   Me,
   Overview,
   Problem,
+  ReviewItem,
 } from './schemas.ts';
 import { exceptionInclude, exceptionView, NotFound, setsWithLatestRun } from './views.ts';
 
@@ -74,6 +75,46 @@ export function registerWorkRoutes(app: App, deps: WorkDeps) {
     async () => {
       const u = await currentUser();
       return { id: u.id, name: u.name, email: u.email };
+    },
+  );
+
+  app.get(
+    '/review',
+    {
+      schema: {
+        summary: 'Documents waiting for a human check, with the reasons, oldest first',
+        response: { 200: z.array(ReviewItem), ...errors },
+      },
+    },
+    async () => {
+      const docs = await db.document.findMany({
+        where: { status: 'NEEDS_REVIEW' },
+        orderBy: { createdAt: 'asc' },
+        include: {
+          vendor: true,
+          set: true,
+          extractions: { orderBy: { version: 'desc' }, take: 1 },
+        },
+      });
+      return docs.map((d) => {
+        const ex = d.extractions[0];
+        const conf = (ex?.fieldConfidence ?? {}) as Record<string, number>;
+        return {
+          document: {
+            id: d.id,
+            status: d.status,
+            type: d.type,
+            docNumber: d.docNumber,
+            poNumber: d.set?.poNumber ?? null,
+            mimeType: d.mimeType,
+            pages: d.pageCount,
+            uploadedAt: d.createdAt.toISOString(),
+          },
+          vendorName: d.vendor?.name ?? null,
+          reasons: (ex?.reviewReasons ?? []) as string[],
+          unsureFields: Object.values(conf).filter((c) => c < 0.8).length,
+        };
+      });
     },
   );
 

@@ -213,3 +213,10 @@ export const SetDetail = SetSummary.omit({ documents: true }).extend({
 });
 
 export const UploadResult = z.object({ document: DocumentSummary, duplicate: z.boolean() });
+
+export const ReviewItem = z.object({
+  document: DocumentSummary,
+  vendorName: z.string().nullable(),
+  reasons: z.array(z.string()),
+  unsureFields: z.number().describe('Fields read with confidence below 0.8'),
+});
