@@ -1,6 +1,6 @@
 # M7: Deploy to AWS. Requirements
 
-- **Status:** Draft, waiting for your approval
+- **Status:** Approved 2026-10-18 (new Free-plan account, shared demo password for changes, recorded AI answers only)
 - **Links to the PRD:** US-12 · NFR-01 (cost) · risk "AWS free deploy incurs cost" · ADR-0005 (audit log, part 2)
 - **Release when done:** v1.0.0 (the last planned milestone)
 
@@ -93,24 +93,24 @@ So "$0" means: run on a **Free plan account** (it can't be billed), or on an old
 - Terraform keeps its record of what it created (the *state file*) on your computer, not in the
   repo (it can contain secrets).
 
-## Questions for you
+## Questions (answered 2026-10-18)
 
 - **Q1. Which AWS account will you use?**
   - **A: A new account on the Free plan** (it can't be charged; credits cover a small server for
     about 6 months).
   - **B: An existing account** (older ones may still have 12 months of free small servers; otherwise
     normal prices apply, so the budget alarm matters more).
-  - *I recommend A* if you don't already have one: it's the only setup where a bill is impossible.
+  - *I recommend A* if you don't already have one: it's the only setup where a bill is impossible. **Answer: A, a new Free-plan account.**
 - **Q2. Who can change things on the live site?**
   - **A: Anyone with the link can look; changes need a shared demo password** (a simple gate in front
     of the site, not real user accounts).
   - **B: Read-only for everyone** (uploads, decisions, and corrections turned off on the live site).
   - **C: Fully open**, with the demo data reset every night.
   - *I recommend A*: visitors can try the full flow if you give them the password, and nothing
-    changes by accident.
+    changes by accident. **Answer: A, a shared demo password for changes.**
 - **Q3. AI on the live site?**
   - **A: Recorded answers only** (no key in the cloud, no quota risk; uploads work for the test-set
     files and other files get a clear "demo mode" message).
   - **B: Live Gemini free tier** (any document can be read; your key is stored in AWS's parameter
     store and counts against your free quota).
-  - *I recommend A* for a public demo.
+  - *I recommend A* for a public demo. **Answer: A, recorded answers only.**

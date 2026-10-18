@@ -712,3 +712,24 @@ questions about the account, who can change things, and AI on the live site.
   remembered to delete.
 
 **Remember:** before you deploy, know exactly how you'll pay, and how you'll stop paying.
+
+---
+
+## M7 · Design (2026-10-18)
+
+**In one line:** the simplest setup that's safe and free beats the impressive one.
+
+**What we did:** designed the deploy (one small server behind CloudFront), a cost table for every
+resource, the demo password, and two decision records.
+
+**Key ideas**
+- **Price every resource before creating it.** A table of "what it is, why, what it costs" turned
+  "about free" into "about $17.50 a month of credits, which last the whole Free plan".
+- **Same containers everywhere.** The cloud runs the same Compose stack as your laptop, so there's
+  little that only breaks in the cloud.
+- **Close every door you don't need.** No SSH port, the server only talks to CloudFront, and secrets
+  are generated in the cloud instead of typed anywhere.
+- **Least privilege for the app.** The app's database user simply isn't allowed to rewrite history,
+  a second lock behind the trigger.
+
+**Remember:** in the cloud, every resource is a line on a bill until proven otherwise.
