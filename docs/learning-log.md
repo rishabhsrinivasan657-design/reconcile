@@ -672,3 +672,22 @@ and filled in the test plan.
   see two servers with one name. Clear docs: pick one.
 
 **Remember:** "it connects on my machine" means little until it connects from somewhere else.
+
+---
+
+## M6 · Review, release, and retrospective (2026-10-18)
+
+**In one line:** wait for the checks, then ship; and let every retro lesson change a habit.
+
+**What we did:** confirmed all four CI checks passed on the final commit, merged PR #7, released
+v0.7.0, and wrote the retro.
+
+**Key ideas**
+- **Merge on green, not on "probably green".** We waited for the slow checks (tests and the browser
+  test) instead of merging while they ran, even though the previous push had passed.
+- **A demo is a test.** The recorded assistant conversation found a gap that 200 automated tests
+  missed: the safety marks were in the part of the answer Claude Code doesn't read.
+- **Safety signals belong everywhere a reader might look.** Not just in the summary, but in the
+  structured data too.
+
+**Remember:** a real user (even an AI one) is the best test you haven't written yet.
