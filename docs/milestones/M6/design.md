@@ -148,3 +148,12 @@ Claude Desktop gets the equivalent JSON snippet in the README.
 | Large answers waste the assistant's attention | Limits with "showing x of y" and how to narrow down |
 | The API isn't running | A clear error telling you to start it |
 | Moving the API client breaks the website | The move is its own commit; website tests and the browser test must stay green |
+
+## 8. What changed while building (implementation notes)
+
+| Planned | What we did | Why |
+|---|---|---|
+| Separate commits for the server and for each group of tools | One commit for the server and all six tools, with their tests | The server registers every tool, so the pieces only build together |
+| `pnpm mcp` runs the package's own start script | `pnpm mcp` runs `tsx packages/mcp/src/main.ts` directly | A nested `pnpm` call prints a header line to standard output, which would corrupt the MCP conversation. Checked: standard output now carries only MCP messages. |
+| (not planned) | A project-level `.mcp.json`, so Claude Code offers the connector when opened in this folder | One less command for anyone who clones the repo; Claude Code still asks before starting it |
+| (not planned) | `list_exceptions` filters `includeInformational` itself instead of passing it to the API | The API reads that option with a loose "anything is true" conversion, so `false` would have meant true. Logged as backlog B-26. |

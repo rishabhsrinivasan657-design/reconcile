@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "reconcile": {
+      "command": "pnpm",
+      "args": ["--silent", "mcp"],
+      "env": {
+        "RECONCILE_API_URL": "http://localhost:3001",
+        "RECONCILE_WEB_URL": "http://localhost:3000"
+      }
+    }
+  }
+}

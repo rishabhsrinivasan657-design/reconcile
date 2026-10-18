@@ -198,6 +198,46 @@ database, uploads a test set, waits until it's matched, writes off the costliest
 keyboard, finds the decision in the PO's history, and checks every page for accessibility
 problems in both themes. It runs in CI.
 
+## Ask an AI assistant (MCP)
+
+Reconcile includes a connector for AI assistants (an **MCP server**, `packages/mcp`), so you can ask
+Claude about your purchase orders in plain words. It has six **read-only** tools: nothing an
+assistant does through them can change Reconcile's data.
+
+| Tool | Answers questions like |
+|---|---|
+| `list_exceptions` | "What's still open over $1,000?" |
+| `explain_match` | "Why does HP-PO-104386 have a problem?" |
+| `find_short_shipments` | "What was short-shipped in August 2026?" |
+| `get_audit_trail` | "Who wrote off the problem on HP-PO-104386, and why?" |
+| `get_overview` | "How are we doing this week?" |
+| `find_purchase_orders` | "Which Greenvale POs need review?" |
+
+**Claude Code:** start the stack (`pnpm dev:demo`) and open Claude Code in this folder. The repo's
+`.mcp.json` offers the `reconcile` server; approve it when asked. Or add it yourself:
+
+```bash
+claude mcp add reconcile -- pnpm --silent --dir "$PWD" mcp
+```
+
+**Claude Desktop:** add this to `claude_desktop_config.json` (Settings → Developer → Edit config),
+with your own path:
+
+```json
+{
+  "mcpServers": {
+    "reconcile": {
+      "command": "pnpm",
+      "args": ["--silent", "--dir", "/path/to/reconcile", "mcp"]
+    }
+  }
+}
+```
+
+The connector reads through the API, the same way the website does, so the assistant and the website
+always agree ([ADR-0014](docs/adr/0014-mcp-through-the-api.md)). Text that came from documents is
+returned inside `«…»` and the assistant is told to treat it as data, never as instructions.
+
 ## Running Reconcile as a service
 
 ```bash
@@ -232,6 +272,7 @@ under its PO, and matches the PO once it has its documents. Some details:
 | `POST /documents/:id/corrections` | Fix fields the AI misread; saves a human version and re-matches the PO |
 | `GET /documents/:id/pages/:n` | A page as an image, for the highlight viewer |
 | `GET /sets/:poNumber/history`, `/overview`, `/review` | A PO's history in plain sentences, the overview numbers, documents to review |
+| `GET /short-shipments` | Lines where less arrived than was ordered, by receiving date |
 | `GET /events` | Live feed of changes (server-sent events) |
 | `GET /health`, `/docs` | Health check, live manual |
 
@@ -304,6 +345,8 @@ packages/pipeline    Shared by API + worker: storage, upload, read a document, m
 apps/api             The upload/results service (Fastify) with a live manual at /docs
 apps/worker          The background helper: read and match jobs (BullMQ on Redis)
 apps/web             The website (Next.js): overview, problems, POs, documents, review, upload
+packages/api-client  The typed API client shared by the website and the MCP server
+packages/mcp         The AI-assistant connector (MCP server): six read-only tools
 packages/extraction  PDF/scan → typed document with confidence, checks, review flag
 evals/               Eval harness (pnpm eval), baseline.json, committed 20-set CI subset
 docs/                PRD, architecture, ADRs, milestone docs, learning log
@@ -323,6 +366,7 @@ docs/                PRD, architecture, ADRs, milestone docs, learning log
 | `pnpm dev` | Start the API, the worker, and the website together |
 | `pnpm dev:demo` | The same, on the recorded AI answers (no key, no cost) |
 | `pnpm test:e2e` | The browser test (Playwright, with accessibility checks) |
+| `pnpm mcp` | Start the AI-assistant connector (assistants run this for you) |
 
 ## How this project is built
 
