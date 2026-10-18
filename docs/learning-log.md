@@ -593,3 +593,22 @@ themes and at tablet and phone width, and followed the README from a fresh copy 
   line in the example settings file that my own settings file didn't have.
 
 **Remember:** after the tests pass, try it the way a newcomer would.
+
+---
+
+## M5 · Review, release, and retrospective (2026-10-18)
+
+**In one line:** make the new safety net mandatory, then write down what you'd do differently.
+
+**What we did:** made the browser test a required check, self-reviewed the change against a
+checklist, merged PR #6, released v0.6.0, and wrote the retro.
+
+**Key ideas**
+- **A test only protects you if it's required.** Adding the browser test to the checks `main`
+  needs means nobody can merge a change that breaks the main flow.
+- **A self-review checklist catches rule-breaking.** It asks the project's own rules in plain
+  questions: does the website touch the database? is money ever a JavaScript number?
+- **Retros are for habits.** The useful lessons here weren't about code. They were about habits:
+  try a fresh clone, measure the mockup, stop processes precisely.
+
+**Remember:** every lesson in a retro should change something you do next time.

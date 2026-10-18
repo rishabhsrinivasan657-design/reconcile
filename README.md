@@ -5,7 +5,7 @@ An AI **3-way match** agent for distributors and CPG brands. It reconciles
 invoices**, then flags short-ships, price mismatches, and other exceptions for
 a human to approve, dispute, or write off.
 
-> **Status: M5, a working website.** Drop in documents and watch Reconcile read them
+> **Status: M5 released (v0.6.0), a working website.** Drop in documents and watch Reconcile read them
 > with AI, file them under their PO, and match them, live. Work through the problems,
 > costliest first, with the evidence side by side, and approve, dispute, or write off
 > each one. The AI-assistant connector (M6) and deployment (M7) come next (see
