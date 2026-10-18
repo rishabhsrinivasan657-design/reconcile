@@ -126,3 +126,20 @@ jobs:
             apps/web/playwright-report
             apps/web/test-results
           retention-days: 7
+
+  infra:
+    name: Infrastructure checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.16.6
+      - name: Terraform format and validate (no AWS access, no credentials)
+        working-directory: infra
+        run: |
+          terraform fmt -check -recursive
+          terraform init -backend=false -input=false
+          terraform validate
+      - name: Shell scripts
+        run: shellcheck deploy/*.sh

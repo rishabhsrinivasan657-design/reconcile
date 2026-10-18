@@ -86,6 +86,8 @@ resource "aws_instance" "server" {
     volume_type = "gp3"
     volume_size = 20
     encrypted   = true
+    # Default tags don't reach the disk; tag it so the leftovers check can find it.
+    tags = { Project = "reconcile", Name = "reconcile" }
   }
 
   # Instance metadata only with session tokens (IMDSv2).
