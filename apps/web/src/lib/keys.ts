@@ -16,14 +16,14 @@ export function isTyping(e: Pick<KeyboardEvent, 'target' | 'metaKey' | 'ctrlKey'
  * sequence ("g o") that must finish within 900 ms (M5 AC-9).
  */
 export function createKeyReader(now: () => number = () => Date.now()) {
-  let pendingG = 0;
+  let pendingG: number | null = null;
   return (key: string): string | undefined => {
     const k = key.length === 1 ? key.toLowerCase() : key;
-    if (pendingG && now() - pendingG < 900) {
-      pendingG = 0;
+    if (pendingG !== null && now() - pendingG < 900) {
+      pendingG = null;
       return `g ${k}`;
     }
-    pendingG = 0;
+    pendingG = null;
     if (k === 'g') {
       pendingG = now();
       return undefined;

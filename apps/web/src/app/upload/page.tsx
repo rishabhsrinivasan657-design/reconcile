@@ -136,7 +136,11 @@ export default function UploadPage() {
               <h2 id="earlier-h">Earlier uploads</h2>
             </div>
             <Rows
-              rows={earlier.map((d) => ({ key: d.id, name: d.docNumber ?? 'Not read yet', doc: d }))}
+              rows={earlier.map((d) => ({
+                key: d.id,
+                name: d.docNumber ?? 'Not read yet',
+                doc: d,
+              }))}
             />
           </section>
         )}

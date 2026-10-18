@@ -261,7 +261,12 @@ export function registerWorkRoutes(app: App, deps: WorkDeps) {
           where: { purpose: 'EXTRACT', documentId: { not: null } },
           select: { documentId: true, costUsd: true, latencyMs: true, cacheHit: true },
         }),
-        db.auditEvent.findMany({ orderBy: { id: 'desc' }, take: 10 }),
+        // "Started reading" is followed by "Read …"; the overview shows only the outcome.
+        db.auditEvent.findMany({
+          where: { action: { not: 'document.reading' } },
+          orderBy: { id: 'desc' },
+          take: 10,
+        }),
       ]);
       const current = sets.flatMap((s) => s.matchRuns[0]?.exceptions ?? []);
       const open = current.filter((e) => e.status === 'OPEN');
