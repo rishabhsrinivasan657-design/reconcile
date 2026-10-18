@@ -13,7 +13,7 @@ export default tseslint.config(
       'packages/db/prisma/migrations/**',
       'apps/web/.next*/**',
       'apps/web/next-env.d.ts',
-      'apps/web/src/api/**',
+      'packages/api-client/src/schema.ts',
       'apps/web/playwright-report/**',
       'apps/web/test-results/**',
     ],

@@ -4,7 +4,8 @@ evals/golden*/
 *.md
 packages/db/prisma/migrations/
 packages/db/src/generated/
-apps/web/src/api/
+packages/api-client/src/schema.ts
+packages/api-client/src/openapi.json
 apps/web/.next*/
 apps/web/next-env.d.ts
 apps/web/playwright-report/

@@ -8,6 +8,8 @@ const config: NextConfig = {
   // The browser test builds into its own folder so it can run next to `pnpm dev`.
   distDir: process.env.NEXT_DIST_DIR ?? '.next',
   poweredByHeader: false,
+  // Workspace packages ship TypeScript source; Next compiles them like the app's own code.
+  transpilePackages: ['@reconcile/api-client'],
   agentRules: false,
   devIndicators: false,
   // Server-sent events must stream through the forwarder, not be buffered and compressed.
