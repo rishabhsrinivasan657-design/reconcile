@@ -3,6 +3,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { Icon } from '@/components/Icon';
+import { useUi } from '@/components/Providers';
 import { Tag } from '@/components/Tag';
 import { api, unwrap, type DocumentSummary } from '@/lib/api';
 import { when } from '@/lib/format';
@@ -25,6 +26,7 @@ interface Sent {
 /** Drag in files and watch each move through uploaded → reading → ready → matched, live (AC-3). */
 export default function UploadPage() {
   const client = useQueryClient();
+  const ui = useUi();
   const [sent, setSent] = useState<Sent[]>([]);
   const [over, setOver] = useState(false);
   const input = useRef<HTMLInputElement>(null);
@@ -58,6 +60,7 @@ export default function UploadPage() {
             duplicate?: boolean;
             detail?: string;
           };
+          if (res.status === 401) ui.handleLocked({ status: 401 });
           if (!res.ok || !json.document)
             return update({ error: json.detail ?? `The server answered ${res.status}.` });
           update({ id: json.document.id, duplicate: Boolean(json.duplicate) });

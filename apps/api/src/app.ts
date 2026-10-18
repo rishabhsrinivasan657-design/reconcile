@@ -45,12 +45,15 @@ import {
   problem,
   setsWithLatestRun,
 } from './views.ts';
+import { registerDemoGate, type DemoGate } from './demo-gate.ts';
 import { registerWorkRoutes } from './work-routes.ts';
 
 export interface AppDeps {
   db: PrismaClient;
   storage: Storage;
   queues: Pick<Queues, 'enqueueRead' | 'enqueueMatch'>;
+  /** Live demo only: changes need the shared password (ADR-0016). Omitted locally. */
+  demoGate?: DemoGate;
   /** Live announcements (ADR-0013). Defaults to an in-process bus (tests, no Redis). */
   events?: EventBus;
   /** Health check for Redis; omitted in tests that don't use it. */
@@ -102,6 +105,7 @@ export async function buildApp(deps: AppDeps) {
   );
 
   const { db } = deps;
+  registerDemoGate(app, deps.demoGate);
   const events = deps.events ?? memoryEventBus();
   const setPo = async (setId: string | null) =>
     setId

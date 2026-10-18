@@ -1,6 +1,6 @@
 'use client';
 import * as Dialog from '@radix-ui/react-dialog';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import { api, unwrap } from '@/lib/api';
@@ -156,6 +156,67 @@ export function SearchDialog() {
           )}
         </ul>
       )}
+    </Frame>
+  );
+}
+
+/** The live demo's "Unlock changes" dialog (ADR-0016). */
+export function UnlockDialog() {
+  const ui = useUi();
+  const client = useQueryClient();
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [busy, setBusy] = useState(false);
+  const close = () => {
+    ui.openDialog('none');
+    setPassword('');
+    setError('');
+  };
+  return (
+    <Frame open={ui.dialog === 'unlock'} onClose={close} title="Unlock changes">
+      <p className="muted" style={{ margin: 0 }}>
+        Anyone can look around this demo. To upload files, decide on problems, or correct fields,
+        enter the demo password.
+      </p>
+      <form
+        className="stack"
+        style={{ gap: 8 }}
+        onSubmit={async (e) => {
+          e.preventDefault();
+          if (!password) return setError('Enter the demo password.');
+          setBusy(true);
+          const r = await api.POST('/demo/unlock', { body: { password } }).catch(() => undefined);
+          setBusy(false);
+          if (!r || r.error)
+            return setError(r ? "That's not the demo password." : "Couldn't reach the server.");
+          await client.invalidateQueries({ queryKey: ['demo'] });
+          ui.toast('Changes unlocked for this browser.');
+          close();
+        }}
+      >
+        <label htmlFor="demo-password" className="faint small">
+          Demo password
+        </label>
+        <input
+          id="demo-password"
+          type="password"
+          autoFocus
+          autoComplete="current-password"
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            setError('');
+          }}
+        />
+        <div className="row" style={{ justifyContent: 'space-between' }}>
+          <span className="field-error" role="alert">
+            {error}
+          </span>
+          <button className="btn btn-primary" type="submit" aria-busy={busy}>
+            Unlock
+          </button>
+        </div>
+      </form>
     </Frame>
   );
 }

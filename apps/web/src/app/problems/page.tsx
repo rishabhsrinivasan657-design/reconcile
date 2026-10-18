@@ -160,6 +160,7 @@ function Problems() {
             <Detail
               key={selectedId}
               id={selectedId}
+              onRestored={(restoredId) => select(restoredId)}
               onDecided={() => {
                 const next = items[idx + 1] ?? items[idx - 1];
                 if (next && next.id !== selectedId) select(next.id);
@@ -212,7 +213,16 @@ function ListItem({
   );
 }
 
-function Detail({ id, onDecided }: { id: string; onDecided: () => void }) {
+function Detail({
+  id,
+  onDecided,
+  onRestored,
+}: {
+  id: string;
+  onDecided: () => void;
+  /** The save failed: show this problem again. */
+  onRestored: (id: string) => void;
+}) {
   const ui = useUi();
   const client = useQueryClient();
   const q = useQuery({
@@ -239,6 +249,9 @@ function Detail({ id, onDecided }: { id: string; onDecided: () => void }) {
     },
     onError: (err, _body, ctx) => {
       if (ctx?.before) client.setQueryData(LIST_KEY, ctx.before);
+      onRestored(id);
+      if (ui.handleLocked(err))
+        return ui.toast('Changes are locked on this demo. Unlock them, then save again.');
       ui.toast(err instanceof Error ? err.message : 'The decision wasn’t saved. Try again.');
     },
     onSuccess: (e, body) => {

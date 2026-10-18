@@ -12,7 +12,9 @@ interface Toast {
 interface Ui {
   live: LiveStatus;
   toast: (message: string, undo?: () => void) => void;
-  dialog: 'none' | 'shortcuts' | 'search';
+  dialog: 'none' | 'shortcuts' | 'search' | 'unlock';
+  /** Call when the API refused a change because the demo is locked (401): opens the unlock dialog. */
+  handleLocked: (err: unknown) => boolean;
   openDialog: (d: Ui['dialog']) => void;
 }
 const UiContext = createContext<Ui | null>(null);
@@ -62,7 +64,19 @@ function UiProvider({ children }: { children: React.ReactNode }) {
     timer.current = setTimeout(() => setToast(null), 5000);
   }, []);
   return (
-    <UiContext.Provider value={{ live, toast: show, dialog, openDialog }}>
+    <UiContext.Provider
+      value={{
+        live,
+        toast: show,
+        dialog,
+        openDialog,
+        handleLocked: (err) => {
+          if ((err as { status?: number } | null)?.status !== 401) return false;
+          openDialog('unlock');
+          return true;
+        },
+      }}
+    >
       {children}
       <div className="toast-region" role="status" aria-live="polite">
         {toast && (
