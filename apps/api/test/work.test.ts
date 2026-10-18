@@ -279,4 +279,44 @@ describe.skipIf(!testDbUrl)('API for the website (M5 AC-1, AC-2, AC-4–AC-7)', 
     });
     expect(Array.isArray(item.reasons)).toBe(true);
   });
+  it('short-shipments: filtered by the receiving report date, with money at risk (M6 AC-3)', async () => {
+    const llm = new LlmClient({
+      env: LlmEnv.parse({ LLM_CACHE_DIR: tmp() }),
+      cache: new FileCacheStore(path.join(root, 'evals/cache')),
+      mode: 'replay',
+    });
+    for (const id of ['S0010', 'S0134']) {
+      const t = JSON.parse(fs.readFileSync(path.join(golden, id, 'ground_truth.json'), 'utf8'));
+      for (const d of t.documents) {
+        const bytes = new Uint8Array(fs.readFileSync(path.join(golden, id, d.file)));
+        const { document } = await uploadDocument(db, storage, bytes);
+        await readDocument(db, { storage, llm }, document.id);
+      }
+      await matchPurchaseOrder(db, t.poNumber, { graceDays: 0 });
+    }
+    const all = await get('/short-shipments');
+    expect(
+      all.map(
+        (x: { poNumber: string; amount: string; informational: boolean; receivedOn: string }) => [
+          x.receivedOn,
+          x.poNumber,
+          x.amount,
+          x.informational,
+        ],
+      ),
+    ).toEqual([
+      ['2026-01-20', 'HP-PO-106269', '0.00', true],
+      ['2026-03-27', 'HP-PO-104157', '2329.70', false],
+    ]);
+    const march = await get('/short-shipments?from=2026-03-01&to=2026-03-31');
+    expect(march).toHaveLength(1);
+    expect(march[0]).toMatchObject({ vendorName: expect.any(String), ordered: expect.any(Number) });
+    expect(march[0].received).toBeLessThan(march[0].ordered);
+    expect(await get('/short-shipments?from=2026-05-01&to=2026-05-31')).toEqual([]);
+    const bad = await app.inject({
+      method: 'GET',
+      url: '/short-shipments?from=2026-03-31&to=2026-03-01',
+    });
+    expect(bad.statusCode).toBe(400);
+  });
 });

@@ -1206,6 +1206,127 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/short-shipments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Lines where less arrived than was ordered (SHORT_SHIP), by the receiving report date */
+        get: {
+            parameters: {
+                query?: {
+                    /** @description First receiving date to include (YYYY-MM-DD) */
+                    from?: string;
+                    /** @description Last receiving date to include (YYYY-MM-DD) */
+                    to?: string;
+                    /** @description Part of the vendor name */
+                    vendor?: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Default Response */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            exceptionId: string;
+                            poNumber: string;
+                            vendorName: string | null;
+                            /** @description The receiving report's date (YYYY-MM-DD) */
+                            receivedOn: string | null;
+                            sku: string | null;
+                            /** @description From the PO line (document text) */
+                            description: string;
+                            uom: string;
+                            ordered: number;
+                            received: number;
+                            /** @description Null when there is no invoice line */
+                            billed: number | null;
+                            unitPrice: string | null;
+                            /** @description Money at risk: billed but never received; 0.00 when billed correctly */
+                            amount: string;
+                            /** @description True when the invoice billed only what arrived ($0 at risk) */
+                            informational: boolean;
+                            /** @enum {string} */
+                            status: "OPEN" | "APPROVED" | "DISPUTED" | "WRITTEN_OFF";
+                            explanation: string;
+                        }[];
+                    };
+                };
+                /** @description An error, in the standard "problem JSON" shape (RFC 7807). */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            type: string;
+                            title: string;
+                            status: number;
+                            detail?: string;
+                        };
+                    };
+                };
+                /** @description An error, in the standard "problem JSON" shape (RFC 7807). */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            type: string;
+                            title: string;
+                            status: number;
+                            detail?: string;
+                        };
+                    };
+                };
+                /** @description An error, in the standard "problem JSON" shape (RFC 7807). */
+                409: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            type: string;
+                            title: string;
+                            status: number;
+                            detail?: string;
+                        };
+                    };
+                };
+                /** @description An error, in the standard "problem JSON" shape (RFC 7807). */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            type: string;
+                            title: string;
+                            status: number;
+                            detail?: string;
+                        };
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/review": {
         parameters: {
             query?: never;

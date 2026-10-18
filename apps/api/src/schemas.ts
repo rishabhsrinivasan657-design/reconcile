@@ -226,3 +226,25 @@ export const ReviewItem = z.object({
   reasons: z.array(z.string()),
   unsureFields: z.number().describe('Fields read with confidence below 0.8'),
 });
+
+export const ShortShipment = z.object({
+  exceptionId: z.string(),
+  poNumber: z.string(),
+  vendorName: z.string().nullable(),
+  receivedOn: z.string().nullable().describe("The receiving report's date (YYYY-MM-DD)"),
+  sku: z.string().nullable(),
+  description: z.string().describe('From the PO line (document text)'),
+  uom: z.string(),
+  ordered: z.number(),
+  received: z.number(),
+  billed: z.number().nullable().describe('Null when there is no invoice line'),
+  unitPrice: z.string().nullable(),
+  amount: z
+    .string()
+    .describe('Money at risk: billed but never received; 0.00 when billed correctly'),
+  informational: z
+    .boolean()
+    .describe('True when the invoice billed only what arrived ($0 at risk)'),
+  status: ExceptionStatus,
+  explanation: z.string(),
+});
