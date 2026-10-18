@@ -28,6 +28,7 @@
     "extract": "tsx packages/extraction/src/cli.ts",
     "eval:record": "tsx evals/src/cli.ts --stage all --live",
     "dev": "concurrently -k -n api,worker,web -c blue,magenta,green \"pnpm --filter @reconcile/api dev\" \"pnpm --filter @reconcile/worker dev\" \"pnpm --filter @reconcile/web dev\"",
+    "dev:demo": "LLM_MODE=replay LLM_ANSWER_CACHE_DIR=evals/cache MISSING_DOC_GRACE_DAYS=0 pnpm dev",
     "dev:api": "pnpm --filter @reconcile/api dev",
     "dev:worker": "pnpm --filter @reconcile/worker dev",
     "dev:web": "pnpm --filter @reconcile/web dev"

@@ -9,7 +9,7 @@ export const PROBLEM: Record<string, { label: string; tone: Tone }> = {
   QTY_BILLED_NOT_RECEIVED: { label: 'Billed, not received', tone: 'risk' },
   OVER_SHIP: { label: 'Over-shipped', tone: 'caution' },
   UNMATCHED_LINE: { label: 'Line not on PO', tone: 'caution' },
-  SHORT_SHIP: { label: 'Short-shipped', tone: 'neutral' },
+  SHORT_SHIP: { label: 'Short-shipped', tone: 'caution' },
 };
 export const problemWords = (type: string) =>
   PROBLEM[type] ?? { label: type, tone: 'neutral' as Tone };
@@ -77,4 +77,23 @@ export function fieldLabel(key: string): string {
   const m = /^lines\.(\d+)\.(\w+)$/.exec(key);
   if (m) return `Line ${Number(m[1]) + 1} · ${(FIELD[m[2]!] ?? m[2]!).toLowerCase()}`;
   return FIELD[key] ?? key;
+}
+
+/**
+ * How a line pair was made, in plain words. The AI's reasons start with "AI:"; the word matcher's
+ * reasons look like "text 0.94; sizes match (12 oz)".
+ */
+export function pairingReason(
+  reason: string | null | undefined,
+): { ai: boolean; text: string } | null {
+  if (!reason) return null;
+  if (reason.startsWith('AI:'))
+    return { ai: true, text: `Paired by AI: ${reason.slice(3).trim()}` };
+  const score = /text (\d(?:\.\d+)?)/.exec(reason);
+  return {
+    ai: false,
+    text: score
+      ? `Paired by similar wording: ${Math.round(Number(score[1]) * 100)}% alike, same size and unit`
+      : `Paired by similar wording`,
+  };
 }
