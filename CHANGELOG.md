@@ -6,6 +6,31 @@ All notable changes are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-10-18
+
+M6: the AI-assistant connector ([PR #7](https://github.com/rishabhsrinivasan657-design/reconcile/pull/7)).
+
+### Added
+- **MCP server** (`packages/mcp`) so AI assistants like Claude can answer questions about
+  purchase orders, with six **read-only** tools: `list_exceptions`, `explain_match`,
+  `find_short_shipments`, `get_audit_trail`, `get_overview`, `find_purchase_orders`.
+  - Each answer: a plain-English summary plus structured data, exact money, and website links.
+  - Document and human text is `«quoted»` in summaries and named in a `notice` in structured
+    answers, and the server tells assistants to treat it as data, never as instructions.
+  - Lists cap at 50 with "showing x of y"; a stopped API or an unknown PO gives a helpful error.
+- **Connect in one step:** the repo's `.mcp.json` offers the connector to Claude Code; README steps
+  for other folders and for Claude Desktop. A plain-Node launcher starts it from any folder.
+- **API:** `GET /short-shipments` (short-shipped lines by receiving date, with money at risk).
+- **Shared typed API client** (`packages/api-client`), used by the website and the connector.
+- A recorded Claude Code conversation answering the PRD's four questions (`docs/milestones/M6/demo.md`).
+
+### Changed
+- The connector reads through the API, not the database (ADR-0014); the architecture is updated.
+
+### Results
+- 201 tests, including an end-to-end test that starts the connector as its own program;
+  short-shipments match the answer keys; the eval scoreboard is unchanged.
+
 ## [0.6.0] - 2026-10-18
 
 M5: the website ([PR #6](https://github.com/rishabhsrinivasan657-design/reconcile/pull/6)).
@@ -146,7 +171,8 @@ M0: requirements and design. Documentation only, no code.
 - `QTY_BILLED_NOT_RECEIVED` exception type; informational short-ships (PRD decisions Q1, Q2).
 - M0 design: architecture doc, ADRs 0001–0006, doc and PR templates.
 
-[Unreleased]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.3.0...v0.4.0
