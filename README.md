@@ -260,7 +260,9 @@ expected.
 **One-time setup (yours: it involves your account and credentials):**
 
 1. Create an AWS account at [aws.amazon.com](https://aws.amazon.com) and choose the **Free plan**.
-2. Install the tools: `brew install awscli hashicorp/tap/terraform`
+2. Install the tools: `brew install awscli hashicorp/tap/terraform`. If Homebrew says your Command
+   Line Tools are too old, update them first (`softwareupdate --list`, then install the "Command Line
+   Tools for Xcode" entry with `sudo softwareupdate --install "<that label>"`).
 3. Sign in from your terminal: `aws login` (or `aws configure sso`). Terraform uses that sign-in; no
    keys go in this repo, in chat, or in any file.
 
