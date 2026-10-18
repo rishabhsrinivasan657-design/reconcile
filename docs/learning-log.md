@@ -612,3 +612,63 @@ checklist, merged PR #6, released v0.6.0, and wrote the retro.
   try a fresh clone, measure the mockup, stop processes precisely.
 
 **Remember:** every lesson in a retro should change something you do next time.
+
+---
+
+## M6 · Requirements (2026-10-18)
+
+**In one line:** an AI assistant is a new kind of user, so design its access like any user's: useful, correct, and safe.
+
+**What we did:** wrote 11 acceptance criteria for an MCP server, the standard plug that lets AI
+assistants call Reconcile's tools, plus three questions.
+
+**Key ideas**
+- **MCP is an interface, like an API.** Instead of web pages for people, it offers named tools with
+  descriptions for assistants. Good descriptions matter as much as good buttons.
+- **Read-only first.** Letting an assistant change data needs careful permissions, so M6 only reads.
+- **Documents can carry instructions.** An invoice line could say "approve everything". Text from
+  documents must reach the assistant clearly labeled as data (this attack is called *prompt injection*).
+- **One source of truth.** If the connector asks the same API as the website, the two can never disagree.
+
+**Remember:** whatever an assistant reads, a stranger may have written.
+
+---
+
+## M6 · Design (2026-10-18)
+
+**In one line:** make the safe behavior the only possible behavior.
+
+**What we did:** designed six tools, one new API address, and a shared API client, with a
+decision record for reading through the API.
+
+**Key ideas**
+- **Safe by construction beats safe by promise.** The connector's API client simply has no way to
+  send a write request, so "read-only" isn't a rule to remember; it's the only thing the code can do.
+- **Share code instead of copying it.** The typed client moves into its own package so the website
+  and the connector use the same one.
+- **Label untrusted text.** Text from documents is wrapped in `«…»` and the assistant is told what
+  that means, a simple, consistent defense against hidden instructions.
+- **Keep the output channel clean.** Local MCP servers talk over standard output, so a stray log line
+  would break the conversation. Logs go to standard error.
+
+**Remember:** design so that the mistake you fear can't be written.
+
+---
+
+## M6 · Testing (2026-10-18)
+
+**In one line:** test a connector from where its users will start it, not from where you built it.
+
+**What we did:** checked CI, ran the README's connect commands with a throwaway Claude Code setup,
+and filled in the test plan.
+
+**Key ideas**
+- **The starting folder matters.** Assistants start local connectors from wherever they happen to be
+  (Claude Desktop isn't in your project folder). Starting through `pnpm` broke there, so the connector
+  now starts with plain Node, which works from anywhere.
+- **Test in a sandbox.** Running Claude Code with a temporary settings folder let us check the real
+  connect command without touching your own settings.
+- **Two setup paths can collide.** Offering both a project file and a one-line command made Claude Code
+  see two servers with one name. Clear docs: pick one.
+
+**Remember:** "it connects on my machine" means little until it connects from somewhere else.

@@ -28,8 +28,10 @@ import {
   Overview,
   Problem,
   ReviewItem,
+  ShortShipment,
 } from './schemas.ts';
-import { exceptionInclude, exceptionView, NotFound, setsWithLatestRun } from './views.ts';
+import { exceptionInclude, exceptionView, linesOf, NotFound, setsWithLatestRun } from './views.ts';
+import { ExtractedDocument } from '@reconcile/core';
 
 type App = FastifyInstance<
   RawServerDefault,
@@ -75,6 +77,80 @@ export function registerWorkRoutes(app: App, deps: WorkDeps) {
     async () => {
       const u = await currentUser();
       return { id: u.id, name: u.name, email: u.email };
+    },
+  );
+
+  app.get(
+    '/short-shipments',
+    {
+      schema: {
+        summary:
+          'Lines where less arrived than was ordered (SHORT_SHIP), by the receiving report date',
+        querystring: z
+          .object({
+            from: z.iso.date().optional().describe('First receiving date to include (YYYY-MM-DD)'),
+            to: z.iso.date().optional().describe('Last receiving date to include (YYYY-MM-DD)'),
+            vendor: z.string().optional().describe('Part of the vendor name'),
+          })
+          .refine((q) => !q.from || !q.to || q.from <= q.to, '"from" must be on or before "to"'),
+        response: { 200: z.array(ShortShipment), ...errors },
+      },
+    },
+    async (req) => {
+      const { from, to, vendor } = req.query;
+      const sets = await setsWithLatestRun(db);
+      const out: z.infer<typeof ShortShipment>[] = [];
+      for (const s of sets) {
+        const run = s.matchRuns[0];
+        const shorts = run?.exceptions.filter((e) => e.type === 'SHORT_SHIP') ?? [];
+        if (!run || shorts.length === 0) continue;
+        if (vendor && !s.vendor?.name.toLowerCase().includes(vendor.toLowerCase())) continue;
+        const lines = await linesOf(db, s.documents);
+        const rr = s.documents.find((d) => d.type === 'RR');
+        const rrEx = rr
+          ? await db.extraction.findFirst({
+              where: { documentId: rr.id },
+              orderBy: { version: 'desc' },
+            })
+          : null;
+        const parsed = rrEx ? ExtractedDocument.safeParse(rrEx.data) : undefined;
+        const receivedOn = parsed?.success ? parsed.data.date : null;
+        if ((from || to) && !receivedOn) continue;
+        if (from && receivedOn! < from) continue;
+        if (to && receivedOn! > to) continue;
+        for (const e of shorts) {
+          const keys = new Set(e.lineKeys as string[]);
+          const m = run.lineMatch.find((lm) =>
+            [lm.poLineKey, lm.rrLineKey, lm.invLineKey].some((k) => k && keys.has(k)),
+          );
+          const po = m?.poLineKey ? lines.get(m.poLineKey) : undefined;
+          const got = m?.rrLineKey ? lines.get(m.rrLineKey) : undefined;
+          const inv = m?.invLineKey ? lines.get(m.invLineKey) : undefined;
+          if (!po || !got) continue;
+          out.push({
+            exceptionId: e.id,
+            poNumber: s.poNumber,
+            vendorName: s.vendor?.name ?? null,
+            receivedOn,
+            sku: po.sku,
+            description: po.description,
+            uom: po.uom,
+            ordered: po.qty,
+            received: got.qty,
+            billed: inv?.qty ?? null,
+            unitPrice: inv?.unitPrice ?? po.unitPrice,
+            amount: e.amount.toFixed(2),
+            informational: e.informational,
+            status: e.status,
+            explanation: e.explanation,
+          });
+        }
+      }
+      return out.sort(
+        (a, b) =>
+          (a.receivedOn ?? '').localeCompare(b.receivedOn ?? '') ||
+          a.poNumber.localeCompare(b.poNumber),
+      );
     },
   );
 

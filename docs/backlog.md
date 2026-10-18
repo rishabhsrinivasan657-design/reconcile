@@ -34,6 +34,7 @@ Priority: **P1** next after the current plan · **P2** valuable later · **P3** 
 | B-23 | Run the AI-only pairing strategy on the stress sets when quota allows | P3 | M4 testing |
 | B-24 | Add box accuracy to the scoreboard (how well the AI's highlight boxes overlap the answer key's). Measured once in M5: PDFs 97–100% of boxes on target, scans 96% for header fields but 80% for line items | P2 | M5 design feedback |
 | B-25 | Phone performance: on a simulated slow phone over 4G, the Problems page scores 62 (desktop 97). Split the page code so the first screen loads less JavaScript | P3 | M5 testing |
+| B-26 | `GET /exceptions?includeInformational=false` is read as true (a loose text-to-true conversion). Parse "false" properly and add a test | P2 | M6 implementation |
 
 ## Tech debt
 

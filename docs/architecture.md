@@ -64,7 +64,7 @@ flowchart TB
   worker --> fs
   core -->|via LLM client| llm
   core -.->|token bucket| redis
-  mcpsrv --> db
+  mcpsrv -->|HTTP JSON, read-only| api
 ```
 
 </details>
@@ -76,7 +76,7 @@ flowchart TB
 | `worker` | Run the extract and match jobs | serve HTTP |
 | `core` | Pure logic: schemas, matching, LLM client, prompts | import Prisma, Fastify, Next, or BullMQ |
 | `db` | Schema, migrations, seed, typed client | contain business rules |
-| `mcp` | Read-only tools over the DB | write anything |
+| `mcp` | Read-only tools for AI assistants, through the API (ADR-0014) | write anything, or touch the DB directly |
 
 ## 3. Main flow: upload → exception
 

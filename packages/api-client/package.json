@@ -1,0 +1,19 @@
+{
+  "name": "@reconcile/api-client",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "api:types": "tsx ../../apps/api/src/openapi.ts > src/openapi.json && openapi-typescript src/openapi.json -o src/schema.ts"
+  },
+  "dependencies": {
+    "openapi-fetch": "^0.17.0"
+  },
+  "devDependencies": {
+    "openapi-typescript": "^7.13.0"
+  }
+}

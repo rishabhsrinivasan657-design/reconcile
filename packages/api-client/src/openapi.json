@@ -2847,6 +2847,264 @@
         }
       }
     },
+    "/short-shipments": {
+      "get": {
+        "summary": "Lines where less arrived than was ordered (SHORT_SHIP), by the receiving report date",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+            },
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "description": "First receiving date to include (YYYY-MM-DD)"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+            },
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "description": "Last receiving date to include (YYYY-MM-DD)"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "vendor",
+            "required": false,
+            "description": "Part of the vendor name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "exceptionId": {
+                        "type": "string"
+                      },
+                      "poNumber": {
+                        "type": "string"
+                      },
+                      "vendorName": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "receivedOn": {
+                        "nullable": true,
+                        "description": "The receiving report's date (YYYY-MM-DD)",
+                        "type": "string"
+                      },
+                      "sku": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "From the PO line (document text)"
+                      },
+                      "uom": {
+                        "type": "string"
+                      },
+                      "ordered": {
+                        "type": "number"
+                      },
+                      "received": {
+                        "type": "number"
+                      },
+                      "billed": {
+                        "nullable": true,
+                        "description": "Null when there is no invoice line",
+                        "type": "number"
+                      },
+                      "unitPrice": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "string",
+                        "description": "Money at risk: billed but never received; 0.00 when billed correctly"
+                      },
+                      "informational": {
+                        "type": "boolean",
+                        "description": "True when the invoice billed only what arrived ($0 at risk)"
+                      },
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "OPEN",
+                          "APPROVED",
+                          "DISPUTED",
+                          "WRITTEN_OFF"
+                        ]
+                      },
+                      "explanation": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "exceptionId",
+                      "poNumber",
+                      "vendorName",
+                      "receivedOn",
+                      "sku",
+                      "description",
+                      "uom",
+                      "ordered",
+                      "received",
+                      "billed",
+                      "unitPrice",
+                      "amount",
+                      "informational",
+                      "status",
+                      "explanation"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "An error, in the standard \"problem JSON\" shape (RFC 7807).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "number"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "title",
+                    "status"
+                  ],
+                  "additionalProperties": false,
+                  "description": "An error, in the standard \"problem JSON\" shape (RFC 7807)."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "An error, in the standard \"problem JSON\" shape (RFC 7807).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "number"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "title",
+                    "status"
+                  ],
+                  "additionalProperties": false,
+                  "description": "An error, in the standard \"problem JSON\" shape (RFC 7807)."
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "An error, in the standard \"problem JSON\" shape (RFC 7807).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "number"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "title",
+                    "status"
+                  ],
+                  "additionalProperties": false,
+                  "description": "An error, in the standard \"problem JSON\" shape (RFC 7807)."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error, in the standard \"problem JSON\" shape (RFC 7807).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "number"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "title",
+                    "status"
+                  ],
+                  "additionalProperties": false,
+                  "description": "An error, in the standard \"problem JSON\" shape (RFC 7807)."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/review": {
       "get": {
         "summary": "Documents waiting for a human check, with the reasons, oldest first",

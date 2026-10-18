@@ -11,7 +11,7 @@ Each milestone gets a folder `Mx/` with `requirements.md`, `design.md`,
 | M3 LLM client and extraction | ✅ Released v0.4.0 (2026-10-17) |
 | M4 API, worker, fuzzy fallback | ✅ Released v0.5.0 (2026-10-17) |
 | M5 Web UI and human-in-the-loop | ✅ Released v0.6.0 (2026-10-18) |
-| M6 MCP server | Not started |
+| M6 MCP server | Testing gate |
 | M7 Deploy | Not started |
 
 M0 is documentation-only. Its "requirements" are the PRD and its "design" is
