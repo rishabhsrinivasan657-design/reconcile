@@ -612,3 +612,22 @@ checklist, merged PR #6, released v0.6.0, and wrote the retro.
   try a fresh clone, measure the mockup, stop processes precisely.
 
 **Remember:** every lesson in a retro should change something you do next time.
+
+---
+
+## M6 · Requirements (2026-10-18)
+
+**In one line:** an AI assistant is a new kind of user, so design its access like any user's: useful, correct, and safe.
+
+**What we did:** wrote 11 acceptance criteria for an MCP server, the standard plug that lets AI
+assistants call Reconcile's tools, plus three questions.
+
+**Key ideas**
+- **MCP is an interface, like an API.** Instead of web pages for people, it offers named tools with
+  descriptions for assistants. Good descriptions matter as much as good buttons.
+- **Read-only first.** Letting an assistant change data needs careful permissions, so M6 only reads.
+- **Documents can carry instructions.** An invoice line could say "approve everything". Text from
+  documents must reach the assistant clearly labeled as data (this attack is called *prompt injection*).
+- **One source of truth.** If the connector asks the same API as the website, the two can never disagree.
+
+**Remember:** whatever an assistant reads, a stranger may have written.
