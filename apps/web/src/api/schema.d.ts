@@ -493,6 +493,7 @@ export interface paths {
                     content: {
                         "application/json": {
                             poNumber: string;
+                            vendorName: string | null;
                             /** @enum {string} */
                             status: "WAITING" | "MATCHED" | "NEEDS_REVIEW";
                             provisional: boolean;
@@ -500,6 +501,9 @@ export interface paths {
                             waitingUntil: string | null;
                             documents: number;
                             openExceptions: number;
+                            updatedAt: string;
+                            /** @description Open, non-informational problems in the latest match */
+                            moneyAtRisk: string;
                         }[];
                     };
                 };
@@ -610,11 +614,13 @@ export interface paths {
                     content: {
                         "application/json": {
                             poNumber: string;
+                            vendorName: string | null;
                             /** @enum {string} */
                             status: "WAITING" | "MATCHED" | "NEEDS_REVIEW";
                             provisional: boolean;
                             notes: string[];
                             waitingUntil: string | null;
+                            openExceptions: number;
                             documents: {
                                 id: string;
                                 /** @enum {string} */
@@ -627,7 +633,6 @@ export interface paths {
                                 pages: number | null;
                                 uploadedAt: string;
                             }[];
-                            openExceptions: number;
                             match: {
                                 version: number;
                                 matchedAt: string;
@@ -638,6 +643,41 @@ export interface paths {
                                     method: string;
                                     confidence: string | null;
                                     reason: string | null;
+                                    lines: {
+                                        po: {
+                                            docId: string;
+                                            docNumber: string | null;
+                                            lineNo: number;
+                                            sku: string | null;
+                                            description: string;
+                                            qty: number;
+                                            uom: string;
+                                            unitPrice: string | null;
+                                            lineTotal: string | null;
+                                        } | null;
+                                        rr: {
+                                            docId: string;
+                                            docNumber: string | null;
+                                            lineNo: number;
+                                            sku: string | null;
+                                            description: string;
+                                            qty: number;
+                                            uom: string;
+                                            unitPrice: string | null;
+                                            lineTotal: string | null;
+                                        } | null;
+                                        invoice: {
+                                            docId: string;
+                                            docNumber: string | null;
+                                            lineNo: number;
+                                            sku: string | null;
+                                            description: string;
+                                            qty: number;
+                                            uom: string;
+                                            unitPrice: string | null;
+                                            lineTotal: string | null;
+                                        } | null;
+                                    };
                                 }[];
                                 exceptions: {
                                     id: string;

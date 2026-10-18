@@ -990,6 +990,10 @@
                       "poNumber": {
                         "type": "string"
                       },
+                      "vendorName": {
+                        "nullable": true,
+                        "type": "string"
+                      },
                       "status": {
                         "type": "string",
                         "enum": [
@@ -1016,16 +1020,26 @@
                       },
                       "openExceptions": {
                         "type": "number"
+                      },
+                      "updatedAt": {
+                        "type": "string"
+                      },
+                      "moneyAtRisk": {
+                        "type": "string",
+                        "description": "Open, non-informational problems in the latest match"
                       }
                     },
                     "required": [
                       "poNumber",
+                      "vendorName",
                       "status",
                       "provisional",
                       "notes",
                       "waitingUntil",
                       "documents",
-                      "openExceptions"
+                      "openExceptions",
+                      "updatedAt",
+                      "moneyAtRisk"
                     ],
                     "additionalProperties": false
                   }
@@ -1215,6 +1229,10 @@
                     "poNumber": {
                       "type": "string"
                     },
+                    "vendorName": {
+                      "nullable": true,
+                      "type": "string"
+                    },
                     "status": {
                       "type": "string",
                       "enum": [
@@ -1235,6 +1253,9 @@
                     "waitingUntil": {
                       "nullable": true,
                       "type": "string"
+                    },
+                    "openExceptions": {
+                      "type": "number"
                     },
                     "documents": {
                       "type": "array",
@@ -1296,9 +1317,6 @@
                         "additionalProperties": false
                       }
                     },
-                    "openExceptions": {
-                      "type": "number"
-                    },
                     "match": {
                       "nullable": true,
                       "type": "object",
@@ -1336,6 +1354,164 @@
                               "reason": {
                                 "nullable": true,
                                 "type": "string"
+                              },
+                              "lines": {
+                                "type": "object",
+                                "properties": {
+                                  "po": {
+                                    "nullable": true,
+                                    "type": "object",
+                                    "properties": {
+                                      "docId": {
+                                        "type": "string"
+                                      },
+                                      "docNumber": {
+                                        "nullable": true,
+                                        "type": "string"
+                                      },
+                                      "lineNo": {
+                                        "type": "number"
+                                      },
+                                      "sku": {
+                                        "nullable": true,
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "qty": {
+                                        "type": "number"
+                                      },
+                                      "uom": {
+                                        "type": "string"
+                                      },
+                                      "unitPrice": {
+                                        "nullable": true,
+                                        "type": "string"
+                                      },
+                                      "lineTotal": {
+                                        "nullable": true,
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "docId",
+                                      "docNumber",
+                                      "lineNo",
+                                      "sku",
+                                      "description",
+                                      "qty",
+                                      "uom",
+                                      "unitPrice",
+                                      "lineTotal"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  "rr": {
+                                    "nullable": true,
+                                    "type": "object",
+                                    "properties": {
+                                      "docId": {
+                                        "type": "string"
+                                      },
+                                      "docNumber": {
+                                        "nullable": true,
+                                        "type": "string"
+                                      },
+                                      "lineNo": {
+                                        "type": "number"
+                                      },
+                                      "sku": {
+                                        "nullable": true,
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "qty": {
+                                        "type": "number"
+                                      },
+                                      "uom": {
+                                        "type": "string"
+                                      },
+                                      "unitPrice": {
+                                        "nullable": true,
+                                        "type": "string"
+                                      },
+                                      "lineTotal": {
+                                        "nullable": true,
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "docId",
+                                      "docNumber",
+                                      "lineNo",
+                                      "sku",
+                                      "description",
+                                      "qty",
+                                      "uom",
+                                      "unitPrice",
+                                      "lineTotal"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  "invoice": {
+                                    "nullable": true,
+                                    "type": "object",
+                                    "properties": {
+                                      "docId": {
+                                        "type": "string"
+                                      },
+                                      "docNumber": {
+                                        "nullable": true,
+                                        "type": "string"
+                                      },
+                                      "lineNo": {
+                                        "type": "number"
+                                      },
+                                      "sku": {
+                                        "nullable": true,
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "qty": {
+                                        "type": "number"
+                                      },
+                                      "uom": {
+                                        "type": "string"
+                                      },
+                                      "unitPrice": {
+                                        "nullable": true,
+                                        "type": "string"
+                                      },
+                                      "lineTotal": {
+                                        "nullable": true,
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "docId",
+                                      "docNumber",
+                                      "lineNo",
+                                      "sku",
+                                      "description",
+                                      "qty",
+                                      "uom",
+                                      "unitPrice",
+                                      "lineTotal"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                },
+                                "required": [
+                                  "po",
+                                  "rr",
+                                  "invoice"
+                                ],
+                                "additionalProperties": false
                               }
                             },
                             "required": [
@@ -1344,7 +1520,8 @@
                               "invoice",
                               "method",
                               "confidence",
-                              "reason"
+                              "reason",
+                              "lines"
                             ],
                             "additionalProperties": false
                           }
@@ -1476,12 +1653,13 @@
                   },
                   "required": [
                     "poNumber",
+                    "vendorName",
                     "status",
                     "provisional",
                     "notes",
                     "waitingUntil",
-                    "documents",
                     "openExceptions",
+                    "documents",
                     "match"
                   ],
                   "additionalProperties": false

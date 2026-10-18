@@ -1,7 +1,6 @@
 import multipart from '@fastify/multipart';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
-import { ExtractedDocument } from '@reconcile/core';
 import type { Document, PrismaClient } from '@reconcile/db';
 import {
   ActionRefused,
@@ -33,14 +32,14 @@ import {
   Problem,
   SetDetail,
   SetStatus,
-  SetSummary,
+  SetListItem,
   UploadResult,
-  type Line,
 } from './schemas.ts';
 import {
   byImpact,
   exceptionInclude,
   exceptionView,
+  linesOf,
   NotFound,
   problem,
   setsWithLatestRun,
@@ -261,7 +260,7 @@ export async function buildApp(deps: AppDeps) {
       schema: {
         summary: 'Every PO set and its status',
         querystring: z.object({ status: SetStatus.optional() }),
-        response: { 200: z.array(SetSummary), ...errors },
+        response: { 200: z.array(SetListItem), ...errors },
       },
     },
     async (req) => {
@@ -271,6 +270,13 @@ export async function buildApp(deps: AppDeps) {
       );
       return sets.map((s) => ({
         poNumber: s.poNumber,
+        vendorName: s.vendor?.name ?? null,
+        updatedAt: s.updatedAt.toISOString(),
+        moneyAtRisk: (
+          (s.matchRuns[0]?.exceptions ?? [])
+            .filter((e) => e.status === 'OPEN' && !e.informational)
+            .reduce((c, e) => c + Math.round(Number(e.amount.toFixed(2)) * 100), 0) / 100
+        ).toFixed(2),
         status: s.status,
         provisional: s.provisional,
         notes: s.notes as string[],
@@ -298,15 +304,29 @@ export async function buildApp(deps: AppDeps) {
       });
       if (!s) throw new NotFound(`No PO ${req.params.poNumber}`);
       const run = s.matchRuns[0];
+      // A grouped near-miss PO (misread number) keeps its document in its own set: include
+      // every document the latest match actually used.
+      const used = new Set(
+        (run?.lineMatch ?? []).flatMap((m) =>
+          [m.poLineKey, m.rrLineKey, m.invLineKey].filter(Boolean).map((k) => k!.split(':')[0]!),
+        ),
+      );
+      const own = new Set(s.documents.map((d) => d.id));
+      const extra = await db.document.findMany({
+        where: { id: { in: [...used].filter((id) => !own.has(id)) } },
+      });
+      const docs = [...s.documents, ...extra];
+      const lines = await linesOf(db, docs);
       return {
         poNumber: s.poNumber,
+        vendorName: s.vendor?.name ?? null,
         status: s.status,
         provisional: s.provisional,
         notes: s.notes as string[],
         waitingUntil: s.waitingUntil?.toISOString() ?? null,
         openExceptions:
           run?.exceptions.filter((e) => e.status === 'OPEN' && !e.informational).length ?? 0,
-        documents: await Promise.all(s.documents.map(summary)),
+        documents: await Promise.all(docs.map(summary)),
         match: run
           ? {
               version: run.version,
@@ -315,6 +335,11 @@ export async function buildApp(deps: AppDeps) {
                 po: m.poLineKey,
                 rr: m.rrLineKey,
                 invoice: m.invLineKey,
+                lines: {
+                  po: m.poLineKey ? (lines.get(m.poLineKey) ?? null) : null,
+                  rr: m.rrLineKey ? (lines.get(m.rrLineKey) ?? null) : null,
+                  invoice: m.invLineKey ? (lines.get(m.invLineKey) ?? null) : null,
+                },
                 method: m.method,
                 confidence: m.confidence?.toFixed(4) ?? null,
                 reason: m.reasoning,
@@ -406,27 +431,7 @@ export async function buildApp(deps: AppDeps) {
         for (const k of [m.poLineKey, m.rrLineKey, m.invLineKey])
           if (k) docIds.add(k.split(':')[0]!);
       const docs = await db.document.findMany({ where: { id: { in: [...docIds] } } });
-      const lines = new Map<string, z.infer<typeof Line>>();
-      for (const d of docs) {
-        const ex = await db.extraction.findFirst({
-          where: { documentId: d.id },
-          orderBy: { version: 'desc' },
-        });
-        const parsed = ex ? ExtractedDocument.safeParse(ex.data) : undefined;
-        if (!parsed?.success) continue;
-        for (const l of parsed.data.lines)
-          lines.set(`${d.id}:${l.lineNo}`, {
-            docId: d.id,
-            docNumber: d.docNumber,
-            lineNo: l.lineNo,
-            sku: l.sku ?? null,
-            description: l.description,
-            qty: l.qty,
-            uom: l.uom,
-            unitPrice: l.unitPrice ?? null,
-            lineTotal: l.lineTotal ?? null,
-          });
-      }
+      const lines = await linesOf(db, docs);
       const at = (k: string | null) => (k ? (lines.get(k) ?? null) : null);
       const paired = new Set(matches.flatMap((m) => [m.poLineKey, m.rrLineKey, m.invLineKey]));
       const typeOf = new Map(docs.map((d) => [d.id, d.type]));

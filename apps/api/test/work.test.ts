@@ -238,4 +238,28 @@ describe.skipIf(!testDbUrl)('API for the website (M5 AC-1, AC-2, AC-4–AC-7)', 
     );
     ctrl.abort();
   });
+  it('a PO grouped with a misread PO number shows both sets’ documents and lines (S0182)', async () => {
+    const other = JSON.parse(
+      fs.readFileSync(path.join(golden, 'S0182', 'ground_truth.json'), 'utf8'),
+    );
+    const llm = new LlmClient({
+      env: LlmEnv.parse({ LLM_CACHE_DIR: tmp() }),
+      cache: new FileCacheStore(path.join(root, 'evals/cache')),
+      mode: 'replay',
+    });
+    for (const d of other.documents) {
+      const bytes = new Uint8Array(fs.readFileSync(path.join(golden, 'S0182', d.file)));
+      const { document } = await uploadDocument(db, storage, bytes);
+      await readDocument(db, { storage, llm }, document.id);
+    }
+    await matchPurchaseOrder(db, other.poNumber, { graceDays: 0 });
+    const set = await get(`/sets/${other.poNumber}`);
+    expect(set.documents.map((d: { type: string }) => d.type).sort()).toEqual([
+      'INVOICE',
+      'PO',
+      'RR',
+    ]);
+    expect(set.match.lineMatches.every((m: { lines: { po: unknown } }) => m.lines.po)).toBe(true);
+    expect(set.notes.join(' ')).toMatch(/1 character apart/);
+  });
 });

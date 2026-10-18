@@ -175,6 +175,7 @@ export const Me = z.object({ id: z.string(), name: z.string(), email: z.string()
 
 export const SetSummary = z.object({
   poNumber: z.string(),
+  vendorName: z.string().nullable(),
   status: SetStatus,
   provisional: z.boolean(),
   notes: z.array(z.string()),
@@ -183,7 +184,12 @@ export const SetSummary = z.object({
   openExceptions: z.number(),
 });
 
-export const SetDetail = SetSummary.extend({
+export const SetListItem = SetSummary.extend({
+  updatedAt: z.string(),
+  moneyAtRisk: z.string().describe('Open, non-informational problems in the latest match'),
+});
+
+export const SetDetail = SetSummary.omit({ documents: true }).extend({
   documents: z.array(DocumentSummary),
   match: z
     .object({
@@ -197,6 +203,7 @@ export const SetDetail = SetSummary.extend({
           method: z.string(),
           confidence: z.string().nullable(),
           reason: z.string().nullable(),
+          lines: z.object({ po: Line.nullable(), rr: Line.nullable(), invoice: Line.nullable() }),
         }),
       ),
       exceptions: z.array(ExceptionView),

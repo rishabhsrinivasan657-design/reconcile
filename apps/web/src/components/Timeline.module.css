@@ -1,0 +1,51 @@
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-4) 20px 20px;
+}
+.entry {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  gap: var(--space-3);
+  position: relative;
+  padding-bottom: var(--space-4);
+}
+.entry::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 14px;
+  bottom: 0;
+  width: 1px;
+  background: var(--rule-strong);
+}
+.entry:last-child::before {
+  display: none;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--rule-strong);
+  margin: 6px 0 0 4px;
+  position: relative;
+}
+.human {
+  background: var(--accent);
+}
+.note,
+.systemNote {
+  display: block;
+  margin-top: 4px;
+  quotes: none;
+  padding-left: 10px;
+}
+.note {
+  font: 400 14px/21px var(--serif);
+  border-left: 2px solid var(--accent);
+}
+.systemNote {
+  font-size: 13px;
+  color: var(--ink-2);
+  border-left: 2px solid var(--rule-strong);
+}

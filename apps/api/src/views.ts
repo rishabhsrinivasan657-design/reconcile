@@ -1,6 +1,7 @@
-import type { Prisma, PrismaClient } from '@reconcile/db';
+import { ExtractedDocument } from '@reconcile/core';
+import type { Document, Prisma, PrismaClient } from '@reconcile/db';
 import type { z } from 'zod';
-import type { ExceptionStatus, ExceptionType, ExceptionView } from './schemas.ts';
+import type { ExceptionStatus, ExceptionType, ExceptionView, Line } from './schemas.ts';
 
 export class NotFound extends Error {}
 
@@ -68,3 +69,32 @@ export const byImpact = (a: z.infer<typeof ExceptionView>, b: z.infer<typeof Exc
   Number(a.informational) - Number(b.informational) ||
   Number(b.amount) - Number(a.amount) ||
   a.poNumber.localeCompare(b.poNumber);
+
+/** Every line of these documents (latest reading), keyed "docId:lineNo" like line matches. */
+export async function linesOf(
+  db: PrismaClient,
+  docs: Pick<Document, 'id' | 'docNumber'>[],
+): Promise<Map<string, z.infer<typeof Line>>> {
+  const lines = new Map<string, z.infer<typeof Line>>();
+  for (const d of docs) {
+    const ex = await db.extraction.findFirst({
+      where: { documentId: d.id },
+      orderBy: { version: 'desc' },
+    });
+    const parsed = ex ? ExtractedDocument.safeParse(ex.data) : undefined;
+    if (!parsed?.success) continue;
+    for (const l of parsed.data.lines)
+      lines.set(`${d.id}:${l.lineNo}`, {
+        docId: d.id,
+        docNumber: d.docNumber,
+        lineNo: l.lineNo,
+        sku: l.sku ?? null,
+        description: l.description,
+        qty: l.qty,
+        uom: l.uom,
+        unitPrice: l.unitPrice ?? null,
+        lineTotal: l.lineTotal ?? null,
+      });
+  }
+  return lines;
+}
