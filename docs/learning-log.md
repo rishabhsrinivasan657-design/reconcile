@@ -691,3 +691,24 @@ v0.7.0, and wrote the retro.
   structured data too.
 
 **Remember:** a real user (even an AI one) is the best test you haven't written yet.
+
+---
+
+## M7 · Requirements (2026-10-18)
+
+**In one line:** in the cloud, cost and safety are requirements, not afterthoughts.
+
+**What we did:** wrote 13 acceptance criteria for deploying to AWS with Terraform, plus three
+questions about the account, who can change things, and AI on the live site.
+
+**Key ideas**
+- **Infrastructure as code.** Terraform describes the cloud setup in files: reviewable like code,
+  repeatable, and removable with one command.
+- **Check the pricing you're relying on.** AWS changed its free offer in 2025. Requirements built on
+  the old "12 months free" would have been wrong for a new account.
+- **A public link is a new kind of risk.** Anyone can open it, so decide up front what strangers may
+  change, and keep secrets out of the repo and logs.
+- **Make "turn it off" as easy as "turn it on".** Most surprise cloud bills come from things nobody
+  remembered to delete.
+
+**Remember:** before you deploy, know exactly how you'll pay, and how you'll stop paying.
