@@ -6,6 +6,41 @@ All notable changes are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-10-18
+
+M5: the website ([PR #6](https://github.com/rishabhsrinivasan657-design/reconcile/pull/6)).
+
+### Added
+- **Website** (`apps/web`, Next.js 16) in the "Ledger" look, with light and dark themes:
+  - **Overview:** money at risk, where it is, PO counts, AI cost and speed, recent activity.
+  - **Problems:** costliest first; the PO, receipt, and invoice lines side by side with the
+    differences written out; approve, dispute, or write off with a required note.
+  - **POs:** documents, how each line was paired (SKU, wording, or AI with its reason), and the
+    full history in plain sentences.
+  - **Document:** the page image with a box over every field the AI read, its confidence, and
+    field corrections that re-match the PO.
+  - **Review** and **Upload** (files move through uploaded → reading → ready → matched, live).
+  - Keyboard shortcuts (`?` lists them), search (`/`), and designed loading, empty, and error states.
+- **API:** decide on a problem, correct a field, PO history, overview numbers, review list, page
+  images, live feed (server-sent events), and the signed-in user.
+- **Live updates:** the worker and API announce changes over Redis; browsers refresh only what changed.
+- **Style guide** (`docs/style-guide.md`) and a typed API client generated from the API's manual.
+- **Browser test** (`pnpm test:e2e`, Playwright with axe accessibility checks), now a required CI check.
+- `pnpm dev` also starts the website; `pnpm dev:demo` runs everything on the recorded AI answers.
+
+### Changed
+- Problems carry their vendor and latest decision and can be sorted by impact; a problem's detail
+  includes the involved lines from every document.
+- A PO grouped with a misread PO number shows that PO's documents and lines, and the misread PO
+  says where it was grouped.
+
+### Fixed
+- An empty key line in `.env` (as in `.env.example`) no longer stops the worker in replay mode.
+
+### Results
+- Lighthouse (desktop): accessibility 100, performance 96–99 on every page.
+- 188 tests; the eval scoreboard is unchanged (match and e2e 100).
+
 ## [0.5.0] - 2026-10-17
 
 M4: Reconcile runs as a backend service ([PR #5](https://github.com/rishabhsrinivasan657-design/reconcile/pull/5)).
@@ -111,7 +146,8 @@ M0: requirements and design. Documentation only, no code.
 - `QTY_BILLED_NOT_RECEIVED` exception type; informational short-ships (PRD decisions Q1, Q2).
 - M0 design: architecture doc, ADRs 0001–0006, doc and PR templates.
 
-[Unreleased]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.2.0...v0.3.0
