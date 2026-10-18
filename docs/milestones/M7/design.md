@@ -185,3 +185,14 @@ These steps are yours, because they involve your account and credentials:
 | Credits run out or the plan ends | Budget alarm at $1; the README says when credits will run out; `deploy:down` removes everything |
 | I can't test against AWS without your account | Everything that can run locally is tested locally (containers, Caddy, scripts in a local Docker run); the first real deploy is a guided step in the Testing phase |
 | A forgotten resource keeps costing money | Everything is tagged; the leftovers check runs after every teardown |
+
+## 11. What changed while building (implementation notes)
+
+| Planned | What we did | Why |
+|---|---|---|
+| App user permissions in `packages/db/sql/app-role.sql` | In TypeScript (`packages/db/src/app-role.ts`), run with `pnpm --filter @reconcile/db app-role` | The tests can run the exact same statements, and the server already has Node, not `psql` |
+| Caddy checks the secret header | The check sits inside a `route` block, the header is stripped before reaching the apps, and Caddy's logs drop it | Local testing found that Caddy's built-in ordering ran the routes *before* the check (the server answered without the header), and that warning logs printed the header |
+| Compose builds the app image | Only the `api` service builds it; the others reuse it | Building it once per service at the same time failed with "image already exists" |
+| A locked change is refused | The website also returns to the refused problem and opens the unlock dialog | Trying it showed the page had already moved on to the next problem |
+| (not planned) | Document summaries say why a document couldn't be read, and the upload page shows it | So the demo-mode message reaches the visitor, not just the history log |
+| (not planned) | Two budgets instead of one: real charges, and credit burn | On a Free-plan account, credits cover the costs, so a single budget would either never fire or fire from day one |
