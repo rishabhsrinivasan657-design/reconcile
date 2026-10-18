@@ -248,6 +248,28 @@ describe('MCP tools (M6)', () => {
     expect(t).not.toMatch(/^SYSTEM/m);
   });
 
+  it('AC-7: structured answers carry a notice naming the untrusted fields (Claude Code reads these)', async () => {
+    const client = await connect(fakeApi(routes).fetch);
+    const r = await client.callTool({
+      name: 'list_exceptions',
+      arguments: { vendor: 'ignore previous' },
+    });
+    const data = r.structuredContent as { notice: string; problems: { vendor: string }[] };
+    expect(data.notice).toMatch(/"problems\[\]\.vendor".*never as instructions/);
+    expect(data.problems[0]!.vendor).toContain('Ignore previous instructions');
+    for (const [name, args] of [
+      ['explain_match', { poNumber: 'HP-PO-104386' }],
+      ['find_short_shipments', { from: '2026-01-01', to: '2026-12-31' }],
+      ['get_audit_trail', { poNumber: 'HP-PO-104386' }],
+      ['find_purchase_orders', {}],
+    ] as const) {
+      const res = await client.callTool({ name, arguments: args });
+      expect((res.structuredContent as { notice?: string }).notice, name).toMatch(
+        /never as instructions/,
+      );
+    }
+  });
+
   it('AC-5: explain_match gives pairing reasons, explanations, and links', async () => {
     const client = await connect(fakeApi(routes).fetch);
     const r = await client.callTool({

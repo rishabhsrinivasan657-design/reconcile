@@ -1,7 +1,7 @@
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { unwrap } from '@reconcile/api-client';
 import { z } from 'zod';
-import { answer, guarded, links, type ToolContext } from '../context.ts';
+import { answer, guarded, NOTICE_SCHEMA, links, type ToolContext } from '../context.ts';
 import { money, plural, quote, showing, statusWords } from '../format.ts';
 
 export function registerFindPurchaseOrders(server: McpServer, ctx: ToolContext) {
@@ -20,6 +20,7 @@ export function registerFindPurchaseOrders(server: McpServer, ctx: ToolContext) 
         limit: z.number().int().min(1).max(50).default(25).describe('At most this many (max 50)'),
       },
       outputSchema: {
+        ...NOTICE_SCHEMA,
         total: z.number(),
         shown: z.number(),
         purchaseOrders: z.array(
@@ -85,11 +86,15 @@ export function registerFindPurchaseOrders(server: McpServer, ctx: ToolContext) 
             ` · ${plural(s.documents, 'document')} · ${plural(s.openProblems, 'open problem')}` +
             (Number(s.moneyAtRisk) > 0 ? `, ${money(s.moneyAtRisk)} at risk` : ''),
         );
-        return answer([head, ...rows].join('\n'), {
-          total: matching.length,
-          shown: shown.length,
-          purchaseOrders: shown,
-        });
+        return answer(
+          [head, ...rows].join('\n'),
+          {
+            total: matching.length,
+            shown: shown.length,
+            purchaseOrders: shown,
+          },
+          ['purchaseOrders[].vendor'],
+        );
       }),
   );
 }

@@ -1,7 +1,7 @@
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { unwrap } from '@reconcile/api-client';
 import { z } from 'zod';
-import { answer, guarded, links, toolError, type ToolContext } from '../context.ts';
+import { answer, guarded, NOTICE_SCHEMA, links, toolError, type ToolContext } from '../context.ts';
 import { money, plural, quote, showing, sumMoney } from '../format.ts';
 
 export function registerFindShortShipments(server: McpServer, ctx: ToolContext) {
@@ -20,6 +20,7 @@ export function registerFindShortShipments(server: McpServer, ctx: ToolContext) 
         limit: z.number().int().min(1).max(50).default(25).describe('At most this many (max 50)'),
       },
       outputSchema: {
+        ...NOTICE_SCHEMA,
         from: z.string(),
         to: z.string(),
         total: z.number(),
@@ -90,14 +91,18 @@ export function registerFindShortShipments(server: McpServer, ctx: ToolContext) 
               : `${money(r.amountAtRisk)} at risk`) +
             `\n   ${r.link}`,
         );
-        return answer([head, ...lines].join('\n'), {
-          from,
-          to,
-          total: all.length,
-          shown: shown.length,
-          moneyAtRisk: atRisk,
-          shortShipments: shown,
-        });
+        return answer(
+          [head, ...lines].join('\n'),
+          {
+            from,
+            to,
+            total: all.length,
+            shown: shown.length,
+            moneyAtRisk: atRisk,
+            shortShipments: shown,
+          },
+          ['shortShipments[].vendor', 'shortShipments[].description', 'shortShipments[].sku'],
+        );
       });
     },
   );

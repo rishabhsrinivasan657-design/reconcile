@@ -1,7 +1,7 @@
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { unwrap } from '@reconcile/api-client';
 import { z } from 'zod';
-import { answer, guarded, links, type ToolContext } from '../context.ts';
+import { answer, guarded, NOTICE_SCHEMA, links, type ToolContext } from '../context.ts';
 import {
   DECISION_WORDS,
   money,
@@ -70,6 +70,7 @@ export function registerListExceptions(server: McpServer, ctx: ToolContext) {
         limit: z.number().int().min(1).max(50).default(25).describe('At most this many (max 50)'),
       },
       outputSchema: {
+        ...NOTICE_SCHEMA,
         total: z.number().describe('Problems matching the filters'),
         shown: z.number(),
         moneyAtRisk: z
@@ -146,12 +147,16 @@ export function registerListExceptions(server: McpServer, ctx: ToolContext) {
               : '') +
             `\n   ${p.link}`,
         );
-        return answer([head, ...rows].join('\n'), {
-          total: matching.length,
-          shown: shown.length,
-          moneyAtRisk: atRisk,
-          problems,
-        });
+        return answer(
+          [head, ...rows].join('\n'),
+          {
+            total: matching.length,
+            shown: shown.length,
+            moneyAtRisk: atRisk,
+            problems,
+          },
+          ['problems[].vendor', 'problems[].explanation', 'problems[].decision.note'],
+        );
       }),
   );
 }
