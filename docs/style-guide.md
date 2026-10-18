@@ -21,7 +21,7 @@ work for people who don't see color well.
 | `--raised` | `#FFFFFF` | `#20262A` | Menus, dialogs, inputs |
 | `--ink` | `#1C2321` | `#ECE7DC` | Main text |
 | `--ink-2` | `#535B57` | `#AEB3AD` | Supporting text |
-| `--ink-3` | `#6E746F` | `#868C87` | Hints, captions (still 4.5:1 contrast) |
+| `--ink-3` | `#626863` | `#8F9590` | Hints, captions (at least 4.5:1 contrast on paper and sheet) |
 | `--rule` | `#E3DBCB` | `#2A3134` | Thin dividing lines |
 | `--rule-strong` | `#CDC2AC` | `#3A4246` | Table header lines, input borders |
 | `--accent` | `#0E5C58` | `#63B9AF` | Buttons, links, selection, focus ring |

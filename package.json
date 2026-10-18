@@ -13,6 +13,7 @@
     "typecheck": "tsc -p tsconfig.json && pnpm -r --parallel typecheck",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:e2e": "pnpm --filter @reconcile/web test:e2e",
     "docs:check": "tsx scripts/check-docs.ts",
     "docs:diagrams": "tsx scripts/render-diagrams.ts",
     "postinstall": "pnpm --filter @reconcile/db exec prisma generate",

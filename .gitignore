@@ -14,3 +14,5 @@ packages/db/src/generated/
 .cache/
 playwright-report/
 test-results/
+.next-e2e/
+apps/web/next-env.d.ts

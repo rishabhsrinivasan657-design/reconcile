@@ -9,3 +9,4 @@ apps/web/.next/
 apps/web/next-env.d.ts
 apps/web/playwright-report/
 apps/web/test-results/
+apps/web/.next-e2e/

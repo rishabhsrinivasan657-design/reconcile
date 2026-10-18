@@ -204,6 +204,7 @@ function Rows({
                 <td>
                   <span
                     className={s.steps}
+                    role="img"
                     aria-label={step > 0 ? `Step ${step} of 4` : step < 0 ? 'Stopped' : 'Sending'}
                   >
                     {STEPS.map((label, k) => (
