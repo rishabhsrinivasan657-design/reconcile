@@ -1,6 +1,6 @@
 # M7: Deploy to AWS. Design
 
-- **Status:** Draft, waiting for your approval
+- **Status:** Approved (2026-10-18)
 - **Builds:** AC-1 … AC-13 from [`requirements.md`](requirements.md)
 - **New decision records:** [ADR-0015](../../adr/0015-one-server-behind-cloudfront.md) (one small
   server behind CloudFront) and [ADR-0016](../../adr/0016-demo-password-for-changes.md) (a shared

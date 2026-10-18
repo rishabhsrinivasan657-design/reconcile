@@ -1,6 +1,6 @@
 # ADR-0016: A shared demo password for changes on the live site
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-10-18
 - **Requirements:** M7 AC-8 (answer to M7 Q2); PRD non-goal "auth beyond a single seeded user"
 

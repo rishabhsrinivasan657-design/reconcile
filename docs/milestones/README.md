@@ -12,7 +12,7 @@ Each milestone gets a folder `Mx/` with `requirements.md`, `design.md`,
 | M4 API, worker, fuzzy fallback | ✅ Released v0.5.0 (2026-10-17) |
 | M5 Web UI and human-in-the-loop | ✅ Released v0.6.0 (2026-10-18) |
 | M6 MCP server | ✅ Released v0.7.0 (2026-10-18) |
-| M7 Deploy | Design gate |
+| M7 Deploy | Implementation |
 
 M0 is documentation-only. Its "requirements" are the PRD and its "design" is
 `architecture.md` plus the ADRs, so its folder holds only the retro.

@@ -1,6 +1,6 @@
 # ADR-0015: One small server behind CloudFront
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-10-18
 - **Requirements:** US-12, NFR-01, M7 AC-1, AC-5, AC-7
 
