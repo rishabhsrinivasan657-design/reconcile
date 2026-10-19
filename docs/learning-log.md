@@ -733,3 +733,23 @@ resource, the demo password, and two decision records.
   a second lock behind the trigger.
 
 **Remember:** in the cloud, every resource is a line on a bill until proven otherwise.
+
+---
+
+## M7 · Testing, review, release, and retrospective (2026-10-18)
+
+**In one line:** prove the cycle end to end (on, update, off, on again), then ship.
+
+**What we did:** deployed to a new AWS Free-plan account, checked every criterion on the live site,
+tore it all down and confirmed nothing was left, deployed again, merged PR #8, and released v1.0.0.
+
+**Key ideas**
+- **Test "off" as seriously as "on".** The teardown check proved that cleanup is one command, the
+  thing that prevents surprise bills.
+- **Check from outside and inside.** From your laptop: the HTTPS link works, the server's own address
+  doesn't. On the server: secrets are root-only, logs are clean, the database refuses history edits.
+- **Never handle what you don't need.** The AWS sign-in, the Mac password, and the confirmation to
+  create resources all stayed with you; the scripts only used them.
+- **1.0.0 means "the plan is done",** not "finished forever". The backlog holds what comes next.
+
+**Remember:** a deploy isn't done until you've also proven you can undo it.

@@ -35,6 +35,9 @@ Priority: **P1** next after the current plan · **P2** valuable later · **P3** 
 | B-24 | Add box accuracy to the scoreboard (how well the AI's highlight boxes overlap the answer key's). Measured once in M5: PDFs 97–100% of boxes on target, scans 96% for header fields but 80% for line items | P2 | M5 design feedback |
 | B-25 | Phone performance: on a simulated slow phone over 4G, the Problems page scores 62 (desktop 97). Split the page code so the first screen loads less JavaScript | P3 | M5 testing |
 | B-26 | `GET /exceptions?includeInformational=false` is read as true (a loose text-to-true conversion). Parse "false" properly and add a test | P2 | M6 implementation |
+| B-27 | Deploy on merge from GitHub Actions (AWS sign-in through OIDC, no stored keys) | P3 | M7 retro |
+| B-28 | Deploy as a non-root admin user (IAM Identity Center) instead of the account's root user | P2 | M7 testing |
+| B-29 | Back up the live demo's database (a snapshot before each update) | P3 | M7 retro |
 
 ## Tech debt
 
