@@ -9,7 +9,7 @@ Testing phase with you.
 | AC | How we check it | Kind | Result |
 |---|---|---|---|
 | AC-1 Deploy | `pnpm deploy:up` from a clean start prints a working HTTPS link; a second run reports no changes | live || ✅ `pnpm deploy:up` on a new Free-plan account: 19 resources created, app deployed, smoke test passed, link printed (about 20 minutes). A second `terraform plan` reports no changes. |
-| AC-2 Tear down | `pnpm deploy:down` finishes and the leftovers check finds nothing tagged `Project=reconcile`; the AWS console's billing page shows nothing running | live | |
+| AC-2 Tear down | `pnpm deploy:down` finishes and the leftovers check finds nothing tagged `Project=reconcile`; the AWS console's billing page shows nothing running | live | ✅ "Destroy complete! Resources: 19 destroyed" and "Nothing billable is left". Checked separately: server terminated; no disks, CloudFront address, stored passwords, budgets, or role left |
 | AC-3 Update | Make a decision, deploy a new commit, and the decision is still there | live | ✅ Redeployed commit 969a1f6: Terraform reported no changes, only the app was rebuilt (a few minutes), demo data was left as it was, and the first deploy's decision survived (2 decisions after the second smoke test) |
 | AC-4 Budget alarm | The budget exists with a $1 threshold and your email (seen in the console; Terraform plan shows it) | live || ✅ Both budgets exist: `reconcile-real-charges` ($1, alerts on any real charge) and `reconcile-credit-burn` ($25 a month before credits), emailing your address. |
 | AC-5 Small and free-eligible | The Terraform plan lists only the resources in design §2; the instance type is on the Free plan's eligible list; no RDS, load balancer, NAT gateway | local + live || ✅ The plan listed only design §2's resources (19, including 5 local password generators); `t4g.small`, 20 GB gp3, no RDS, load balancer, or NAT gateway. |
@@ -34,4 +34,20 @@ No change expected; M7 doesn't touch reading or matching.
 3. `pnpm deploy:down`, then confirm "Nothing billable is left".
 
 ## Results
-(Filled in during the Testing phase.)
+
+Checked 2026-10-18 on a new AWS Free-plan account.
+
+- **All 13 criteria pass**, on the real deployment where they need one.
+- **Full cycle:** deploy (about 20 minutes) → smoke test → redeploy a new commit (a few minutes,
+  data kept) → tear down (19 destroyed, nothing left) → deploy again.
+- **Tests:** 212 automated tests pass; CI is green on all six checks, including the new
+  **Infrastructure checks**.
+- **Server headroom:** 10 of 19 GB disk and 1.1 of 1.8 GB memory used, with the swap file covering
+  the website build.
+
+### Found and fixed in this phase
+
+| Found by | Problem | Fix |
+|---|---|---|
+| First deploy on your Mac | Homebrew wouldn't install Terraform until Apple's Command Line Tools were updated | README setup step says so |
+| Local production run (implementation) | Caddy ran its routes before the secret-header check, and logged the header | Fixed before the first deploy; verified live (the server's own address doesn't answer, no secrets in logs) |
