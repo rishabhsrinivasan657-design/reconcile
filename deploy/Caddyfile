@@ -1,0 +1,36 @@
+# In front of the website and the API on the server (ADR-0015).
+# Only CloudFront knows ORIGIN_SECRET; it adds it to every request it forwards. Requests that reach
+# the server any other way are refused.
+{
+	admin off
+	auto_https off
+	# Logs must never contain the secret header (found in local testing).
+	log default {
+		format filter {
+			wrap json
+			request>headers>X-Origin-Secret delete
+		}
+	}
+}
+
+:80 {
+	# `route` keeps these in the written order. Without it, Caddy's built-in ordering runs the
+	# handle blocks before `respond`, and the secret check never happens (found in local testing).
+	route {
+		@notFromCloudFront not header X-Origin-Secret {$ORIGIN_SECRET}
+		respond @notFromCloudFront "Forbidden" 403
+
+		handle_path /api/* {
+			# flush_interval -1 streams the live feed (server-sent events) without buffering.
+			reverse_proxy api:3001 {
+				flush_interval -1
+				header_up -X-Origin-Secret
+			}
+		}
+		handle {
+			reverse_proxy web:3000 {
+				header_up -X-Origin-Secret
+			}
+		}
+	}
+}

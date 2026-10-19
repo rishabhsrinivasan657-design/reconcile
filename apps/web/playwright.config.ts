@@ -30,6 +30,8 @@ const env = {
 
 export default defineConfig({
   testDir: 'e2e',
+  // The live smoke test runs against the deployed site (playwright.live.config.ts).
+  testIgnore: 'live-smoke.spec.ts',
   timeout: 120_000,
   expect: { timeout: 15_000 },
   retries: process.env.CI ? 1 : 0,

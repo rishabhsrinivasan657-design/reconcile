@@ -21,3 +21,5 @@ one and update the old one's status line.
 | [0012](0012-website-stack.md) | Website: Next.js, design tokens, Radix primitives, generated API client | Accepted |
 | [0013](0013-live-updates.md) | Live updates through Redis announcements and server-sent events | Accepted |
 | [0014](0014-mcp-through-the-api.md) | The AI-assistant connector reads through the API, using a shared typed client | Accepted |
+| [0015](0015-one-server-behind-cloudfront.md) | Deploy: one small server running the Compose stack, behind CloudFront | Accepted |
+| [0016](0016-demo-password-for-changes.md) | A shared demo password for changes on the live site | Accepted |

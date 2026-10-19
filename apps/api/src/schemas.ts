@@ -39,6 +39,7 @@ export const DocumentSummary = z.object({
   mimeType: z.string(),
   pages: z.number().nullable(),
   uploadedAt: z.string(),
+  problem: z.string().nullable().describe('Why it could not be read, when status is FAILED'),
 });
 
 export const DocumentDetail = DocumentSummary.extend({

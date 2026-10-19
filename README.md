@@ -245,6 +245,49 @@ The connector reads through the API, the same way the website does, so the assis
 always agree ([ADR-0014](docs/adr/0014-mcp-through-the-api.md)). Text that came from documents is
 returned inside `«…»` and the assistant is told to treat it as data, never as instructions.
 
+## Put it online (AWS, $0 on the Free plan)
+
+Two commands put Reconcile on AWS at an HTTPS link you can share, and remove it again
+([ADR-0015](docs/adr/0015-one-server-behind-cloudfront.md)). It's one small server running the same
+containers as your laptop, behind CloudFront for HTTPS. The infrastructure is described in
+[`infra/`](infra) with Terraform.
+
+**What it costs:** about **$17.50 a month**, paid from the AWS Free plan's credits ($100 at sign-up,
+up to $200). A Free-plan account **can't be charged**, so the credits cover the whole 6-month plan.
+Two budget alarms email you: one on any real charge, one if credits are being used faster than
+expected.
+
+**One-time setup (yours: it involves your account and credentials):**
+
+1. Create an AWS account at [aws.amazon.com](https://aws.amazon.com) and choose the **Free plan**.
+2. Install the tools: `brew install awscli hashicorp/tap/terraform`. If Homebrew says your Command
+   Line Tools are too old, update them first (`softwareupdate --list`, then install the "Command Line
+   Tools for Xcode" entry with `sudo softwareupdate --install "<that label>"`).
+3. Sign in from your terminal: `aws login` (or `aws configure sso`). Terraform uses that sign-in; no
+   keys go in this repo, in chat, or in any file.
+
+**Deploy, then remove:**
+
+```bash
+pnpm deploy:up      # shows the plan, asks you to confirm, deploys, smoke-tests, prints the link
+pnpm deploy:down    # deletes everything, then checks nothing billable is left
+```
+
+`deploy:up` deploys the current commit, which must be pushed to GitHub (the server builds from
+there). The first run takes about 20 minutes (server setup, image build, and CloudFront); later runs
+only rebuild the app. It asks once for the email address for the budget alarms.
+
+**On the live site:** anyone with the link can look around. Uploading, deciding, and correcting need
+the **demo password** that `deploy:up` prints (the **Unlock changes** button,
+[ADR-0016](docs/adr/0016-demo-password-for-changes.md)). The AI uses recorded answers only, so it
+reads the sample documents; other files get a "demo mode" message. No AI key is stored in AWS.
+
+| Command | What it does |
+|---|---|
+| `pnpm deploy:smoke` | Run the live smoke test against the deployed site |
+| `pnpm deploy:leftovers` | Check nothing tagged `Project=reconcile` is left in your account |
+| `aws ssm start-session --target <instance id>` | A terminal on the server (no SSH port is open) |
+
 ## Running Reconcile as a service
 
 ```bash
@@ -354,6 +397,8 @@ apps/worker          The background helper: read and match jobs (BullMQ on Redis
 apps/web             The website (Next.js): overview, problems, POs, documents, review, upload
 packages/api-client  The typed API client shared by the website and the MCP server
 packages/mcp         The AI-assistant connector (MCP server): six read-only tools
+infra/               Terraform for the AWS deploy (server, CloudFront, secrets, budgets)
+deploy/              Production image, containers, Caddy, and the server's update script
 packages/extraction  PDF/scan → typed document with confidence, checks, review flag
 evals/               Eval harness (pnpm eval), baseline.json, committed 20-set CI subset
 docs/                PRD, architecture, ADRs, milestone docs, learning log
@@ -374,6 +419,7 @@ docs/                PRD, architecture, ADRs, milestone docs, learning log
 | `pnpm dev:demo` | The same, on the recorded AI answers (no key, no cost) |
 | `pnpm test:e2e` | The browser test (Playwright, with accessibility checks) |
 | `pnpm mcp` | Start the AI-assistant connector (assistants run this for you) |
+| `pnpm deploy:up` / `deploy:down` | Put it on AWS / remove it (see "Put it online") |
 
 ## How this project is built
 

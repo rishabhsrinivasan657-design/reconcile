@@ -1,0 +1,105 @@
+# The live demo's containers (ADR-0015). Secrets come from /etc/reconcile/.env, written at boot
+# from the AWS parameter store; nothing secret is in this file.
+name: reconcile
+
+x-app: &app # Built once by the api service below; the others reuse the same image.
+  image: reconcile-app
+  pull_policy: never
+  restart: unless-stopped
+  environment:
+    &app-env # The app runs as a database user that can't edit history (ADR-0005, M7 AC-10).
+    DATABASE_URL: postgresql://reconcile_app:${APP_DB_PASSWORD}@postgres:5432/reconcile
+    REDIS_URL: redis://redis:6379
+    STORAGE_DIR: /data/storage
+    LLM_MODE: replay
+    LLM_ANSWER_CACHE_DIR: evals/cache
+    MISSING_DOC_GRACE_DAYS: '0'
+    DEMO_PASSWORD: ${DEMO_PASSWORD}
+    DEMO_COOKIE_SECRET: ${DEMO_COOKIE_SECRET}
+  volumes:
+    - storage:/data/storage
+  depends_on:
+    postgres: { condition: service_healthy }
+    redis: { condition: service_healthy }
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: reconcile_owner
+      POSTGRES_PASSWORD: ${DB_OWNER_PASSWORD}
+      POSTGRES_DB: reconcile
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U reconcile_owner -d reconcile']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  redis:
+    image: redis:8-alpine
+    restart: unless-stopped
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  api:
+    <<: *app
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    pull_policy: build
+    command: ['node', '--import', 'tsx', 'apps/api/src/main.ts']
+
+  worker:
+    <<: *app
+    command: ['node', '--import', 'tsx', 'apps/worker/src/main.ts']
+
+  web:
+    <<: *app
+    command:
+      [
+        'pnpm',
+        '--filter',
+        '@reconcile/web',
+        'exec',
+        'next',
+        'start',
+        '--port',
+        '3000',
+        '--hostname',
+        '0.0.0.0',
+      ]
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - '${HTTP_PORT:-80}:80'
+    environment:
+      ORIGIN_SECRET: ${ORIGIN_SECRET}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    depends_on: [api, web]
+
+  # One-off tasks (migrations, permissions, seed, demo data): `docker compose run --rm tools …`.
+  tools:
+    <<: *app
+    restart: 'no'
+    profiles: ['tools']
+    environment:
+      <<: *app-env
+      OWNER_DATABASE_URL: postgresql://reconcile_owner:${DB_OWNER_PASSWORD}@postgres:5432/reconcile
+      APP_DB_USER: reconcile_app
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD}
+
+volumes:
+  pgdata:
+  redisdata:
+  storage:

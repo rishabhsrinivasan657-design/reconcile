@@ -6,7 +6,7 @@ import { api, unwrap } from '@/lib/api';
 import { useKeys } from '@/lib/keys';
 import { Icon, type IconName } from './Icon';
 import { useUi } from './Providers';
-import { SearchDialog, ShortcutsDialog } from './Dialogs';
+import { SearchDialog, ShortcutsDialog, UnlockDialog } from './Dialogs';
 import { ThemeToggle } from './ThemeToggle';
 import s from './Shell.module.css';
 
@@ -35,6 +35,11 @@ export function Shell({ children }: { children: React.ReactNode }) {
   const overview = useQuery({
     queryKey: ['overview'],
     queryFn: () => unwrap(api.GET('/overview')),
+  });
+  const demo = useQuery({
+    queryKey: ['demo'],
+    queryFn: () => unwrap(api.GET('/demo')),
+    staleTime: Infinity,
   });
   const me = useQuery({
     queryKey: ['me'],
@@ -82,6 +87,16 @@ export function Shell({ children }: { children: React.ReactNode }) {
           <button className="link-btn small" onClick={() => ui.openDialog('search')}>
             <Icon name="search" /> Find <span className="kbd">/</span>
           </button>
+          {demo.data?.locked &&
+            (demo.data.unlocked ? (
+              <span className="link-btn small" style={{ cursor: 'default' }}>
+                <Icon name="check" /> Changes unlocked
+              </span>
+            ) : (
+              <button className="link-btn small" onClick={() => ui.openDialog('unlock')}>
+                <Icon name="lock" /> Unlock changes
+              </button>
+            ))}
           <ThemeToggle />
           <button className="link-btn small" onClick={() => ui.openDialog('shortcuts')}>
             <Icon name="keyboard" /> Shortcuts <span className="kbd">?</span>
@@ -112,6 +127,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
       </main>
       <ShortcutsDialog />
       <SearchDialog />
+      <UnlockDialog />
     </div>
   );
 }

@@ -67,7 +67,11 @@ function Viewer({ doc }: { doc: DocumentDetail }) {
       setRematch({ from: matchVersion, warnings: r.warnings });
       void client.invalidateQueries({ queryKey: ['document', doc.id] });
     },
-    onError: (e) => ui.toast(e instanceof Error ? e.message : 'The correction wasn’t saved.'),
+    onError: (e) => {
+      if (ui.handleLocked(e))
+        return ui.toast('Changes are locked on this demo. Unlock them, then save again.');
+      ui.toast(e instanceof Error ? e.message : 'The correction wasn’t saved.');
+    },
   });
 
   useKeys({

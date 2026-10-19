@@ -33,6 +33,12 @@ const PATHS: Record<string, React.ReactNode> = {
   x: <path d="M6 6l12 12M18 6L6 18" />,
   dot: <circle cx="12" cy="12" r="4" fill="currentColor" stroke="none" />,
   refresh: <path d="M20 11a8 8 0 10-2.3 5.7M20 4v7h-7" />,
+  lock: (
+    <>
+      <rect x="5" y="11" width="14" height="10" rx="2" />
+      <path d="M8 11V8a4 4 0 018 0v3" />
+    </>
+  ),
   keyboard: (
     <>
       <rect x="3" y="6" width="18" height="12" rx="2" />

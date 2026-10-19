@@ -18,6 +18,18 @@ const app = await buildApp({
   storage: new LocalStorage(path.resolve(env.STORAGE_DIR)),
   queues,
   events: redisEventBus(redis),
+  ...(env.DEMO_PASSWORD
+    ? {
+        demoGate: {
+          password: env.DEMO_PASSWORD,
+          secret:
+            env.DEMO_COOKIE_SECRET ??
+            (() => {
+              throw new Error('DEMO_COOKIE_SECRET (32+ characters) is required with DEMO_PASSWORD');
+            })(),
+        },
+      }
+    : {}),
   pingRedis: () => redis.ping(),
 });
 

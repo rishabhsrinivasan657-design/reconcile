@@ -269,8 +269,9 @@ Details are in ADR-0006.
 **Local (M1–M6):** `docker compose up -d` starts Postgres and Redis.
 `pnpm dev` runs web, api, and worker on the host. File uploads go to `./storage`.
 
-**Cloud (M7):** a single small EC2 instance runs the same compose stack, with
-Terraform-managed networking and a budget alarm. That design is written at M7.
+**Cloud (M7):** a single small EC2 instance (`t4g.small`) runs the same Compose stack plus Caddy,
+behind CloudFront for HTTPS, with Terraform-managed networking, generated secrets in the parameter
+store, and a budget alarm ([ADR-0015](adr/0015-one-server-behind-cloudfront.md), M7 design).
 
 ## 10. Cross-cutting concerns
 
