@@ -6,6 +6,28 @@ All notable changes are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-10-18
+
+M7: deploy to AWS ([PR #8](https://github.com/rishabhsrinivasan657-design/reconcile/pull/8)). With this, every milestone in the plan (M0–M7) is done: Reconcile reads purchase orders, receiving reports, and invoices with AI, matches them, explains every problem, lets a person decide, answers an AI assistant's questions, and runs online for $0.
+
+### Added
+- **One command up, one command down:** `pnpm deploy:up` creates the AWS setup with Terraform (you confirm the plan), deploys the current commit, smoke-tests the live site, and prints the link; `pnpm deploy:down` deletes everything and checks nothing billable is left. Also `deploy:smoke` and `deploy:leftovers`.
+- **Infrastructure** (`infra/`):
+  - one Free-plan-eligible `t4g.small` server running the same containers as local development, behind CloudFront for free HTTPS
+  - HTTP only from CloudFront, with a secret header; no SSH (Session Manager)
+  - generated secrets in the parameter store
+  - two free budget alarms (real charges, credit burn)
+  - about $17.50 a month of Free plan credits
+- **Production containers** (`deploy/`): one image for API, worker, and website; Caddy in front; an update script that migrates, applies permissions, seeds, and loads the demo data once.
+- **Demo password for changes:** anyone can look around the live site; uploads, decisions, and corrections need the password ("Unlock changes"). Off locally.
+- **Audit log, part 2:** in the cloud the app's database user can't update, delete, or truncate history.
+- **Demo mode:** the live site reads only the sample documents (recorded AI answers); other files get a clear message, now shown on the upload page.
+- CI job **Infrastructure checks** (terraform fmt/validate, shellcheck; no credentials).
+
+### Results
+- All 13 M7 criteria pass on a real AWS Free-plan account: deploy, update (data kept), teardown (nothing left), and deploy again.
+- 212 tests; CI green on all six checks; the eval scoreboard is unchanged (match and e2e 100).
+
 ## [0.7.0] - 2026-10-18
 
 M6: the AI-assistant connector ([PR #7](https://github.com/rishabhsrinivasan657-design/reconcile/pull/7)).
@@ -171,7 +193,8 @@ M0: requirements and design. Documentation only, no code.
 - `QTY_BILLED_NOT_RECEIVED` exception type; informational short-ships (PRD decisions Q1, Q2).
 - M0 design: architecture doc, ADRs 0001–0006, doc and PR templates.
 
-[Unreleased]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.7.0...HEAD
+[Unreleased]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.7.0...v1.0.0
 [0.7.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/rishabhsrinivasan657-design/reconcile/compare/v0.4.0...v0.5.0

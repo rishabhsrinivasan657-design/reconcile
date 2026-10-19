@@ -5,11 +5,11 @@ An AI **3-way match** agent for distributors and CPG brands. It reconciles
 invoices**, then flags short-ships, price mismatches, and other exceptions for
 a human to approve, dispute, or write off.
 
-> **Status: M6 released (v0.7.0): a working website and an AI-assistant connector.** Drop in documents and watch Reconcile read them
+> **Status: v1.0.0, all planned milestones done: a working website, an AI-assistant connector, and a one-command AWS deploy.** Drop in documents and watch Reconcile read them
 > with AI, file them under their PO, and match them, live. Work through the problems,
 > costliest first, with the evidence side by side, and approve, dispute, or write off
-> each one. Ask Claude about your POs through the AI-assistant connector (M6). Deployment (M7) comes next (see
-> [the milestone list](docs/milestones/README.md)).
+> each one. Ask Claude about your POs through the AI-assistant connector (M6), and put it online with one
+> command (M7). See [the milestone list](docs/milestones/README.md).
 
 ![The problems queue: costliest first, the PO, receipt, and invoice lines side by side, and the decision panel](docs/screenshots/problems.png)
 
